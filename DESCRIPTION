@@ -1,0 +1,14 @@
+Package: CohenDlibrary
+Type: Package
+Title: Measurement Precision Toolkit
+Description: omputing Cohen's d_p in between-subject and within-subject designs.
+Version: 0.1
+Date: 2020-12-11
+License: GPL-3
+Author: Denis Cousineau <denis.cousineau@uottawa.ca>
+Maintainer: Denis Cousineau <denis.cousineau@uottawa.ca>
+Depends: R (>= 3.0.0)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
+NeedsCompilation: yes

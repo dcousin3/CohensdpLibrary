@@ -1,0 +1,30 @@
+FT_OBJS = CohenDCollection.o
+
+all:
+	@$(MAKE) $(SHLIB)
+	@rm -f *.mod *.o
+
+$(SHLIB): $(FT_OBJS)
+
+# The subsidiary files
+TCDF.o: BetaCDF.o NCDF.o
+
+TncCDF.o: LprimeCDF.o
+TncPDF.o: TncPDF.o
+TncIDF.o: TncPDF.o dtrinv.o
+
+# The Lecoutre function files
+KprimeCDF.o: betaCDF.o LprimeCDF.o TCDF.o
+KprimePDF.o: KprimeCDF.o
+KprimeIDF.o: KprimeCDF.o dtrinv.o
+
+LprimeCDF.o: Chi2CDF.o NCDF.o TCDF.o
+LprimePDF.o: LprimeCDF.o 
+LprimeIDF.o: LprimeCDF.o dtrinv.o 
+
+# The mixture file
+KLprimmesMixtureCDF.o: KprimeCDF.o LprimeCDF
+KLprimmesMixturePDF.o: KLprimmesMixtureCDF.o
+KLprimmesMixtureIDF.o: KLprimmesMixtureCDF.o mydtrinv.o
+
+

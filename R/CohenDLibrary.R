@@ -1,0 +1,3 @@
+#' @useDynLib CohenDCollection
+NULL
+#> NULL
