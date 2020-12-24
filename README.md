@@ -15,6 +15,6 @@ You can install this library on you computer if the library devtools is installe
 	devtools::install_github("dcousin3/CohenDLibrary")<br>
 	library(CohenDLibrary)
 
-Check the <ToCome>.pdf document for more on the functions. The main function is CohensD so help(CohensD) will get you started.
+Check the <ToCome>.pdf document for more on the functions. The main function is CohensD so help(CohenD) will get you started.
 
 
