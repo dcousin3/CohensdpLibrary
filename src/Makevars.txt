@@ -1,4 +1,4 @@
-FT_OBJS = CohenDCollection.o
+FT_OBJS = CohenDLibrary.o
 
 all:
 	@$(MAKE) $(SHLIB)
@@ -26,5 +26,4 @@ LprimeIDF.o: LprimeCDF.o dtrinv.o
 KLprimmesMixtureCDF.o: KprimeCDF.o LprimeCDF
 KLprimmesMixturePDF.o: KLprimmesMixtureCDF.o
 KLprimmesMixtureIDF.o: KLprimmesMixtureCDF.o mydtrinv.o
-
 

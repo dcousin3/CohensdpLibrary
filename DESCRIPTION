@@ -1,7 +1,7 @@
-Package: CohenDlibrary
+Package: CohenDLibrary
 Type: Package
-Title: Measurement Precision Toolkit
-Description: omputing Cohen's d_p in between-subject and within-subject designs.
+Title: Cohen's D computation with confidence intervals
+Description: Computing Cohen's d_p in between-subject and within-subject designs.
 Version: 0.1
 Date: 2020-12-11
 License: GPL-3

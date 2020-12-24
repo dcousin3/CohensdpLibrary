@@ -48,7 +48,7 @@ function klprimesmixtureidf( p, n, obsr, obsd, delta, maxitr, ier )
     !  Local declarations
     !  ------------------
     real(kind=8)              :: k, ncL, dlL, scaled
-    real(kind=8), external    :: kprimelprimeconvolutioncdf, mydtrinv
+    real(kind=8), external    :: klprimesmixturecdf, mydtrinv
 
     dlL = 2 * (n- 1._8) / (1+obsr**2)
     scaled = sqrt(n / (2 * (1._8- obsr)) )
@@ -69,7 +69,7 @@ contains
         integer,      intent(out):: iok
         real(kind=8), external   :: kprimelprimeconvolutioncdf
         real(kind=8) :: func
-        func = kprimelprimeconvolutioncdf(x, n, obsr, obsd, delta, maxitr, iok)
+        func = klprimesmixturecdf(x, n, obsr, obsd, delta, maxitr, iok)
     end function func
 
 end function klprimesmixtureidf
