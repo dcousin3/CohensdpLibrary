@@ -1,10 +1,10 @@
-FT_OBJS = CohenDLibrary.o
+TARGET = CohenDLibrary.o
 
-all:
-	@$(MAKE) $(SHLIB)
-	@rm -f *.mod *.o
+#all: $(SHLIB)
+#    @$(MAKE) $(SHLIB)
+#    @rm -f *.o
 
-$(SHLIB): $(FT_OBJS)
+$(SHLIB): $(TARGET)
 
 # The subsidiary files
 TCDF.o: BetaCDF.o NCDF.o
@@ -27,3 +27,5 @@ KLprimmesMixtureCDF.o: KprimeCDF.o LprimeCDF
 KLprimmesMixturePDF.o: KLprimmesMixtureCDF.o
 KLprimmesMixtureIDF.o: KLprimmesMixtureCDF.o mydtrinv.o
 
+# finally, the file with the wrappers to subroutines
+subwrapper.o: KLprimmesMixturePDF.o LprimePDF.o KprimePDF.o
