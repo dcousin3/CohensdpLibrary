@@ -1,4 +1,4 @@
-function kprimecdf( x, q, r, a1, delta, maxitr, ier )
+FUNCTION kprimecdf( x, q, r, a1, TOL, MAXITER, ier )
 
 !-----------------------------------------------------------------------
 !
@@ -10,12 +10,12 @@ function kprimecdf( x, q, r, a1, delta, maxitr, ier )
 !     Q     - Input . First degrees of freedom       (Q >  0) - Real
 !     R     - Input . Second   "    "     "          (R >  0) - Real
 !     A1    - Input . Eccentricity parameter                  - Real
-!     DELTA - Input . Maximum absolute error required on      - Real
+!     TOL   - Input . Maximum absolute error required on      - Real
 !                     kprimecdf (stopping criteria)
-!                     (eps < DELTA < 1 where eps is machine
+!                     (eps < TOL < 1 where eps is machine
 !                     epsilon; see parameter statement below)
-!     MAXITR- Input . Maximum number of iterations            - Integer
-!     IER   - Output. Return code :                           - Integer
+!     MAXITER - Input . Maximum number of iterations            - Integer
+!     IER     - Output. Return code :                           - Integer
 !                     0 = normal
 !                    -1 = no more evolution of the sum but
 !                         required accuracy not reached yet
@@ -48,46 +48,47 @@ function kprimecdf( x, q, r, a1, delta, maxitr, ier )
 !
 !-----------------------------------------------------------------------
 
-   implicit none
+   IMPLICIT NONE
+   INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
    !  Function
    !  --------
 
-   real(kind=8) :: kprimecdf
+   REAL(PR) :: kprimecdf
 
    !  Arguments
    !  ---------
 
-   real(kind=8), intent(in) :: x, q, r, a1, delta
-   integer, intent(in)      :: maxitr
-   integer, intent(out)     :: ier
+   REAL(PR), INTENT(in)     :: x, q, r, a1, TOL
+   INTEGER, INTENT(in)      :: MAXITER
+   INTEGER, INTENT(out)     :: ier
 
    !  local declarations
    !  ------------------
 
-!! real(kind=8), external :: dlgama
-   real(kind=8), external :: betacdf, lprimecdf, tcdf
+!! REAL(PR), EXTERNAL :: dlgama
+   REAL(PR), EXTERNAL :: betacdf, lprimecdf, tcdf
 
-   real(kind=8), parameter :: zero=0.0_8, half=0.5_8, one=1.0_8, two=2.0_8
-   real(kind=8), parameter :: dlg15=-0.120782237635245204_8  ! =log(gamma(1.5))
-   real(kind=8), parameter :: bel=1.0e6_8, qlimit=2.0e6_8, rlimit=2.0e6_8
-   real(kind=8), parameter :: eps=0.223e-15_8, explower=-706.893_8
-   real(kind=8), parameter :: betaratio=0.01_8
-   integer, parameter :: kmin=10    ! When starting point of iterations is below
-                                    ! this limit "method 2" is not judged worthwile
+   REAL(PR), PARAMETER :: zero =0.0D0, half=0.5D0, one=1.0D0, two=2.0D0
+   REAL(PR), PARAMETER :: dlg15=-0.120782237635245204D0  ! =log(gamma(1.5))
+   REAL(PR), PARAMETER :: bel  =1.0D6, qlimit=2.0D6, rlimit=2.0D6
+   REAL(PR), PARAMETER :: eps  =0.223D-15, explower=-706.893D0
+   REAL(PR), PARAMETER :: betaratio=0.01D0
+   INTEGER, PARAMETER  :: kmin=10    ! When starting point of iterations is below
+                                     ! this limit "method 2" is not judged worthwile
 
    !     These constants are machine dependent:
    !     eps = machine epsilon
    !           (the smallest real such that 1.0 + eps > 1.0)
    !     explower = minimum valid argument for the exponential function
 
-   real(kind=8) :: a2, aqa, aqal, beta0, betak, dj2, q2, q2l, qqal
-   real(kind=8) :: r2, r2l, r2l1mx, sumg, xarg, xl, xx
-   integer :: iok, j, jm, k, kit
-   logical :: xneg
-   real(kind=8) :: betab(0:1), betaf(0:1), gcoefb(0:1), gcoeff(0:1)
-   real(kind=8) :: cdf(0:1), xgamb(0:1), xgamf(0:1)
-   real(kind=8) :: prv(0:1)
+   REAL(PR) :: a2, aqa, aqal, beta0, betak, dj2, q2, q2l, qqal
+   REAL(PR) :: r2, r2l, r2l1mx, sumg, xarg, xl, xx
+   INTEGER :: iok, j, jm, k, kit
+   LOGICAL :: xneg
+   REAL(PR) :: betab(0:1), betaf(0:1), gcoefb(0:1), gcoeff(0:1)
+   REAL(PR) :: cdf(0:1), xgamb(0:1), xgamf(0:1)
+   REAL(PR) :: prv(0:1)
 
    !-----------------------------------------------------------------
 
@@ -96,7 +97,7 @@ function kprimecdf( x, q, r, a1, delta, maxitr, ier )
 
    !  Test for valid input arguments
 
-   if ( q <= zero .or. r <= zero .or. delta >= one .or. delta <= eps ) then
+   if ( q <= zero .or. r <= zero .or. TOL >= one .or. TOL <= eps ) then
       ier = 1
       return
    end if
@@ -121,11 +122,11 @@ function kprimecdf( x, q, r, a1, delta, maxitr, ier )
    !  If q or r is large enough use limiting distribution
 
    if ( q > qlimit ) then
-      kprimecdf = one - lprimecdf( a1, r, x, delta, maxitr, ier ) ! noncentral t
+      kprimecdf = one - lprimecdf( a1, r, x, TOL, MAXITER, ier ) ! noncentral t
       if ( ier /= 0 ) ier = 4
       return
    else if ( r > rlimit ) then
-      kprimecdf = lprimecdf( x, q, a1, delta, maxitr, ier )
+      kprimecdf = lprimecdf( x, q, a1, TOL, MAXITER, ier )
       if ( ier /= 0 ) ier = 4
       return
    end if
@@ -286,7 +287,7 @@ function kprimecdf( x, q, r, a1, delta, maxitr, ier )
    !  Iteration loops
 
    !  Do forward and backward computations k times or until convergence
-   kit = min( k, maxitr )
+   kit = min( k, MAXITER )
    do j = 2, kit
       jm = mod(k+j,2)
       betaf(jm) = max( betaf(jm)-xgamf(jm), zero )
@@ -298,7 +299,7 @@ function kprimecdf( x, q, r, a1, delta, maxitr, ier )
       cdf(jm) = cdf(jm) + gcoeff(jm)*betaf(jm) + gcoefb(jm)*betab(jm)
 
       sumg = sumg + gcoeff(jm) + gcoefb(jm)
-      if ( (one-sumg)*beta0 <= delta ) goto 10
+      if ( (one-sumg)*beta0 <= TOL ) goto 10
       !  Looking for no more evolution of the sum
       if ( cdf(0) == prv(0) .and. cdf(1) == prv(1) ) then
          ier = -1
@@ -309,7 +310,7 @@ function kprimecdf( x, q, r, a1, delta, maxitr, ier )
    end do
 
    !  Do forward computations until convergence
-   do j = max(kit,1)+1, maxitr
+   do j = max(kit,1)+1, MAXITER
       jm = mod(k+j,2)
       betaf(jm) = max( betaf(jm)-xgamf(jm), zero )
       gcoeff(jm) = gcoeff(jm)*(k+j-two+q)*aqa/(k+j)
@@ -317,7 +318,7 @@ function kprimecdf( x, q, r, a1, delta, maxitr, ier )
       cdf(jm) = cdf(jm) + gcoeff(jm)*betaf(jm)
 
       sumg = sumg + gcoeff(jm)
-      if ( (one-sumg)*betaf(jm) <= delta ) goto 10
+      if ( (one-sumg)*betaf(jm) <= TOL ) goto 10
       !  Looking for no more evolution of the sum
       if ( cdf(0) == prv(0) .and. cdf(1) == prv(1) ) then
          ier = -1
@@ -348,7 +349,7 @@ function kprimecdf( x, q, r, a1, delta, maxitr, ier )
 
    if ( ier == -1 ) then
       ! See if the "reverse" problem is OK
-      call kprimebis( a1, r, q, x, delta, maxitr, iok, xx )
+      call kprimebis( a1, r, q, x, TOL, MAXITER, iok, xx )
       if ( iok == 0 ) then
          kprimecdf = one - xx
          ier = 0
@@ -357,49 +358,51 @@ function kprimecdf( x, q, r, a1, delta, maxitr, ier )
 
       ! Check out of limits
    if ( kprimecdf < zero ) then
-      if ( kprimecdf >= -delta ) then
+      if ( kprimecdf >= -TOL ) then
          kprimecdf = zero
       else
          ier = 5 + ier
       end if
    else if ( kprimecdf > one ) then
-      if ( kprimecdf <= one+delta ) then
+      if ( kprimecdf <= one+TOL ) then
          kprimecdf = one
       else
          ier = 5 + ier
       end if
    end if
 
-end function kprimecdf
-subroutine kprimebis( x, q, r, a1, delta, maxitr, ier, result )
+END FUNCTION kprimecdf
+
+SUBROUTINE kprimebis( x, q, r, a1, TOL, MAXITER, ier, result )
 
 !     Returns in result the K' cdf
 !     This is the subroutine version of the Kprimecdf function used
 !     for the reverse problem when ier=-1 in the Kprimecdf function
 !     (Same arguments as in kprimecdf function)
 
-   implicit none
+   IMPLICIT NONE
+   INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
    !  Arguments
    !  ---------
 
-   real(kind=8), intent(in) :: x, q, r, a1, delta
-   real(kind=8), intent(out) :: result
-   integer, intent(in) :: maxitr
-   integer, intent(out) :: ier
+   REAL(PR), INTENT(in) :: x, q, r, a1, TOL
+   REAL(PR), INTENT(out) :: result
+   INTEGER, INTENT(in) :: MAXITER
+   INTEGER, INTENT(out) :: ier
 
    !  local declarations
    !  ------------------
 
-!! real(kind=8), external :: dlgama
-   real(kind=8), external :: betacdf, lprimecdf, tcdf
+!! REAL(PR), EXTERNAL :: dlgama
+   REAL(PR), EXTERNAL :: betacdf, lprimecdf, tcdf
 
-   real(kind=8), parameter :: zero=0.0_8, half=0.5_8, one=1.0_8, two=2.0_8
-   real(kind=8), parameter :: dlg15=-0.120782237635245204_8  ! =log(gamma(1.5))
-   real(kind=8), parameter :: bel=1.0e6_8, qlimit=2.0e6_8, rlimit=2.0e6_8
-   real(kind=8), parameter :: eps=0.223e-15_8, explower=-706.893_8
-   real(kind=8), parameter :: betaratio=0.01_8
-   integer, parameter :: kmin=10    ! When starting point of iterations is below
+   REAL(PR), PARAMETER :: zero=0.0D0, half=0.5D0, one=1.0D0, two=2.0D0
+   REAL(PR), PARAMETER :: dlg15=-0.120782237635245204D0  ! =log(gamma(1.5))
+   REAL(PR), PARAMETER :: bel=1.0D6, qlimit=2.0D6, rlimit=2.0D6
+   REAL(PR), PARAMETER :: eps=0.223D-15, explower=-706.893D0
+   REAL(PR), PARAMETER :: betaratio=0.01D0
+   INTEGER, PARAMETER :: kmin=10    ! When starting point of iterations is below
                                     ! this limit "method 2" is not judged worthwile
 
    !     These constants are machine dependent:
@@ -407,13 +410,13 @@ subroutine kprimebis( x, q, r, a1, delta, maxitr, ier, result )
    !           (the smallest real such that 1.0 + eps > 1.0)
    !     explower = minimum valid argument for the exponential function
 
-   real(kind=8) :: a2, aqa, aqal, beta0, betak, dj2, q2, q2l, qqal
-   real(kind=8) :: r2, r2l, r2l1mx, sumg, xarg, xl, xx
-   integer :: iok, j, jm, k, kit
-   logical :: xneg
-   real(kind=8) :: betab(0:1), betaf(0:1), gcoefb(0:1), gcoeff(0:1)
-   real(kind=8) :: cdf(0:1), xgamb(0:1), xgamf(0:1)
-   real(kind=8) :: prv(0:1)
+   REAL(PR) :: a2, aqa, aqal, beta0, betak, dj2, q2, q2l, qqal
+   REAL(PR) :: r2, r2l, r2l1mx, sumg, xarg, xl, xx
+   INTEGER :: iok, j, jm, k, kit
+   LOGICAL :: xneg
+   REAL(PR) :: betab(0:1), betaf(0:1), gcoefb(0:1), gcoeff(0:1)
+   REAL(PR) :: cdf(0:1), xgamb(0:1), xgamf(0:1)
+   REAL(PR) :: prv(0:1)
 
    !-----------------------------------------------------------------
 
@@ -422,7 +425,7 @@ subroutine kprimebis( x, q, r, a1, delta, maxitr, ier, result )
 
    !  Test for valid input arguments
 
-   if ( q <= zero .or. r <= zero .or. delta >= one .or. delta <= eps ) then
+   if ( q <= zero .or. r <= zero .or. TOL >= one .or. TOL <= eps ) then
       ier = 1
       return
    end if
@@ -447,11 +450,11 @@ subroutine kprimebis( x, q, r, a1, delta, maxitr, ier, result )
    !  If q or r is large enough use limiting distribution
 
    if ( q > qlimit ) then
-      result = one - lprimecdf( a1, r, x, delta, maxitr, ier ) ! noncentral t
+      result = one - lprimecdf( a1, r, x, TOL, MAXITER, ier ) ! noncentral t
       if ( ier /= 0 ) ier = 4
       return
    else if ( r > rlimit ) then
-      result = lprimecdf( x, q, a1, delta, maxitr, ier )
+      result = lprimecdf( x, q, a1, TOL, MAXITER, ier )
       if ( ier /= 0 ) ier = 4
       return
    end if
@@ -612,7 +615,7 @@ subroutine kprimebis( x, q, r, a1, delta, maxitr, ier, result )
    !  Iteration loops
 
    !  Do forward and backward computations k times or until convergence
-   kit = min( k, maxitr )
+   kit = min( k, MAXITER )
    do j = 2, kit
       jm = mod(k+j,2)
       betaf(jm) = max( betaf(jm)-xgamf(jm), zero )
@@ -624,7 +627,7 @@ subroutine kprimebis( x, q, r, a1, delta, maxitr, ier, result )
       cdf(jm) = cdf(jm) + gcoeff(jm)*betaf(jm) + gcoefb(jm)*betab(jm)
 
       sumg = sumg + gcoeff(jm) + gcoefb(jm)
-      if ( (one-sumg)*beta0 <= delta ) goto 10
+      if ( (one-sumg)*beta0 <= TOL ) goto 10
       !  Looking for no more evolution of the sum
       if ( cdf(0) == prv(0) .and. cdf(1) == prv(1) ) then
          ier = -1
@@ -635,7 +638,7 @@ subroutine kprimebis( x, q, r, a1, delta, maxitr, ier, result )
    end do
 
    !  Do forward computations until convergence
-   do j = max(kit,1)+1, maxitr
+   do j = max(kit,1)+1, MAXITER
       jm = mod(k+j,2)
       betaf(jm) = max( betaf(jm)-xgamf(jm), zero )
       gcoeff(jm) = gcoeff(jm)*(k+j-two+q)*aqa/(k+j)
@@ -643,7 +646,7 @@ subroutine kprimebis( x, q, r, a1, delta, maxitr, ier, result )
       cdf(jm) = cdf(jm) + gcoeff(jm)*betaf(jm)
 
       sumg = sumg + gcoeff(jm)
-      if ( (one-sumg)*betaf(jm) <= delta ) goto 10
+      if ( (one-sumg)*betaf(jm) <= TOL ) goto 10
       !  Looking for no more evolution of the sum
       if ( cdf(0) == prv(0) .and. cdf(1) == prv(1) ) then
          ier = -1
@@ -672,4 +675,4 @@ subroutine kprimebis( x, q, r, a1, delta, maxitr, ier, result )
    end if
    if ( a1 < zero ) result = one - result
 
-end subroutine kprimebis
+END SUBROUTINE kprimebis

@@ -1,4 +1,4 @@
-function kprimepdf( x, q, r, a1, delta, maxitr, ier )
+FUNCTION kprimepdf( x, q, r, a1, TOL, MAXITER, ier )
 
 !-----------------------------------------------------------------------
 !
@@ -10,11 +10,11 @@ function kprimepdf( x, q, r, a1, delta, maxitr, ier )
 !     Q     - Input . First degrees of freedom       (Q >  0) - Real
 !     R     - Input . Second   "    "     "          (R >  0) - Real
 !     A1    - Input . Eccentricity parameter                  - Real
-!     DELTA - Input . Maximum absolute error required on      - Real
+!     TOL   - Input . Maximum absolute error required on      - Real
 !                     kprimecdf (stopping criteria)
-!                     (eps < DELTA < 1 where eps is machine
+!                     (eps < TOL < 1 where eps is machine
 !                     epsilon; see parameter statement below)
-!     MAXITR- Input . Maximum number of iterations            - Integer
+!     MAXITER- Input . Maximum number of iterations            - Integer
 !     IER   - Output. unreturned...                           - Integer
 !
 !     External functions called:
@@ -25,50 +25,51 @@ function kprimepdf( x, q, r, a1, delta, maxitr, ier )
 !*********************************************************************************************!
 !**                                                                                         **!
 !** This function was added by Denis Cousineau, 28 november 2020.                           **!
-!** It is just a wrapper to the generic function dfridr from Numerical Reciepes.            **!
-!** Press, Teukolsky, Vetterling, Flannery (1992)                                           **!
+!** It is just a wrapper to the generic function dfridr from Numerical Receipes.            **!
 !**                                                                                         **!
 !*********************************************************************************************!
 
-    implicit none
+    IMPLICIT NONE
+    INTEGER, PARAMETER       :: PR=KIND(1.0D0)
 
     !  Function
     !  --------
-    real(kind=8) :: kprimepdf
+    REAL(PR)                 :: kprimepdf
 
     !  Arguments
     !  ---------
-    real(kind=8), intent(in)  :: x, q, r, a1, delta
-    integer,      intent(in)  :: maxitr
-    integer, intent(out)      :: ier
+    REAL(PR), INTENT(in)     :: x, q, r, a1, TOL
+    INTEGER, INTENT(in)      :: MAXITER
+    INTEGER, INTENT(out)     :: ier
 
     !  Local declarations
     !  ------------------
-    real(kind=8), external  :: kprimecdf
-    real(kind=8)            :: rer  ! real-valued error 
+    REAL(PR), EXTERNAL       :: kprimecdf
+    REAL(PR)                 :: rer  ! real-valued error 
 
     ier = 0
-    kprimepdf = dfridr( func, x, 0.1_8, rer )
+    kprimepdf = dfridr( func, x, 0.1D0, rer )
 
-contains
-    function func( x )
-        real(kind=8), intent(in) :: x
-        real(kind=8), external   :: kprimecdf
-        real(kind=8)  :: func
-        integer       :: iok
-        func = kprimecdf(x, q, r, a1, delta, maxitr, iok)
-    end function func
+CONTAINS
+    FUNCTION func( x )
+        REAL(PR), INTENT(in) :: x
+        REAL(PR), EXTERNAL   :: kprimecdf
+        REAL(PR)             :: func
+        INTEGER              :: iok
+        func = kprimecdf(x, q, r, a1, TOL, MAXITER, iok)
+    END FUNCTION func
 
-    function dfridr(func, x, h, rer )
+    FUNCTION dfridr(func, x, h, rer )
         ! Reference: Press, Teukolsky, Vetterling, Flannery (1992) Numerical Receipes in fortran 77 (vol. 1)
-        real(kind=8)              :: dfridr
-        real(kind=8), external    :: func
-        real(kind=8), intent(in)  :: x, h
-        real(kind=8), intent(out) :: rer
-        real(kind=8), parameter   :: CON=1.4_8, CON2=1.96_8, BIG=1.0e30_8, SAFE=2.0_8
-        integer,      parameter   :: NTAB=10
-        integer                   :: i, j
-        real(kind=8)              :: errt, fac, hh, a(NTAB,NTAB)
+        REAL(PR)              :: dfridr
+        REAL(PR), EXTERNAL    :: func
+        REAL(PR), INTENT(in)  :: x, h
+        REAL(PR), INTENT(out) :: rer
+        REAL(PR), PARAMETER   :: CON =1.4D0, CON2=1.96D0, BIG=1.0D30, SAFE=2.0D0
+        INTEGER,  PARAMETER   :: NTAB=10
+        INTEGER               :: i, j
+        REAL(PR)              :: errt, fac, hh, a(NTAB,NTAB)
+
         ! Returns the derivative of a function func at a point x by Ridders’ method of polynomial
         ! extrapolation. The value h is input as an estimated initial stepsize; it need not be small,
         ! but rather should be an increment in x over which func changes substantially. An estimate
@@ -76,7 +77,7 @@ contains
         ! Parameters: Stepsize is decreased by CON at each iteration. Max size of tableau is set by
         ! NTAB. Return when error is SAFE worse than the best so far.
         if (h .eq. 0.) then
-            dfridr = -10.0_8
+            dfridr = -10.0D0
         end if
 
         hh = h
@@ -105,10 +106,10 @@ contains
             end if 
         end do
         return
-    end function dfridr
+    END FUNCTION dfridr
 
 
-end function kprimepdf
+END FUNCTION kprimepdf
 
 
 

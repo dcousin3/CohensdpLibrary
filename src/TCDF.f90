@@ -28,26 +28,27 @@ function tcdf( x, p, plim, ier )
 !-----------------------------------------------------------------------
 
    implicit none
+   INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
    !  Function
    !  --------
 
-   real(kind=8) :: tcdf
+   real(PR) :: tcdf
 
    !  Arguments
    !  ---------
 
-   real(kind=8), intent(in) :: x, p, plim
+   real(PR), intent(in) :: x, p, plim
    integer, intent(out) :: ier
 
    !  local declarations
    !  ------------------
 
-   real(kind=8), external :: betacdf, ncdf
+   real(PR), external :: betacdf, ncdf
 
-   real(kind=8), parameter :: zero=0.0_8, half=0.5_8, one=1.0_8
+   real(PR), parameter :: zero=0.0D0, half=0.5D0, one=1.0D0
 
-   real(kind=8) :: t, xx
+   real(PR) :: t, xx
 
    !-----------------------------------------------------------------
 

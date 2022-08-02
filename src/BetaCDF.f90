@@ -23,27 +23,23 @@ function betacdf( x, p, q, ier )
 !-----------------------------------------------------------------------
 
    implicit none
+   INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
    !  Function
    !  --------
-
-   real(kind=8) :: betacdf
+   real(PR) :: betacdf
 
    !  Arguments
    !  ---------
-
-   real(kind=8), intent(in) :: x, p, q
+   real(PR), intent(in) :: x, p, q
    integer, intent(out) :: ier
 
    !  Local declarations
    !  ------------------
-
-   real(kind=8), parameter :: zero=0.0_8, one=1.0_8
-
-   real(kind=8) :: w, w1, y
+   real(PR), parameter :: zero=0.0D0, one=1.0D0
+   real(PR) :: w, w1, y
 
    !--------------------------------------------------------------------
-
    !  Test for valid input arguments
 
    if ( p <= zero .or. q <= zero ) then
@@ -72,84 +68,86 @@ function betacdf( x, p, q, ier )
    end if
 
 end function betacdf
+
+
 subroutine bratio( a, b, x, y, w, w1, ierr )
-
-!*****************************************************************************80
-!
-!! BRATIO evaluates the incomplete beta function Ix(A,B).
-!
-!  Discussion:
-!
-!    It is assumed that X <= 1
-!    and Y = 1 - X.  BRATIO assigns W and W1 the values
-!
-!                      W  = ix(a,b)
-!                      W1 = 1 - ix(a,b)
-!
-!     ierr is a variable that reports the status of the results.
-!     if no input errors are detected then ierr is set to 0 and
-!     w and w1 are computed. otherwise, if an error is detected,
-!     then w and w1 are assigned the value 0 and ierr is set to
-!     one of the following values ...
-!
-!        ierr = 1  if a or b is negative
-!        ierr = 2  if a = b = 0
-!        ierr = 3  if x < 0 or x .gt. 1
-!        ierr = 4  if y < 0 or y .gt. 1
-!        ierr = 5  if x + y /= 1
-!        ierr = 6  if x = a = 0
-!        ierr = 7  if y = b = 0
-!
-!  Modified:
-!
-!    17 May 2007
-!
-!  Author:
-!
-!    Armido DiDinato, Alfred Morris
-!
-!  Reference:
-!
-!    Armido DiDinato, Alfred Morris,
-!    Algorithm 708:
-!    Significant Digit Computation of the
-!    Incomplete Beta Function Ratios,
-!    ACM Transactions on Mathematical Software,
-!    Volume 18, Number 3, September 1993, pages 360-373.
-!
-!  Parameters:
-!
-!    Input, real A, B, the parameters of the function.  A and B should
-!    be nonnegative.
-!
+    !*****************************************************************************80
+    !
+    !! BRATIO evaluates the incomplete beta function Ix(A,B).
+    !
+    !  Discussion:
+    !
+    !    It is assumed that X <= 1
+    !    and Y = 1 - X.  BRATIO assigns W and W1 the values
+    !
+    !                      W  = ix(a,b)
+    !                      W1 = 1 - ix(a,b)
+    !
+    !     ierr is a variable that reports the status of the results.
+    !     if no input errors are detected then ierr is set to 0 and
+    !     w and w1 are computed. otherwise, if an error is detected,
+    !     then w and w1 are assigned the value 0 and ierr is set to
+    !     one of the following values ...
+    !
+    !        ierr = 1  if a or b is negative
+    !        ierr = 2  if a = b = 0
+    !        ierr = 3  if x < 0 or x .gt. 1
+    !        ierr = 4  if y < 0 or y .gt. 1
+    !        ierr = 5  if x + y /= 1
+    !        ierr = 6  if x = a = 0
+    !        ierr = 7  if y = b = 0
+    !
+    !  Modified:
+    !
+    !    17 May 2007
+    !
+    !  Author:
+    !
+    !    Armido DiDinato, Alfred Morris
+    !
+    !  Reference:
+    !
+    !    Armido DiDinato, Alfred Morris,
+    !    Algorithm 708:
+    !    Significant Digit Computation of the
+    !    Incomplete Beta Function Ratios,
+    !    ACM Transactions on Mathematical Software,
+    !    Volume 18, Number 3, September 1993, pages 360-373.
+    !
+    !  Parameters:
+    !
+    !    Input, real A, B, the parameters of the function.  A and B should
+    !    be nonnegative.
+    !
   implicit none
+  INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-   real(kind=8), parameter :: zero=0.0_8, half=0.5_8, one=1.0_8
+  real(PR), parameter :: zero=0.0D0, half=0.5D0, one=1.0D0
 
-  real(kind=8) a
-  real(kind=8) a0
-  real(kind=8) apser
-  real(kind=8) b
-  real(kind=8) b0
-  real(kind=8) basym
-  real(kind=8) bfrac
-  real(kind=8) bpser
-  real(kind=8) bup
-  real(kind=8) eps
-  real(kind=8) fpser
+  real(PR) a
+  real(PR) a0
+  real(PR) apser
+  real(PR) b
+  real(PR) b0
+  real(PR) basym
+  real(PR) bfrac
+  real(PR) bpser
+  real(PR) bup
+  real(PR) eps
+  real(PR) fpser
   integer ierr
   integer ierr1
   integer ind
-  real(kind=8) lambda
+  real(PR) lambda
   integer n
-  real(kind=8) t
-  real(kind=8) w
-  real(kind=8) w1
-  real(kind=8) x
-  real(kind=8) x0
-  real(kind=8) y
-  real(kind=8) y0
-  real(kind=8) z
+  real(PR) t
+  real(PR) w
+  real(PR) w1
+  real(PR) x
+  real(PR) x0
+  real(PR) y
+  real(PR) y0
+  real(PR) z
 
   eps = epsilon ( one )
 
@@ -162,7 +160,7 @@ subroutine bratio( a, b, x, y, w, w1, ierr )
 
   z = ((x + y) - half) - half
 
-  if ( abs(z) .gt. 3.0_8*eps) then
+  if ( abs(z) .gt. 3.0D0*eps) then
     ierr = 5
     return
   end if
@@ -174,8 +172,8 @@ subroutine bratio( a, b, x, y, w, w1, ierr )
   if (a == zero) go to 211
   if (b == zero) go to 201
 
-      eps = max ( eps, 1.e-15_8 )
-      if ( max ( a, b ) < 1.e-3_8*eps) go to 230
+      eps = max ( eps, 1.D-15 )
+      if ( max ( a, b ) < 1.D-3*eps) go to 230
 
       ind = 0
       a0 = a
@@ -196,17 +194,17 @@ subroutine bratio( a, b, x, y, w, w1, ierr )
    10 if (b0 < min ( eps, eps * a0 ) ) go to 80
       if (a0 < min ( eps, eps * b0 ) .and. b0*x0 <= one) go to 90
       if ( max ( a0, b0 ) .gt. one) go to 20
-      if (a0 .ge. min ( 0.2_8, b0 ) ) go to 100
-      if (x0**a0 <= 0.9_8) go to 100
-      if (x0 .ge. 0.3_8) go to 110
+      if (a0 .ge. min ( 0.2D0, b0 ) ) go to 100
+      if (x0**a0 <= 0.9D0) go to 100
+      if (x0 .ge. 0.3D0) go to 110
       n = 20
       go to 130
 
    20 if (b0 <= one) go to 100
-      if (x0 .ge. 0.3_8) go to 110
-      if (x0 .ge. 0.1_8) go to 21
-      if ((x0*b0)**a0 <= 0.7_8) go to 100
-   21 if (b0 .gt. 15.0_8) go to 131
+      if (x0 .ge. 0.3D0) go to 110
+      if (x0 .ge. 0.1D0) go to 21
+      if ((x0*b0)**a0 <= 0.7D0) go to 100
+   21 if (b0 .gt. 15.0D0) go to 131
       n = 20
       go to 130
 !
@@ -225,14 +223,14 @@ subroutine bratio( a, b, x, y, w, w1, ierr )
       y0 = x
       lambda = abs(lambda)
 
-   40 if (b0 < 40.0_8 .and. b0*x0 <= 0.7_8) go to 100
-      if (b0 < 40.0_8) go to 140
+   40 if (b0 < 40.0D0 .and. b0*x0 <= 0.7D0) go to 100
+      if (b0 < 40.0D0) go to 140
       if (a0 .gt. b0) go to 50
-         if (a0 <= 100.0_8) go to 120
-         if (lambda .gt. 0.03_8*a0) go to 120
+         if (a0 <= 100.0D0) go to 120
+         if (lambda .gt. 0.03D0*a0) go to 120
          go to 180
-   50 if (b0 <= 100.0_8) go to 120
-      if (lambda .gt. 0.03_8*b0) go to 120
+   50 if (b0 <= 100.0D0) go to 120
+      if (lambda .gt. 0.03D0*b0) go to 120
       go to 180
 !
 !  evaluation of the appropriate algorithm
@@ -258,14 +256,14 @@ subroutine bratio( a, b, x, y, w, w1, ierr )
       go to 220
 
   120 continue
-      w = bfrac(a0, b0, x0, y0, lambda, 15.0_8*eps)
+      w = bfrac(a0, b0, x0, y0, lambda, 15.0D0*eps)
       w1 = half + (half - w)
       go to 220
 
   130 continue
       w1 = bup(b0, a0, y0, x0, n, eps)
       b0 = b0 + n
-  131 call bgrat ( b0, a0, y0, x0, w1, 15.0_8*eps, ierr1 )
+  131 call bgrat ( b0, a0, y0, x0, w1, 15.0D0*eps, ierr1 )
       w = half + (half - w1)
       go to 220
 
@@ -278,20 +276,20 @@ subroutine bratio( a, b, x, y, w, w1, ierr )
       end if
 
   141 w = bup(b0, a0, y0, x0, n, eps)
-      if (x0 .gt. 0.7_8) go to 150
+      if (x0 .gt. 0.7D0) go to 150
       w = w + bpser(a0, b0, x0, eps)
       w1 = half + (half - w)
       go to 220
 
-  150 if ( 15.0_8 < a0 ) go to 151
+  150 if ( 15.0D0 < a0 ) go to 151
          n = 20
          w = w + bup(a0, b0, x0, y0, n, eps)
          a0 = a0 + n
-  151 call bgrat ( a0, b0, x0, y0, w, 15.0_8*eps, ierr1 )
+  151 call bgrat ( a0, b0, x0, y0, w, 15.0D0*eps, ierr1 )
       w1 = half + (half - w)
       go to 220
 
-  180 w = basym(a0, b0, lambda, 100.0_8*eps)
+  180 w = basym(a0, b0, lambda, 100.0D0*eps)
       w1 = half + (half - w)
       go to 220
 !
@@ -336,62 +334,64 @@ subroutine bratio( a, b, x, y, w, w1, ierr )
 
   return
 end subroutine bratio
+
+
 function algdiv ( a, b )
-
-!*****************************************************************************80
-!
-!! ALGDIV computes ln(gamma(b)/gamma(a+b)) when 8 <= B.
-!
-!  Discussion:
-!
-!    In this algorithm, del(x) is the function defined by
-!    ln(gamma(x)) = (x - 0.5)*ln(x) - x + 0.5*ln(2*pi) + del(x).
-!
-!  Modified:
-!
-!    17 May 2007
-!
-!  Author:
-!
-!    Armido DiDinato, Alfred Morris
-!
-!  Reference:
-!
-!    Armido DiDinato, Alfred Morris,
-!    Algorithm 708:
-!    Significant Digit Computation of the
-!    Incomplete Beta Function Ratios,
-!    ACM Transactions on Mathematical Software,
-!    Volume 18, Number 3, September 1993, pages 360-373.
-!
+    !*****************************************************************************80
+    !
+    !! ALGDIV computes ln(gamma(b)/gamma(a+b)) when 8 <= B.
+    !
+    !  Discussion:
+    !
+    !    In this algorithm, del(x) is the function defined by
+    !    ln(gamma(x)) = (x - 0.5)*ln(x) - x + 0.5*ln(2*pi) + del(x).
+    !
+    !  Modified:
+    !
+    !    17 May 2007
+    !
+    !  Author:
+    !
+    !    Armido DiDinato, Alfred Morris
+    !
+    !  Reference:
+    !
+    !    Armido DiDinato, Alfred Morris,
+    !    Algorithm 708:
+    !    Significant Digit Computation of the
+    !    Incomplete Beta Function Ratios,
+    !    ACM Transactions on Mathematical Software,
+    !    Volume 18, Number 3, September 1993, pages 360-373.
+    !
   implicit none
+  INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-   real(kind=8), parameter :: half=0.5_8, one=1.0_8
+  real(PR), parameter :: half=0.5D0, one=1.0D0
 
-  real(kind=8) a
-  real(kind=8) algdiv
-  real(kind=8) alnrel
-  real(kind=8) b
-  real(kind=8) c
-  real(kind=8), parameter :: c0 = 0.833333333333333e-01_8
-  real(kind=8), parameter :: c1 = -0.277777777760991e-02_8
-  real(kind=8), parameter :: c2 = 0.793650666825390e-03_8
-  real(kind=8), parameter :: c3 = -0.595202931351870e-03_8
-  real(kind=8), parameter :: c4 = 0.837308034031215e-03_8
-  real(kind=8), parameter :: c5 = -0.165322962780713e-02_8
-  real(kind=8) d
-  real(kind=8) h
-  real(kind=8) s11
-  real(kind=8) s3
-  real(kind=8) s5
-  real(kind=8) s7
-  real(kind=8) s9
-  real(kind=8) t
-  real(kind=8) u
-  real(kind=8) v
-  real(kind=8) w
-  real(kind=8) x
-  real(kind=8) x2
+  real(PR) a
+  real(PR) algdiv
+  real(PR) alnrel
+  real(PR) b
+  real(PR) c
+  real(PR), parameter :: c0 = 0.833333333333333D-01
+  real(PR), parameter :: c1 = -0.277777777760991D-02
+  real(PR), parameter :: c2 = 0.793650666825390D-03
+  real(PR), parameter :: c3 = -0.595202931351870D-03
+  real(PR), parameter :: c4 = 0.837308034031215D-03
+  real(PR), parameter :: c5 = -0.165322962780713D-02
+  real(PR) d
+  real(PR) h
+  real(PR) s11
+  real(PR) s3
+  real(PR) s5
+  real(PR) s7
+  real(PR) s9
+  real(PR) t
+  real(PR) u
+  real(PR) v
+  real(PR) w
+  real(PR) x
+  real(PR) x2
 
   if ( b < a ) then
     h = b / a
@@ -457,24 +457,25 @@ function alnrel ( a )
 !    Volume 18, Number 3, September 1993, pages 360-373.
 !
   implicit none
+  INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-   real(kind=16), parameter :: onedble=1.0_16
-   real(kind=8), parameter :: one=1.0_8, two=2.0_8
+  real(kind=16), parameter :: onedble=1.0_16
+  real(PR), parameter :: one=1.0D0, two=2.0D0
 
-  real(kind=8) a
-  real(kind=8) alnrel
-  real(kind=8), parameter :: p1 = -0.129418923021993e+01_8
-  real(kind=8), parameter :: p2 = 0.405303492862024_8
-  real(kind=8), parameter :: p3 = -0.178874546012214e-01_8
-  real(kind=8), parameter :: q1 = -0.162752256355323e+01_8
-  real(kind=8), parameter :: q2 = 0.747811014037616_8
-  real(kind=8), parameter :: q3 = -0.845104217945565e-01_8
-  real(kind=8) t
-  real(kind=8) t2
-  real(kind=8) w
-  real(kind=8) x
+  real(PR) a
+  real(PR) alnrel
+  real(PR), parameter :: p1 = -0.129418923021993D+01
+  real(PR), parameter :: p2 = 0.405303492862024D0
+  real(PR), parameter :: p3 = -0.178874546012214D-01
+  real(PR), parameter :: q1 = -0.162752256355323D+01
+  real(PR), parameter :: q2 = 0.747811014037616D0
+  real(PR), parameter :: q3 = -0.845104217945565D-01
+  real(PR) t
+  real(PR) t2
+  real(PR) w
+  real(PR) x
 
-  if ( abs ( a ) <= 0.375_8 ) then
+  if ( abs ( a ) <= 0.375D0 ) then
 
     t = a / (a + two)
     t2 = t * t
@@ -517,34 +518,35 @@ function apser ( a, b, x, eps )
 !    Volume 18, Number 3, September 1993, pages 360-373.
 !
   implicit none
+  INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-   real(kind=8), parameter :: zero=0.0_8, one=1.0_8
+  real(PR), parameter :: zero=0.0D0, one=1.0D0
 
-  real(kind=8) a
-  real(kind=8) aj
-  real(kind=8) apser
-  real(kind=8) b
-  real(kind=8) bx
-  real(kind=8) c
-  real(kind=8) eps
-  real(kind=8), parameter :: g = 0.577215664901533_8
-  real(kind=8) j
-  real(kind=8) psi
-  real(kind=8) s
-  real(kind=8) t
-  real(kind=8) tol
-  real(kind=8) x
+  real(PR) a
+  real(PR) aj
+  real(PR) apser
+  real(PR) b
+  real(PR) bx
+  real(PR) c
+  real(PR) eps
+  real(PR), parameter :: g = 0.577215664901533D0
+  real(PR) j
+  real(PR) psi
+  real(PR) s
+  real(PR) t
+  real(PR) tol
+  real(PR) x
 
   bx = b * x
   t = x - bx
 
-  if ( b * eps <= 2.e-2_8 ) then
+  if ( b * eps <= 2.D-2 ) then
     c = log(x) + psi(b) + g + t
   else
     c = log(bx) + g + t
   end if
 
-  tol = 5.0_8*eps*abs(c)
+  tol = 5.0D0*eps*abs(c)
   j = one
   s = zero
 
@@ -593,57 +595,58 @@ function basym ( a, b, lambda, eps )
 !    Volume 18, Number 3, September 1993, pages 360-373.
 !
   implicit none
+  INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-   real(kind=8), parameter :: zero=0.0_8, half=0.5_8, one=1.0_8, two=2.0_8
+  real(PR), parameter :: zero=0.0D0, half=0.5D0, one=1.0D0, two=2.0D0
 
-  real(kind=8) a
-  real(kind=8) a0(21)
-  real(kind=8) b
-  real(kind=8) b0(21)
-  real(kind=8) bcorr
-  real(kind=8) basym
-  real(kind=8) bsum
-  real(kind=8) c(21)
-  real(kind=8) d(21)
-  real(kind=8) dsum
-  real(kind=8), parameter :: e0 = 1.12837916709551_8
-  real(kind=8), parameter :: e1 = 0.353553390593274_8
-  real(kind=8) eps
-!!real(kind=8) erfc1
-  real(kind=8) f
-  real(kind=8) h
-  real(kind=8) h2
-  real(kind=8) hn
+  real(PR) a
+  real(PR) a0(21)
+  real(PR) b
+  real(PR) b0(21)
+  real(PR) bcorr
+  real(PR) basym
+  real(PR) bsum
+  real(PR) c(21)
+  real(PR) d(21)
+  real(PR) dsum
+  real(PR), parameter :: e0 = 1.12837916709551D0
+  real(PR), parameter :: e1 = 0.353553390593274D0
+  real(PR) eps
+!!real(PR) erfc1
+  real(PR) f
+  real(PR) h
+  real(PR) h2
+  real(PR) hn
   integer i
   integer im1
   integer imj
   integer j
-  real(kind=8) j0
-  real(kind=8) j1
-  real(kind=8) lambda
+  real(PR) j0
+  real(PR) j1
+  real(PR) lambda
   integer m
   integer mm1
   integer mmj
   integer n
   integer np1
   integer, parameter :: num = 20
-  real(kind=8) r
-  real(kind=8) r0
-  real(kind=8) r1
-  real(kind=8) rlog1
-  real(kind=8) s
-  real(kind=8) sum2
-  real(kind=8) t
-  real(kind=8) t0
-  real(kind=8) t1
-  real(kind=8) u
-  real(kind=8) w
-  real(kind=8) w0
-  real(kind=8) z
-  real(kind=8) z0
-  real(kind=8) z2
-  real(kind=8) zn
-  real(kind=8) znm1
+  real(PR) r
+  real(PR) r0
+  real(PR) r1
+  real(PR) rlog1
+  real(PR) s
+  real(PR) sum2
+  real(PR) t
+  real(PR) t0
+  real(PR) t1
+  real(PR) u
+  real(PR) w
+  real(PR) w0
+  real(PR) z
+  real(PR) z0
+  real(PR) z2
+  real(PR) zn
+  real(PR) znm1
 !
 !  num is the maximum value that n can take in the do loop
 !  ending at statement 50. it is required that num be even.
@@ -679,7 +682,7 @@ function basym ( a, b, lambda, eps )
   z = half*(z0/e1)
   z2 = f + f
 
-  a0(1) = (two/3.0_8)*r1
+  a0(1) = (two/3.0D0)*r1
   c(1) = - half*a0(1)
   d(1) = - c(1)
   j0 = (half/e0)*exp(z0*z0)*erfc(z0)
@@ -699,7 +702,7 @@ function basym ( a, b, lambda, eps )
     a0(n) = two*r0*(one + h*hn)/(n + two)
     np1 = n + 1
     s = s + hn
-    a0(np1) = two*r1*s/(n + 3.0_8)
+    a0(np1) = two*r1*s/(n + 3.0D0)
 
     do i = n, np1
 
@@ -781,31 +784,32 @@ function bcorr ( a0, b0 )
 !    Volume 18, Number 3, September 1993, pages 360-373.
 !
   implicit none
+  INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-   real(kind=8), parameter :: one=1.0_8
+  real(PR), parameter :: one=1.0D0
 
-  real(kind=8) a
-  real(kind=8) a0
-  real(kind=8) b
-  real(kind=8) b0
-  real(kind=8) bcorr
-  real(kind=8) c
-  real(kind=8), parameter :: c0 = 0.833333333333333e-01_8
-  real(kind=8), parameter :: c1 = -0.277777777760991e-02_8
-  real(kind=8), parameter :: c2 = 0.793650666825390e-03_8
-  real(kind=8), parameter :: c3 = -0.595202931351870e-03_8
-  real(kind=8), parameter :: c4 = 0.837308034031215e-03_8
-  real(kind=8), parameter :: c5 = -0.165322962780713e-02_8
-  real(kind=8) h
-  real(kind=8) s11
-  real(kind=8) s3
-  real(kind=8) s5
-  real(kind=8) s7
-  real(kind=8) s9
-  real(kind=8) t
-  real(kind=8) w
-  real(kind=8) x
-  real(kind=8) x2
+  real(PR) a
+  real(PR) a0
+  real(PR) b
+  real(PR) b0
+  real(PR) bcorr
+  real(PR) c
+  real(PR), parameter :: c0 = 0.833333333333333D-01
+  real(PR), parameter :: c1 = -0.277777777760991D-02
+  real(PR), parameter :: c2 = 0.793650666825390D-03
+  real(PR), parameter :: c3 = -0.595202931351870D-03
+  real(PR), parameter :: c4 = 0.837308034031215D-03
+  real(PR), parameter :: c5 = -0.165322962780713D-02
+  real(PR) h
+  real(PR) s11
+  real(PR) s3
+  real(PR) s5
+  real(PR) s7
+  real(PR) s9
+  real(PR) t
+  real(PR) w
+  real(PR) x
+  real(PR) x2
 
   a = min ( a0, b0 )
   b = max ( a0, b0 )
@@ -863,37 +867,38 @@ function betaln ( a0, b0 )
 !    Local, real E, the value of Log ( 2 * PI ) / 2.
 !
   implicit none
+  INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-   real(kind=8), parameter :: zero=0.0_8, half=0.5_8, one=1.0_8, two=2.0_8
+  real(PR), parameter :: zero=0.0D0, half=0.5D0, one=1.0D0, two=2.0D0
 
-  real(kind=8) a
-  real(kind=8) a0
-  real(kind=8) algdiv
-  real(kind=8) alnrel
-  real(kind=8) b
-  real(kind=8) b0
-  real(kind=8) bcorr
-  real(kind=8) betaln
-  real(kind=8) c
-  real(kind=8), parameter :: e = 0.918938533204673_8
-!!real(kind=8) dlgama
-  real(kind=8) gsumln
-  real(kind=8) h
+  real(PR) a
+  real(PR) a0
+  real(PR) algdiv
+  real(PR) alnrel
+  real(PR) b
+  real(PR) b0
+  real(PR) bcorr
+  real(PR) betaln
+  real(PR) c
+  real(PR), parameter :: e = 0.918938533204673D0
+!!real(PR) dlgama
+  real(PR) gsumln
+  real(PR) h
   integer i
   integer n
-  real(kind=8) u
-  real(kind=8) v
-  real(kind=8) w
-  real(kind=8) z
+  real(PR) u
+  real(PR) v
+  real(PR) w
+  real(PR) z
 
   a = min ( a0, b0 )
   b = max ( a0, b0 )
-  if (a .ge. 8.0_8) go to 60
+  if (a .ge. 8.0D0) go to 60
   if (a .ge. one) go to 20
 !
 !  a < 1
 !
-  if ( b < 8.0_8 ) then
+  if ( b < 8.0D0 ) then
     betaln = dlgama ( a ) + ( dlgama ( b ) - dlgama ( a + b ) )
     return
   else
@@ -908,13 +913,13 @@ function betaln ( a0, b0 )
          betaln = dlgama(a) + dlgama(b) - gsumln(a,b)
          return
    21 w = zero
-      if (b < 8.0_8) go to 40
+      if (b < 8.0D0) go to 40
          betaln = dlgama(a) + algdiv(a,b)
          return
 !
 ! reduction of a when b <= 1000
 !
-   30 if (b .gt. 1000.0_8) go to 50
+   30 if (b .gt. 1000.0D0) go to 50
       n = a - one
       w = one
       do i = 1,n
@@ -923,7 +928,7 @@ function betaln ( a0, b0 )
          w = w * (h/(one + h))
       end do
       w = log ( w )
-      if (b < 8.0_8) go to 40
+      if (b < 8.0D0) go to 40
       betaln = w + dlgama(a) + algdiv(a,b)
       return
 !
@@ -989,35 +994,36 @@ function bfrac ( a, b, x, y, lambda, eps )
 !    Volume 18, Number 3, September 1993, pages 360-373.
 !
   implicit none
+  INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-   real(kind=8), parameter :: zero=0.0_8, one=1.0_8, two=2.0_8
+  real(PR), parameter :: zero=0.0D0, one=1.0D0, two=2.0D0
 
-  real(kind=8) a
-  real(kind=8) alpha
-  real(kind=8) an
-  real(kind=8) anp1
-  real(kind=8) b
-  real(kind=8) beta
-  real(kind=8) bfrac
-  real(kind=8) bn
-  real(kind=8) bnp1
-  real(kind=8) brcomp
-  real(kind=8) c
-  real(kind=8) c0
-  real(kind=8) c1
-  real(kind=8) e
-  real(kind=8) eps
-  real(kind=8) lambda
-  real(kind=8) n
-  real(kind=8) p
-  real(kind=8) r
-  real(kind=8) r0
-  real(kind=8) s
-  real(kind=8) t
-  real(kind=8) w
-  real(kind=8) x
-  real(kind=8) y
-  real(kind=8) yp1
+  real(PR) a
+  real(PR) alpha
+  real(PR) an
+  real(PR) anp1
+  real(PR) b
+  real(PR) beta
+  real(PR) bfrac
+  real(PR) bn
+  real(PR) bnp1
+  real(PR) brcomp
+  real(PR) c
+  real(PR) c0
+  real(PR) c1
+  real(PR) e
+  real(PR) eps
+  real(PR) lambda
+  real(PR) n
+  real(PR) p
+  real(PR) r
+  real(PR) r0
+  real(PR) s
+  real(PR) t
+  real(PR) w
+  real(PR) x
+  real(PR) y
+  real(PR) yp1
 
   bfrac = brcomp ( a, b, x, y )
 
@@ -1113,48 +1119,49 @@ subroutine bgrat ( a, b, x, y, w, eps, ierr )
 !    Volume 18, Number 3, September 1993, pages 360-373.
 !
   implicit none
+  INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-   real(kind=8), parameter :: zero=0.0_8, half=0.5_8, one=1.0_8, two=2.0_8
+  real(PR), parameter :: zero=0.0D0, half=0.5D0, one=1.0D0, two=2.0D0
 
-  real(kind=8) a
-  real(kind=8) algdiv
-  real(kind=8) alnrel
-  real(kind=8) b
-  real(kind=8) bm1
-  real(kind=8) bp2n
-  real(kind=8) c(30)
-  real(kind=8) cn
-  real(kind=8) coef
-  real(kind=8) d(30)
-  real(kind=8) dj
-  real(kind=8) eps
-  real(kind=8) gam1
+  real(PR) a
+  real(PR) algdiv
+  real(PR) alnrel
+  real(PR) b
+  real(PR) bm1
+  real(PR) bp2n
+  real(PR) c(30)
+  real(PR) cn
+  real(PR) coef
+  real(PR) d(30)
+  real(PR) dj
+  real(PR) eps
+  real(PR) gam1
   integer i
   integer ierr
-  real(kind=8) j
-  real(kind=8) l
-  real(kind=8) lnx
+  real(PR) j
+  real(PR) l
+  real(PR) lnx
   integer n
-  real(kind=8) n2
+  real(PR) n2
   integer nm1
-  real(kind=8) nu
-  real(kind=8) p
-  real(kind=8) q
-  real(kind=8) r
-  real(kind=8) s
-  real(kind=8) sum1
-  real(kind=8) t
-  real(kind=8) t2
-  real(kind=8) u
-  real(kind=8) v
-  real(kind=8) w
-  real(kind=8) x
-  real(kind=8) y
-  real(kind=8) z
+  real(PR) nu
+  real(PR) p
+  real(PR) q
+  real(PR) r
+  real(PR) s
+  real(PR) sum1
+  real(PR) t
+  real(PR) t2
+  real(PR) u
+  real(PR) v
+  real(PR) w
+  real(PR) x
+  real(PR) y
+  real(PR) z
 
   bm1 = (b - half) - half
   nu = a + half*bm1
-  if (y .gt. 0.375_8) go to 10
+  if (y .gt. 0.375D0) go to 10
   lnx = alnrel(-y)
   go to 11
 10 continue
@@ -1173,8 +1180,8 @@ subroutine bgrat ( a, b, x, y, w, eps, ierr )
       if (u == zero) go to 100
       call grat1(b,z,r,p,q,eps)
 
-      v = 0.25_8*(one/nu)**2
-      t2 = 0.25_8*lnx*lnx
+      v = 0.25D0*(one/nu)**2
+      t2 = 0.25D0*lnx*lnx
       l = w/u
       j = q/r
       sum1 = j
@@ -1247,32 +1254,33 @@ function bpser ( a, b, x, eps )
 !    Volume 18, Number 3, September 1993, pages 360-373.
 !
   implicit none
+  INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-   real(kind=16), parameter :: onedble=1.0_16
-   real(kind=8), parameter :: zero=0.0_8, half=0.5_8, one=1.0_8
+  real(kind=16), parameter :: onedble=1.0_16
+  real(PR), parameter :: zero=0.0D0, half=0.5D0, one=1.0D0
 
-  real(kind=8) a
-  real(kind=8) a0
-  real(kind=8) algdiv
-  real(kind=8) apb
-  real(kind=8) b
-  real(kind=8) b0
-  real(kind=8) betaln
-  real(kind=8) bpser
-  real(kind=8) c
-  real(kind=8) eps
-  real(kind=8) gam1
-  real(kind=8) gamln1
+  real(PR) a
+  real(PR) a0
+  real(PR) algdiv
+  real(PR) apb
+  real(PR) b
+  real(PR) b0
+  real(PR) betaln
+  real(PR) bpser
+  real(PR) c
+  real(PR) eps
+  real(PR) gam1
+  real(PR) gamln1
   integer i
   integer m
-  real(kind=8) n
-  real(kind=8) sum1
-  real(kind=8) t
-  real(kind=8) tol
-  real(kind=8) u
-  real(kind=8) w
-  real(kind=8) x
-  real(kind=8) z
+  real(PR) n
+  real(PR) sum1
+  real(PR) t
+  real(PR) tol
+  real(PR) u
+  real(PR) w
+  real(PR) x
+  real(PR) z
 
   bpser = zero
   if ( x == zero ) then
@@ -1287,7 +1295,7 @@ function bpser ( a, b, x, eps )
          bpser = exp(z)/a
          go to 70
    10 b0 = max ( a, b )
-      if (b0 .ge. 8.0_8) go to 60
+      if (b0 .ge. 8.0D0) go to 60
       if (b0 .gt. one) go to 40
 !
 !  procedure for a0 < 1 and b0 <= 1
@@ -1334,7 +1342,7 @@ function bpser ( a, b, x, eps )
    60 u = gamln1(a0) + algdiv(a0,b0)
       z = a* log ( x ) - u
       bpser = (a0/a)*exp(z)
-   70 if (bpser == zero .or. a <= 0.1_8*eps) return
+   70 if (bpser == zero .or. a <= 0.1D0*eps) return
 !
 !  Compute the series
 !
@@ -1381,51 +1389,52 @@ function brcmp1 ( mu, a, b, x, y )
 !    Volume 18, Number 3, September 1993, pages 360-373.
 !
   implicit none
+  INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-   real(kind=16), parameter :: onedble=1.0_16
-   real(kind=8), parameter :: zero=0.0_8, one=1.0_8
+  real(kind=16), parameter :: onedble=1.0_16
+  real(PR), parameter :: zero=0.0D0, one=1.0D0
 
-  real(kind=8) a
-  real(kind=8) a0
-  real(kind=8) algdiv
-  real(kind=8) alnrel
-  real(kind=8) apb
-  real(kind=8) b
-  real(kind=8) b0
-  real(kind=8) bcorr
-  real(kind=8) betaln
-  real(kind=8) brcmp1
-  real(kind=8) c
-  real(kind=8), parameter :: const = 0.398942280401433_8
-  real(kind=8) e
-  real(kind=8) esum
-  real(kind=8) gam1
-  real(kind=8) gamln1
-  real(kind=8) h
+  real(PR) a
+  real(PR) a0
+  real(PR) algdiv
+  real(PR) alnrel
+  real(PR) apb
+  real(PR) b
+  real(PR) b0
+  real(PR) bcorr
+  real(PR) betaln
+  real(PR) brcmp1
+  real(PR) c
+  real(PR), parameter :: const = 0.398942280401433D0
+  real(PR) e
+  real(PR) esum
+  real(PR) gam1
+  real(PR) gamln1
+  real(PR) h
   integer i
-  real(kind=8) lambda
-  real(kind=8) lnx
-  real(kind=8) lny
+  real(PR) lambda
+  real(PR) lnx
+  real(PR) lny
   integer mu
   integer n
-  real(kind=8) rlog1
-  real(kind=8) t
-  real(kind=8) u
-  real(kind=8) v
-  real(kind=8) x
-  real(kind=8) x0
-  real(kind=8) y
-  real(kind=8) y0
-  real(kind=8) z
+  real(PR) rlog1
+  real(PR) t
+  real(PR) u
+  real(PR) v
+  real(PR) x
+  real(PR) x0
+  real(PR) y
+  real(PR) y0
+  real(PR) z
 
   a0 = min ( a, b )
-      if (a0 .ge. 8.0_8) go to 100
+      if (a0 .ge. 8.0D0) go to 100
 
-      if (x .gt. 0.375_8) go to 10
+      if (x .gt. 0.375D0) go to 10
          lnx = log ( x )
          lny = alnrel(-x)
          go to 20
-   10 if (y .gt. 0.375_8) go to 11
+   10 if (y .gt. 0.375D0) go to 11
          lnx = alnrel(-y)
          lny = log ( y )
          go to 20
@@ -1441,7 +1450,7 @@ function brcmp1 ( mu, a, b, x, y )
 !  procedure for a < 1 or b < 1
 !-----------------------------------------------------------------------
    30 b0 = max ( a, b )
-      if (b0 .ge. 8.0_8) go to 80
+      if (b0 .ge. 8.0D0) go to 80
       if (b0 .gt. one) go to 60
 !
 !  algorithm for b0 <= 1
@@ -1503,13 +1512,13 @@ function brcmp1 ( mu, a, b, x, y )
       lambda = (a + b)*y - b
 
   110 e = -lambda/a
-      if (abs(e) .gt. 0.6_8) go to 111
+      if (abs(e) .gt. 0.6D0) go to 111
          u = rlog1(e)
          go to 120
   111 u = e - log ( x / x0 )
 
   120 e = lambda/b
-      if (abs(e) .gt. 0.6_8) go to 121
+      if (abs(e) .gt. 0.6D0) go to 121
          v = rlog1(e)
          go to 130
   121 v = e - log ( y / y0 )
@@ -1543,40 +1552,41 @@ function brcomp ( a, b, x, y )
 !    Volume 18, Number 3, September 1993, pages 360-373.
 !
   implicit none
+  INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-   real(kind=16), parameter :: onedble=1.0_16
-   real(kind=8), parameter :: zero=0.0_8, one=1.0_8
+  real(kind=16), parameter :: onedble=1.0_16
+  real(PR), parameter :: zero=0.0D0, one=1.0D0
 
-  real(kind=8) a
-  real(kind=8) a0
-  real(kind=8) algdiv
-  real(kind=8) alnrel
-  real(kind=8) apb
-  real(kind=8) b
-  real(kind=8) b0
-  real(kind=8) bcorr
-  real(kind=8) betaln
-  real(kind=8) brcomp
-  real(kind=8) c
-  real(kind=8), parameter :: const = 0.398942280401433_8
-  real(kind=8) e
-  real(kind=8) gam1
-  real(kind=8) gamln1
-  real(kind=8) h
+  real(PR) a
+  real(PR) a0
+  real(PR) algdiv
+  real(PR) alnrel
+  real(PR) apb
+  real(PR) b
+  real(PR) b0
+  real(PR) bcorr
+  real(PR) betaln
+  real(PR) brcomp
+  real(PR) c
+  real(PR), parameter :: const = 0.398942280401433D0
+  real(PR) e
+  real(PR) gam1
+  real(PR) gamln1
+  real(PR) h
   integer i
-  real(kind=8) lambda
-  real(kind=8) lnx
-  real(kind=8) lny
+  real(PR) lambda
+  real(PR) lnx
+  real(PR) lny
   integer n
-  real(kind=8) rlog1
-  real(kind=8) t
-  real(kind=8) u
-  real(kind=8) v
-  real(kind=8) x
-  real(kind=8) x0
-  real(kind=8) y
-  real(kind=8) y0
-  real(kind=8) z
+  real(PR) rlog1
+  real(PR) t
+  real(PR) u
+  real(PR) v
+  real(PR) x
+  real(PR) x0
+  real(PR) y
+  real(PR) y0
+  real(PR) z
 
   brcomp = zero
 
@@ -1588,11 +1598,11 @@ function brcomp ( a, b, x, y )
 
       if ( 8.0 <= a0 ) go to 100
 
-      if (x .gt. 0.375_8) go to 10
+      if (x .gt. 0.375D0) go to 10
          lnx = log ( x )
          lny = alnrel(-x)
          go to 20
-   10 if (y .gt. 0.375_8) go to 11
+   10 if (y .gt. 0.375D0) go to 11
          lnx = alnrel(-y)
          lny = log ( y )
          go to 20
@@ -1610,7 +1620,7 @@ function brcomp ( a, b, x, y )
 !  procedure for a < 1 or b < 1
 !-----------------------------------------------------------------------
    30 b0 = max ( a, b )
-      if (b0 .ge. 8.0_8) go to 80
+      if (b0 .ge. 8.0D0) go to 80
       if ( one < b0 ) go to 60
 !
 !  algorithm for b0 <= 1
@@ -1672,13 +1682,13 @@ function brcomp ( a, b, x, y )
       lambda = (a + b)*y - b
 
   110 e = -lambda/a
-      if (abs(e) .gt. 0.6_8) go to 111
+      if (abs(e) .gt. 0.6D0) go to 111
          u = rlog1(e)
          go to 120
   111 u = e - log ( x / x0 )
 
   120 e = lambda/b
-      if (abs(e) .gt. 0.6_8) go to 121
+      if (abs(e) .gt. 0.6D0) go to 121
          v = rlog1(e)
          go to 130
   121 v = e - log ( y / y0 )
@@ -1714,30 +1724,31 @@ function bup ( a, b, x, y, n, eps )
 !    Volume 18, Number 3, September 1993, pages 360-373.
 !
   implicit none
+  INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-   real(kind=8), parameter :: zero=0.0_8, one=1.0_8
+  real(PR), parameter :: zero=0.0D0, one=1.0D0
 
-  real(kind=8) a
-  real(kind=8) ap1
-  real(kind=8) apb
-  real(kind=8) b
-  real(kind=8) brcmp1
-  real(kind=8) bup
-  real(kind=8) d
-  real(kind=8) eps
-  real(kind=8) exparg
+  real(PR) a
+  real(PR) ap1
+  real(PR) apb
+  real(PR) b
+  real(PR) brcmp1
+  real(PR) bup
+  real(PR) d
+  real(PR) eps
+  real(PR) exparg
   integer i
   integer k
   integer kp1
-  real(kind=8) l
+  real(PR) l
   integer mu
   integer n
   integer nm1
-  real(kind=8) r
-  real(kind=8) t
-  real(kind=8) w
-  real(kind=8) x
-  real(kind=8) y
+  real(PR) r
+  real(PR) t
+  real(PR) w
+  real(PR) x
+  real(PR) y
 !
 !  obtain the scaling factor exp(-mu) and
 !  exp(mu)*(x**a*y**b/beta(a,b))/a
@@ -1747,7 +1758,7 @@ function bup ( a, b, x, y, n, eps )
   mu = 0
   d = one
   if (n == 1 .or. a < one) go to 10
-      if (apb < 1.1_8*ap1) go to 10
+      if (apb < 1.1D0*ap1) go to 10
          mu = abs(exparg(1))
          k = exparg(0)
          if (k < mu) mu = k
@@ -1765,7 +1776,7 @@ function bup ( a, b, x, y, n, eps )
 !
       k = 0
       if (b <= one) go to 40
-      if ( 1.e-4_8 < y ) go to 20
+      if ( 1.D-4 < y ) go to 20
          k = nm1
          go to 30
    20 r = (b - one)*x/y - a
@@ -1823,13 +1834,14 @@ function esum ( mu, x )
 !    Volume 18, Number 3, September 1993, pages 360-373.
 !
   implicit none
+  INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-   real(kind=8), parameter :: zero=0.0_8
+  real(PR), parameter :: zero=0.0D0
 
-  real(kind=8) esum
+  real(PR) esum
   integer mu
-  real(kind=8) w
-  real(kind=8) x
+  real(PR) w
+  real(PR) x
 
   if (x .gt. zero) go to 10
 
@@ -1866,14 +1878,15 @@ function exparg ( l )
 !    Only an approximate value for exparg(l) is needed.
 !
   implicit none
+  INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-  real(kind=8) exparg
+  real(PR) exparg
   integer l
 
    if (l == 0) then
-      exparg =  706.893_8   ! log(huge(real*8)), approx.
+      exparg =  706.893D0   ! log(huge(real*8)), approx.
    else
-      exparg = -706.893_8   ! log(tiny(real*8)), approx.
+      exparg = -706.893D0   ! log(tiny(real*8)), approx.
    end if
 
 end
@@ -1903,26 +1916,27 @@ function fpser ( a, b, x, eps )
 !    Volume 18, Number 3, September 1993, pages 360-373.
 !
   implicit none
+  INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-   real(kind=8), parameter :: zero=0.0_8, one=1.0_8
+  real(PR), parameter :: zero=0.0D0, one=1.0D0
 
-  real(kind=8) a
-  real(kind=8) an
-  real(kind=8) b
-  real(kind=8) c
-  real(kind=8) eps
-  real(kind=8) exparg
-  real(kind=8) fpser
-  real(kind=8) s
-  real(kind=8) t
-  real(kind=8) tol
-  real(kind=8) x
+  real(PR) a
+  real(PR) an
+  real(PR) b
+  real(PR) c
+  real(PR) eps
+  real(PR) exparg
+  real(PR) fpser
+  real(PR) s
+  real(PR) t
+  real(PR) tol
+  real(PR) x
 !
 !  Set FPSER = X**A.
 !
   fpser = one
 
-  if ( 1.0E-03_8 * eps < a ) then
+  if ( 1.0D-03 * eps < a ) then
     fpser = zero
     t = a * log ( x )
     if ( t < exparg ( 1 ) ) then
@@ -1980,38 +1994,39 @@ function gam1 ( a )
 !    Volume 18, Number 3, September 1993, pages 360-373.
 !
   implicit none
+  INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-   real(kind=8), parameter :: zero=0.0_8, half=0.5_8, one=1.0_8
+  real(PR), parameter :: zero=0.0D0, half=0.5D0, one=1.0D0
 
-  real(kind=8) a
-  real(kind=8) bot
-  real(kind=8) d
-  real(kind=8) gam1
-  real(kind=8) p(7)
-  real(kind=8) q(5)
-  real(kind=8) r(9)
-  real(kind=8) s1
-  real(kind=8) s2
-  real(kind=8) t
-  real(kind=8) top
-  real(kind=8) w
+  real(PR) a
+  real(PR) bot
+  real(PR) d
+  real(PR) gam1
+  real(PR) p(7)
+  real(PR) q(5)
+  real(PR) r(9)
+  real(PR) s1
+  real(PR) s2
+  real(PR) t
+  real(PR) top
+  real(PR) w
 
-      data p(1)/ .577215664901533_8/, p(2)/-.409078193005776_8/, &
-           p(3)/-.230975380857675_8/, p(4)/ .597275330452234e-01_8/, &
-           p(5)/ .766968181649490e-02_8/, p(6)/-.514889771323592e-02_8/, &
-           p(7)/ .589597428611429e-03_8/
+      data p(1)/ .577215664901533D0/, p(2)/-.409078193005776D0/, &
+           p(3)/-.230975380857675D0/, p(4)/ .597275330452234D-01/, &
+           p(5)/ .766968181649490D-02/, p(6)/-.514889771323592D-02/, &
+           p(7)/ .589597428611429D-03/
 
-      data q(1)/ .100000000000000e+01_8/, q(2)/ .427569613095214_8/, &
-           q(3)/ .158451672430138_8/, q(4)/ .261132021441447e-01_8/, &
-           q(5)/ .423244297896961e-02_8/
+      data q(1)/ .100000000000000D+01/, q(2)/ .427569613095214D0/, &
+           q(3)/ .158451672430138D0/, q(4)/ .261132021441447D-01/, &
+           q(5)/ .423244297896961D-02/
 
-      data r(1)/-.422784335098468_8/, r(2)/-.771330383816272_8/, &
-           r(3)/-.244757765222226_8/, r(4)/ .118378989872749_8/, &
-           r(5)/ .930357293360349e-03_8/, r(6)/-.118290993445146e-01_8/, &
-           r(7)/ .223047661158249e-02_8/, r(8)/ .266505979058923e-03_8/, &
-           r(9)/-.132674909766242e-03_8/
+      data r(1)/-.422784335098468D0/, r(2)/-.771330383816272D0/, &
+           r(3)/-.244757765222226D0/, r(4)/ .118378989872749D0/, &
+           r(5)/ .930357293360349D-03/, r(6)/-.118290993445146D-01/, &
+           r(7)/ .223047661158249D-02/, r(8)/ .266505979058923D-03/, &
+           r(9)/-.132674909766242D-03/
 
-      data s1  / .273076135303957_8/, s2    / .559398236957378e-01_8/
+      data s1  / .273076135303957D0/, s2    / .559398236957378D-01/
 
       t = a
       d = a - half
@@ -2066,52 +2081,53 @@ function gamln1 ( a )
 !    Volume 18, Number 3, September 1993, pages 360-373.
 !
   implicit none
+  INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-   real(kind=8), parameter :: half=0.5_8, one=1.0_8
+  real(PR), parameter :: half=0.5D0, one=1.0D0
 
-  real(kind=8) a
-  real(kind=8) gamln1
-  real(kind=8) p0
-  real(kind=8) p1
-  real(kind=8) p2
-  real(kind=8) p3
-  real(kind=8) p4
-  real(kind=8) p5
-  real(kind=8) p6
-  real(kind=8) q1
-  real(kind=8) q2
-  real(kind=8) q3
-  real(kind=8) q4
-  real(kind=8) q5
-  real(kind=8) q6
-  real(kind=8) r0
-  real(kind=8) r1
-  real(kind=8) r2
-  real(kind=8) r3
-  real(kind=8) r4
-  real(kind=8) r5
-  real(kind=8) s1
-  real(kind=8) s2
-  real(kind=8) s3
-  real(kind=8) s4
-  real(kind=8) s5
-  real(kind=8) w
-  real(kind=8) x
+  real(PR) a
+  real(PR) gamln1
+  real(PR) p0
+  real(PR) p1
+  real(PR) p2
+  real(PR) p3
+  real(PR) p4
+  real(PR) p5
+  real(PR) p6
+  real(PR) q1
+  real(PR) q2
+  real(PR) q3
+  real(PR) q4
+  real(PR) q5
+  real(PR) q6
+  real(PR) r0
+  real(PR) r1
+  real(PR) r2
+  real(PR) r3
+  real(PR) r4
+  real(PR) r5
+  real(PR) s1
+  real(PR) s2
+  real(PR) s3
+  real(PR) s4
+  real(PR) s5
+  real(PR) w
+  real(PR) x
 
-      data p0/ .577215664901533_8/, p1/ .844203922187225_8/, &
-           p2/-.168860593646662_8/, p3/-.780427615533591_8/, &
-           p4/-.402055799310489_8/, p5/-.673562214325671e-01_8/, &
-           p6/-.271935708322958e-02_8/
-      data q1/ .288743195473681e+01_8/, q2/ .312755088914843e+01_8/, &
-           q3/ .156875193295039e+01_8/, q4/ .361951990101499_8/, &
-           q5/ .325038868253937e-01_8/, q6/ .667465618796164e-03_8/
+      data p0/ .577215664901533D0/, p1/ .844203922187225D0/, &
+           p2/-.168860593646662D0/, p3/-.780427615533591D0/, &
+           p4/-.402055799310489D0/, p5/-.673562214325671D-01/, &
+           p6/-.271935708322958D-02/
+      data q1/ .288743195473681D+01/, q2/ .312755088914843D+01/, &
+           q3/ .156875193295039D+01/, q4/ .361951990101499D0/, &
+           q5/ .325038868253937D-01/, q6/ .667465618796164D-03/
 
-      data r0/.422784335098467_8/,    r1/.848044614534529_8/, &
-           r2/.565221050691933_8/,    r3/.156513060486551_8/, &
-           r4/.170502484022650e-01_8/, r5/.497958207639485e-03_8/
-      data s1/.124313399877507e+01_8/, s2/.548042109832463_8/, &
-           s3/.101552187439830_8/,    s4/.713309612391000e-02_8/, &
-           s5/.116165475989616e-03_8/
+      data r0/.422784335098467D0/,    r1/.848044614534529D0/, &
+           r2/.565221050691933D0/,    r3/.156513060486551D0/, &
+           r4/.170502484022650D-01/, r5/.497958207639485D-03/
+      data s1/.124313399877507D+01/, s2/.548042109832463D0/, &
+           s3/.101552187439830D0/,    s4/.713309612391000D-02/, &
+           s5/.116165475989616D-03/
 
   if ( a < 0.6 ) then
       w = ((((((p6*a + p5)*a + p4)*a + p3)*a + p2)*a + p1)*a + p0)/ &
@@ -2155,37 +2171,38 @@ subroutine grat1 ( a, x, r, p, q, eps )
 !    Volume 18, Number 3, September 1993, pages 360-373.
 !
   implicit none
+  INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-   real(kind=8), parameter :: zero=0.0_8, half=0.5_8, one=1.0_8, two=2.0_8
+  real(PR), parameter :: zero=0.0D0, half=0.5D0, one=1.0D0, two=2.0D0
 
-  real(kind=8) a
-  real(kind=8) a2n
-  real(kind=8) a2nm1
-  real(kind=8) am0
-  real(kind=8) an
-  real(kind=8) an0
-  real(kind=8) b2n
-  real(kind=8) b2nm1
-  real(kind=8) c
-  real(kind=8) cma
-  real(kind=8) eps
-!!real(kind=8) erf
-!!real(kind=8) erfc1
-  real(kind=8) g
-  real(kind=8) gam1
-  real(kind=8) h
-  real(kind=8) j
-  real(kind=8) l
-  real(kind=8) p
-  real(kind=8) q
-  real(kind=8) r
-  real(kind=8) rexp
-  real(kind=8) sum2
-  real(kind=8) t
-  real(kind=8) tol
-  real(kind=8) w
-  real(kind=8) x
-  real(kind=8) z
+  real(PR) a
+  real(PR) a2n
+  real(PR) a2nm1
+  real(PR) am0
+  real(PR) an
+  real(PR) an0
+  real(PR) b2n
+  real(PR) b2nm1
+  real(PR) c
+  real(PR) cma
+  real(PR) eps
+!!real(PR) erf
+!!real(PR) erfc1
+  real(PR) g
+  real(PR) gam1
+  real(PR) h
+  real(PR) j
+  real(PR) l
+  real(PR) p
+  real(PR) q
+  real(PR) r
+  real(PR) rexp
+  real(PR) sum2
+  real(PR) t
+  real(PR) tol
+  real(PR) w
+  real(PR) x
+  real(PR) z
 
   if (a*x == zero) go to 130
   if (a == half) go to 120
@@ -2196,10 +2213,10 @@ subroutine grat1 ( a, x, r, p, q, eps )
 !
 10 continue
 
-      an = 3.0_8
+      an = 3.0D0
       c = x
-      sum2 = x/(a + 3.0_8)
-      tol = 0.1_8*eps/(a + one)
+      sum2 = x/(a + 3.0D0)
+      tol = 0.1D0*eps/(a + one)
 
       do
         an = an + one
@@ -2211,15 +2228,15 @@ subroutine grat1 ( a, x, r, p, q, eps )
         end if
       end do
 
-      j = a*x*((sum2/6.0_8 - half/(a + two))*x + one/(a + one))
+      j = a*x*((sum2/6.0D0 - half/(a + two))*x + one/(a + one))
 
       z = a * log ( x )
       h = gam1(a)
       g = one + h
-      if (x < 0.25_8) go to 20
-         if (a < x/2.59_8) go to 40
+      if (x < 0.25D0) go to 20
+         if (a < x/2.59D0) go to 40
          go to 30
-   20 if (z .gt. -0.13394_8) go to 40
+   20 if (z .gt. -0.13394D0) go to 40
 
    30 w = exp(z)
       p = w*g*(half + (half - j))
@@ -2263,7 +2280,7 @@ subroutine grat1 ( a, x, r, p, q, eps )
       q = zero
       return
 
-  120 if (x .ge. 0.25_8) go to 121
+  120 if (x .ge. 0.25D0) go to 121
       p = erf(sqrt(x))
       q = half + (half - p)
       return
@@ -2301,22 +2318,23 @@ function gsumln ( a, b )
 !    Volume 18, Number 3, September 1993, pages 360-373.
 !
   implicit none
+  INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-   real(kind=16), parameter :: twodble=2.0_16
-   real(kind=8), parameter :: one=1.0_8
+  real(kind=16), parameter :: twodble=2.0_16
+  real(PR), parameter :: one=1.0D0
 
-  real(kind=8) a
-  real(kind=8) alnrel
-  real(kind=8) b
-  real(kind=8) gamln1
-  real(kind=8) gsumln
-  real(kind=8) x
+  real(PR) a
+  real(PR) alnrel
+  real(PR) b
+  real(PR) gamln1
+  real(PR) gsumln
+  real(PR) x
 
   x = real ( a, kind(twodble) ) + real ( b, kind(twodble) ) - twodble
 
-  if ( x <= 0.25_8 ) then
+  if ( x <= 0.25D0 ) then
     gsumln = gamln1 ( one + x )
-  else if (x <= 1.25_8 ) then
+  else if (x <= 1.25D0 ) then
     gsumln = gamln1 ( x ) + alnrel ( x )
   else
     gsumln = gamln1 ( x - one ) + log ( x * ( one + x ) )
@@ -2408,9 +2426,9 @@ function ipmpar ( i )
       imach( 5) = digits(0.0)
       imach( 6) = minexponent(0.0)
       imach( 7) = maxexponent(0.0)
-      imach( 8) = digits(0.0_8)
-      imach( 9) = minexponent(0.0_8)
-      imach(10) = maxexponent(0.0_8)
+      imach( 8) = digits(0.0D0)
+      imach( 9) = minexponent(0.0D0)
+      imach(10) = maxexponent(0.0D0)
 !
 !     machine constants for amdahl machines.
 !
@@ -2799,51 +2817,52 @@ function psi ( xx )
 !    argument beyond which PSI may be represented as log(x).
 !
   implicit none
+  INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-   real(kind=8), parameter :: zero=0.0_8, half=0.5_8, one=1.0_8
+  real(PR), parameter :: zero=0.0D0, half=0.5D0, one=1.0D0
 
-  real(kind=8) aug
-  real(kind=8) den
+  real(PR) aug
+  real(PR) den
   real(kind=16), parameter :: dx0 = 1.461632144968362341262659542325721325_16
   integer i
   integer ipmpar
   integer m
   integer n
   integer nq
-  real(kind=8) p1(7)
-  real(kind=8) p2(4)
-  real(kind=8), parameter :: piov4 = 0.785398163397448_8
-  real(kind=8) psi
-  real(kind=8) q1(6)
-  real(kind=8) q2(4)
-  real(kind=8) sgn
-  real(kind=8) upper
-  real(kind=8) w
-  real(kind=8) x
-  real(kind=8) xmax1
-  real(kind=8) xmx0
-  real(kind=8) xsmall
-  real(kind=8) xx
-  real(kind=8) z
+  real(PR) p1(7)
+  real(PR) p2(4)
+  real(PR), parameter :: piov4 = 0.785398163397448D0
+  real(PR) psi
+  real(PR) q1(6)
+  real(PR) q2(4)
+  real(PR) sgn
+  real(PR) upper
+  real(PR) w
+  real(PR) x
+  real(PR) xmax1
+  real(PR) xmx0
+  real(PR) xsmall
+  real(PR) xx
+  real(PR) z
 !
 !  coefficients for rational approximation of
 !  psi(x) / (x - x0),  0.5 <= x <= 3.0
 !
-      data p1(1)/.895385022981970e-02_8/, p1(2)/.477762828042627e+01_8/, &
-           p1(3)/.142441585084029e+03_8/, p1(4)/.118645200713425e+04_8/, &
-           p1(5)/.363351846806499e+04_8/, p1(6)/.413810161269013e+04_8/, &
-           p1(7)/.130560269827897e+04_8/
-      data q1(1)/.448452573429826e+02_8/, q1(2)/.520752771467162e+03_8/, &
-           q1(3)/.221000799247830e+04_8/, q1(4)/.364127349079381e+04_8/, &
-           q1(5)/.190831076596300e+04_8/, q1(6)/.691091682714533e-05_8/
+      data p1(1)/.895385022981970D-02/, p1(2)/.477762828042627D+01/, &
+           p1(3)/.142441585084029D+03/, p1(4)/.118645200713425D+04/, &
+           p1(5)/.363351846806499D+04/, p1(6)/.413810161269013D+04/, &
+           p1(7)/.130560269827897D+04/
+      data q1(1)/.448452573429826D+02/, q1(2)/.520752771467162D+03/, &
+           q1(3)/.221000799247830D+04/, q1(4)/.364127349079381D+04/, &
+           q1(5)/.190831076596300D+04/, q1(6)/.691091682714533D-05/
 !
 !  coefficients for rational approximation of
 !  psi(x) - ln(x) + 1 / (2*x),  x .gt. 3.0
 !
-      data p2(1)/-.212940445131011e+01_8/, p2(2)/-.701677227766759e+01_8/, &
-           p2(3)/-.448616543918019e+01_8/, p2(4)/-.648157123766197_8/
-      data q2(1)/ .322703493791143e+02_8/, q2(2)/ .892920700481861e+02_8/, &
-           q2(3)/ .546117738103215e+02_8/, q2(4)/ .777788548522962e+01_8/
+      data p2(1)/-.212940445131011D+01/, p2(2)/-.701677227766759D+01/, &
+           p2(3)/-.448616543918019D+01/, p2(4)/-.648157123766197D0/
+      data q2(1)/ .322703493791143D+02/, q2(2)/ .892920700481861D+02/, &
+           q2(3)/ .546117738103215D+02/, q2(4)/ .777788548522962D+01/
 !
 !  machine dependent constants ...
 !
@@ -2852,7 +2871,7 @@ function psi ( xx )
 !
       xmax1 = ipmpar(3)
       xmax1 =  min ( xmax1, one / epsilon ( xmax1 ) )
-      xsmall = 1.e-9_8
+      xsmall = 1.0D-9
 
       x = xx
       aug = zero
@@ -2883,8 +2902,8 @@ function psi ( xx )
   120 if (w .ge. xmax1) go to 400
       nq = int(w)
       w = w - float(nq)
-      nq = int(w*4.0_8)
-      w = 4.0_8 * (w - float(nq) * .25_8)
+      nq = int(w*4.0D0)
+      w = 4.0D0 * (w - float(nq) * .25D0)
 !
 !  w is now related to the fractional part of  4.0 * x.
 !  adjust argument to correspond to values in first
@@ -2914,11 +2933,11 @@ function psi ( xx )
 !  use cos/sin as a substitute for cotan, and
 !  sin/cos as a substitute for tan
 !
-      aug = sgn * ((cos(z) / sin(z)) * 4.0_8)
+      aug = sgn * ((cos(z) / sin(z)) * 4.0D0)
       go to 150
-  140 aug = sgn * ((sin(z) / cos(z)) * 4.0_8)
+  140 aug = sgn * ((sin(z) / cos(z)) * 4.0D0)
   150 x = one - x
-  200 if (x .gt. 3.0_8) go to 300
+  200 if (x .gt. 3.0D0) go to 300
 !
 !  0.5 <= x <= 3.0
 !
@@ -2984,20 +3003,21 @@ function rexp ( x )
 !    Volume 18, Number 3, September 1993, pages 360-373.
 !
   implicit none
+  INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-   real(kind=8), parameter :: zero=0.0_8, half=0.5_8, one=1.0_8
+  real(PR), parameter :: zero=0.0D0, half=0.5D0, one=1.0D0
 
-  real(kind=8), parameter :: p1 = 0.914041914819518e-09_8
-  real(kind=8), parameter :: p2 = 0.238082361044469e-01_8
-  real(kind=8), parameter :: q1 = -0.499999999085958_8
-  real(kind=8), parameter :: q2 = 0.107141568980644_8
-  real(kind=8), parameter :: q3 = -0.119041179760821e-01_8
-  real(kind=8), parameter :: q4 = 0.595130811860248e-03_8
-  real(kind=8) rexp
-  real(kind=8) w
-  real(kind=8) x
+  real(PR), parameter :: p1 = 0.914041914819518D-09
+  real(PR), parameter :: p2 = 0.238082361044469D-01
+  real(PR), parameter :: q1 = -0.499999999085958D0
+  real(PR), parameter :: q2 = 0.107141568980644D0
+  real(PR), parameter :: q3 = -0.119041179760821D-01
+  real(PR), parameter :: q4 = 0.595130811860248D-03
+  real(PR) rexp
+  real(PR) w
+  real(PR) x
 
-  if ( abs ( x ) <= 0.15_8 ) then
+  if ( abs ( x ) <= 0.15D0 ) then
 
     rexp = x * (((  &
               p2    &
@@ -3047,39 +3067,40 @@ function rlog1 ( x )
 !    Volume 18, Number 3, September 1993, pages 360-373.
 !
   implicit none
+  INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-   real(kind=8), parameter :: zero=0.0_8, half=0.5_8, one=1.0_8, two=2.0_8
+  real(PR), parameter :: zero=0.0D0, half=0.5D0, one=1.0D0, two=2.0D0
 
-  real(kind=8), parameter :: a = 0.566749439387324E-01_8
-  real(kind=8), parameter :: b = 0.456512608815524E-01_8
-  real(kind=8) h
-  real(kind=8), parameter :: p0 = 0.333333333333333_8
-  real(kind=8), parameter :: p1 = -0.224696413112536_8
-  real(kind=8), parameter :: p2 = 0.620886815375787E-02_8
-  real(kind=8), parameter :: q1 = -0.127408923933623E+01_8
-  real(kind=8), parameter :: q2 = 0.354508718369557_8
-  real(kind=8) r
-  real(kind=8) rlog1
-  real(kind=8) t
-  real(kind=8) w
-  real(kind=8) w1
-  real(kind=8) x
+  real(PR), parameter :: a = 0.566749439387324D-01
+  real(PR), parameter :: b = 0.456512608815524D-01
+  real(PR) h
+  real(PR), parameter :: p0 = 0.333333333333333D0
+  real(PR), parameter :: p1 = -0.224696413112536D0
+  real(PR), parameter :: p2 = 0.620886815375787D-02
+  real(PR), parameter :: q1 = -0.127408923933623D+01
+  real(PR), parameter :: q2 = 0.354508718369557
+  real(PR) r
+  real(PR) rlog1
+  real(PR) t
+  real(PR) w
+  real(PR) w1
+  real(PR) x
 
-  if ( x < -0.39_8 ) then
+  if ( x < -0.39D0 ) then
 
     w = ( x + half ) + half
     rlog1 = x - log ( w )
 
-  else if ( x < -0.18_8 ) then
+  else if ( x < -0.18D0 ) then
 
-    h = ( x + 0.3_8 ) / 0.7_8
-    w1 = a - h * 0.3_8
+    h = ( x + 0.3D0 ) / 0.7D0
+    w1 = a - h * 0.3D0
     r = h / ( h + two )
     t = r * r
     w = ( ( p2 * t + p1 ) * t + p0 ) / ( ( q2 * t + q1 ) * t + one )
     rlog1 = two * t * ( one / ( one - r ) - r * w ) + w1
 
-  else if ( x <= 0.18_8 ) then
+  else if ( x <= 0.18D0 ) then
 
     h = x
     w1 = zero
@@ -3088,10 +3109,10 @@ function rlog1 ( x )
     w = (( p2 * t + p1 ) * t + p0 ) / (( q2 * t + q1 ) * t + one )
     rlog1 = two * t * ( one / ( one - r ) - r * w ) + w1
 
-  else if ( x <= 0.57_8 ) then
+  else if ( x <= 0.57D0 ) then
 
-    h = 0.75_8 * x - 0.25_8
-    w1 = b + h / 3.0_8
+    h = 0.75D0 * x - 0.25D0
+    w1 = b + h / 3.0D0
     r = h / ( h + two )
     t = r * r
     w = (( p2 * t + p1 ) * t + p0 ) / (( q2 * t + q1 ) * t + one )

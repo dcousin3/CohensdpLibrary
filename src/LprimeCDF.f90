@@ -1,75 +1,65 @@
-function lprimecdf( x, q, a, delta, maxitr, ier )
+function lprimecdf( x, q, a, TOL, MAXITER, ier )
+    !-----------------------------------------------------------------------
+    !     Calculates the probability that a random variable distributed
+    !     according to the Lambda' distribution with Q degrees of freedom,
+    !     A centrality parameter, is less than or equal to X
+    !
+    !     X     - Input . Value of the variable                   - Real
+    !     Q     - Input . Degrees of freedom             (Q >  0) - Real
+    !     A     - Input . Eccentricity parameter                  - Real
+    !     TOL - Input . Maximum absolute error required on      - Real
+    !                     lprimecdf (stopping criterion)
+    !                     (eps < TOL < 1 where eps is machine
+    !                     epsilon; see parameter statement below)
+    !     MAXITER- Input . Maximum number of iterations            - Integer
+    !     IER   - Output. Return code :                           - Integer
+    !                     0 = normal
+    !                     1 = invalid input argument
+    !                         (then lprimecdf = zero)
+    !                     2 = maximum number of iterations reached
+    !                         (then lprimecdf = value at last iteration,
+    !                                    or zero)
+    !                     3 = required accuracy cannot be reached
+    !                         (then lprimecdf = value at last iteration)
+    !                     4 = error in auxiliary function
+    !                         (chi2cdf or tcdf)
+    !                     7 = result out of limits (i.e. <0 or >1)
+    !
+    !     External functions called:
+    !       CHI2CDF  NCDF  TCDF
+    !       DLGAMA (Log(Gamma(.)) if not in FORTRAN library
+    !
+    !     Fortran functions called:
+    !       ABS  EXP  LOG  NINT  (and DLGAMA if available)
+    !-----------------------------------------------------------------------
 
-!-----------------------------------------------------------------------
-!
-!     Calculates the probability that a random variable distributed
-!     according to the Lambda' distribution with Q degrees of freedom,
-!     A centrality parameter, is less than or equal to X
-!
-!     X     - Input . Value of the variable                   - Real
-!     Q     - Input . Degrees of freedom             (Q >  0) - Real
-!     A     - Input . Eccentricity parameter                  - Real
-!     DELTA - Input . Maximum absolute error required on      - Real
-!                     lprimecdf (stopping criterion)
-!                     (eps < delta < 1 where eps is machine
-!                     epsilon; see parameter statement below)
-!     MAXITR- Input . Maximum number of iterations            - Integer
-!     IER   - Output. Return code :                           - Integer
-!                     0 = normal
-!                     1 = invalid input argument
-!                         (then lprimecdf = zero)
-!                     2 = maximum number of iterations reached
-!                         (then lprimecdf = value at last iteration,
-!                                    or zero)
-!                     3 = required accuracy cannot be reached
-!                         (then lprimecdf = value at last iteration)
-!                     4 = error in auxiliary function
-!                         (chi2cdf or tcdf)
-!                     7 = result out of limits (i.e. <0 or >1)
-!
-!     J. Poitevineau (CNRS-URA1201)  June 03, 1985
-!
-!     External functions called:
-!       CHI2CDF  NCDF  TCDF
-!       DLGAMA (Log(Gamma(.)) if not in FORTRAN library
-!
-!     Fortran functions called:
-!       ABS  EXP  LOG  NINT  (and DLGAMA if available)
-!
-!-----------------------------------------------------------------------
-
-   implicit none
+   IMPLICIT NONE
+   INTEGER, PARAMETER  :: PR=KIND(1.0D0)
 
    !  Function
-   !  --------
-
-   real(kind=8) :: lprimecdf
+   REAL(PR) :: lprimecdf
 
    !  Arguments
-   !  ---------
-
-   real(kind=8), intent(in) :: x, q, a, delta
-   integer, intent(in) :: maxitr
-   integer, intent(out) :: ier
+   REAL(PR), INTENT(in):: x, q, a, TOL
+   INTEGER, INTENT(in) :: MAXITER
+   INTEGER, INTENT(out):: ier
 
    !  local declarations
-   !  ------------------
+!! real(PR), external   :: dlgama
+   REAL(PR), EXTERNAL  :: chi2cdf, ncdf, tcdf
 
-!! real(kind=8), external :: dlgama
-   real(kind=8), external :: chi2cdf, ncdf, tcdf
+   REAL(PR), PARAMETER :: zero=0.0D0, half=0.5D0, one=1.0D0
+   REAL(PR), PARAMETER :: onep5=1.5D0, two=2.0D0, three=3.0D0, four=4.0D0
+   REAL(PR), PARAMETER :: dlg15=-0.120782237635245204D0  ! =log(gamma(1.5))
+   REAL(PR), PARAMETER :: twol=0.6931471805599453D0      ! =log(2)
+   REAL(PR), PARAMETER :: bel=1.0D6, qlimit=1.0D5, cinf=1.0D-20
+   REAL(PR), PARAMETER :: dflimit=1.0D6
 
-   real(kind=8), parameter :: zero=0.0_8, half=0.5_8, one=1.0_8
-   real(kind=8), parameter :: onep5=1.5_8, two=2.0_8, three=3.0_8, four=4.0_8
-   real(kind=8), parameter :: dlg15=-0.120782237635245204_8  ! =log(gamma(1.5))
-   real(kind=8), parameter :: twol=0.6931471805599453_8      ! =log(2)
-   real(kind=8), parameter :: bel=1.0e6_8, qlimit=1.0e5_8, cinf=1.0e-20_8
-   real(kind=8), parameter :: dflimit=1.0e6_8
-
-   real(kind=8), parameter :: eps=0.223e-15_8, tinyr=1.0e-307_8, explower=-706.893_8
-   real(kind=8), parameter :: relerr=1.0e-14_8 ! Relative error assumed
+   REAL(PR), PARAMETER :: eps=0.223D-15, tinyr=1.0D-307, explower=-706.893D0
+   REAL(PR), PARAMETER :: relerr=1.0D-14       ! Relative error assumed
                                                ! in recurrence calculations
-   real(kind=8), parameter :: xp=tinyr/relerr
-   integer, parameter :: jmax=200
+   REAL(PR), PARAMETER :: xp=tinyr/relerr
+   INTEGER, PARAMETER  :: jmax=200
 
    !     dflimit = limit for approximation in chi2cdf function
    !     These constants are machine dependent:
@@ -79,14 +69,14 @@ function lprimecdf( x, q, a, delta, maxitr, ier )
    !     explower = minimum valid argument for the exponential function
    !             (i.e. log(tinyr))
 
-   real(kind=8) :: aqal, a2, dj, dj2, erp, err, ga, g0,  &
-                   kgj, kgl,                             &
-                   qqal, q2, q2l,                        &
-                   sum, sumg, sumgk, sumneg,             &
-                   xarg, xl, x2, xx
-   integer :: iok, j, ja, jjj, jm, jz, j0
-   logical :: xneg
-   real(kind=8) :: gl(0:1), kx(0:1), rl(0:1)
+   REAL(PR) :: aqal, a2, dj, dj2, erp, err, ga, g0,  &
+               kgj, kgl,                             &
+               qqal, q2, q2l,                        &
+               sum, sumg, sumgk, sumneg,             &
+               xarg, xl, x2, xx
+   INTEGER  :: iok, j, ja, jjj, jm, jz, j0
+   LOGICAL  :: xneg
+   REAL(PR) :: gl(0:1), kx(0:1), rl(0:1)
 
    !-----------------------------------------------------------------
 
@@ -94,14 +84,12 @@ function lprimecdf( x, q, a, delta, maxitr, ier )
    ier = 0
 
    !  Test for valid input arguments
-
-   if ( q <= zero .or. delta >= one .or. delta <= eps ) then
+   if ( q <= zero .or. TOL >= one .or. TOL <= eps ) then
       ier = 1
       return
    end if
 
    !  Case x = 0
-
    if ( abs(x) < eps ) then
       sum = zero
       sumneg = zero
@@ -111,7 +99,6 @@ function lprimecdf( x, q, a, delta, maxitr, ier )
 
    !  If a is close to zero or q is large enough use approximation
    !  (exact if a = 0)
-
    if ( abs(a) < eps ) then
       lprimecdf = ncdf( x )
       return
@@ -124,7 +111,6 @@ function lprimecdf( x, q, a, delta, maxitr, ier )
    end if
 
    !  Define usefull parameters
-
    xx   = x
    xarg = x*x
    x2   = half * xarg
@@ -137,14 +123,13 @@ function lprimecdf( x, q, a, delta, maxitr, ier )
 
    if ( a < zero ) xx = -xx
    xneg = xx < zero
-
    !  General case (iterations)
    !  kx's are decreasing for all j's
    !  gl's are decreasing for j >= jjj = 2*(a2/2 - a2/q - 1)
    !  kgj, sumg, sumgk are only used for stopping rule
    !  Logs are used to avoid underflows
 
-   err  = delta * half
+   err  = TOL * half
    erp  = err / relerr
    qqal = q2 * log( q/(q+a2) )
    aqal = log( a2/(q+a2) )
@@ -157,7 +142,6 @@ function lprimecdf( x, q, a, delta, maxitr, ier )
    !  cinf is a limit under which sum of g coefficients is
    !  considered as negligible
    !  g0 is gl at j0
-
    j0 = 0
    g0 = qqal - twol
    if ( jjj >= jmax ) then
@@ -190,7 +174,7 @@ function lprimecdf( x, q, a, delta, maxitr, ier )
          g0 = ga
       end if
    end if
-   5 continue
+5  continue
 
    !  Initialize
 
@@ -199,7 +183,6 @@ function lprimecdf( x, q, a, delta, maxitr, ier )
    !  kgj = sum( j*g*kx ) <= sum( j*g )  (as kx <= 1)
    !                      <= exp(g0)*sum( j )    (as j <= j0 < jjj)
    !                      <= exp(g0)*j0*(j0+1)/2
-
    kgj = zero
    if ( j0 > 0 ) then
       jm = mod(j0,2)
@@ -244,8 +227,7 @@ function lprimecdf( x, q, a, delta, maxitr, ier )
    sumgk = zero
 
    !  Iteration loop
-
-   do j = j0, j0+maxitr
+   do j = j0, j0+MAXITER
       dj = j
       jm = mod(j,2)
 
@@ -273,7 +255,6 @@ function lprimecdf( x, q, a, delta, maxitr, ier )
 
       !  Check accuracy (stopping rule)
       !  xp is used to prevent possible underflow
-
       if ( gl(jm) >= explower ) sumg = sumg + exp(gl(jm))
       if ( kgj >= xp ) then
          if ( relerr*kgj+kx(jm)*(one-sumg) < err ) goto 10
@@ -282,7 +263,6 @@ function lprimecdf( x, q, a, delta, maxitr, ier )
       end if
 
       !  Prepare next iteration
-
       dj2    = dj * half
       gl(jm) = gl(jm) + aqal + log(dj2+q2) - log(dj2+one)
       if ( rl(jm) >= explower ) kx(jm) = kx(jm) - exp( rl(jm) )
@@ -291,12 +271,10 @@ function lprimecdf( x, q, a, delta, maxitr, ier )
    end do
 
    !  Maximum number of iterations is reached
-
    ier = 2
 
    !  The end
-
-   10 continue
+10 continue
    !  Pr( L'(q,abs(a)) < 0 ) = Pr( t(q) < -abs(a) )
    lprimecdf = sum - sumneg + tcdf( -abs(a), q, bel, iok )
    if ( iok /= 0 ) then
@@ -305,17 +283,17 @@ function lprimecdf( x, q, a, delta, maxitr, ier )
    end if
    if ( a < zero ) lprimecdf = one - lprimecdf
    if ( lprimecdf < zero ) then
-      if ( lprimecdf >= -delta ) then
+      if ( lprimecdf >= -TOL ) then
          lprimecdf = zero
       else
          ier = 7
       end if
    else if ( lprimecdf > one ) then
-      if ( lprimecdf <= one+delta ) then
+      if ( lprimecdf <= one+TOL ) then
          lprimecdf = one
       else
          ier = 7
       end if
    end if
 
-end function lprimecdf
+END FUNCTION lprimecdf

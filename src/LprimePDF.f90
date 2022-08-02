@@ -1,4 +1,4 @@
-function lprimepdf( x, q, a1, delta, maxitr, ier )
+function lprimepdf( x, q, a1, TOL, MAXITER, ier )
     
 !-----------------------------------------------------------------------
 !
@@ -6,15 +6,15 @@ function lprimepdf( x, q, a1, delta, maxitr, ier )
 !     according to the L' distribution with Q degrees of
 !     freedom, A1 centrality parameter, is equal to X
 !
-!     P     - Input . p value of the desired quantile (0<P<1) - Real
-!     Q     - Input . First degrees of freedom       (Q >  0) - Real
-!     A1    - Input . Eccentricity parameter                  - Real
-!     DELTA - Input . Maximum absolute error required on      - Real
+!     P       - Input . p value of the desired quantile (0<P<1) - Real
+!     Q       - Input . First degrees of freedom       (Q >  0) - Real
+!     A1      - Input . Eccentricity parameter                  - Real
+!     TOL     - Input . Maximum absolute error required on      - Real
 !                     kprimecdf (stopping criteria)
-!                     (eps < DELTA < 1 where eps is machine
+!                     (eps < TOL < 1 where eps is machine
 !                     epsilon; see parameter statement below)
-!     MAXITR- Input . Maximum number of iterations            - Integer
-!     IER   - Output. unreturned...                           - Integer
+!     MAXITER - Input . Maximum number of iterations            - Integer
+!     IER     - Output. unreturned...                           - Integer
 !
 !     External functions called:
 !       LPRIMECDF
@@ -25,49 +25,49 @@ function lprimepdf( x, q, a1, delta, maxitr, ier )
 !**                                                                                         **!
 !** This function was added by Denis Cousineau, 28 november 2020.                           **!
 !** It is just a wrapper to the generic function dfridr from Numerical Reciepes.            **!
-!** Press, Teukolsky, Vetterling, Flannery (1992)                                           **!
 !**                                                                                         **!
 !*********************************************************************************************!
 
     implicit none
+    INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
     !  Function
     !  --------
-    real(kind=8) :: lprimepdf
+    real(PR) :: lprimepdf
 
     !  Arguments
     !  ---------
-    real(kind=8), intent(in)  :: x, q, a1, delta
-    integer,      intent(in)  :: maxitr
-    real(kind=8), intent(out) :: ier
+    real(PR), intent(in)  :: x, q, a1, TOL
+    integer,      intent(in)  :: MAXITER
+    real(PR), intent(out) :: ier
 
     !  Local declarations
     !  ------------------
-    real(kind=8), external  :: lprimecdf
-    real(kind=8)            :: rer  ! real-valued error 
+    real(PR), external  :: lprimecdf
+    real(PR)            :: rer  ! real-valued error 
 
     ier = 0
-    lprimepdf = dfridr( func, x, 0.1_8, rer )
+    lprimepdf = dfridr( func, x, 0.1D0, rer )
 
 contains
     function func( x )
-        real(kind=8), intent(in) :: x
-        real(kind=8), external   :: lprimecdf
-        real(kind=8)  :: func
+        real(PR), intent(in) :: x
+        real(PR), external   :: lprimecdf
+        real(PR)  :: func
         integer       :: iok
-        func = lprimecdf(x, q, a1, delta, maxitr, iok)
+        func = lprimecdf(x, q, a1, TOL, MAXITER, iok)
     end function func
 
     function dfridr(func, x, h, rer )
         ! Reference: Press, Teukolsky, Vetterling, Flannery (1992) Numerical Receipes in fortran 77 (vol. 1)
-        real(kind=8)              :: dfridr
-        real(kind=8), external    :: func
-        real(kind=8), intent(in)  :: x, h
-        real(kind=8), intent(out) :: rer
-        real(kind=8), parameter   :: CON=1.4_8, CON2=1.96_8, BIG=1.0e30_8, SAFE=2.0_8
+        real(PR)              :: dfridr
+        real(PR), external    :: func
+        real(PR), intent(in)  :: x, h
+        real(PR), intent(out) :: rer
+        real(PR), parameter   :: CON=1.4D0, CON2=1.96D0, BIG=1.0D30, SAFE=2.0D0
         integer,      parameter   :: NTAB=10
         integer                   :: i, j
-        real(kind=8)              :: errt, fac, hh, a(NTAB,NTAB)
+        real(PR)              :: errt, fac, hh, a(NTAB,NTAB)
         ! Returns the derivative of a function func at a point x by Ridders’ method of polynomial
         ! extrapolation. The value h is input as an estimated initial stepsize; it need not be small,
         ! but rather should be an increment in x over which func changes substantially. An estimate
@@ -75,7 +75,7 @@ contains
         ! Parameters: Stepsize is decreased by CON at each iteration. Max size of tableau is set by
         ! NTAB. Return when error is SAFE worse than the best so far.
         if (h .eq. 0.) then
-            dfridr = -10.0_8
+            dfridr = -10.0D0
         end if
 
         hh = h

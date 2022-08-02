@@ -43,38 +43,39 @@ function lprimeidf( p, q, a1, delta, maxitr, ier )
 !*********************************************************************************************!
 
     implicit none
+    INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
     !  Function
     !  --------
-    real(kind=8) :: lprimeidf
+    real(PR) :: lprimeidf
 
     !  Arguments
     !  ---------
-    real(kind=8), intent(in)  :: p, q, a1, delta
+    real(PR), intent(in)  :: p, q, a1, delta
     integer,      intent(in)  :: maxitr
     integer,      intent(out) :: ier
 
     !  Local declarations
     !  ------------------
-    real(kind=8) :: k
-    real(kind=8), external :: lprimecdf, dtrinv
+    real(PR) :: k
+    real(PR), external :: lprimecdf, dtrinv
 
     k = Exp(dlgama((q+1)/2.) - dlgama(q/2.) ) * sqrt(2/q)
 
     lprimeidf = dtrinv( func, p,                       &
-                .FALSE., .FALSE., -1.0e6_8, 1.0e6_8,   &
+                .FALSE., .FALSE., -1.0D6, 1.0D6,   &
                 a1 * k,                                &
                 sqrt(a1**2 *(1-k**2) + 1 ),            &
-                +1.0e-6_8, 1000,                       &
+                +1.0D-6, 1000,                       &
                 ier                                    &
             )
 
 contains
     function func(x, iok)
-        real(kind=8), intent(in) :: x
+        real(PR), intent(in) :: x
         integer,      intent(out):: iok
-        real(kind=8), external   :: lprimecdf
-        real(kind=8) :: func
+        real(PR), external   :: lprimecdf
+        real(PR) :: func
         func = lprimecdf(x, q, a1, delta, maxitr, iok)
     end function func
 

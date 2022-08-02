@@ -28,30 +28,31 @@ function chi2cdf( x, p, plimit, ier )
 !-----------------------------------------------------------------------
 
    implicit none
+   INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
    !  Function
    !  --------
 
-   real(kind=8) :: chi2cdf
+   real(PR) :: chi2cdf
 
    !  Arguments
    !  ---------
 
-   real(kind=8), intent(in) :: x, p, plimit
+   real(PR), intent(in) :: x, p, plimit
    integer, intent(out) :: ier
 
    !  Local declarations
    !  ------------------
 
-!! real(kind=8), external :: dlgama
-   real(kind=8), external :: ncdf
+!! real(PR), external :: dlgama
+   real(PR), external :: ncdf
 
-   real(kind=8), parameter :: zero=0.0_8, half=0.5_8, one=1.0_8
-   real(kind=8), parameter :: two=one+one, three=two+one, nine=three*three
-   real(kind=8), parameter :: xlimit=1.0e-40_8
-   real(kind=8), parameter :: relerr=1.0e-14_8
-   real(kind=8), parameter :: tinyr=1.0e-307_8, explower=-706.893_8
-   real(kind=8), parameter :: fpmin=1.0e-300_8
+   real(PR), parameter :: zero=0.0D0, half=0.5D0, one=1.0D0
+   real(PR), parameter :: two=one+one, three=two+one, nine=three*three
+   real(PR), parameter :: xlimit=1.0D-40
+   real(PR), parameter :: relerr=1.0D-14
+   real(PR), parameter :: tinyr=1.0D-307, explower=-706.893D0
+   real(PR), parameter :: fpmin=1.0D-300
    integer, parameter :: itmax=2000
 
    !     relerr = relative error
@@ -61,7 +62,7 @@ function chi2cdf( x, p, plimit, ier )
    !     explower = minimum valid argument for the exponential function
    !             (i.e. log(tinyr))
 
-   real(kind=8) :: a, an, ap, b, c, d, del, h, y
+   real(PR) :: a, an, ap, b, c, d, del, h, y
    integer :: i, n
    logical :: flag
 
