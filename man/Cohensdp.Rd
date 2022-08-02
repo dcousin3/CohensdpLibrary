@@ -43,8 +43,8 @@ Cohensdp( statistics = list( m1= 101, m2= 114, s1= 12.5, s2= 14.3, n1= 12, n2= 1
           design     = "between")
 
 # example in a repeated-measure design
-Cohensdp( statistics = list( m1= 101, m2= 114, s1= 12.5, s2= 14.3, n= 12, rho= 0.53 ), 
-          design     = "within")
+Cohensdp(statistics =list( m1= 101, m2= 114, s1= 12.5, s2= 14.3, n= 12, rho= 0.53 ),
+         design     ="within")
 
 # example with a single-group design where mu is a population parameter
 Cohensdp( statistics = list( m = 101, m0 = 114, s = 12.5, n = 10 ), 
