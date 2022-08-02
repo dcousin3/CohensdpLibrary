@@ -35,7 +35,7 @@ J( statistics = list( n1 = 12, n2 = 12 ),
    design     = "between")
 
 # example in a repeated-measure design
-J( statistics = list( n = 12, r = 0.53 ), 
+J( statistics = list( n = 12, rho = 0.53 ), 
    design     = "within")
 
 # example with a single-group design where mu is a population parameter

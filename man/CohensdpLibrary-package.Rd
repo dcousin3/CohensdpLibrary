@@ -4,7 +4,7 @@
 \name{CohensdpLibrary-package}
 \alias{CohensdpLibrary}
 \alias{CohensdpLibrary-package}
-\title{CohensdpLibrary: Cohen's d_p computation with confidence intervals}
+\title{CohensdpLibrary: Cohen's D_p Computation with Confidence Intervals}
 \description{
 Computing Cohen's d_p in between-subject and within-subject designs.
 }

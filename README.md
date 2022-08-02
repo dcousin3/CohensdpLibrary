@@ -1,11 +1,10 @@
-# Cohen's dp library: Getting the Cohen's $d_p$ and its confidence interval in any design
+# Cohen's $d_p$ library: Getting the Cohen's $d_p$ and its confidence interval in any design
 
 <!-- badges: start -->
 [![CRAN Status](https://www.r-pkg.org/badges/version/CohensdpLibrary)](https://cran.r-project.org/package=CohensdpLibrary)
 <!-- badges: end -->
 
-This repository contains source code and a package suitable for R 3.0 and above. It computes 
-the Cohen's $d_p$ and its confidence intervals in within-subject and between-subject designs.
+This library computes the Cohen's $d_p$ and its confidence intervals in within-subject and between-subject designs.
 
 See :
 Cousineau, D. (under preparation) The Exact confidence interval of the Cohen's dp in repeated-measure designs.

@@ -64,10 +64,10 @@
 #' ###
 #'
 #' # Finally, this example computes a within-subject design
-#' Cohensdp( statistics = list(m1=15, m2=20, sd1=4, sd2=4, n=25, r = 0.333), 
+#' Cohensdp( statistics = list(m1=15, m2=20, sd1=4, sd2=4, n=25, rho = 0.333), 
 #'           design = "within")
 #' ###
-#' The sample size n is a unique number; the observed correlation r is specified with r.
+#' The sample size n is a unique number; the population correlation is specified with rho.
 #'
 #' # By default, the functions assumes maximum iterations and tolerance values.
 #' # You can change these defaults with the options:

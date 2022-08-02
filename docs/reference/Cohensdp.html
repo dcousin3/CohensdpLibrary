@@ -164,9 +164,9 @@ rho is unknown.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Cousineau D (2022).
-&#8220;The exact distribution of the Cohen㤼㸲s d_p in repeated-measure designs.&#8221;
+&#8220;The exact distribution of the Cohen's d_p in repeated-measure designs.&#8221;
 doi: <a href='https://doi.org/10.31234/osf.io/akcnd'>10.31234/osf.io/akcnd</a>
-, <a href='psyarxiv.com/akcnd'>psyarxiv.com/akcnd</a>.<br /><br /> Cousineau D (2022 - submitted).
+, <a href='https://psyarxiv.com/akcnd'>https://psyarxiv.com/akcnd</a>.<br /><br /> Cousineau D (2022 - submitted).
 &#8220;The exact confidence interval of the Cohen's dp in repeated-measure designs.&#8221;
 <em>submitted</em>, <b>submitted</b>(submitted), 1-10.
 doi: <a href='https://doi.org/upcoming'>upcoming</a>
@@ -186,10 +186,9 @@ doi: <a href='https://doi.org/10.20982/tqmp.14.4.p242'>10.20982/tqmp.14.4.p242</
 <span class='r-out co'><span class='r-pr'>#&gt;</span> [1] -1.8074058 -0.9679684 -0.1090564</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># example in a repeated-measure design</span></span>
-<span class='r-in'><span class='fu'>Cohensdp</span><span class='op'>(</span> statistics <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span> m1<span class='op'>=</span> <span class='fl'>101</span>, m2<span class='op'>=</span> <span class='fl'>114</span>, s1<span class='op'>=</span> <span class='fl'>12.5</span>, s2<span class='op'>=</span> <span class='fl'>14.3</span>, n<span class='op'>=</span> <span class='fl'>12</span>, r<span class='op'>=</span> <span class='fl'>0.53</span> <span class='op'>)</span>, </span>
+<span class='r-in'><span class='fu'>Cohensdp</span><span class='op'>(</span> statistics <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span> m1<span class='op'>=</span> <span class='fl'>101</span>, m2<span class='op'>=</span> <span class='fl'>114</span>, s1<span class='op'>=</span> <span class='fl'>12.5</span>, s2<span class='op'>=</span> <span class='fl'>14.3</span>, n<span class='op'>=</span> <span class='fl'>12</span>, rho<span class='op'>=</span> <span class='fl'>0.53</span> <span class='op'>)</span>, </span>
 <span class='r-in'>          design     <span class='op'>=</span> <span class='st'>"within"</span><span class='op'>)</span></span>
-<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>No known confidence interval at this time when rho is unknown. Using Adjusted lambda' method...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] -1.5876649 -0.9679684 -0.2752363</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] -1.5938740 -0.9679684 -0.3245811</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># example with a single-group design where mu is a population parameter</span></span>
 <span class='r-in'><span class='fu'>Cohensdp</span><span class='op'>(</span> statistics <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span> m <span class='op'>=</span> <span class='fl'>101</span>, m0 <span class='op'>=</span> <span class='fl'>114</span>, s <span class='op'>=</span> <span class='fl'>12.5</span>, n <span class='op'>=</span> <span class='fl'>10</span> <span class='op'>)</span>, </span>

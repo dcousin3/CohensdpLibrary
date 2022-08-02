@@ -2,7 +2,7 @@ citHeader("To cite the package Cohenspd in publications, please use:")
 
 citEntry(
   entry    = "Article",
-  title    = "The exact confidence interval of the Cohen's dp in repeated-measure designs.",
+  title    = "The Exact Confidence Interval of the Cohen's dp in Repeated-Measure Designs.",
   author   = personList(as.person("Denis Cousineau")),
   journal  = "The Quantitative Methods for Psychology",
   year     = "2022 --submitted",
@@ -10,11 +10,10 @@ citEntry(
   number   = "submitted",
   pages    = "1--412",
   url      = "https://dcousin3.github.io/CohensdpLibrary/",
-  doi      = "submitted",
   textVersion = paste(
     "Cousineau, D. (2022--submitted). ",
     "The exact confidence interval of the Cohen's dp in repeated-measure designs,",
-    "submitted, 1-10. doi: pending"
+    "submitted, 1-10."
   )
 )
 

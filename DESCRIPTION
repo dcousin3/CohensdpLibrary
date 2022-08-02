@@ -1,6 +1,6 @@
 Package: CohensdpLibrary
 Type: Package
-Title: Cohen's d_p computation with confidence intervals
+Title: Cohen's D_p Computation with Confidence Intervals
 Description: Computing Cohen's d_p in between-subject and within-subject designs.
 Version: 0.2
 Date: 2022-07-19
