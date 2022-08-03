@@ -53,18 +53,20 @@
 #' x2 <- c(6,7,8,9)
 #'
 #' # Get the Cohen's dp with its confidence interval (95% default):
-#' Cohensdp( statistics = list(m1=mean(x1), m2=mean(x2), sd1=sd(x1), sd2=sd(x2), n1=len(x1), n2=len(x2)))
+#' Cohensdp( statistics = list(m1=mean(x1), m2=mean(x2), s1=sd(x1), 
+#'          s2=sd(x2), n1=length(x1), n2=length(x2)),
+#'          design = "between")
 #' ###
 #' # in the above, the design is assumed by default to be a between-group design, and the relevant
 #' # statistics are means m1 and m2, standard deviations s1 and s2, sample sizes n1 and n2.
 #'
 #' # This example specifies the design and change the confident level (gamma):
-#' Cohensdp( statistics = list(m1=15, m2=20, sd1=4, sd2=4, n1=25, n2=25), 
+#' Cohensdp( statistics = list(m1=15, m2=20, s1=4, s2=4, n1=25, n2=25), 
 #'           design = "between", gamma = .80)
 #' ###
 #'
 #' # Finally, this example computes a within-subject design
-#' Cohensdp( statistics = list(m1=15, m2=20, sd1=4, sd2=4, n=25, rho = 0.333), 
+#' Cohensdp( statistics = list(m1=15, m2=20, s1=4, s2=4, n=25, rho = 0.333), 
 #'           design = "within")
 #' ###
 #' The sample size n is a unique number; the population correlation is specified with rho.

@@ -76,7 +76,7 @@ Hedgesgp <- function(
     }
 
     if( getOption("CohensdpLibrary.SHOWWARNINGS") )
-        warning(" ::CohensdpLibrary:: There is no known confidence interval for an (unbiased) Hedges's gp...")
+        message(" ::CohensdpLibrary:: There is no confidence interval for an (unbiased) Hedges's gp...")
 
     ##############################################################################
     # STEP 2: let's do the computation and return everything
@@ -183,10 +183,17 @@ Hedgesgp.within.rhounknown <- function( statistics ) {
     sdp  <- sqrt((sts$s1^2 + sts$s2^2)/2)
     #compute biased Cohen's d_p 
     dp   <- dmn / sdp  
+
+    if( getOption("CohensdpLibrary.SHOWWARNINGS") )
+        message(" ::CohensdpLibrary:: No known correction factor at this time when rho is unknown. Decreasing df by 1...")
+ 
     # compute correction factor
-    j <- J.within.rhounknown( statistics )
-    # no known correction factor at this time...
-    #dp * j
+    pastsituation = getOption("CohensdpLibrary.SHOWWARNINGS")
+    options("CohensdpLibrary.SHOWWARNINGS" = FALSE)
+    j <- J.within.rhounknown( statistics = list(n = sts$n-1, r = sts$r) )
+    options("CohensdpLibrary.SHOWWARNINGS" = pastsituation)
+
+    dp * j
 
 }
 

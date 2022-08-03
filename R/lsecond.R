@@ -45,7 +45,8 @@
 
 #' @export 
 dlsecond <- function( delta, n, d, rho ) {
-    if (n < 0) stop("Negative sample size forbidden. Exiting lsecond...")
+    if (n < 2) stop("Sample size smaller than 2 forbidden. Exiting lsecond...")
+    if (rho < -1 | rho > +1 ) stop("Correlation not between -1 and +1. Exiting lsecond...")
     res <- .Fortran("sublsecondpdf",
         as.double(delta), 
         as.double(n), 
@@ -53,18 +54,19 @@ dlsecond <- function( delta, n, d, rho ) {
         as.double(rho), 
         as.double(getOption("CohensdpLibrary.TOLERAN")), 
         as.integer(getOption("CohensdpLibrary.MAXITER")),
-        as.integer(-99),
-        as.double(0.00)  )
+        err = as.integer(-99),
+        ans = as.double(0.00)  )
 
-    if (res[[7]] != 0) {
-        warning( messageWier("lsecond", res[[7]]) )
+    if (res$err != 0) {
+        warning( messageWier("lsecond", res$err ) )
     }
-    return( res[[8]] )
+    return( res$ans )
 }
 
 #' @export 
 plsecond <- function( delta, n, d, rho ) {
-    if (n < 0) stop("Negative sample size forbidden. Exiting lsecond...")
+    if (n < 2) stop("Sample size  smaller than 2 forbidden. Exiting lsecond...")
+    if (rho < -1 | rho > +1 ) stop("Correlation not between -1 and +1. Exiting lsecond...")
     res <- .Fortran("sublsecondcdf",
         as.double(delta), 
         as.double(n), 
@@ -72,19 +74,21 @@ plsecond <- function( delta, n, d, rho ) {
         as.double(rho), 
         as.double(getOption("CohensdpLibrary.TOLERAN")), 
         as.integer(getOption("CohensdpLibrary.MAXITER")),
-        as.integer(-99),
-        as.double(0.00)  )
+        err = as.integer(-99),
+        ans = as.double(0.00)  )
 
-    if (res[[7]] != 0) {
-        warning( messageWier("lsecond", res[[7]]) )
+    if (res$err != 0) {
+        warning( messageWier("lsecond", res$err ) )
     }
-    return( res[[8]] )
+    return( res$ans )
 }
 
 #' @export 
 qlsecond <- function( p,    n, d, rho ) {
-    if (n < 0) stop("Negative sample size forbidden. Exiting lsecond...")
+message("m1: entering qlsecond")
+    if (n < 2) stop("Sample size  smaller than 2 forbidden. Exiting lsecond...")
     if ( p < 0 | p > 1 ) stop("Probability must be between 0 and 1. Exiting lsecond...")
+    if (rho < -1 | rho > +1 ) stop("Correlation not between -1 and +1. Exiting lsecond...")
     res <- .Fortran("sublsecondidf",
         as.double(p), 
         as.double(n), 
@@ -92,11 +96,11 @@ qlsecond <- function( p,    n, d, rho ) {
         as.double(rho), 
         as.double(getOption("CohensdpLibrary.TOLERAN")), 
         as.integer(getOption("CohensdpLibrary.MAXITER")),
-        as.integer(-99),
-        as.double(0.00)  )
+        err = as.integer(-99),
+        ans = as.double(0.00)  )
 
-    if (res[[7]] != 0) {
-        warning( messageWier("lsecond", res[[7]]) )
+    if (res$err != 0) {
+        warning( messageWier("lsecond", res$err ) )
     }
-    return( res[[8]] )
+    return( res$ans  )
 }

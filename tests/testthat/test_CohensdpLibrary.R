@@ -32,7 +32,7 @@ test_that("TESTS of the Lecoutre's distributions (2/8)", {
 
 
 ########################################################################
-test_that("TESTS of the novel distribution lambdaprime (3/8)", {
+test_that("TESTS of the novel distribution lambda second (3/8)", {
     res <- dlsecond(0.25, 9, 0.26, 0.333)   
     expect_equal( res, 1.037531, tolerance=1e-6 )
     res <- plsecond(0.25, 9, 0.26, 0.333)   
@@ -57,8 +57,11 @@ test_that("TESTS of J (4/8)", {
     expect_equal( res$estimate, 0.9849119, tolerance=1e-6 )   
     res <- J( statistics = list(n=26,rho=0.200), design="within")
     expect_equal( res$estimate, 0.984342, tolerance=1e-6 )   
+    expect_message( res <- J( statistics = list(n=26,r=0.200), design="within") )
+    expect_equal( res$estimate, 0.9836873, tolerance=1e-6 )   
 
     expect_error( J( design="between") )
+    expect_error( J( statistics = list(g=1), design="between") )
     expect_error( J( statistics = 34 ) )
     expect_error( J( statistics = list(n=10) ) )
 
@@ -66,15 +69,12 @@ test_that("TESTS of J (4/8)", {
     expect_error( J( statistics = list(n1=10), design="single") )
 
     expect_error( J( statistics = list(n1=10), design="within") )
-    expect_error( J( statistics = list(n=1, r=0.1), design="within") )
     expect_error( J( statistics = list(n=10, r=1.1), design="within") )
-    expect_warning( J( statistics = list(n=10, r=0.1), design="within") )
 
     expect_error( J( statistics = list(n=10), design="between") )
     expect_error( J( statistics = list(n1=1), design="between") )
     expect_error( J( statistics = list(n1=11, n2=1), design="between") )
     expect_error( J( statistics = list(n1=1, n2=11), design="between") )
-    expect_error( J( statistics = list(g=1), design="between") )
 
 })
 
@@ -102,11 +102,11 @@ test_that("TESTS of Cohensdp (5/8)", {
     expect_equal( resW$interval, c(-1.0347886, 0.5418429), tolerance=1e-6  )
 
 
-    # testing within-group design, rho unknown = Adjusted Lambda' method
+    # testing within-group design, rho unknown : df reduced by 1
     # CohensdpLibrary:::Cohensdp.within(statistics=list(r= 0.2, m1=72, m2=76,s1=16,s2=16,n=10))
-    expect_warning( resW <- Cohensdp( statistics=list(m1=72, m2=76,s1=16,s2=16,n=10,r=0.2), design="within") )
+    expect_message( resW <- Cohensdp( statistics=list(m1=72, m2=76,s1=16,s2=16,n=10,r=0.2), design="within") )
     expect_equal( resW$estimate, -0.250, tolerance=1e-6  )
-    expect_equal( resW$interval, c(-1.0595437, 0.5883274), tolerance=1e-6  )
+    expect_equal( resW$interval, c(-1.0770421, 0.5849652), tolerance=1e-6  )
 
 })
 
@@ -132,8 +132,8 @@ test_that("TESTS of Hedgesgp (6/8)", {
 
     # testing within-group design, rho unknown
     # CohensdpLibrary:::Hedgesgp.within(statistics=list(m1=72, m2=76,s1=16,s2=16,n=20, r=0.2))
-    expect_warning( resW <- Hedgesgp( statistics = list(m1=72,m2=76,s1=16,s2=16,n=20,rho=0.2), design="within") )
-    expect_equal( resW$estimate, -0.2448432, tolerance=1e-6 )
+    expect_warning( resW <- Hedgesgp( statistics = list(m1=72,m2=76,s1=16,s2=16,n=20,r=0.2), design="within") )
+    expect_equal( resW$estimate, -0.244555, tolerance=1e-6 )
 
 
 })

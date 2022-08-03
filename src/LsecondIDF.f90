@@ -28,8 +28,8 @@ FUNCTION lsecondIDF ( q, n, d, rho, TOL, MAXITER, ier )
     !  Arguments
     REAL(KIND=PR), INTENT(IN)  :: q, n, d, rho
     INTEGER, INTENT(IN)        :: MAXITER  ! max iterations, suggested 5000
-    INTEGER, INTENT(OUT)       :: ier      
     REAL(PR), INTENT(IN)       :: TOL      ! precision to exit, suggested 10D-5
+    INTEGER, INTENT(OUT)       :: ier      
 
     !  Local declarations
     INTEGER                    :: jer
@@ -50,8 +50,8 @@ FUNCTION lsecondIDF ( q, n, d, rho, TOL, MAXITER, ier )
 CONTAINS
 
     FUNCTION func(x)
-        REAL(KIND=PR), intent(in) :: x
-        REAL(KIND=PR), external   :: nsnctCDF
+        REAL(KIND=PR), INTENT(in) :: x
+        REAL(KIND=PR), EXTERNAL   :: nsnctCDF
         REAL(KIND=PR) :: func
         func = lsecondCDF(x, n, d, rho, TOL, MAXITER )
     END FUNCTION func

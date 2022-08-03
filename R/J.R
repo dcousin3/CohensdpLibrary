@@ -174,12 +174,15 @@ J.within.rhoknown <- function( statistics ) {
 J.within.rhounknown <- function( statistics ) {
     sts  <- vfyStat(statistics, c("n", "r"))
 
-    df = 2*(sts$n-1)
-
     # compute unbiasing factor; works for small or large df; thanks to Robert Calin-Jageman
     if( getOption("CohensdpLibrary.SHOWWARNINGS") )
-        warning("No known correction factor at this time when rho is unknown.")
+        message(" ::CohensdpLibrary:: No known correction factor at this time when rho is unknown. Decreasing df by 1...")
 
+    df = 2*(sts$n-1-1)
+
+    exp ( lgamma(df/2) - log(sqrt(df/2)) - lgamma((df-1)/2) ) *
+      (1-sts$r^2)^(-(df-2)/4) /
+      hypergeometric2F1((df-1)/4, (df+1)/4, (df+2)/4, sts$r^2)
 }
 
 

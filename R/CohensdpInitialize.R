@@ -2,14 +2,14 @@
 .onLoad <- function(libname, pkgname) {    
     # set the default arguments for the iterative functions:
     options(
-        "CohensdpLibrary.MAXITER" = 32500,     # this is the maximum; 
+        "CohensdpLibrary.MAXITER" = 32500,     # this is the maximum in short integer; 
                                                # that should be more than enough!
-                                               # The nbre of iterations very rarely exceeds 2000
+                                               # The nbre of iterations only rarely exceeds 2000
         "CohensdpLibrary.TOLERAN" = 0.0000001, # less than 7 decimals in the additional steps...
         "CohensdpLibrary.FORMAT"  = "%5.3f",   # printing results with 3 decimals 
                                                # Should be more than enough!
                                                # See Cousineau, 2020, JMP, for the number of decimals
-        "CohensdpLibrary.SHOWWARNINGS" = TRUE  # use to inhibit messages
+        "CohensdpLibrary.SHOWWARNINGS" = TRUE  # use to inhibit messages and warnings
     )
 
     # load the external dynamically-link library Cohensdp
@@ -21,6 +21,7 @@
 .onUnload <- function(libpath) {
     # unload the dll
     # dyn.unload("CohensdpLibrary") #unloaded automatically by R
+
 }
 
 
@@ -49,9 +50,9 @@ vfyStat <- function(statlist, statname) {
     if ("n" %in% names(statlist) )  {if (statlist$n  <2) stop(messageNtsm(statlist$n)) }
     if ("n1" %in% names(statlist) ) {if (statlist$n1 <2) stop(messageNtsm(statlist$n1)) }
     if ("n2" %in% names(statlist) ) {if (statlist$n2 <2) stop(messageNtsm(statlist$n2)) }
-    if ("s" %in% names(statlist) )  {if (statlist$s  <2) stop(messageSneg(statlist$s)) }
-    if ("s1" %in% names(statlist) ) {if (statlist$s1 <2) stop(messageSneg(statlist$s1)) }
-    if ("s2" %in% names(statlist) ) {if (statlist$s2 <2) stop(messageSneg(statlist$s2)) }
+    if ("s" %in% names(statlist) )  {if (statlist$s  <0) stop(messageSneg(statlist$s)) }
+    if ("s1" %in% names(statlist) ) {if (statlist$s1 <0) stop(messageSneg(statlist$s1)) }
+    if ("s2" %in% names(statlist) ) {if (statlist$s2 <0) stop(messageSneg(statlist$s2)) }
     if ("rho" %in% names(statlist) ){if ((statlist$rho < -1) | (statlist$rho > +1)) stop(messageRwrg(statlist$rho)) }
     if ("r" %in% names(statlist) )  {if (  (statlist$r < -1) |   (statlist$r > +1)) stop(messageRwrg(statlist$r)) }
 

@@ -41,7 +41,7 @@
 
 #' @export 
 dlprime <- function( x, nu, ncp) {
-    if (nu < 0) stop("Negative degree of freedom forbidden. Exiting lprime...")
+    if (nu < 1) stop("Degree of freedom smaller than 1 forbidden. Exiting lprime...")
     res <- .Fortran("sublprimepdf",
         as.double(x), 
         as.double(nu), 
@@ -59,7 +59,7 @@ dlprime <- function( x, nu, ncp) {
 
 #' @export 
 plprime <- function( x, nu, ncp) {
-    if (nu < 0) stop("Negative degree of freedom forbidden. Exiting lprime...")
+    if (nu < 1) stop("Degree of freedom smaller than 1 forbidden. Exiting lprime...")
     res <- .Fortran("sublprimecdf",
         as.double(x), 
         as.double(nu), 
@@ -77,7 +77,7 @@ plprime <- function( x, nu, ncp) {
 
 #' @export 
 qlprime <- function( p, nu, ncp) {
-    if (nu < 0) stop("Negative degree of freedom forbidden. Exiting lprime...")
+    if (nu < 1) stop("Degree of freedom smaller than 1 forbidden. Exiting lprime...")
     if ( p < 0 | p > 1 ) stop("Probability must be between 0 and 1. Exiting lprime...")
     res <- .Fortran("sublprimeidf",
         as.double(p), 

@@ -183,34 +183,6 @@ Cohensdp.within <- function(statistics, gamma = .95) {
     res
 }
 
-Cohensdp.within.rhounknown <- function(statistics, gamma = .95) {
-    sts  <- vfyStat(statistics, c("m1","s1","m2","s2","n", "r"))
-
-    #get pairwise statistics Delta means and pooled SD
-    dmn  <- sts$m1 - sts$m2
-    sdp  <- sqrt((sts$s1^2 + sts$s2^2)/2)
-    W    <- (sts$s1 * sts$s2) / ((sts$s1^2 + sts$s2^2)/2)
-
-    #compute biased Cohen's d_p 
-    dp   <- dmn / sdp  
-
-    if( getOption("CohensdpLibrary.SHOWWARNINGS") )
-        warning("No known confidence interval at this time when rho is unknown. Using Adjusted lambda' method...")
-
-    W    <- (sts$s1 * sts$s2) / ((sts$s1^2 + sts$s2^2)/2)
-    rW <- sts$r * W
-
-    lambda <- dp * J.single( sts ) * sqrt(sts$n/(2*(1-rW)))
-
-    #quantile of the noncentral t distribution 
-    dlow = qlprime(1/2-gamma/2, nu = 2/(1+sts$r^2)*(sts$n-1), ncp = lambda )
-    dhig = qlprime(1/2+gamma/2, nu = 2/(1+sts$r^2)*(sts$n-1), ncp = lambda )
-
-    limits <- c(dlow, dhig) / sqrt(sts$n/(2*(1-rW))) / J.single( list( n=2*(sts$n-1)/(1+sts$r^2)+1 ))
-    c(dp, limits)
-
-}
-
 Cohensdp.within.rhoknown <- function(statistics, gamma = .95) {
     sts  <- vfyStat(statistics, c("m1","s1","m2","s2","n", "rho"))
 
@@ -224,6 +196,28 @@ Cohensdp.within.rhoknown <- function(statistics, gamma = .95) {
     #quantile of the (noncentral, nonstandard) lambda'' distribution 
     dlow = qlsecond(1/2-gamma/2., n = sts$n, d = dp, rho = sts$rho )
     dhig = qlsecond(1/2+gamma/2., n = sts$n, d = dp, rho = sts$rho )
+
+    limits <- c(dlow, dhig) 
+    c(dp, limits)
+
+}
+
+Cohensdp.within.rhounknown <- function(statistics, gamma = .95) {
+    sts  <- vfyStat(statistics, c("m1","s1","m2","s2","n", "r"))
+
+    #get pairwise statistics Delta means and pooled SD
+    dmn  <- sts$m1 - sts$m2
+    sdp  <- sqrt((sts$s1^2 + sts$s2^2)/2)
+
+    #compute biased Cohen's d_p 
+    dp   <- dmn / sdp  
+
+    if( getOption("CohensdpLibrary.SHOWWARNINGS") )
+        message(" ::CohensdpLibrary:: No known confidence interval at this time when rho is unknown. Decreasing df by 1...")
+
+    #quantile of the (noncentral, nonstandard) lambda'' distribution 
+    dlow = qlsecond(1/2-gamma/2., n = sts$n-1, d = dp, rho = sts$r )
+    dhig = qlsecond(1/2+gamma/2., n = sts$n-1, d = dp, rho = sts$r )
 
     limits <- c(dlow, dhig) 
     c(dp, limits)
