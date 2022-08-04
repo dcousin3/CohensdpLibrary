@@ -31,7 +31,7 @@ FUNCTION hyg0f1 ( parama, paramz )
         ! serie= serie + step
         ! IF (step < tol) GOTO 10
     ! ENDDO
-    ! we use logs because there are commonly overflow
+    ! we use logs because there are frequent overflow
     DO WHILE (.TRUE.)
         iter = iter + 1
         IF (iter .GE. MAXITER) GOTO 10

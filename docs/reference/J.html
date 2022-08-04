@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="The correction factor J for a standardized mean difference. — J" />
-<meta property="og:description" content="J computes the correction factor to get an unbiased Cohen's d in either within-
+<meta property="og:description" content="J() computes the correction factor to get an unbiased Cohen's $d_p$ in either within-
 subject, between-subject design and single-group design. See
 Lecoutre (2022 - submitted); Goulet-Pelletier and Cousineau (2018)
 ." />
@@ -75,7 +75,7 @@ Lecoutre (2022 - submitted); Goulet-Pelletier and Cousineau (2018)
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">CohensdpLibrary</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5</span>
       </span>
     </div>
 
@@ -115,7 +115,7 @@ Lecoutre (2022 - submitted); Goulet-Pelletier and Cousineau (2018)
     </div>
 
     <div class="ref-description">
-    <p>J computes the correction factor to get an unbiased Cohen's d in either within-
+    <p><code>J()</code> computes the correction factor to get an unbiased Cohen's $d_p$ in either within-
 subject, between-subject design and single-group design. See
 Lecoutre (2022 - submitted); Goulet-Pelletier and Cousineau (2018)
 .</p>
@@ -130,23 +130,26 @@ Lecoutre (2022 - submitted); Goulet-Pelletier and Cousineau (2018)
       <th>statistics</th>
       <td><p>a list of pre-computed statistics. The statistics to provide
 depend on the design:
-  - for "between": n1, n2, the sample sizes of the two groups;
-  - for "within":  n, and r or rho the correlation between the 
-    measure; 
-  - for "single":  n.</p></td>
+- for "between": <code>n1</code>, <code>n2</code>, the sample sizes of the two groups;
+- for "within":  <code>n</code>, and <code>r</code> or <code>rho</code> the correlation between
+the measure;
+- for "single":  <code>n</code>.</p></td>
     </tr>
     <tr>
       <th>design</th>
-      <td><p>the design of the measures ("within", "between", or "single");</p></td>
+      <td><p>the design of the measures (<code>"within"</code>, <code>"between"</code>, or <code>"single"</code>);</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>the correction factor for unbiasing a Cohen's dp</p>
+    
+<pre>       the correction factor for unbiasing a Cohen's $d_p$. 
+</pre>
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function is currently unavailable in within-subject design when the population 
+    <p>This function decreases the degrees of freedom by 1 in within-subject design when the population
 rho is unknown.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -178,14 +181,20 @@ doi: <a href='https://doi.org/10.20982/tqmp.14.4.p242'>10.20982/tqmp.14.4.p242</
 <span class='r-in'><span class='co'># The results can be displayed in three modes</span></span>
 <span class='r-in'><span class='va'>res</span> <span class='op'>&lt;-</span> <span class='fu'>J</span><span class='op'>(</span> statistics <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span> n <span class='op'>=</span> <span class='fl'>12</span> <span class='op'>)</span>, </span>
 <span class='r-in'>          design     <span class='op'>=</span> <span class='st'>"single"</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>res</span>              <span class='co'># a raw result of the Cohen's d_p and its confidence interval</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># a raw result of the Cohen's d_p and its confidence interval</span></span>
+<span class='r-in'><span class='va'>res</span>              </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.9299598</span>
-<span class='r-in'><span class='fu'><a href='summarize.html'>summarize</a></span><span class='op'>(</span> <span class='va'>res</span> <span class='op'>)</span> <span class='co'># a human-readable output</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># a human-readable output</span></span>
+<span class='r-in'><span class='fu'><a href='summarize.html'>summarize</a></span><span class='op'>(</span> <span class='va'>res</span> <span class='op'>)</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Correction factor J(11) = 0.930</span>
-<span class='r-in'><span class='fu'><a href='explain.html'>explain</a></span><span class='op'>(</span> <span class='va'>res</span> <span class='op'>)</span>   <span class='co'># a human-readable ouptut with additional explanations on the </span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># ...and a human-readable ouptut with additional explanations</span></span>
+<span class='r-in'><span class='fu'><a href='explain.html'>explain</a></span><span class='op'>(</span> <span class='va'>res</span> <span class='op'>)</span>   </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Correction factor J(11) = 0.930</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>  	*: degrees of freedom nu = n-1 = 12-1; Hedges, 1981, Journal of Educational Statistics.</span>
-<span class='r-in'>                 <span class='co'># computations.</span></span>
+<span class='r-in'>                 </span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

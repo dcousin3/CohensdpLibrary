@@ -1,3 +1,7 @@
+#' @name hypergeometrics
+#'
+#' @md
+#'
 #' @title hypergeometric functions.
 #'
 #' @aliases hypergeometric0F1 hypergeometric1F1 hypergeometric2F1

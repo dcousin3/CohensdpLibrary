@@ -85,13 +85,9 @@ FUNCTION    dtrinv( func, f, linf, lsup, xinf, xsup, ex, sx, TOL, MAXITER, ier )
    INTEGER, PARAMETER    :: PR=KIND(1.0D0)
 
    !  Function
-   !  --------
-
    REAL(PR) :: dtrinv
 
    !  Arguments
-   !  ---------
-
    REAL(PR), EXTERNAL    :: func
    REAL(PR), INTENT(in)  :: f
    LOGICAL,  INTENT(in)  :: linf, lsup
@@ -100,17 +96,12 @@ FUNCTION    dtrinv( func, f, linf, lsup, xinf, xsup, ex, sx, TOL, MAXITER, ier )
    INTEGER,  INTENT(out) :: ier
 
    !  Local declarations
-   !  ------------------
-
    REAL(PR), PARAMETER  :: zero=0.0D0, half=0.5D0, one=1.0D0
-
    REAL(PR)             :: asx, c, t, t2, xa, xm, xmx, xz, y, ya, yz
    INTEGER              :: iok, it
 
    !--------------------------------------------------------------------
-
    !  Test for valid input arguments
-
    if ( f < zero .or. f > one .or. sx == zero .or. xinf >= xsup  &
       .or. TOL >= one .or. TOL <= 1.0D-12 ) then
         if ( f < zero .or. f > one ) then
@@ -141,7 +132,6 @@ FUNCTION    dtrinv( func, f, linf, lsup, xinf, xsup, ex, sx, TOL, MAXITER, ier )
    ier = 0
 
    !  f near 0 or 1
-
    if ( f <= TOL ) then
       dtrinv = xinf
       return
@@ -152,7 +142,6 @@ FUNCTION    dtrinv( func, f, linf, lsup, xinf, xsup, ex, sx, TOL, MAXITER, ier )
    end if
 
    ! Compute initial solution xm
-
    asx = abs(sx)
    xm  = ex
    if ( sx > zero ) then
@@ -177,7 +166,6 @@ FUNCTION    dtrinv( func, f, linf, lsup, xinf, xsup, ex, sx, TOL, MAXITER, ier )
    end if
 
    !  Get lower (xa) and upper (xz) bounds for x
-
    if ( f < y ) then
       !  Get an upper bound
       xz = xm
@@ -261,16 +249,13 @@ FUNCTION    dtrinv( func, f, linf, lsup, xinf, xsup, ex, sx, TOL, MAXITER, ier )
    end if
 
    ! Iteration loop
-
    xmx = xa
 
    do it = 1, MAXITER
-
       !  1st step: solution xm = linear interpolation on (xa, xz)
 
       !  Note that there's no protection for yz=ya
       !  in the following statement because it should not occur...
-
       xm = xa + (xz-xa)*(f-ya)/(yz-ya)
 
       !  Protection against degenerated cases

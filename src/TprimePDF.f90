@@ -1,63 +1,62 @@
-function tprimepdf( x, q, a1, TOL, MAXITER, ier )
+FUNCTION tprimepdf( x, q, a1, TOL, MAXITER, ier )
+    !-----------------------------------------------------------------------
+    !     Calculates the density that a random variable distributed
+    !     according to the t' distribution with Q degrees of
+    !     freedom, A1 centrality parameter, is equal to X
+    !
+    !     P       - Input . p value of the desired quantile (0<P<1) - Real
+    !     Q       - Input . Degrees of freedom              (Q > 0) - Real
+    !     A1      - Input . Eccentricity parameter                  - Real
+    !     TOL     - Input . Maximum absolute error required on      - Real
+    !                     kprimecdf (stopping criteria)
+    !                     (eps < TOL < 1 where eps is machine
+    !                     epsilon; see parameter statement below)
+    !     MAXITER - Input . Maximum number of iterations            - Integer
+    !     IER     - Output. unreturned...                           - Integer
+    !
+    !     External functions called:
+    !       LPRIMECDF
+    !     Fortran functions called:
+    !       ABS    MAX
+    !
+    !*********************************************************************************************!
+    !**                                                                                         **!
+    !** This function was added by Denis Cousineau, 28 november 2020.                           **!
+    !** It is just a wrapper to the generic function dfridr from Numerical Reciepes.            **!
+    !**                                                                                         **!
+    !*********************************************************************************************!
 
-!-----------------------------------------------------------------------
-!
-!     Calculates the density that a random variable distributed
-!     according to the t' distribution with Q degrees of
-!     freedom, A1 centrality parameter, is equal to X
-!
-!     P       - Input . p value of the desired quantile (0<P<1) - Real
-!     Q       - Input . Degrees of freedom              (Q > 0) - Real
-!     A1      - Input . Eccentricity parameter                  - Real
-!     TOL     - Input . Maximum absolute error required on      - Real
-!                     kprimecdf (stopping criteria)
-!                     (eps < TOL < 1 where eps is machine
-!                     epsilon; see parameter statement below)
-!     MAXITER - Input . Maximum number of iterations            - Integer
-!     IER     - Output. unreturned...                           - Integer
-!
-!     External functions called:
-!       LPRIMECDF
-!     Fortran functions called:
-!       ABS    MAX
-!
-!*********************************************************************************************!
-!**                                                                                         **!
-!** This function was added by Denis Cousineau, 28 november 2020.                           **!
-!** It is just a wrapper to the generic function dfridr from Numerical Reciepes.            **!
-!**                                                                                         **!
-!*********************************************************************************************!
-
-    implicit none
+    IMPLICIT NONE
     INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
     !  Function
     !  --------
-    real(PR) :: tprimepdf
+    REAL(PR) :: tprimepdf
 
     !  Arguments
     !  ---------
-    real(PR), intent(in)  :: x, q, a1, TOL
-    integer,      intent(in)  :: MAXITER
-    real(PR), intent(out) :: ier
+    REAL(PR),     INTENT(in)  :: x, q, a1, TOL
+    INTEGER,      INTENT(in)  :: MAXITER
+    REAL(PR),     INTENT(out) :: ier
 
     !  Local declarations
     !  ------------------
-    real(PR), external  :: tprimecdf
+    REAL(PR), EXTERNAL  :: tprimecdf
 
     ier = 0
     tprimepdf = dfridr( func, x, 0.1D0, ier )
 
-contains
-    function func( x )
+CONTAINS
+
+    FUNCTION func( x )
         real(PR), intent(in) :: x
         real(PR), external   :: tprimecdf
         real(PR)  :: func
         integer       :: iok
         func = tprimecdf(x, q, a1, TOL, MAXITER, iok)
-    end function func
+    END FUNCTION func
 
-    function dfridr(func, x, h, rer )
+    FUNCTION dfridr(func, x, h, rer )
         ! Reference: Press, Teukolsky, Vetterling, Flannery (1992) Numerical Receipes in fortran 77 (vol. 1)
         real(PR)              :: dfridr
         real(PR), external    :: func
@@ -103,9 +102,9 @@ contains
             end if 
         end do
         return
-    end function dfridr
+    END FUNCTION dfridr
 
-end function tprimepdf
+END FUNCTION tprimepdf
 
 
 

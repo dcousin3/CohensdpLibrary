@@ -3,18 +3,18 @@
 #include <R_ext/Rdynload.h>
 
 /* .Fortran calls */
-extern double F77_NAME(subhyg0f1)    (double *, double *, double *);
-extern double F77_NAME(subhyg1f1)    (double *, double *, double *, double *);
-extern double F77_NAME(subhyg2f1)    (double *, double *, double *, double *, double *);
-extern double F77_NAME(sublprimepdf) (double *, double *, double *, double *, short *,  short *, double *);
-extern double F77_NAME(sublprimecdf) (double *, double *, double *, double *, short *,  short *, double *);
-extern double F77_NAME(sublprimeidf) (double *, double *, double *, double *, short *,  short *, double *);
-extern double F77_NAME(subkprimepdf) (double *, double *, double *, double *, double *, short *, short *, double *);
-extern double F77_NAME(subkprimecdf) (double *, double *, double *, double *, double *, short *, short *, double *);
-extern double F77_NAME(subkprimeidf) (double *, double *, double *, double *, double *, short *, short *, double *);
-extern double F77_NAME(sublsecondpdf)(double *, double *, double *, double *, double *, short *, short *, double *);
-extern double F77_NAME(sublsecondcdf)(double *, double *, double *, double *, double *, short *, short *, double *);
-extern double F77_NAME(sublsecondidf)(double *, double *, double *, double *, double *, int *, int *, double *);
+extern void F77_NAME(subhyg0f1)    (double *, double *, double *);
+extern void F77_NAME(subhyg1f1)    (double *, double *, double *, double *);
+extern void F77_NAME(subhyg2f1)    (double *, double *, double *, double *, double *);
+extern void F77_NAME(sublprimepdf) (double *, double *, double *, double *, short *,  short *, double *);
+extern void F77_NAME(sublprimecdf) (double *, double *, double *, double *, short *,  short *, double *);
+extern void F77_NAME(sublprimeidf) (double *, double *, double *, double *, short *,  short *, double *);
+extern void F77_NAME(subkprimepdf) (double *, double *, double *, double *, double *, short *, short *, double *);
+extern void F77_NAME(subkprimecdf) (double *, double *, double *, double *, double *, short *, short *, double *);
+extern void F77_NAME(subkprimeidf) (double *, double *, double *, double *, double *, short *, short *, double *);
+extern void F77_NAME(sublsecondpdf)(double *, double *, double *, double *, double *, short *, short *, double *);
+extern void F77_NAME(sublsecondcdf)(double *, double *, double *, double *, double *, short *, short *, double *);
+extern void F77_NAME(sublsecondidf)(double *, double *, double *, double *, double *, short *, short *, double *);
 
 static const R_FortranMethodDef FortranEntries[] = {
     {"subhyg0f1",     (DL_FUNC) &F77_NAME(subhyg0f1),     3},

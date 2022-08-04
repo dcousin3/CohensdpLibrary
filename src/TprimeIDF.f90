@@ -1,64 +1,63 @@
-function tprimeidf( p, q, a1, delta, maxitr, ier )
+FUNCTION tprimeidf( p, q, a1, delta, maxitr, ier )
 
-!-----------------------------------------------------------------------
-!
-!     Calculates the quantile of a random variable distributed
-!     according to the t' distribution with Q degrees of freedom,
-!     A centrality parameter, that is the X such that F( X | q, a) = p
-!
-!     P     - Input . Value of the quantile          (0<P<1)  - Real
-!     Q     - Input . Degrees of freedom             (Q >  0) - Real
-!     A1    - Input . Eccentricity parameter                  - Real
-!     DELTA - Input . Maximum absolute error required on      - Real
-!                     kprimecdf (stopping criteria)
-!                     (eps < DELTA < 1 where eps is machine
-!                     epsilon; see parameter statement below)
-!     MAXITR- Input . Maximum number of iterations            - Integer
-!     IER   - Output. Return code :                           - Integer
-!                     0 = normal
-!                    -1 = no more evolution of the sum but
-!                         required accuracy not reached yet
-!                         (then kprimecdf = value at last iteration)
-!                     1 = invalid input argument
-!                         (then kprimecdf = zero)
-!                     2 = maximum number of iterations reached
-!                         (then kprimecdf = value at last iteration)
-!                     3 = cannot be computed
-!                         (then kprimecdf = zero)
-!                     4 = error in auxiliary function
-!                         (betacdf, lprimecdf or tcdf)
-!                     5 = result out of limits (i.e. <0 or >1)
-!                     7 = 2 + 5 both codes apply
-!
-!     External functions called:
-!       LPRIMECDF
-!     Fortran functions called:
-!       ABS  LOG  SQRT  DLGAMA
-!
-!*********************************************************************************************!
-!**                                                                                         **!
-!** This function was added by Denis Cousineau, 28 november 2020.                           **!
-!** It is just a wrapper to the generic function dtrinv.f90 made by J. Poitevineau.         **!
-!**                                                                                         **!
-!*********************************************************************************************!
+    !-----------------------------------------------------------------------
+    !     Calculates the quantile of a random variable distributed
+    !     according to the t' distribution with Q degrees of freedom,
+    !     A centrality parameter, that is the X such that F( X | q, a) = p
+    !
+    !     P     - Input . Value of the quantile          (0<P<1)  - Real
+    !     Q     - Input . Degrees of freedom             (Q >  0) - Real
+    !     A1    - Input . Eccentricity parameter                  - Real
+    !     DELTA - Input . Maximum absolute error required on      - Real
+    !                     kprimecdf (stopping criteria)
+    !                     (eps < DELTA < 1 where eps is machine
+    !                     epsilon; see parameter statement below)
+    !     MAXITR- Input . Maximum number of iterations            - Integer
+    !     IER   - Output. Return code :                           - Integer
+    !                     0 = normal
+    !                    -1 = no more evolution of the sum but
+    !                         required accuracy not reached yet
+    !                         (then kprimecdf = value at last iteration)
+    !                     1 = invalid input argument
+    !                         (then kprimecdf = zero)
+    !                     2 = maximum number of iterations reached
+    !                         (then kprimecdf = value at last iteration)
+    !                     3 = cannot be computed
+    !                         (then kprimecdf = zero)
+    !                     4 = error in auxiliary function
+    !                         (betacdf, lprimecdf or tcdf)
+    !                     5 = result out of limits (i.e. <0 or >1)
+    !                     7 = 2 + 5 both codes apply
+    !
+    !     External functions called:
+    !       LPRIMECDF
+    !     Fortran functions called:
+    !       ABS  LOG  SQRT  DLGAMA
+    !
+    !*********************************************************************************************!
+    !**                                                                                         **!
+    !** This function was added by Denis Cousineau, 28 november 2020.                           **!
+    !** It is just a wrapper to the generic function dtrinv.f90 made by J. Poitevineau.         **!
+    !**                                                                                         **!
+    !*********************************************************************************************!
 
-    implicit none
+    IMPLICIT NONE
     INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
     !  Function
     !  --------
-    real(PR) :: tprimeidf
+    REAL(PR) :: tprimeidf
 
     !  Arguments
     !  ---------
-    real(PR), intent(in)  :: p, q, a1, delta
-    integer,      intent(in)  :: maxitr
-    integer,      intent(out) :: ier
+    REAL(PR),     INTENT(in)  :: p, q, a1, delta
+    INTEGER,      INTENT(in)  :: maxitr
+    INTEGER,      INTENT(out) :: ier
 
     !  Local declarations
     !  ------------------
-    real(PR) :: k
-    real(PR), external :: tprimecdf, dtrinv
+    REAL(PR) :: k
+    REAL(PR), EXTERNAL :: tprimecdf, dtrinv
 
     k = sqrt(q/2) * Exp(dlgama((q-1.0D0)/2.0D0) - dlgama(q/2.0D0) ) 
 
@@ -70,15 +69,16 @@ function tprimeidf( p, q, a1, delta, maxitr, ier )
                 ier                                       &
             )
 
-contains
-    function func(x, iok)
-        real(PR), intent(in) :: x
-        integer,      intent(out):: iok
-        real(PR), external   :: lprimecdf
-        real(PR) :: func
-        func = tprimecdf(x, q, a1, delta, maxitr, iok)
-    end function func
+CONTAINS
 
-end function tprimeidf
+    FUNCTION func(x, iok)
+        REAL(PR), INTENT(in) :: x
+        INTEGER,  INTENT(out):: iok
+        REAL(PR), EXTERNAL   :: lprimecdf
+        REAL(PR) :: func
+        func = tprimecdf(x, q, a1, delta, maxitr, iok)
+    END FUNCTION func
+
+END FUNCTION tprimeidf
 
 

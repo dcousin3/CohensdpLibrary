@@ -1,72 +1,66 @@
 FUNCTION kprimecdf( x, q, r, a1, TOL, MAXITER, ier )
-
-!-----------------------------------------------------------------------
-!
-!     Calculates the probability that a random variable distributed
-!     according to the K' distribution with Q and R degrees of
-!     freedom, A1 centrality parameter, is less than or equal to X
-!
-!     X     - Input . Value of the variable                   - Real
-!     Q     - Input . First degrees of freedom       (Q >  0) - Real
-!     R     - Input . Second   "    "     "          (R >  0) - Real
-!     A1    - Input . Eccentricity parameter                  - Real
-!     TOL   - Input . Maximum absolute error required on      - Real
-!                     kprimecdf (stopping criteria)
-!                     (eps < TOL < 1 where eps is machine
-!                     epsilon; see parameter statement below)
-!     MAXITER - Input . Maximum number of iterations            - Integer
-!     IER     - Output. Return code :                           - Integer
-!                     0 = normal
-!                    -1 = no more evolution of the sum but
-!                         required accuracy not reached yet
-!                         (then kprimecdf = value at last iteration)
-!                     1 = invalid input argument
-!                         (then kprimecdf = zero)
-!                     2 = maximum number of iterations reached
-!                         (then kprimecdf = value at last iteration)
-!                     3 = cannot be computed
-!                         (then kprimecdf = zero)
-!                     4 = error in auxiliary function
-!                         (betacdf, lprimecdf or tcdf)
-!                     5 = result out of limits (i.e. <0 or >1)
-!                     7 = 2 + 5 both codes apply
-!
-!     External functions called:
-!       BETACDF  LPRIMECDF  TCDF
-!       DLGAMA (Log(Gamma(.)) if not in FORTRAN library
-!
-!     Fortran functions called:
-!       ABS  EXP  LOG  MAX  MOD  INT  (and DLGAMA if available)
-!
-!     Uses "method 2", see Benton & Krishnamoorthy (2003),
-!     Computational Statistics & Data Analysis, 43, 249-267.
-!     N.B. The mode is taken as the starting point for iterations
-!     (forward and backward).
-!     Starting index is modified if worthwile (see parameter betaratio)
-!     To deal with the case where k=0 and r<=1, xgamf is updated at the
-!     end of the iteration loop rather than at the beginning.
-!
-!-----------------------------------------------------------------------
+    !-----------------------------------------------------------------------
+    !     Poitevineau, J. and Lecoutre, B. (2010) Statistical distributions for bayesian 
+    !         experimental data analysis fortran functions 1. continuous distributions,
+    !         url = https://eris62.eu
+    !
+    !     Calculates the probability that a random variable distributed
+    !     according to the K' distribution with Q and R degrees of
+    !     freedom, A1 centrality parameter, is less than or equal to X
+    !
+    !     X     - Input . Value of the variable                   - Real
+    !     Q     - Input . First degrees of freedom       (Q >  0) - Real
+    !     R     - Input . Second   "    "     "          (R >  0) - Real
+    !     A1    - Input . Eccentricity parameter                  - Real
+    !     TOL   - Input . Maximum absolute error required on      - Real
+    !                     kprimecdf (stopping criteria)
+    !                     (eps < TOL < 1 where eps is machine
+    !                     epsilon; see parameter statement below)
+    !     MAXITER - Input . Maximum number of iterations            - Integer
+    !     IER     - Output. Return code :                           - Integer
+    !                     0 = normal
+    !                    -1 = no more evolution of the sum but
+    !                         required accuracy not reached yet
+    !                         (then kprimecdf = value at last iteration)
+    !                     1 = invalid input argument
+    !                         (then kprimecdf = zero)
+    !                     2 = maximum number of iterations reached
+    !                         (then kprimecdf = value at last iteration)
+    !                     3 = cannot be computed
+    !                         (then kprimecdf = zero)
+    !                     4 = error in auxiliary function
+    !                         (betacdf, lprimecdf or tcdf)
+    !                     5 = result out of limits (i.e. <0 or >1)
+    !                     7 = 2 + 5 both codes apply
+    !
+    !     External functions called:
+    !       BETACDF  LPRIMECDF  TCDF
+    !       DLGAMA (Log(Gamma(.)) if not in FORTRAN library
+    !
+    !     Fortran functions called:
+    !       ABS  EXP  LOG  MAX  MOD  INT  (and DLGAMA if available)
+    !
+    !     Uses "method 2", see Benton & Krishnamoorthy (2003),
+    !     Computational Statistics & Data Analysis, 43, 249-267.
+    !     N.B. The mode is taken as the starting point for iterations
+    !     (forward and backward).
+    !     Starting index is modified if worthwile (see parameter betaratio)
+    !     To deal with the case where k=0 and r<=1, xgamf is updated at the
+    !     end of the iteration loop rather than at the beginning.
+    !-----------------------------------------------------------------------
 
    IMPLICIT NONE
    INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
    !  Function
-   !  --------
-
    REAL(PR) :: kprimecdf
 
    !  Arguments
-   !  ---------
-
    REAL(PR), INTENT(in)     :: x, q, r, a1, TOL
    INTEGER, INTENT(in)      :: MAXITER
    INTEGER, INTENT(out)     :: ier
 
    !  local declarations
-   !  ------------------
-
-!! REAL(PR), EXTERNAL :: dlgama
    REAL(PR), EXTERNAL :: betacdf, lprimecdf, tcdf
 
    REAL(PR), PARAMETER :: zero =0.0D0, half=0.5D0, one=1.0D0, two=2.0D0
@@ -81,7 +75,6 @@ FUNCTION kprimecdf( x, q, r, a1, TOL, MAXITER, ier )
    !     eps = machine epsilon
    !           (the smallest real such that 1.0 + eps > 1.0)
    !     explower = minimum valid argument for the exponential function
-
    REAL(PR) :: a2, aqa, aqal, beta0, betak, dj2, q2, q2l, qqal
    REAL(PR) :: r2, r2l, r2l1mx, sumg, xarg, xl, xx
    INTEGER :: iok, j, jm, k, kit
@@ -91,19 +84,16 @@ FUNCTION kprimecdf( x, q, r, a1, TOL, MAXITER, ier )
    REAL(PR) :: prv(0:1)
 
    !-----------------------------------------------------------------
-
    kprimecdf = zero
    ier = 0
 
    !  Test for valid input arguments
-
    if ( q <= zero .or. r <= zero .or. TOL >= one .or. TOL <= eps ) then
       ier = 1
       return
    end if
 
    !  Case x = 0
-
    if ( abs(x) < eps ) then
       cdf(0) = zero
       cdf(1) = zero
@@ -112,7 +102,6 @@ FUNCTION kprimecdf( x, q, r, a1, TOL, MAXITER, ier )
    end if
 
    !  If a1 is close to zero use approximation (exact if a1 = 0)
-
    if ( abs(a1) < eps ) then
       kprimecdf = tcdf( x, r, bel, ier )
       if ( ier /= 0 ) ier = 4
@@ -120,7 +109,6 @@ FUNCTION kprimecdf( x, q, r, a1, TOL, MAXITER, ier )
    end if
 
    !  If q or r is large enough use limiting distribution
-
    if ( q > qlimit ) then
       kprimecdf = one - lprimecdf( a1, r, x, TOL, MAXITER, ier ) ! noncentral t
       if ( ier /= 0 ) ier = 4
@@ -132,7 +120,6 @@ FUNCTION kprimecdf( x, q, r, a1, TOL, MAXITER, ier )
    end if
 
    !  Define usefull parameters
-
    xx = x
    xarg = x*x
    xarg = xarg / (xarg+r)
@@ -141,7 +128,6 @@ FUNCTION kprimecdf( x, q, r, a1, TOL, MAXITER, ier )
    a2 = a1*a1
 
    !  Case xarg close to one (x tends to +/- infinity)
-
    if ( abs(xarg-one) < eps+eps ) then
       if ( x > zero ) kprimecdf = one
       return
@@ -149,21 +135,17 @@ FUNCTION kprimecdf( x, q, r, a1, TOL, MAXITER, ier )
 
    !  Case a1 < 0 : change sign of x :
    !  Pr( K'(a1,1) < x ) = 1 - Pr( K'(-a1,1) < -x )
-
    if ( a1 < zero ) xx = -xx
    xneg = xx < zero          ! When a1 and x are not of same sign, the series is alternate
                              ! and this is flagged by xneg
 
    !  General case (iterations)
-
    !  When a1 > 0:
    !     1) if xx > 0:
    !        Pr( K'<xx ) =  Pr( K'<0 ) + Pr( 0<K'<xx )
    !     2) if xx < 0:
    !        Pr( K'<xx ) =  Pr( K'<0 ) - Pr( xx<K'<0 )
-
    !  First, calculate  Pr( Min(0,xx)<K'<Max(0,xx) )
-
    aqa = a2/(q+a2)
    aqal = log(aqa)
    qqal = q2*log(one-aqa)
@@ -177,7 +159,6 @@ FUNCTION kprimecdf( x, q, r, a1, TOL, MAXITER, ier )
 
    ! To deal with the case where k=0 and r<=1, xgamf is updated at
    ! end of iteration loop, while xgamb is updated at beginning of loop
-
    dj2 = k*half
    betaf(0) = betacdf( xarg, dj2+half, r2, ier )
    if ( ier /= 0 ) then
@@ -285,7 +266,6 @@ FUNCTION kprimecdf( x, q, r, a1, TOL, MAXITER, ier )
    prv = -one
 
    !  Iteration loops
-
    !  Do forward and backward computations k times or until convergence
    kit = min( k, MAXITER )
    do j = 2, kit
@@ -373,28 +353,22 @@ FUNCTION kprimecdf( x, q, r, a1, TOL, MAXITER, ier )
 
 END FUNCTION kprimecdf
 
+
 SUBROUTINE kprimebis( x, q, r, a1, TOL, MAXITER, ier, result )
-
-!     Returns in result the K' cdf
-!     This is the subroutine version of the Kprimecdf function used
-!     for the reverse problem when ier=-1 in the Kprimecdf function
-!     (Same arguments as in kprimecdf function)
-
+    !     Returns in result the K' cdf
+    !     This is the subroutine version of the Kprimecdf function used
+    !     for the reverse problem when ier=-1 in the Kprimecdf function
+    !     (Same arguments as in kprimecdf function)
    IMPLICIT NONE
    INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
    !  Arguments
-   !  ---------
-
    REAL(PR), INTENT(in) :: x, q, r, a1, TOL
    REAL(PR), INTENT(out) :: result
    INTEGER, INTENT(in) :: MAXITER
    INTEGER, INTENT(out) :: ier
 
    !  local declarations
-   !  ------------------
-
-!! REAL(PR), EXTERNAL :: dlgama
    REAL(PR), EXTERNAL :: betacdf, lprimecdf, tcdf
 
    REAL(PR), PARAMETER :: zero=0.0D0, half=0.5D0, one=1.0D0, two=2.0D0
@@ -409,7 +383,6 @@ SUBROUTINE kprimebis( x, q, r, a1, TOL, MAXITER, ier, result )
    !     eps = machine epsilon
    !           (the smallest real such that 1.0 + eps > 1.0)
    !     explower = minimum valid argument for the exponential function
-
    REAL(PR) :: a2, aqa, aqal, beta0, betak, dj2, q2, q2l, qqal
    REAL(PR) :: r2, r2l, r2l1mx, sumg, xarg, xl, xx
    INTEGER :: iok, j, jm, k, kit
@@ -419,19 +392,16 @@ SUBROUTINE kprimebis( x, q, r, a1, TOL, MAXITER, ier, result )
    REAL(PR) :: prv(0:1)
 
    !-----------------------------------------------------------------
-
    xx = zero
    ier = 0
 
    !  Test for valid input arguments
-
    if ( q <= zero .or. r <= zero .or. TOL >= one .or. TOL <= eps ) then
       ier = 1
       return
    end if
 
    !  Case x = 0
-
    if ( abs(x) < eps ) then
       cdf(0) = zero
       cdf(1) = zero
@@ -440,7 +410,6 @@ SUBROUTINE kprimebis( x, q, r, a1, TOL, MAXITER, ier, result )
    end if
 
    !  If a1 is close to zero use approximation (exact if a1 = 0)
-
    if ( abs(a1) < eps ) then
       result = tcdf( x, r, bel, ier )
       if ( ier /= 0 ) ier = 4
@@ -448,7 +417,6 @@ SUBROUTINE kprimebis( x, q, r, a1, TOL, MAXITER, ier, result )
    end if
 
    !  If q or r is large enough use limiting distribution
-
    if ( q > qlimit ) then
       result = one - lprimecdf( a1, r, x, TOL, MAXITER, ier ) ! noncentral t
       if ( ier /= 0 ) ier = 4
@@ -460,7 +428,6 @@ SUBROUTINE kprimebis( x, q, r, a1, TOL, MAXITER, ier, result )
    end if
 
    !  Define usefull parameters
-
    xx = x
    xarg = x*x
    xarg = xarg / (xarg+r)
@@ -469,7 +436,6 @@ SUBROUTINE kprimebis( x, q, r, a1, TOL, MAXITER, ier, result )
    a2 = a1*a1
 
    !  Case xarg close to one (x tends to +/- infinity)
-
    if ( abs(xarg-one) < eps+eps ) then
       if ( x > zero ) result = one
       return
@@ -477,13 +443,11 @@ SUBROUTINE kprimebis( x, q, r, a1, TOL, MAXITER, ier, result )
 
    !  Case a1 < 0 : change sign of x :
    !  Pr( K'(a1,1) < x ) = 1 - Pr( K'(-a1,1) < -x )
-
    if ( a1 < zero ) xx = -xx
    xneg = xx < zero          ! When a1 and x are not of same sign, the series is alternate
                              ! and this is flagged by xneg
 
    !  General case (iterations)
-
    !  When a1 > 0:
    !     1) if xx > 0:
    !        Pr( K'<xx ) =  Pr( K'<0 ) + Pr( 0<K'<xx )
@@ -491,7 +455,6 @@ SUBROUTINE kprimebis( x, q, r, a1, TOL, MAXITER, ier, result )
    !        Pr( K'<xx ) =  Pr( K'<0 ) - Pr( xx<K'<0 )
 
    !  First, calculate  Pr( Min(0,xx)<K'<Max(0,xx) )
-
    aqa = a2/(q+a2)
    aqal = log(aqa)
    qqal = q2*log(one-aqa)
@@ -505,7 +468,6 @@ SUBROUTINE kprimebis( x, q, r, a1, TOL, MAXITER, ier, result )
 
    ! To deal with the case where k=0 and r<=1, xgamf is updated at
    ! end of iteration loop, while xgamb is updated at beginning of loop
-
    dj2 = k*half
    betaf(0) = betacdf( xarg, dj2+half, r2, ier )
    if ( ier /= 0 ) then
@@ -613,7 +575,6 @@ SUBROUTINE kprimebis( x, q, r, a1, TOL, MAXITER, ier, result )
    prv = -one
 
    !  Iteration loops
-
    !  Do forward and backward computations k times or until convergence
    kit = min( k, MAXITER )
    do j = 2, kit
@@ -657,7 +618,6 @@ SUBROUTINE kprimebis( x, q, r, a1, TOL, MAXITER, ier, result )
    end do
 
    !  Maximum number of iterations is reached
-
    ier = 2
 
    10 continue

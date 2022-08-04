@@ -1,13 +1,13 @@
 FUNCTION lsecondPDF ( delta, n, d, rho, TOL, MAXITER, ier )
     ! ***************************************************************************
-    ! Nonstandard noncentral t" distribution
-    !   This distribution is the exact distribution of the Cohen's d_p
+    ! Nonstandard noncentral Lambda" distribution
+    !   This distribution is the exact distribution of the Cohen's delta
     !   in the 2-repeated-measure samples from a Binormal population with 
     !   common variance sigma.
-    ! Parameters are n        (sample size), 
+    ! Parameters are delta    (putative parameter whose density is required)
+    !                n        (sample size), 
     !                d        (observed difference in the sample), 
     !                rho      (correlation in the population)
-    !                delta    (putative parameter whose density is required)
     !                TOL      (a tolerance level to decide to quit)
     !                MAXITER  (maximum iterations, often 15 are enough)
     !                ier      (unused)

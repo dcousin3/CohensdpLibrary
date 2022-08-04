@@ -1,6 +1,5 @@
 FUNCTION lprimeidf( p, q, a1, TOL, MAXITER, ier )
     !-----------------------------------------------------------------------
-    !
     !     Calculates the quantile of a random variable distributed
     !     according to the Lambda' distribution with Q degrees of freedom,
     !     A centrality parameter, that is the X such that F( X | q, a) = p
@@ -45,17 +44,14 @@ FUNCTION lprimeidf( p, q, a1, TOL, MAXITER, ier )
     INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
     !  Function
-    !  --------
     REAL(PR) :: lprimeidf
 
     !  Arguments
-    !  ---------
     REAL(PR), INTENT(in)  :: p, q, a1, TOL
     INTEGER,  INTENT(in)  :: MAXITER
     INTEGER,  INTENT(out) :: ier
 
     !  Local declarations
-    !  ------------------
     REAL(PR) :: k
     REAL(PR), EXTERNAL :: lprimecdf, dtrinv
 

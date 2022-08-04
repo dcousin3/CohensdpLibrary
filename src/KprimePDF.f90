@@ -1,49 +1,44 @@
 FUNCTION kprimepdf( x, q, r, a1, TOL, MAXITER, ier )
-
-!-----------------------------------------------------------------------
-!
-!     Calculates the probability that a random variable distributed
-!     according to the K' distribution with Q and R degrees of
-!     freedom, A1 centrality parameter, is less than or equal to X
-!
-!     P     - Input . p value of the desired quantile (0<P<1) - Real
-!     Q     - Input . First degrees of freedom       (Q >  0) - Real
-!     R     - Input . Second   "    "     "          (R >  0) - Real
-!     A1    - Input . Eccentricity parameter                  - Real
-!     TOL   - Input . Maximum absolute error required on      - Real
-!                     kprimecdf (stopping criteria)
-!                     (eps < TOL < 1 where eps is machine
-!                     epsilon; see parameter statement below)
-!     MAXITER- Input . Maximum number of iterations            - Integer
-!     IER   - Output. unreturned...                           - Integer
-!
-!     External functions called:
-!       KPRIMECDF
-!     Fortran functions called:
-!       ABS    MAX
-!
-!*********************************************************************************************!
-!**                                                                                         **!
-!** This function was added by Denis Cousineau, 28 november 2020.                           **!
-!** It is just a wrapper to the generic function dfridr from Numerical Receipes.            **!
-!**                                                                                         **!
-!*********************************************************************************************!
+    !-----------------------------------------------------------------------
+    !     Calculates the probability that a random variable distributed
+    !     according to the K' distribution with Q and R degrees of
+    !     freedom, A1 centrality parameter, is less than or equal to X
+    !
+    !     P     - Input . p value of the desired quantile (0<P<1) - Real
+    !     Q     - Input . First degrees of freedom       (Q >  0) - Real
+    !     R     - Input . Second   "    "     "          (R >  0) - Real
+    !     A1    - Input . Eccentricity parameter                  - Real
+    !     TOL   - Input . Maximum absolute error required on      - Real
+    !                     kprimecdf (stopping criteria)
+    !                     (eps < TOL < 1 where eps is machine
+    !                     epsilon; see parameter statement below)
+    !     MAXITER- Input . Maximum number of iterations            - Integer
+    !     IER   - Output. unreturned...                           - Integer
+    !
+    !     External functions called:
+    !       KPRIMECDF
+    !     Fortran functions called:
+    !       ABS    MAX
+    !
+    !*********************************************************************************************!
+    !**                                                                                         **!
+    !** This function was added by Denis Cousineau, 28 november 2020.                           **!
+    !** It is just a wrapper to the generic function dfridr from Numerical Receipes.            **!
+    !**                                                                                         **!
+    !*********************************************************************************************!
 
     IMPLICIT NONE
     INTEGER, PARAMETER       :: PR=KIND(1.0D0)
 
     !  Function
-    !  --------
     REAL(PR)                 :: kprimepdf
 
     !  Arguments
-    !  ---------
     REAL(PR), INTENT(in)     :: x, q, r, a1, TOL
     INTEGER, INTENT(in)      :: MAXITER
     INTEGER, INTENT(out)     :: ier
 
     !  Local declarations
-    !  ------------------
     REAL(PR), EXTERNAL       :: kprimecdf
     REAL(PR)                 :: rer  ! real-valued error 
 
@@ -51,6 +46,7 @@ FUNCTION kprimepdf( x, q, r, a1, TOL, MAXITER, ier )
     kprimepdf = dfridr( func, x, 0.1D0, rer )
 
 CONTAINS
+
     FUNCTION func( x )
         REAL(PR), INTENT(in) :: x
         REAL(PR), EXTERNAL   :: kprimecdf

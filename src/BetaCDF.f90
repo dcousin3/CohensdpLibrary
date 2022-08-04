@@ -1,47 +1,40 @@
-function betacdf( x, p, q, ier )
+FUNCTION betacdf( x, p, q, ier )
+    !-----------------------------------------------------------------------
+    !     Returns the incomplete beta function
+    !
+    !     X     - Input . Value of the variable (0 <= X <= 1)     - Real
+    !     P     - Input . First parameter  (P > 0)                - Real
+    !     Q     - Input . Second parameter (Q > 0)                - Real
+    !     IER   - Output. Return code :                           - Integer
+    !                     0 = normal
+    !                     1 = invalid input argument
+    !                     3 = result out of limits
+    !                         (betacdf < 0 or betacdf > 1)
+    !
+    !     Uses subroutine bratio:
+    !     Armido DiDinato, Alfred Morris.
+    !     Algorithm 708: Significant Digit Computation of the
+    !     Incomplete Beta Function Ratios.
+    !     ACM Transactions on Mathematical Software,
+    !     Volume 18, Number 3, September 1993, pages 360-373.
+    !-----------------------------------------------------------------------
 
-!-----------------------------------------------------------------------
-!
-!     Returns the incomplete beta function
-!
-!     X     - Input . Value of the variable (0 <= X <= 1)     - Real
-!     P     - Input . First parameter  (P > 0)                - Real
-!     Q     - Input . Second parameter (Q > 0)                - Real
-!     IER   - Output. Return code :                           - Integer
-!                     0 = normal
-!                     1 = invalid input argument
-!                     3 = result out of limits
-!                         (betacdf < 0 or betacdf > 1)
-!
-!     Uses subroutine bratio:
-!     Armido DiDinato, Alfred Morris.
-!     Algorithm 708: Significant Digit Computation of the
-!     Incomplete Beta Function Ratios.
-!     ACM Transactions on Mathematical Software,
-!     Volume 18, Number 3, September 1993, pages 360-373.
-!
-!-----------------------------------------------------------------------
-
-   implicit none
+   IMPLICIT NONE
    INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
    !  Function
-   !  --------
-   real(PR) :: betacdf
+   REAL(PR) :: betacdf
 
    !  Arguments
-   !  ---------
-   real(PR), intent(in) :: x, p, q
-   integer, intent(out) :: ier
+   REAL(PR), INTENT(in) :: x, p, q
+   INTEGER, INTENT(out) :: ier
 
    !  Local declarations
-   !  ------------------
-   real(PR), parameter :: zero=0.0D0, one=1.0D0
-   real(PR) :: w, w1, y
+   REAL(PR), PARAMETER :: zero=0.0D0, one=1.0D0
+   REAL(PR) :: w, w1, y
 
    !--------------------------------------------------------------------
    !  Test for valid input arguments
-
    if ( p <= zero .or. q <= zero ) then
       ier  = 1
       betacdf = -one
@@ -67,7 +60,7 @@ function betacdf( x, p, q, ier )
       ier = 3
    end if
 
-end function betacdf
+END FUNCTION betacdf
 
 
 subroutine bratio( a, b, x, y, w, w1, ierr )

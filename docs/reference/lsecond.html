@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>The K' or non-central K distribuiton. — dkprime • CohensdpLibrary</title>
+<title>Lambda second distribution or the non-central, non-standard, Lambda distribution. — lsecond • CohensdpLibrary</title>
 
 
 <!-- jquery -->
@@ -39,11 +39,14 @@
 
 
 
-<meta property="og:title" content="The K' or non-central K distribuiton. — dkprime" />
-<meta property="og:description" content="The K' distribution was created to solve various problems in linear model statistics.
-pkprime returns the cumulative probability of the lambda prime distribution with 
-parameters nu1, nu2, ncp; dkprime returns its density and qkprime, a quantile.
-Lecoutre (1999); Poitevineau and Lecoutre (2010)
+<meta property="og:title" content="Lambda second distribution or the non-central, non-standard, Lambda distribution. — lsecond" />
+<meta property="og:description" content="This distribution was introduced in Cousineau (submitted)
+ as the
+exact solution to the predictive distribution of the Cohen's dp in repeated-measure
+design. A more elegant notation was provided in Lecoutre (2022 - submitted)
+.
+It is the dual of the t&quot; distribution, the sampling distribution of dp in repeated-measure
+design introduced in Cousineau (2022)
 ." />
 
 
@@ -110,86 +113,91 @@ Lecoutre (1999); Poitevineau and Lecoutre (2010)
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>The K' or non-central K distribuiton.</h1>
+    <h1>Lambda second distribution or the non-central, non-standard, Lambda distribution.</h1>
     
-    <div class="hidden name"><code>dkprime.Rd</code></div>
+    <div class="hidden name"><code>lsecond.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The K' distribution was created to solve various problems in linear model statistics.
-pkprime returns the cumulative probability of the lambda prime distribution with 
-parameters nu1, nu2, ncp; dkprime returns its density and qkprime, a quantile.
-Lecoutre (1999); Poitevineau and Lecoutre (2010)
+    <p>This distribution was introduced in Cousineau (submitted)
+ as the
+exact solution to the predictive distribution of the Cohen's dp in repeated-measure
+design. A more elegant notation was provided in Lecoutre (2022 - submitted)
+.
+It is the dual of the t" distribution, the sampling distribution of dp in repeated-measure
+design introduced in Cousineau (2022)
 .</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pkprime</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>nu1</span>, <span class='va'>nu2</span>, <span class='va'>ncp</span><span class='op'>)</span> 
-<span class='fu'>dkprime</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>nu1</span>, <span class='va'>nu2</span>, <span class='va'>ncp</span><span class='op'>)</span> 
-<span class='fu'>qkprime</span><span class='op'>(</span><span class='va'>p</span>, <span class='va'>nu1</span>, <span class='va'>nu2</span>, <span class='va'>ncp</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>plsecond</span><span class='op'>(</span><span class='va'>delta</span>, <span class='va'>n</span>, <span class='va'>d</span>, <span class='va'>rho</span><span class='op'>)</span> 
+<span class='fu'>dlsecond</span><span class='op'>(</span><span class='va'>delta</span>, <span class='va'>n</span>, <span class='va'>d</span>, <span class='va'>rho</span><span class='op'>)</span> 
+<span class='fu'>qlsecond</span><span class='op'>(</span><span class='va'>p</span>,     <span class='va'>n</span>, <span class='va'>d</span>, <span class='va'>rho</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>the value from which a probability is sought;</p></td>
+      <th>delta</th>
+      <td><p>the parameter of the population whose probability is to assess;</p></td>
     </tr>
     <tr>
-      <th>nu1</th>
-      <td><p>the first degree of freedom;</p></td>
+      <th>n</th>
+      <td><p>the sample size n</p></td>
     </tr>
     <tr>
-      <th>nu2</th>
-      <td><p>the second degree of freedom;</p></td>
+      <th>d</th>
+      <td><p>the observed d_p of the sample;</p></td>
     </tr>
     <tr>
-      <th>ncp</th>
-      <td><p>the noncentrality parameter;</p></td>
+      <th>rho</th>
+      <td><p>the population correlation</p></td>
     </tr>
     <tr>
       <th>p</th>
-      <td><p>the probability from which a quantile is requested;</p></td>
+      <td><p>the probability from which a quantile is requested</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>the probability or quantile of a K' distribution</p>
+    
+<pre>     the probability or quantile of a Lambda'' distribution
+</pre>
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>kprime is a p,d,q set of functions that compute the K-prime distribution. This distribution has many applications,
-including to obtain the sampling distribution of _r_ given a population rho and the predictive distributions
-of rho given a sample _r_. See Lecoutre (1999); Poitevineau and Lecoutre (2010)
+    <p>lsecond are p,d,q functions that compute the Lambda-second (L") distribution. This
+distribution is an generalization of the lambda-prime distribution
+(Lecoutre 1999)
 .</p>
-<p>These functions are herein implemented from the FORTRAN source code of Poitevineau and Lecoutre (2010)
-.
-Note that the library _sadists_ also implements this distribution (Pav 2020)
-. 
-However, the sadists::kprime distribution is innacurate for small nu1 or small nu2.</p>
+<p>Note that the parameters are the raw sample size n, the observed Cohen's dp, and the
+population rho. All the scaling required are performed within the functions (and so
+you do not provide degrees of freedom).This is henceforth not a generic lambda-second
+distribution, but a lambda-second custom-tailored  for the problem of standardized mean
+difference.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Lecoutre B (1999).
+    <p>Cousineau D (2022).
+&#8220;The exact distribution of the Cohen's \(d_p\) in repeated-measure designs.&#8221;
+doi: <a href='https://doi.org/10.31234/osf.io/akcnd'>10.31234/osf.io/akcnd</a>
+, <a href='psyarxiv.com/akcnd'>psyarxiv.com/akcnd</a>.<br /><br /> Cousineau D (submitted).
+&#8220;The exact confidence interval of the Cohen's \(d_p\) in repeated-measure designs.&#8221;
+<em>The Quantitative Methods for Psychology</em>.<br /><br /> Lecoutre B (1999).
 &#8220;Two useful distributions for Bayesian predictive procedures under normal models.&#8221;
 <em>Journal of Statistical Planning and Inference</em>, <b>79</b>, 93 -- 105.
 doi: <a href='https://doi.org/10.1016/S0378-3758(98)00231-6'>10.1016/S0378-3758(98)00231-6</a>
-.<br /><br /> Pav SE (2020).
-&#8220;sadists: Some Additional Distributions [R package].&#8221;
-<a href='https://github.com/shabbychef/sadists'>https://github.com/shabbychef/sadists</a>.<br /><br /> Poitevineau J, Lecoutre B (2010).
-&#8220;Implementing Bayesian predictive procedures: The K-prime and K-square distributions.&#8221;
-<em>Computational Statistics and Data Analysis</em>, <b>54</b>, 724 -- 731.
-doi: <a href='https://doi.org/10.1016/j.csda.2008.11.004'>10.1016/j.csda.2008.11.004</a>
-.<br /><br /> Poitevineau J, Lecoutre B (2010).
-&#8220;Statistical distributions for bayesian experimental data analysis fortran functions 1. continuous distributions.&#8221;
-<a href='https://eris62.eu'>https://eris62.eu</a>.</p>
+.<br /><br /> Lecoutre B (2022 - submitted).
+&#8220;A note on the distributions of the sum and ratio of two correlated chi-square distributions.&#8221;
+<em>submitted</em>, <b>submitted</b>, submitted.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='r-in'></span>
-<span class='r-in'><span class='fu'>dkprime</span><span class='op'>(</span><span class='fl'>11.1</span>, <span class='fl'>9</span>, <span class='fl'>8</span>, <span class='fl'>10.0</span><span class='op'>)</span>  <span class='co'># 0.09410193</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.09410193</span>
-<span class='r-in'><span class='fu'>pkprime</span><span class='op'>(</span><span class='fl'>11.1</span>, <span class='fl'>9</span>, <span class='fl'>8</span>, <span class='fl'>10.0</span><span class='op'>)</span>  <span class='co'># 0.606652</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.6066524</span>
-<span class='r-in'><span class='fu'>qkprime</span><span class='op'>(</span><span class='fl'>0.01</span>, <span class='fl'>9</span>, <span class='fl'>8</span>, <span class='fl'>10.0</span><span class='op'>)</span>  <span class='co'># 3.875234</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 3.875234</span>
+<span class='r-in'><span class='fu'>dlsecond</span><span class='op'>(</span><span class='fl'>0.25</span>, <span class='fl'>9</span>, <span class='fl'>0.26</span>, <span class='fl'>0.333</span><span class='op'>)</span> <span class='co'># 1.03753</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1.037531</span>
+<span class='r-in'><span class='fu'>plsecond</span><span class='op'>(</span><span class='fl'>0.25</span>, <span class='fl'>9</span>, <span class='fl'>0.26</span>, <span class='fl'>0.333</span><span class='op'>)</span> <span class='co'># 0.494299</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.4942994</span>
+<span class='r-in'><span class='fu'>qlsecond</span><span class='op'>(</span><span class='fl'>0.01</span>, <span class='fl'>9</span>, <span class='fl'>0.26</span>, <span class='fl'>0.333</span><span class='op'>)</span> <span class='co'># -0.6468003</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] -0.6468</span>
 <span class='r-in'></span>
 </pre>
   </div>

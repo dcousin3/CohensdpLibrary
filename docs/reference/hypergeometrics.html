@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>summarize — summarize • CohensdpLibrary</title>
+<title>hypergeometric functions. — hypergeometrics • CohensdpLibrary</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,15 @@
 
 
 
-<meta property="og:title" content="summarize — summarize" />
-<meta property="og:description" content="``summarize()`` provides a human-readable output of a dpObject. it is 
-synonyme of ``summary()`` (but as actions are verbs, I used a verb)." />
+<meta property="og:title" content="hypergeometric functions. — hypergeometrics" />
+<meta property="og:description" content="The hypergeometric functions are a series of functions which includes
+the hypergeometric0F1, called the confluent hypergeometric limit function;
+the hypergeometric1F1, called the confluent hypergeometric function;
+and the hypergeometric2F1, called Gauss' confluent hypergeometric function.
+These functions are involved in the computation of the K' and Lambda'
+distributions, as well as the Chi-square&quot; and the t&quot; distributions
+(Cousineau 2022)
+." />
 
 
 
@@ -107,35 +113,70 @@ synonyme of ``summary()`` (but as actions are verbs, I used a verb)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>summarize</h1>
+    <h1>hypergeometric functions.</h1>
     
-    <div class="hidden name"><code>summarize.Rd</code></div>
+    <div class="hidden name"><code>hypergeometrics.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>``summarize()`` provides a human-readable output of a dpObject. it is 
-synonyme of ``summary()`` (but as actions are verbs, I used a verb).</p>
+    <p>The hypergeometric functions are a series of functions which includes
+the hypergeometric0F1, called the confluent hypergeometric limit function;
+the hypergeometric1F1, called the confluent hypergeometric function;
+and the hypergeometric2F1, called Gauss' confluent hypergeometric function.
+These functions are involved in the computation of the K' and Lambda'
+distributions, as well as the Chi-square" and the t" distributions
+(Cousineau 2022)
+.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>summarize</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
-
-<span class='co'># S3 method for CohensdpObject</span>
-<span class='fu'>summarize</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>hypergeometric0F1</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>z</span><span class='op'>)</span>      
+<span class='fu'>hypergeometric1F1</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span>, <span class='va'>z</span><span class='op'>)</span>  
+<span class='fu'>hypergeometric2F1</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span>, <span class='va'>c</span>, <span class='va'>z</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>an object to summarize</p></td>
+      <th>a</th>
+      <td><p>the first parameter;</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>ignored</p></td>
+      <th>z</th>
+      <td><p>the argument raised to the powers 0 ... infinity ;</p></td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td><p>the second parameter;</p></td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td><p>the third parameter;</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    
+<pre>the result of the hypergeometric function
+</pre>
+
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Cousineau D (2022).
+&#8220;The exact distribution of the Cohen's \(d_p\) in repeated-measure designs.&#8221;
+doi: <a href='https://doi.org/10.31234/osf.io/akcnd'>10.31234/osf.io/akcnd</a>
+, <a href='psyarxiv.com/akcnd'>psyarxiv.com/akcnd</a>.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='fu'>hypergeometric0F1</span><span class='op'>(</span><span class='fl'>12</span>, <span class='fl'>0.4</span><span class='op'>)</span>         <span class='co'>#   1.033851</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1.033851</span>
+<span class='r-in'><span class='fu'>hypergeometric1F1</span><span class='op'>(</span><span class='fl'>12</span>, <span class='fl'>14</span>, <span class='fl'>0.4</span><span class='op'>)</span>     <span class='co'>#   1.409877</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1.409877</span>
+<span class='r-in'><span class='fu'>hypergeometric2F1</span><span class='op'>(</span><span class='fl'>12</span>, <span class='fl'>14</span>, <span class='fl'>16</span>, <span class='fl'>0.4</span><span class='op'>)</span> <span class='co'># 205.5699</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 205.5699</span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

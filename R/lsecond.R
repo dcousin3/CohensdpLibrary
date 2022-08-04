@@ -1,3 +1,7 @@
+#' @name lsecond
+#'
+#' @md
+#'
 #' @title Lambda second distribution or the non-central, non-standard, Lambda distribution.
 #'
 #' @aliases dlsecond plsecond qlsecond
@@ -85,7 +89,6 @@ plsecond <- function( delta, n, d, rho ) {
 
 #' @export 
 qlsecond <- function( p,    n, d, rho ) {
-message("m1: entering qlsecond")
     if (n < 2) stop("Sample size  smaller than 2 forbidden. Exiting lsecond...")
     if ( p < 0 | p > 1 ) stop("Probability must be between 0 and 1. Exiting lsecond...")
     if (rho < -1 | rho > +1 ) stop("Correlation not between -1 and +1. Exiting lsecond...")

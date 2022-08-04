@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>summarize — summarize • CohensdpLibrary</title>
+<title>Lambda prime or noncentral Lambda distribution. — lprime • CohensdpLibrary</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,12 @@
 
 
 
-<meta property="og:title" content="summarize — summarize" />
-<meta property="og:description" content="``summarize()`` provides a human-readable output of a dpObject. it is 
-synonyme of ``summary()`` (but as actions are verbs, I used a verb)." />
+<meta property="og:title" content="Lambda prime or noncentral Lambda distribution. — lprime" />
+<meta property="og:description" content="plprime computes the cumulative probability of the lambda-prime distribution with
+parameters nu, ncp. dlprime(x, nu, ncp)  returns the density of the lambda prime
+and distribution qlprime(p, nu, ncp) its quantiles. See
+Lecoutre (1999)
+." />
 
 
 
@@ -107,35 +110,86 @@ synonyme of ``summary()`` (but as actions are verbs, I used a verb)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>summarize</h1>
+    <h1>Lambda prime or noncentral Lambda distribution.</h1>
     
-    <div class="hidden name"><code>summarize.Rd</code></div>
+    <div class="hidden name"><code>lprime.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>``summarize()`` provides a human-readable output of a dpObject. it is 
-synonyme of ``summary()`` (but as actions are verbs, I used a verb).</p>
+    <p>plprime computes the cumulative probability of the lambda-prime distribution with
+parameters nu, ncp. dlprime(x, nu, ncp)  returns the density of the lambda prime
+and distribution qlprime(p, nu, ncp) its quantiles. See
+Lecoutre (1999)
+.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>summarize</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
-
-<span class='co'># S3 method for CohensdpObject</span>
-<span class='fu'>summarize</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>plprime</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>nu</span>, <span class='va'>ncp</span><span class='op'>)</span> 
+<span class='fu'>dlprime</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>nu</span>, <span class='va'>ncp</span><span class='op'>)</span>
+<span class='fu'>qlprime</span><span class='op'>(</span><span class='va'>p</span>, <span class='va'>nu</span>, <span class='va'>ncp</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>an object to summarize</p></td>
+      <td><p>the score for which a probability is sought;</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>ignored</p></td>
+      <th>nu</th>
+      <td><p>the degree of freedom of the distribution;</p></td>
+    </tr>
+    <tr>
+      <th>ncp</th>
+      <td><p>the non-centrality parameter of the distribution;</p></td>
+    </tr>
+    <tr>
+      <th>p</th>
+      <td><p>the probability from which a quantile is requested;</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    
+<pre>     the probability or quantile of a Lambda' distribution
+</pre>
+
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>lprime are functions that compute the Lambda-prime distribution. It was shown to be the predictive
+distribution of a population standardized mean or standardized mean difference in between-group design
+given an observed Cohen's dp (Lecoutre 2007)
+.</p>
+<p>These functions are implemented from the FORTRAN source of Poitevineau and Lecoutre (2010)
+.
+Note that the library sadists also implements this distribution sadists::lprime (Pav 2020)
+.</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Lecoutre B (1999).
+&#8220;Two useful distributions for Bayesian predictive procedures under normal models.&#8221;
+<em>Journal of Statistical Planning and Inference</em>, <b>79</b>, 93 -- 105.
+doi: <a href='https://doi.org/10.1016/S0378-3758(98)00231-6'>10.1016/S0378-3758(98)00231-6</a>
+.<br /><br /> Lecoutre B (2007).
+&#8220;Another look at confidence intervals from the noncentral T distribution.&#8221;
+<em>Journal of Modern Applied Statistical Methods</em>, <b>6</b>, 107 -- 116.
+doi: <a href='https://doi.org/10.22237/jmasm/1177992600'>10.22237/jmasm/1177992600</a>
+.<br /><br /> Pav SE (2020).
+&#8220;sadists: Some Additional Distributions [R package].&#8221;
+<a href='https://github.com/shabbychef/sadists'>https://github.com/shabbychef/sadists</a>.<br /><br /> Poitevineau J, Lecoutre B (2010).
+&#8220;Statistical distributions for bayesian experimental data analysis fortran functions 1. continuous distributions.&#8221;
+<a href='https://eris62.eu'>https://eris62.eu</a>.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='fu'>dlprime</span><span class='op'>(</span><span class='fl'>11.1</span>, <span class='fl'>9</span>, <span class='fl'>10.0</span><span class='op'>)</span> <span class='co'># 0.129447</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.129447</span>
+<span class='r-in'><span class='fu'>plprime</span><span class='op'>(</span><span class='fl'>11.1</span>, <span class='fl'>9</span>, <span class='fl'>10.0</span><span class='op'>)</span> <span class='co'># 0.7134134</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.7134134</span>
+<span class='r-in'><span class='fu'>qlprime</span><span class='op'>(</span><span class='fl'>0.01</span>, <span class='fl'>9</span>, <span class='fl'>10.0</span><span class='op'>)</span> <span class='co'># 4.2453</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 4.2453</span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

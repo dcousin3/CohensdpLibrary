@@ -1,0 +1,25 @@
+title: CohensdpLibrary
+url: https://github.com/dcousin3/CohensdpLibrary
+
+reference:
+  - title: Main Functions
+    desc: The three essential functions
+    contents:
+      - '`Cohensdp`'
+      - '`Hedgesgp`'
+      - '`J`'
+  - title: Human readable outputs
+    desc: Methods to provide easier-to-read outputs
+    contents:
+      - '`explain`'
+      - '`summarize`'
+  - title: Distributions
+    desc: Usefull distributions
+    contents:
+      - '`kprime`'
+      - '`lprime`'
+      - '`lsecond`'
+  - title: Subsidiary functions
+    desc: Some functions required for the computations
+    contents:
+      - '`hypergeometrics`'

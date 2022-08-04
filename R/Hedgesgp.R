@@ -1,9 +1,13 @@
+#' @name Hedgesgp
+#'
+#' @md
+#'
 #' @title The unbiased Hedges' standardized mean difference.
 #'
 #' @aliases Hedgesgp
 #'
 #' @description
-#' Hedgesgp computes the unbiased Cohen's d (noted g_p) in either within-subject,
+#' ``Hedgesgp()`` computes the unbiased Cohen's d (noted $g_p$) in either within-subject,
 #' between-subject design and single-group design. See
 #' \insertCite{h81,gc18;textual}{CohensdpLibrary}.
 #'
@@ -12,22 +16,22 @@
 #'
 #' @param statistics    a list of pre-computed statistics. The statistics to provide 
 #'                      depend on the design:
-#'                        - for "between": m1, m2 the means of the two groups, s1, s2 
-#'                          the standard deviation of the two groups, and n1, n2, 
-#'                          the sample sizes of the two groups;
-#'                        - for "within": m1, m2, s1, s2, n, and r or rho the correlation
-#'                          between the measure; 
-#'                        - for "single": m, s, n and mu the reference mean from which m 
-#'                          is standardized).
-#' @param design        the design of the measures ("within", "between", or "single");
+#'                        - for "between": ``m1``, ``m2`` the means of the two groups, 
+#'                          ``s1``, ``s2`` the standard deviation of the two groups, and 
+#'                          ``n1``, ``n2``, the sample sizes of the two groups;
+#'                        - for "within": ``m1``, ``m2``, ``s1``, ``s2``, ``n``, and 
+#'                          ``r`` or ``rho`` the correlation between the measure; 
+#'                        - for "single": ``m``, ``s``, ``n`` and ``m0`` the reference 
+#'                          mean from which ``m`` is standardized).
+#' @param design        the design of the measures (``"within"``, ``"between"``, or ``"single"``);
 #'
-#' @return            the unbiased Cohen's d_p statistic 
+#' @return            the unbiased Cohen's $d_p$ statistic.
 #'
 #' @details
 #' This function returns the Cohen's d_p statistics corrected for bias but no confidence
 #' interval as this estimate is not used to build such interval.
-#' This function is currently unavailable in within-subject design when the population 
-#' rho is unknown.
+#' This function reduces the degrees of freedom by 1 in within-subject design when the 
+#' population  rho is unknown.
 #'
 #' @references
 #' \insertAllCited{}
@@ -50,10 +54,16 @@
 #' # The results can be displayed in three modes
 #' res <- Hedgesgp( statistics = list( m = 101, m0 = 114, s = 12.5, n = 10 ), 
 #'                  design     = "single")
-#' res              # a raw result of the Cohen's d_p and its confidence interval
-#' summarize( res ) # a human-readable output
-#' explain( res )   # a human-readable ouptut with additional explanations on the 
-#'                  # computations.
+#'
+#' # a raw result of the Cohen's d_p and its confidence interval
+#' res              
+#'
+#' # a human-readable output
+#' summarize( res ) 
+#'
+#' # ... and a human-readable ouptut with additional explanations 
+#' explain( res )   
+#'                  
 #' 
 
 #' @export 
@@ -190,7 +200,7 @@ Hedgesgp.within.rhounknown <- function( statistics ) {
     # compute correction factor
     pastsituation = getOption("CohensdpLibrary.SHOWWARNINGS")
     options("CohensdpLibrary.SHOWWARNINGS" = FALSE)
-    j <- J.within.rhounknown( statistics = list(n = sts$n-1, r = sts$r) )
+    j <- J.within.rhounknown( sts )
     options("CohensdpLibrary.SHOWWARNINGS" = pastsituation)
 
     dp * j

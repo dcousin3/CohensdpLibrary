@@ -1,5 +1,3 @@
-#' @useDynLib CohensdpLibrary
-#
 #' @details
 #' CohensdpLibrary is a library that computes the Cohen's $d_p$ along with confidence intervals. 
 #' Its main contribution is to allow confidence intervals in the repeated-measure designs.

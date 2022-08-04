@@ -1,47 +1,39 @@
-function ncdf( x )
+FUNCTION ncdf( x )
+    !-----------------------------------------------------------------------
+    !     Returns the probability that a random variable distributed
+    !     according to the Normal distribution with zero mean and unit
+    !     variance, is less than or equal to x.
+    !
+    !     X    - Input . Argument                                 - Real
+    !
+    !     Fortran  functions called:
+    !        ABS
+    !
+    !     Calculation is based upon the error function, using Chebyshev
+    !     approximation over the interval (0, 6.09).
+    !
+    !-----------------------------------------------------------------------
 
-!-----------------------------------------------------------------------
-!
-!     Returns the probability that a random variable distributed
-!     according to the Normal distribution with zero mean and unit
-!     variance, is less than or equal to x.
-!
-!     X    - Input . Argument                                 - Real
-!
-!     Fortran  functions called:
-!        ABS
-!
-!     Calculation is based upon the error function, using Chebyshev
-!     approximation over the interval (0, 6.09).
-!
-!-----------------------------------------------------------------------
-
-   implicit none
-   INTEGER, PARAMETER        :: PR=KIND(1.0D0)
+   IMPLICIT NONE
+   INTEGER, PARAMETER   :: PR=KIND(1.0D0)
 
    !  Function
-   !  --------
-
-   real(PR) :: ncdf
+   REAL(PR) :: ncdf
 
    !  Arguments
-   !  ---------
-
-   real(PR), intent(in) :: x
+   REAL(PR), INTENT(in) :: x
 
    !  Local declarations
-   !  ------------------
+   REAL(PR), PARAMETER :: zero=0.0D0, half=0.5D0, one=1.0D0
+   REAL(PR), PARAMETER :: b=6.09D0
+   REAL(PR), PARAMETER :: epsl=1.0D-15
+   REAL(PR), PARAMETER :: sq2=0.70710678118654748D0  ! = 1/sqrt(2)
+   INTEGER, PARAMETER :: m=43
 
-   real(PR), parameter :: zero=0.0D0, half=0.5D0, one=1.0D0
-   real(PR), parameter :: b=6.09D0
-   real(PR), parameter :: epsl=1.0D-15
-   real(PR), parameter :: sq2=0.70710678118654748D0  ! = 1/sqrt(2)
-   integer, parameter :: m=43
-
-   real(PR) :: ax, d, dd, sv, y, y2, z
-   integer :: j
+   REAL(PR) :: ax, d, dd, sv, y, y2, z
+   INTEGER :: j
    !  Chebyshev coefficients for the error function:
-   real(PR) :: c(m)=(/                                          &
+   REAL(PR) :: c(m)=(/                                          &
                 0.1635454272828649D+01,   0.3340345052068802D+00, &
                -0.2550158252490571D+00, 0.1576322031081386D+00, &
                -0.7292374105725899D-01, 0.1844981586051652D-01, &
@@ -90,4 +82,4 @@ function ncdf( x )
    end if
    if ( x < zero ) ncdf = one - ncdf
 
-end function ncdf
+END FUNCTION ncdf

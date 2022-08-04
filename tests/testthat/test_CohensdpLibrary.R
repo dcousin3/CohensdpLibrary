@@ -117,24 +117,23 @@ test_that("TESTS of Hedgesgp (6/8)", {
 
     # testing single-group design
     # CohensdpLibrary:::Hedgesgp.single(statistics=list(m=72, m0=76,s=16,n=20))
-    expect_warning( resS <- Hedgesgp( statistics = list(m=72,m0 =76,s=16,n=20), design="single") )
+    expect_message( resS <- Hedgesgp( statistics = list(m=72,m0 =76,s=16,n=20), design="single") )
     expect_equal( resS$estimate, -0.2399776, tolerance=1e-6 )
 
     # testing between-group design
     # CohensdpLibrary:::Hedgesgp.between(statistics=list(m1=72, m2=76,s1=16,s2=16,n1=20,n2=20))
-    expect_warning( resB <- Hedgesgp( statistics = list(m1=72,m2=76,s1=16,s2=16,n1=20,n2=20), design="between") )
+    expect_message( resB <- Hedgesgp( statistics = list(m1=72,m2=76,s1=16,s2=16,n1=20,n2=20), design="between") )
     expect_equal( resB$estimate, -0.2450276, tolerance=1e-6 )
 
     # testing within-group design, rho known
     # CohensdpLibrary:::Hedgesgp.within(statistics=list(m1=72, m2=76,s1=16,s2=16,n=20, rho=0.2))
-    expect_warning( resW <- Hedgesgp( statistics = list(m1=72,m2=76,s1=16,s2=16,n=20,rho=0.2), design="within") )
+    expect_message( resW <- Hedgesgp( statistics = list(m1=72,m2=76,s1=16,s2=16,n=20,rho=0.2), design="within") )
     expect_equal( resW$estimate, -0.2448432, tolerance=1e-6 )
 
     # testing within-group design, rho unknown
     # CohensdpLibrary:::Hedgesgp.within(statistics=list(m1=72, m2=76,s1=16,s2=16,n=20, r=0.2))
-    expect_warning( resW <- Hedgesgp( statistics = list(m1=72,m2=76,s1=16,s2=16,n=20,r=0.2), design="within") )
-    expect_equal( resW$estimate, -0.244555, tolerance=1e-6 )
-
+    expect_message( resW <- Hedgesgp( statistics = list(m1=72,m2=76,s1=16,s2=16,n=20,r=0.2), design="within") )
+    expect_equal( resW$estimate, -0.2445552, tolerance=1e-6 )
 
 })
 
@@ -143,7 +142,7 @@ test_that("TESTS of Hedgesgp (6/8)", {
 ########################################################################
 test_that("TESTS of the options (7/8)", {
 
-    expect_warning( Hedgesgp( statistics = list(m1=72,m2=76,s1=16,s2=16,n=20,rho=0.2), design="within") )
+    expect_message( Hedgesgp( statistics = list(m1=72,m2=76,s1=16,s2=16,n=20,rho=0.2), design="within") )
     options("CohensdpLibrary.SHOWWARNINGS" = FALSE)
     expect_equal( -0.2448432, Hedgesgp( statistics = list(m1=72,m2=76,s1=16,s2=16,n=20,rho=0.2), design="within")$estimate, tolerance=1e-6 )
     options("CohensdpLibrary.SHOWWARNINGS" = TRUE)

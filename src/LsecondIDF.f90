@@ -23,7 +23,7 @@ FUNCTION lsecondIDF ( q, n, d, rho, TOL, MAXITER, ier )
     INTEGER, PARAMETER         :: PR=KIND(1.0D0)
 
     !  Function
-    REAL(KIND=PR) :: lsecondIDF
+    REAL(KIND=PR)              :: lsecondIDF
 
     !  Arguments
     REAL(KIND=PR), INTENT(IN)  :: q, n, d, rho
@@ -36,24 +36,23 @@ FUNCTION lsecondIDF ( q, n, d, rho, TOL, MAXITER, ier )
     REAL(PR), PARAMETER        :: ONE=1.0D0, TWO=2.0D0
 
     !  Local declarations
-    !  ------------------
     REAL(KIND=PR), EXTERNAL :: lsecondCDF, mydtrinv
 
-    ier = 0
-    lsecondIDF = mydtrinv( func, q,               &
-                .FALSE., .FALSE., -1.0D6, 1.0D6,       & ! no bounds
-                d,                                     & ! approximate mean
-                ONE/TWO,                               & ! approximate standard deviation
-                TOL, MAXITER,  jer                     & ! etc.
+    lsecondIDF = mydtrinv( func, q,                     & ! func must a one-argument function
+                 .FALSE., .FALSE., -1.0D6, 1.0D6,       & ! no bounds
+                 d,                                     & ! approximate mean
+                 ONE/TWO,                               & ! approximate standard deviation
+                 TOL, MAXITER,  ier                     & ! etc.
             )
 
 CONTAINS
 
-    FUNCTION func(x)
+    FUNCTION func(x, iok)
         REAL(KIND=PR), INTENT(in) :: x
+        INTEGER,       INTENT(out):: iok
         REAL(KIND=PR), EXTERNAL   :: nsnctCDF
         REAL(KIND=PR) :: func
-        func = lsecondCDF(x, n, d, rho, TOL, MAXITER )
+        func = lsecondCDF(x, n, d, rho, TOL, MAXITER, iok )
     END FUNCTION func
 
 END FUNCTION lsecondIDF

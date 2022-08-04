@@ -1,3 +1,7 @@
+#' @name kprime
+#'
+#' @md
+#'
 #' @title The K' or non-central K distribuiton.
 #'
 #' @aliases dkprime pkprime qkprime

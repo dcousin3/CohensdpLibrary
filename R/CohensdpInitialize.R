@@ -1,3 +1,5 @@
+#' @useDynLib CohensdpLibrary
+#
 # things to initialize
 .onLoad <- function(libname, pkgname) {    
     # set the default arguments for the iterative functions:
@@ -63,11 +65,12 @@ vfyStat <- function(statlist, statname) {
 ## new METHODS : here only router function and generic
 ####################################################################
 
-
+#' @md
+#'
 #' @title explain 
 #' 
 #' @description
-#' explain provides a human-readable, exhaustive, description of
+#' ``explain()`` provides a human-readable, exhaustive, description of
 #' the results. It also provides references to the key results.
 #' 
 #' @param x   an object to explain
@@ -84,8 +87,8 @@ explain.default <- function(x, ...) { print(x) }
 #' @title summarize 
 #' 
 #' @description
-#' Summarize provides a human-readable output of a dpObject. it is 
-#' synonyme of summary (but as actions are verbs, I used a verb).
+#' ``summarize()`` provides a human-readable output of a dpObject. it is 
+#' synonyme of ``summary()`` (but as actions are verbs, I used a verb).
 #' 
 #' @param x   an object to summarize
 #' @param ... ignored

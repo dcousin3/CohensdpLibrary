@@ -1,5 +1,9 @@
-function lprimecdf( x, q, a, TOL, MAXITER, ier )
+FUNCTION lprimecdf( x, q, a, TOL, MAXITER, ier )
     !-----------------------------------------------------------------------
+    !     Poitevineau, J. and Lecoutre, B. (2010) Statistical distributions for bayesian 
+    !         experimental data analysis fortran functions 1. continuous distributions,
+    !         url = https://eris62.eu
+    !
     !     Calculates the probability that a random variable distributed
     !     according to the Lambda' distribution with Q degrees of freedom,
     !     A centrality parameter, is less than or equal to X
@@ -45,7 +49,6 @@ function lprimecdf( x, q, a, TOL, MAXITER, ier )
    INTEGER, INTENT(out):: ier
 
    !  local declarations
-!! real(PR), external   :: dlgama
    REAL(PR), EXTERNAL  :: chi2cdf, ncdf, tcdf
 
    REAL(PR), PARAMETER :: zero=0.0D0, half=0.5D0, one=1.0D0
@@ -68,7 +71,6 @@ function lprimecdf( x, q, a, TOL, MAXITER, ier )
    !     tinyr = the smallest positive real
    !     explower = minimum valid argument for the exponential function
    !             (i.e. log(tinyr))
-
    REAL(PR) :: aqal, a2, dj, dj2, erp, err, ga, g0,  &
                kgj, kgl,                             &
                qqal, q2, q2l,                        &
@@ -79,7 +81,6 @@ function lprimecdf( x, q, a, TOL, MAXITER, ier )
    REAL(PR) :: gl(0:1), kx(0:1), rl(0:1)
 
    !-----------------------------------------------------------------
-
    lprimecdf = zero
    ier = 0
 

@@ -7,31 +7,32 @@
 Hedgesgp(statistics, design)
 }
 \arguments{
-\item{statistics}{a list of pre-computed statistics. The statistics to provide 
+\item{statistics}{a list of pre-computed statistics. The statistics to provide
 depend on the design:
-  - for "between": m1, m2 the means of the two groups, s1, s2 
-    the standard deviation of the two groups, and n1, n2, 
-    the sample sizes of the two groups;
-  - for "within": m1, m2, s1, s2, n, and r or rho the correlation
-    between the measure; 
-  - for "single": m, s, n and mu the reference mean from which m 
-    is standardized).}
+- for "between": \code{m1}, \code{m2} the means of the two groups,
+\code{s1}, \code{s2} the standard deviation of the two groups, and
+\code{n1}, \code{n2}, the sample sizes of the two groups;
+- for "within": \code{m1}, \code{m2}, \code{s1}, \code{s2}, \code{n}, and
+\code{r} or \code{rho} the correlation between the measure;
+- for "single": \code{m}, \code{s}, \code{n} and \code{m0} the reference
+mean from which \code{m} is standardized).}
 
-\item{design}{the design of the measures ("within", "between", or "single");}
+\item{design}{the design of the measures (\code{"within"}, \code{"between"}, or \code{"single"});}
 }
 \value{
-the unbiased Cohen's d_p statistic
+\preformatted{       the unbiased Cohen's $d_p$ statistic.
+}
 }
 \description{
-Hedgesgp computes the unbiased Cohen's d (noted g_p) in either within-subject,
+\code{Hedgesgp()} computes the unbiased Cohen's d (noted $g_p$) in either within-subject,
 between-subject design and single-group design. See
 \insertCite{h81,gc18;textual}{CohensdpLibrary}.
 }
 \details{
 This function returns the Cohen's d_p statistics corrected for bias but no confidence
 interval as this estimate is not used to build such interval.
-This function is currently unavailable in within-subject design when the population 
-rho is unknown.
+This function reduces the degrees of freedom by 1 in within-subject design when the
+population  rho is unknown.
 }
 \examples{
 
@@ -50,10 +51,16 @@ Hedgesgp( statistics = list( m = 101, m0 = 114, s = 12.5, n = 10 ),
 # The results can be displayed in three modes
 res <- Hedgesgp( statistics = list( m = 101, m0 = 114, s = 12.5, n = 10 ), 
                  design     = "single")
-res              # a raw result of the Cohen's d_p and its confidence interval
-summarize( res ) # a human-readable output
-explain( res )   # a human-readable ouptut with additional explanations on the 
-                 # computations.
+
+# a raw result of the Cohen's d_p and its confidence interval
+res              
+
+# a human-readable output
+summarize( res ) 
+
+# ... and a human-readable ouptut with additional explanations 
+explain( res )   
+                 
 
 }
 \references{

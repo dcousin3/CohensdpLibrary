@@ -1,6 +1,6 @@
 ! What follows are wrappers to the fortran functions because 
 ! R cannot link to functions, only to subroutines
-
+! D. Cousineau, 4/08/2022
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! lsecond
 ! from Cousineau, 2022, psyArxiv; Lecoutre, 2022

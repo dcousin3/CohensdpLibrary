@@ -1,3 +1,26 @@
+! Addition for real numbers only (D. Cousineau, 4/4/2022)
+! It is also D. Cousineau who removed the module; it was creating a temporary file needlessly
+
+FUNCTION hyg2F1(A, B, C, Z)
+!  USE HYP_2F1_MODULE
+  INTEGER, PARAMETER :: PR=KIND(1.0D0),IPR=KIND(1)
+
+  ! note that the parameters MUST BE CONVERTED TO REAL before calling this function
+  REAL(PR), INTENT(IN)  :: A, B, C, Z
+  REAL(PR)              :: hyg2F1
+  COMPLEX(PR), EXTERNAL :: HYP_2F1
+
+  hyg2F1 = REALPART( HYP_2F1( &
+                CMPLX( REAL(A,KIND=PR), 0, KIND=PR), &
+                CMPLX( REAL(B,KIND=PR), 0, KIND=PR), & 
+                CMPLX( REAL(C,KIND=PR), 0, KIND=PR), &
+                CMPLX( REAL(Z,KIND=PR), 0, KIND=PR) ) &
+            )
+
+END FUNCTION hyg2F1
+
+
+
 !============== START HYP_2F1 FILE ====================================
 ! SOURCE:
 !@article{MICHEL2008535,
@@ -1922,27 +1945,4 @@ RECURSIVE FUNCTION HYP_2F1(A,B,C,Z) RESULT(RES)
 END FUNCTION HYP_2F1
 !
 !============== END HYP_2F1 FILE ======================================
-
-! Addition for real numbers only (D. Cousineau)
-! It is also D. Cousineau who removed the module; it was creating a temporary file needlessly
-
-FUNCTION hyg2F1(A, B, C, Z)
-!  USE HYP_2F1_MODULE
-  INTEGER, PARAMETER :: PR=KIND(1.0D0),IPR=KIND(1)
-
-  ! note that the parameters MUST BE CONVERTED TO REAL before calling this function
-  REAL(PR), INTENT(IN)  :: A, B, C, Z
-  REAL(PR)              :: hyg2F1
-  COMPLEX(PR), EXTERNAL :: HYP_2F1
-
-!hyg2F1 = Exp(9.)
-!return
-  hyg2F1 = REALPART( HYP_2F1( &
-                CMPLX( REAL(A,KIND=PR), 0, KIND=PR), &
-                CMPLX( REAL(B,KIND=PR), 0, KIND=PR), & 
-                CMPLX( REAL(C,KIND=PR), 0, KIND=PR), &
-                CMPLX( REAL(Z,KIND=PR), 0, KIND=PR) ) &
-            )
-
-END FUNCTION hyg2F1
 

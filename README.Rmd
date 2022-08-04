@@ -1,0 +1,117 @@
+---
+title: "README file"
+output: github_document
+bibliography: "inst/REFERENCES.bib"
+csl: "inst/apa-6th.csl"
+---
+
+# Cohen's $d_p$ library: Getting the Cohen's $d_p$ and its confidence interval in any design
+
+<!-- badges: start -->
+[![CRAN Status](https://www.r-pkg.org/badges/version/CohensdpLibrary)](https://cran.r-project.org/package=CohensdpLibrary)
+<!-- badges: end -->
+
+This library computes the Cohen's $d_p$ and its confidence intervals in any experimental design. In the past, 
+researchers developed distinct versions of standardized mean difference for between and within-subject design.
+The consequence is that these various estimators could not be compared between each others and more importantly,
+across experimental design. @L0003-1 noted the existence of two different measures in within-subject design,
+and @w16 noted the existence of at least 5 difference sorts of standardized mean difference. He concluded by
+making this very important point: all these estimators ARE NOT Cohen's d measures.
+
+The measure that J. Cohen [@c69] created is obtained from the mean difference standardized using the pooled
+standard deviation. Hence, measures such as \(d_{av}\), $d_z$, $d_a$, etc. are not Cohen's d and **more importantly**,
+they cannot be compared! They all return different values because they measure different things. They are not just
+different, they can be markedly different. As an example, a $d_z$, given the means and standard deviations,
+can be _smaller_  **or** _larger_ than the Cohen's $d$ depending on the amount of correlation across the pairs
+of data. 
+
+This whole mess implies lack of comparability and confusion as to what statistics was actually reported. For that
+reason, I chose to call the true Cohen's $d$ with a distinct subscript $p$, as in $d_p$ so that (i) we clearly see the 
+difference (the reader is not left guessing what $d$ represents); (ii) is is clear that the _p_ooled standard
+deviation and only this statistic was used to standardized the mean difference. Further, by advocating a unique
+statistic for standardized mean difference, it allows for comparisons across studies, whether they used within-subject
+or between-subject design.
+
+```{r, echo = FALSE, message = FALSE, results = 'hide'}
+cat("this will be hidden; use for general initializations.\n")
+library(CohensdpLibrary)
+options("CohensdpLibrary.SHOWWARNINGS" = FALSE) # shut down all messages
+```
+
+## Why this package?
+
+`MBESS` is an excellent package which already computes standardized mean difference and returns confidence 
+intervals [@k22]. However, it does not compute confidence intervals in within-subject design directly. The
+Algina and Keselman approximate method can be implemented within MBESS with some programing [@CG057-1]. 
+This package, on the other hand, can be used with any experimental design. It only requires an argument
+`design` which specifies the type of experimental design.
+
+The confidence interval in within-subect design was unknown until recently. In recent work [@c22a;@c22b],
+its exact expression was found when the population correlation is know and an approximation was
+proposed when the sample correlation is known, but not the population correlation. 
+
+# Using ``CohensdpLibrary``
+
+
+You can install this library on you computer from CRAN (note the uppercase C and uppercase L)
+```{r, echo = TRUE, eval = FALSE}
+install.packages("CohensdpLibrary")
+```
+
+or if the library devtools is installed with:
+```{r, echo = TRUE, eval = FALSE}
+devtools::install_github("dcousin3/CohensdpLibrary")
+```
+
+and before using it:
+```{r, echo = TRUE}
+library(CohensdpLibrary)
+```
+
+The main function is ``Cohensdp``, which returns the Cohen's $d_p$ and its 
+confidence intervals under various designs. For example, this returns the 
+triplet (lower 95% confidence interval bound, d_p, upper 95% confidence interval 
+bound) given the sample means, the sample standard deviations, and the correlation
+
+```{r}
+Cohensdp( statistics = list(m1=76, m2=72, n=20, s1=14.8, s2=18.8, r=0.2),
+          design = "within"
+)
+```
+
+You get a more readable output with ``summarize``, e.g.,
+
+```{r}
+summarize(Cohensdp( statistics = list(m1=76, m2=72, n=20, s1=14.8, s2=18.8, r=0.2),
+                    design = "within")
+)
+```
+
+The design can be replaced with ``between`` for a between-subject design:
+
+```{r}
+summarize(Cohensdp( statistics = list(m1=76, m2=72, n1=10, n2=10, s1=14.8, s2=18.8),
+                    design = "between")
+)
+```
+(the statistic ``r`` is removed as there is no correlation in between-group design, and ``n`` is
+provided separately for each group, ``n1`` and ``n2``).
+
+Finally, it is also possible to get a Cohen's $d_p$ from a single group as long as you have an 
+hypothetical mean ``m0`` to compare the sample mean to, e.g., 
+```{r}
+summarize(Cohensdp( statistics = list(m=76, m0=72, n=20, s=14.8),
+                    design = "single")
+)
+```
+
+Replace ``summarize`` with ``explain`` for additional information on the result.
+
+
+Check the web site [https://github.com/dcousin3/CohensdpLibrary](https://github.com/dcousin3/CohensdpLibrary) for more.
+also, ``help(CohensdpLibrary)`` will get you started.
+
+
+# References
+
+\insertAllCited{}

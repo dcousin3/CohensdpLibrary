@@ -1,73 +1,69 @@
-function lprimepdf( x, q, a1, TOL, MAXITER, ier )
-    
-!-----------------------------------------------------------------------
-!
-!     Calculates the density that a random variable distributed
-!     according to the L' distribution with Q degrees of
-!     freedom, A1 centrality parameter, is equal to X
-!
-!     P       - Input . p value of the desired quantile (0<P<1) - Real
-!     Q       - Input . First degrees of freedom       (Q >  0) - Real
-!     A1      - Input . Eccentricity parameter                  - Real
-!     TOL     - Input . Maximum absolute error required on      - Real
-!                     kprimecdf (stopping criteria)
-!                     (eps < TOL < 1 where eps is machine
-!                     epsilon; see parameter statement below)
-!     MAXITER - Input . Maximum number of iterations            - Integer
-!     IER     - Output. unreturned...                           - Integer
-!
-!     External functions called:
-!       LPRIMECDF
-!     Fortran functions called:
-!       ABS    MAX
-!
-!*********************************************************************************************!
-!**                                                                                         **!
-!** This function was added by Denis Cousineau, 28 november 2020.                           **!
-!** It is just a wrapper to the generic function dfridr from Numerical Reciepes.            **!
-!**                                                                                         **!
-!*********************************************************************************************!
+FUNCTION lprimepdf( x, q, a1, TOL, MAXITER, ier ) 
+    !-----------------------------------------------------------------------
+    !     Calculates the density that a random variable distributed
+    !     according to the L' distribution with Q degrees of
+    !     freedom, A1 centrality parameter, is equal to X
+    !
+    !     P       - Input . p value of the desired quantile (0<P<1) - Real
+    !     Q       - Input . First degrees of freedom       (Q >  0) - Real
+    !     A1      - Input . Eccentricity parameter                  - Real
+    !     TOL     - Input . Maximum absolute error required on      - Real
+    !                     kprimecdf (stopping criteria)
+    !                     (eps < TOL < 1 where eps is machine
+    !                     epsilon; see parameter statement below)
+    !     MAXITER - Input . Maximum number of iterations            - Integer
+    !     IER     - Output. unreturned...                           - Integer
+    !
+    !     External functions called:
+    !       LPRIMECDF
+    !     Fortran functions called:
+    !       ABS    MAX
+    !
+    !*********************************************************************************************!
+    !**                                                                                         **!
+    !** This function was added by Denis Cousineau, 28 november 2020.                           **!
+    !** It is just a wrapper to the generic function dfridr from Numerical Reciepes.            **!
+    !**                                                                                         **!
+    !*********************************************************************************************!
 
-    implicit none
+    IMPLICIT NONE
     INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
     !  Function
-    !  --------
-    real(PR) :: lprimepdf
+    REAL(PR) :: lprimepdf
 
     !  Arguments
-    !  ---------
-    real(PR), intent(in)  :: x, q, a1, TOL
-    integer,      intent(in)  :: MAXITER
-    real(PR), intent(out) :: ier
+    REAL(PR), INTENT(in)  :: x, q, a1, TOL
+    INTEGER,  INTENT(in)  :: MAXITER
+    REAL(PR), INTENT(out) :: ier
 
     !  Local declarations
-    !  ------------------
-    real(PR), external  :: lprimecdf
-    real(PR)            :: rer  ! real-valued error 
+    REAL(PR), EXTERNAL  :: lprimecdf
+    REAL(PR)            :: rer  ! real-valued error 
 
     ier = 0
     lprimepdf = dfridr( func, x, 0.1D0, rer )
 
-contains
-    function func( x )
+CONTAINS
+
+    FUNCTION func( x )
         real(PR), intent(in) :: x
         real(PR), external   :: lprimecdf
         real(PR)  :: func
         integer       :: iok
         func = lprimecdf(x, q, a1, TOL, MAXITER, iok)
-    end function func
+    END FUNCTION func
 
-    function dfridr(func, x, h, rer )
+    FUNCTION dfridr(func, x, h, rer )
         ! Reference: Press, Teukolsky, Vetterling, Flannery (1992) Numerical Receipes in fortran 77 (vol. 1)
-        real(PR)              :: dfridr
-        real(PR), external    :: func
-        real(PR), intent(in)  :: x, h
-        real(PR), intent(out) :: rer
-        real(PR), parameter   :: CON=1.4D0, CON2=1.96D0, BIG=1.0D30, SAFE=2.0D0
-        integer,      parameter   :: NTAB=10
-        integer                   :: i, j
-        real(PR)              :: errt, fac, hh, a(NTAB,NTAB)
+        REAL(PR)              :: dfridr
+        REAL(PR), EXTERNAL    :: func
+        REAL(PR), INTENT(in)  :: x, h
+        real(PR), INTENT(out) :: rer
+        real(PR), PARAMETER   :: CON=1.4D0, CON2=1.96D0, BIG=1.0D30, SAFE=2.0D0
+        INTEGER,  PARAMETER   :: NTAB=10
+        INTEGER               :: i, j
+        REAL(PR)              :: errt, fac, hh, a(NTAB,NTAB)
         ! Returns the derivative of a function func at a point x by Ridders’ method of polynomial
         ! extrapolation. The value h is input as an estimated initial stepsize; it need not be small,
         ! but rather should be an increment in x over which func changes substantially. An estimate
@@ -104,9 +100,9 @@ contains
             end if 
         end do
         return
-    end function dfridr
+    END FUNCTION dfridr
 
-end function lprimepdf
+END FUNCTION lprimepdf
 
 
 

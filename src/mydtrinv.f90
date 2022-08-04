@@ -1,4 +1,5 @@
 FUNCTION mydtrinv ( func, f, linf, lsup, xinf, xsup, ex, sx, TOL, MAXITER, ier )
+    !******************************************************************************/
     ! this function is a replacement for dtrinv, too slow...
     ! f       ex      ex+sx
     ! target, startg, startd )
@@ -25,23 +26,24 @@ FUNCTION mydtrinv ( func, f, linf, lsup, xinf, xsup, ex, sx, TOL, MAXITER, ier )
     !    ex, sx: expected and standard deviation of the distribution
     !    TOL, MAXITER: the precision and maximum number of steps
     !    ier: error code (unused)
+    !******************************************************************************/
 
     IMPLICIT NONE
     INTEGER, PARAMETER    :: PR=KIND(1.0D0)
 
     !  Function
-    REAL(kind=PR) :: mydtrinv
+    REAL(KIND=PR) :: mydtrinv
 
     !  Arguments
-    REAL(kind=PR), EXTERNAL    :: func
-    REAL(kind=PR), INTENT(in)  :: f
+    REAL(KIND=PR), EXTERNAL    :: func
+    REAL(KIND=PR), INTENT(in)  :: f
     LOGICAL,       INTENT(in)  :: linf, lsup
-    REAL(kind=PR), INTENT(in)  :: xinf, xsup, ex, sx, TOL
+    REAL(KIND=PR), INTENT(in)  :: xinf, xsup, ex, sx, TOL
     INTEGER,       INTENT(in)  :: MAXITER
     INTEGER,       INTENT(out) :: ier
 
     ! Local variables
-    REAL(kind=PR)              :: fg, fd, mdl, ptg, ptd, newf
+    REAL(KIND=PR)              :: fg, fd, mdl, ptg, ptd, newf
     INTEGER                    :: i, iok
 
     ptg=ex
@@ -72,7 +74,7 @@ FUNCTION mydtrinv ( func, f, linf, lsup, xinf, xsup, ex, sx, TOL, MAXITER, ier )
     do i = 1, MAXITER
         if (fd - fg < TOL ) exit
 
-        mdl  = (ptd + ptg)/2
+        mdl  = (ptd + ptg)/2.0D0
         newf = func(mdl, iok)
         if (newf < f) then
             ptg = mdl

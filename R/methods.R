@@ -33,7 +33,8 @@ print.CohensdpObject <- function(x, ...) {
     return(invisible(x))
 }
 
-
+#' @name summarize
+#'
 #' @method summarize CohensdpObject 
 #' @export 
 summarize.CohensdpObject <-  function(x, ...) {
@@ -51,8 +52,7 @@ summarize.CohensdpObject <-  function(x, ...) {
                           x$gamma*100, x$interval[1], x$interval[2])             
             ) },
         "gp" = { cat(
-            sprintf(paste("Hedges' gp         = ",format,"\n", sep=""), x$estimate),
-            sprintf("No confidence interval known for Hedges's gp\n") 
+            sprintf(paste("Hedges' gp         = ",format,"\n", sep=""), x$estimate) 
             ) },
         "J"  = { cat(
             switch(x$design,
@@ -67,6 +67,8 @@ summarize.CohensdpObject <-  function(x, ...) {
 }
 
 
+#' @name explain
+#'
 #' @method explain CohensdpObject 
 #' @export
 explain.CohensdpObject <- function(x, ...) {
@@ -113,8 +115,7 @@ explain.CohensdpObject <- function(x, ...) {
                 "single"  = sprintf(paste("\t sample standard deviation ",format," is the denominator\n", sep=""), sts$s ),
                 "within"  = sprintf(paste("\t pooled standard deviation ",format," is the denominator\n", sep=""), sqrt( (sts$s1^2 + sts$s2^2) / 2) ),
                 "between" = sprintf(paste("\t pooled standard deviation ",format," is the denominator\n", sep=""), sqrt( ( (sts$n1-1)*sts$s1^2 + (sts$n2-1)*sts$s2^2) / (sts$n1+sts$n2-2) ) )
-            ),
-            sprintf("\t*: there is no known confidence interval for an (unbiased) Hedges' gp.\n")
+            )
             ) },
         "J" = { cat(
             switch(x$design,

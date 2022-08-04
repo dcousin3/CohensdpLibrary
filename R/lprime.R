@@ -1,3 +1,7 @@
+#' @name lprime
+#'
+#' @md
+#'
 #' @title Lambda prime or noncentral Lambda distribution.
 #'
 #' @aliases dlprime plprime qlprime

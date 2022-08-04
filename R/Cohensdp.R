@@ -1,34 +1,39 @@
+#' @name Cohensdp
+#'
+#' @md
+#'
 #' @title Cohen's standardized mean difference.
 #'
 #' @aliases Cohensdp
 #'
 #' @description
-#' Cohensdp computes the Cohen's d (noted d_p) and its confidence interval in 
+#' ``Cohensdp()`` computes the Cohen's d (noted $d_p$) and its confidence interval in 
 #' either within-subject, between-subject design and single-group design. For 
 #' the between-subject design, MBESS already has an implementation based on the 
-#' "pivotal" method. This method is exact for between-subject design but slower 
-#' to compute than the currently implemented  method based on the Lambda prime
-#' distribution. See \insertCite{h81,c22a,c22b,gc18;textual}{CohensdpLibrary}.
+#' "pivotal" method but the present method is faster, 
+#' using the method based on the Lambda prime
+#' distribution \insertCite{l07}{CohensdpLibrary}. See 
+#' \insertCite{h81,c22a,c22b,gc18;textual}{CohensdpLibrary}.
 #'
 #' @usage
 #' Cohensdp(statistics, design, gamma )
 #'
 #' @param statistics    a list of pre-computed statistics. The statistics to provide 
 #'                      depend on the design:
-#'                      - for "between": m1, m2 the means of the two groups, s1, s2 
-#'                              the standard deviation of the two groups, and n1, n2, 
-#'                              the sample sizes of the two groups;
-#'                        - for "within": m1, m2, s1, s2, n, and r or rho the 
-#'                          correlation between the measure; 
-#'                        - for "single": m, s, n and mu the reference mean from which 
-#'                          m is standardized).
-#' @param design        the design of the measures ("within", "between", or "single");
+#'                      - for "between": ``m1``, ``m2`` the means of the two groups, 
+#'                              ``s1``, ``s2`` the standard deviation of the two groups,
+#'                               and ``n1``, ``n2``, the sample sizes of the two groups;
+#'                        - for "within": ``m1``, ``m2``, ``s1``, ``s2``, ``n``, and 
+#'                              ``r`` or ``rho`` the correlation between the measure; 
+#'                        - for "single": ``m``, ``s``, ``n`` and ``m0`` the reference mean  
+#'                              from which ``m`` is standardized).
+#' @param design        the design of the measures (``"within"``, ``"between"``, or ``"single"``);
 #' @param gamma         the confidence level of the confidence interval (default 0.95) 
 #'
-#' @return            the Cohen's d_p statistic and its confidence interval
+#' @return            the Cohen's $d_p$ statistic and its confidence interval.
 #'
 #' @details
-#' This function is currently unavailable in within-subject design when the population 
+#' This function reduces the degrees of freedom by 1 in within-subject design when the population 
 #' rho is unknown.
 #'
 #' @references
@@ -52,9 +57,16 @@
 #' # The results can be displayed in three modes
 #' res <- Cohensdp( statistics = list( m = 101, m0 = 114, s = 12.5, n = 10), 
 #'                  design     = "single")
-#' res              # a raw result of the Cohen's d_p and its confidence interval
-#' summarize( res ) # a human-readable output
-#' explain( res )   # a human-readable ouptut with additional explanations.
+#' 
+#' # a raw result of the Cohen's d_p and its confidence interval
+#' res              
+#' 
+#' # a human-readable output
+#' summarize( res ) 
+#' 
+#' # ... and a human-readable ouptut with additional explanations.
+#' explain( res )   
+#' 
 #'
 #' 
 

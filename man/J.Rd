@@ -9,23 +9,24 @@ J(statistics, design)
 \arguments{
 \item{statistics}{a list of pre-computed statistics. The statistics to provide
 depend on the design:
-  - for "between": n1, n2, the sample sizes of the two groups;
-  - for "within":  n, and r or rho the correlation between the 
-    measure; 
-  - for "single":  n.}
+- for "between": \code{n1}, \code{n2}, the sample sizes of the two groups;
+- for "within":  \code{n}, and \code{r} or \code{rho} the correlation between
+the measure;
+- for "single":  \code{n}.}
 
-\item{design}{the design of the measures ("within", "between", or "single");}
+\item{design}{the design of the measures (\code{"within"}, \code{"between"}, or \code{"single"});}
 }
 \value{
-the correction factor for unbiasing a Cohen's dp
+\preformatted{       the correction factor for unbiasing a Cohen's $d_p$. 
+}
 }
 \description{
-J computes the correction factor to get an unbiased Cohen's d in either within-
+\code{J()} computes the correction factor to get an unbiased Cohen's $d_p$ in either within-
 subject, between-subject design and single-group design. See
 \insertCite{l22,gc18,;textual}{CohensdpLibrary}.
 }
 \details{
-This function is currently unavailable in within-subject design when the population 
+This function decreases the degrees of freedom by 1 in within-subject design when the population
 rho is unknown.
 }
 \examples{
@@ -45,10 +46,16 @@ J( statistics = list( n = 12 ),
 # The results can be displayed in three modes
 res <- J( statistics = list( n = 12 ), 
           design     = "single")
-res              # a raw result of the Cohen's d_p and its confidence interval
-summarize( res ) # a human-readable output
-explain( res )   # a human-readable ouptut with additional explanations on the 
-                 # computations.
+
+# a raw result of the Cohen's d_p and its confidence interval
+res              
+
+# a human-readable output
+summarize( res ) 
+
+# ...and a human-readable ouptut with additional explanations
+explain( res )   
+                 
 }
 \references{
 \insertAllCited{}
