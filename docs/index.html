@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">CohensdpLibrary</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -74,11 +74,11 @@
 
 <p>This library computes the Cohen’s <em>d</em><sub><em>p</em></sub> and its confidence intervals in any experimental design. In the past, researchers developed distinct versions of standardized mean difference for between and within-subject design. The consequence is that these various estimators could not be compared between each others and more importantly, across experimental design. Lakens (2013) noted the existence of two different measures in within-subject design, and Westfall (2016) noted the existence of at least 5 difference sorts of standardized mean difference. He concluded by making this very important point: all these estimators ARE NOT Cohen’s d measures.</p>
 <p>The measure that J. Cohen (Cohen, 1969) created is obtained from the mean difference standardized using the pooled standard deviation. Hence, measures such as <em>d</em><sub>*a<strong>v<em></em></strong></sub>, d<em><sub></sub></em>z<em>, </em>d<em><sub></sub></em>a<em>, etc. are not Cohen’s d and <strong>more importantly</strong>, they cannot be compared! They all return different values because they measure different things. They are not just different, they can be markedly different. As an example, a </em>d<em><sub></sub></em>z<em>, given the means and standard deviations, can be </em>smaller* or** <em>larger</em> than the Cohen’s <em>d</em> depending on the amount of correlation across the pairs of data.</p>
-<p>This whole mess implies lack of comparability and confusion as to what statistics was actually reported. For that reason, I chose to call the true Cohen’s <em>d</em> with a distinct subscript <em>p</em>, as in <em>d</em><sub><em>p</em></sub> so that (i) we clearly see the difference (the reader is not left guessing what <em>d</em> represents); (ii) is is clear that the _p_ooled standard deviation and only this statistic was used to standardized the mean difference. Further, by advocating a unique statistic for standardized mean difference, it allows for comparisons across studies, whether they used within-subject or between-subject design.</p>
+<p>This whole mess implies lack of comparability and confusion as to what statistics was actually reported. For that reason, I chose to call the true Cohen’s <em>d</em> with a distinct subscript <em>p</em>, as in <em>d</em><sub><em>p</em></sub> so that (i) we clearly see the difference (the reader is not left guessing what <em>d</em> represents); (ii) is is clear that the pooled standard deviation and only this statistic was used to standardized the mean difference. Further, by advocating a unique statistic for standardized mean difference, it allows for comparisons across studies, whether they used within-subject or between-subject design.</p>
 <div id="why-this-package" class="section level2">
 <h2 class="hasAnchor">
 <a href="#why-this-package" class="anchor"></a>Why this package?</h2>
-<p><code>MBESS</code> is an excellent package which already computes standardized mean difference and returns confidence intervals (Kelley, 2022). However, it does not compute confidence intervals in within-subject design directly. The Algina and Keselman approximate method can be implemented within MBESS with some programing (Cousineau &amp; Goulet-Pelletier, 2021). This package, on the other hand, can be used with any experimental design. It only requires an argument <code>design</code> which specifies the type of experimental design.</p>
+<p><code>MBESS</code> is an excellent package which already computes standardized mean difference and returns confidence intervals (Kelley, 2022). However, it does not compute confidence intervals in within-subject design directly. The Algina and Keselman approximate method can be implemented within MBESS with some programming (Cousineau &amp; Goulet-Pelletier, 2021). This package, on the other hand, can be used with any experimental design. It only requires an argument <code>design</code> which specifies the type of experimental design.</p>
 <p>The confidence interval in within-subect design was unknown until recently. In recent work (Cousineau, 2022, submitted), its exact expression was found when the population correlation is know and an approximation was proposed when the sample correlation is known, but not the population correlation.</p>
 </div>
 </div>
@@ -95,7 +95,7 @@
 <p>and before using it:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">CohensdpLibrary</span><span class="op">)</span></code></pre></div>
-<p>The main function is <code>Cohensdp</code>, which returns the Cohen’s <em>d</em><sub><em>p</em></sub> and its confidence intervals under various designs. For example, this returns the triplet (lower 95% confidence interval bound, d_p, upper 95% confidence interval bound) given the sample means, the sample standard deviations, and the correlation</p>
+<p>The main function is <code>Cohensdp</code>, which returns the Cohen’s <em>d</em><sub><em>p</em></sub> and its confidence intervals under various designs. For example, this returns the triplet (lower 95% confidence interval bound, <em>d</em><sub><em>p</em></sub>, upper 95% confidence interval bound) given the sample means, the sample standard deviations, and the correlation</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/Cohensdp.html">Cohensdp</a></span><span class="op">(</span> statistics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>m1<span class="op">=</span><span class="fl">76</span>, m2<span class="op">=</span><span class="fl">72</span>, n<span class="op">=</span><span class="fl">20</span>, s1<span class="op">=</span><span class="fl">14.8</span>, s2<span class="op">=</span><span class="fl">18.8</span>, r<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span>,
           design <span class="op">=</span> <span class="st">"within"</span>
@@ -140,7 +140,7 @@ Cousineau, D. (2022). <em>The exact distribution of the Cohen’s </em>d<em><sub
 Cousineau, D. (submitted). The exact confidence interval of the Cohen’s <em>d</em><sub><em>p</em></sub> in repeated-measure designs. <em>The Quantitative Methods for Psychology</em>.
 </div>
 <div id="ref-CG057-1" class="csl-entry">
-Cousineau, D., &amp; Goulet-Pelletier, J.-C. (2021). A study of confidence intervals for cohen’s dp in within-subject designs with new proposals. <em>The Quantitative Methods for Psychology</em>, <em>17</em>, 51–75. <a href="https://doi.org/10.20982/tqmp.17.1.p051" class="uri">https://doi.org/10.20982/tqmp.17.1.p051</a>
+Cousineau, D., &amp; Goulet-Pelletier, J.-C. (2021). A study of confidence intervals for Cohen’s dp in within-subject designs with new proposals. <em>The Quantitative Methods for Psychology</em>, <em>17</em>, 51–75. <a href="https://doi.org/10.20982/tqmp.17.1.p051" class="uri">https://doi.org/10.20982/tqmp.17.1.p051</a>
 </div>
 <div id="ref-k22" class="csl-entry">
 Kelley, K. (2022). <em>MBESS: The MBESS R package</em>. Retrieved from <a href="https://CRAN.R-project.org/package=MBESS" class="uri">https://CRAN.R-project.org/package=MBESS</a>

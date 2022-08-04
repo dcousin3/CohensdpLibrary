@@ -35,11 +35,11 @@ This whole mess implies lack of comparability and confusion as to what
 statistics was actually reported. For that reason, I chose to call the
 true Cohen’s *d* with a distinct subscript *p*, as in *d*<sub>*p*</sub>
 so that (i) we clearly see the difference (the reader is not left
-guessing what *d* represents); (ii) is is clear that the \_p\_ooled
-standard deviation and only this statistic was used to standardized the
-mean difference. Further, by advocating a unique statistic for
-standardized mean difference, it allows for comparisons across studies,
-whether they used within-subject or between-subject design.
+guessing what *d* represents); (ii) is is clear that the pooled standard
+deviation and only this statistic was used to standardized the mean
+difference. Further, by advocating a unique statistic for standardized
+mean difference, it allows for comparisons across studies, whether they
+used within-subject or between-subject design.
 
 ## Why this package?
 
@@ -47,7 +47,7 @@ whether they used within-subject or between-subject design.
 difference and returns confidence intervals (Kelley, 2022). However, it
 does not compute confidence intervals in within-subject design directly.
 The Algina and Keselman approximate method can be implemented within
-MBESS with some programing (Cousineau & Goulet-Pelletier, 2021). This
+MBESS with some programming (Cousineau & Goulet-Pelletier, 2021). This
 package, on the other hand, can be used with any experimental design. It
 only requires an argument `design` which specifies the type of
 experimental design.
@@ -82,8 +82,8 @@ library(CohensdpLibrary)
 The main function is `Cohensdp`, which returns the Cohen’s
 *d*<sub>*p*</sub> and its confidence intervals under various designs.
 For example, this returns the triplet (lower 95% confidence interval
-bound, d\_p, upper 95% confidence interval bound) given the sample
-means, the sample standard deviations, and the correlation
+bound, *d*<sub>*p*</sub>, upper 95% confidence interval bound) given the
+sample means, the sample standard deviations, and the correlation
 
 ``` r
 Cohensdp( statistics = list(m1=76, m2=72, n=20, s1=14.8, s2=18.8, r=0.2),
@@ -169,7 +169,7 @@ for Psychology*.
 <div id="ref-CG057-1" class="csl-entry">
 
 Cousineau, D., & Goulet-Pelletier, J.-C. (2021). A study of confidence
-intervals for cohen’s dp in within-subject designs with new proposals.
+intervals for Cohen’s dp in within-subject designs with new proposals.
 *The Quantitative Methods for Psychology*, *17*, 51–75.
 <https://doi.org/10.20982/tqmp.17.1.p051>
 

@@ -16,5 +16,5 @@ summarize(x, ...)
 }
 \description{
 ``summarize()`` provides a human-readable output of a dpObject. it is 
-synonyme of ``summary()`` (but as actions are verbs, I used a verb).
+synonym of ``summary()`` (but as actions are verbs, I used a verb).
 }

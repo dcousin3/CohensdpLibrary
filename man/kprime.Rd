@@ -5,7 +5,7 @@
 \alias{dkprime}
 \alias{pkprime}
 \alias{qkprime}
-\title{The K' or non-central K distribuiton.}
+\title{The K' or non-central K distribution.}
 \usage{
 pkprime(x, nu1, nu2, ncp) 
 dkprime(x, nu1, nu2, ncp) 
@@ -39,7 +39,7 @@ of rho given a sample \emph{r}. See \insertCite{l99,pl10;textual}{CohensdpLibrar
 
 These functions are herein implemented from the FORTRAN source code of \insertCite{pl10b;textual}{CohensdpLibrary}.
 Note that the library \emph{sadists} also implements this distribution \insertCite{p20}{CohensdpLibrary}.
-However, the sadists::kprime distribution is innacurate for small nu1 or small nu2.
+However, the sadists::kprime distribution is inaccurate for small nu1 or small nu2.
 }
 \examples{
 

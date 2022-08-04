@@ -2,7 +2,7 @@
 #'
 #' @md
 #'
-#' @title The K' or non-central K distribuiton.
+#' @title The K' or non-central K distribution.
 #'
 #' @aliases dkprime pkprime qkprime
 #'
@@ -32,7 +32,7 @@
 #'
 #' These functions are herein implemented from the FORTRAN source code of \insertCite{pl10b;textual}{CohensdpLibrary}.
 #' Note that the library _sadists_ also implements this distribution \insertCite{p20}{CohensdpLibrary}. 
-#' However, the sadists::kprime distribution is innacurate for small nu1 or small nu2.
+#' However, the sadists::kprime distribution is inaccurate for small nu1 or small nu2.
 #'
 #' @references
 #' \insertAllCited{}

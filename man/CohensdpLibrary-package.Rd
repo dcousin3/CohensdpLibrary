@@ -19,9 +19,9 @@ see help(Cohensdp) for more on this function
 
 It also provides functions
   Hedgesgp( statistics = list(...), design, method )
-for an unbiased Cohens's dp and
+for an unbiased Cohen's dp and
   J( statistics = list(...), design )
-to get the correction factor used in unbiasing dp. 
+to get the correction factor used in un-biasing dp. 
 
 Subsidiary functions are
 plprime(x, nu, ncp) cumulative probability of the lambda prime distribution with parameters nu, ncp
@@ -34,6 +34,6 @@ qkprime(x, nu1, nu2, ncp) quantile
  
 These functions are implemented from the FORTRAN source of Poitevineau & Lecoutre, 2010.
 Note that the library sadists also has implementations for these two distributions. However,
-the sadists::kprime distribution is innacurate for small nu1 or small nu2.
+the sadists::kprime distribution is inaccurate for small nu1 or small nu2.
 }
 \keyword{internal}

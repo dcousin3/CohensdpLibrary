@@ -20,5 +20,5 @@
 
 # CohensdpLibrary 0.1 (August 2020)
 
-* Early implementation with only between-group and single-groug designs.
+* Early implementation with only between-group and single-group designs.
 * Unreleased package.
