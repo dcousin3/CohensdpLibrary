@@ -27,7 +27,7 @@ FUNCTION lsecondCDF( delta, n, d, rho, TOL, MAXITER, ier )
     REAL(PR), intent(in)    :: delta, n, d, rho
     integer                 :: MAXITER  ! max iterations, suggested 5000
     REAL(PR), INTENT(IN)    :: TOL      ! precision to exit, suggested 10D-5
-    REAL(PR), INTENT(OUT)   :: ier
+    INTEGER, INTENT(OUT)    :: ier
     REAL(PR)                :: lsecondCDF
 
     REAL(PR), EXTERNAL      :: lprimecdf

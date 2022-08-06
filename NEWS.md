@@ -1,6 +1,14 @@
-# CohensdpLibrary 0.5 (4 August 2022)
+# CohensdpLibrary 0.5.4 (4 August 2022)
 
 * First release of CohensdpLibrary over CRAN.
+
+# CohensdpLibrary 0.5.1 (4 August 2022)
+
+* Corrected typos and modernized F77 code (arithmetic IF issued warnings on Debbian)
+
+# CohensdpLibrary 0.5.0 (4 August 2022)
+
+* Version for the manuscript Cousineau, D. (submitted)
 
 # CohensdpLibrary 0.4 (August 2022)
 

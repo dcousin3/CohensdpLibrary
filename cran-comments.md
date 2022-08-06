@@ -30,6 +30,7 @@ This directory is created by r-hub but is not part of the present package.
 
 > checking HTML version of manual ... NOTE
 Skipping checking HTML validation: no command 'tidy' found
+I do not know what this message means or how it can be resolved.
 
 ## Test environments
 
