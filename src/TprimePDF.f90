@@ -53,6 +53,7 @@ CONTAINS
         real(PR), external   :: tprimecdf
         real(PR)  :: func
         integer       :: iok
+        iok = 0
         func = tprimecdf(x, q, a1, TOL, MAXITER, iok)
     END FUNCTION func
 

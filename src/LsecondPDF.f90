@@ -34,6 +34,7 @@ FUNCTION lsecondPDF ( delta, n, d, rho, TOL, MAXITER, ier )
     REAL(PR)              :: q, b0, total, step, previousstep, ck, ek
     INTEGER               :: k, jer
 
+    jer = 0
     step  = 0.0D0
     previousstep = 0.0D0
     total  = 0.0D0

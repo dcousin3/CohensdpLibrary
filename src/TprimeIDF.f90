@@ -58,6 +58,7 @@ FUNCTION tprimeidf( p, q, a1, delta, maxitr, ier )
     !  ------------------
     REAL(PR) :: k
     REAL(PR), EXTERNAL :: tprimecdf, dtrinv
+    ier = 0
 
     k = sqrt(q/2) * Exp(dlgama((q-1.0D0)/2.0D0) - dlgama(q/2.0D0) ) 
 

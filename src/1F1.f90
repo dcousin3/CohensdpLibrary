@@ -14,6 +14,11 @@ FUNCTION hyg1F1(A, B, Z)
     !*                              F90 Release By J-P Moreau, Paris. *
     !*                                     (www.jpmoreau.fr)          *
     !******************************************************************
+    !**                                                              **
+    !** I removed some of the goto's in DO's and added ENDDO         **
+    !**     (Denis Cousineau, 6 aout 2022)                           **
+    !**                                                              **
+    !******************************************************************
     INTEGER, PARAMETER    :: PR=KIND(1.0D0)
     REAL(PR), INTENT(IN)  :: A, B, Z
     REAL(PR)              :: hyg1F1
@@ -60,9 +65,10 @@ SUBROUTINE CHGM(A,B,X,HG)
        M=INT(-A)
        R=1.0D0
        HG=1.0D0
-       DO 10 K=1,M
+       DO K=1,M     ! removed label 10
           R=R*(A+K-1.0D0)/K/(B+K-1.0D0)*X
-10        HG=HG+R
+          HG=HG+R   ! removed label 10
+        enddo       ! added for newer compilers
     ENDIF
     IF (HG.NE.0.0D0) RETURN
     IF (X.LT.0.0D0) THEN
@@ -95,11 +101,12 @@ SUBROUTINE CHGM(A,B,X,HG)
           SUM2=1.0D0
           R1=1.0D0
           R2=1.0D0
-          DO 20 I=1,8
+          DO I=1,8          ! removed label 20
              R1=-R1*(A+I-1.0D0)*(A-B+I)/(X*I)
              R2=-R2*(B-A+I-1.0D0)*(A-I)/(X*I)
              SUM1=SUM1+R1
-20               SUM2=SUM2+R2
+             SUM2=SUM2+R2   ! removed label 20
+          enddo             ! added for newer compiler
           HG1=TB/TBA*X**(-A)*DCOS(PI*A)*SUM1
           HG2=TB/TA*DEXP(X)*X**(A-B)*SUM2
           HG=HG1+HG2
@@ -108,11 +115,12 @@ SUBROUTINE CHGM(A,B,X,HG)
        IF (N.EQ.1) Y1=HG
 30      CONTINUE
     IF (A0.GE.2.0D0) THEN
-       DO 35 I=1,LA-1
+       DO I=1,LA-1      ! removed label 35
           HG=((2.0D0*A-B+X)*Y1+(B-A)*Y0)/A
           Y0=Y1
           Y1=HG
-35        A=A+1.0D0
+          A=A+1.0D0     ! remove label 35
+       enddo            !  added for newer compier
     ENDIF
 
     IF (X0.LT.0.0D0) HG=HG*DEXP(X0)

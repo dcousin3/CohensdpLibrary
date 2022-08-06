@@ -53,6 +53,7 @@ FUNCTION tprimecdf( x, q, a, TOL, MAXITER, ier )
    REAL(PR), PARAMETER :: one=1.0D0
 
    !-----------------------------------------------------------------
+   ier = 0
 
    tprimecdf = one - lprimecdf( a, q, x, TOL, MAXITER, ier )
 

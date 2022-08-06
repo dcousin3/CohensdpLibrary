@@ -35,11 +35,11 @@ FUNCTION lprimepdf( x, q, a1, TOL, MAXITER, ier )
     !  Arguments
     REAL(PR), INTENT(in)  :: x, q, a1, TOL
     INTEGER,  INTENT(in)  :: MAXITER
-    REAL(PR), INTENT(out) :: ier
+    INTEGER, INTENT(out)  :: ier
 
     !  Local declarations
-    REAL(PR), EXTERNAL  :: lprimecdf
-    REAL(PR)            :: rer  ! real-valued error 
+    REAL(PR), EXTERNAL    :: lprimecdf
+    REAL(PR)              :: rer  ! real-valued error 
 
     ier = 0
     lprimepdf = dfridr( func, x, 0.1D0, rer )

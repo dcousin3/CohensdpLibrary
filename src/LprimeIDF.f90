@@ -55,6 +55,8 @@ FUNCTION lprimeidf( p, q, a1, TOL, MAXITER, ier )
     REAL(PR) :: k
     REAL(PR), EXTERNAL :: lprimecdf, dtrinv
 
+    ier = 0
+
     k = Exp(dlgama((q+1)/2.) - dlgama(q/2.) ) * sqrt(2/q)
 
     lprimeidf = dtrinv( func, p,                       &
@@ -71,6 +73,7 @@ CONTAINS
         INTEGER,  INTENT(out):: iok
         REAL(PR), EXTERNAL   :: lprimecdf
         REAL(PR) :: func
+        iok = 0
         func = lprimecdf(x, q, a1, TOL, MAXITER, iok)
     END FUNCTION func
 

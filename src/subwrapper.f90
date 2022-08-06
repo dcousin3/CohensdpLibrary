@@ -13,6 +13,7 @@ SUBROUTINE sublsecondpdf( delta, n, d, rho, TOL, MAXITER, ier, res )
     INTEGER,       INTENT(OUT) :: ier
     REAL(KIND=PR), INTENT(OUT) :: res
     REAL(KIND=PR), EXTERNAL    :: lsecondpdf
+    ier = 0
     res = lsecondpdf( delta, n, d, rho, TOL, MAXITER, ier )
 END SUBROUTINE sublsecondpdf
 
@@ -24,6 +25,7 @@ SUBROUTINE sublsecondcdf( delta, n, d, rho, TOL, MAXITER, ier, res )
     INTEGER,       INTENT(OUT) :: ier
     REAL(KIND=PR), INTENT(OUT) :: res
     REAL(KIND=PR), EXTERNAL    :: lsecondcdf
+    ier = 0
     res = lsecondcdf( delta, n, d, rho, TOL, MAXITER, ier )
 END SUBROUTINE sublsecondcdf
 
@@ -35,6 +37,7 @@ SUBROUTINE sublsecondidf( q, n, d, rho, TOL, MAXITER, ier, res )
     INTEGER,       INTENT(OUT) :: ier
     REAL(KIND=PR), INTENT(OUT) :: res
     REAL(KIND=PR), EXTERNAL    :: lsecondidf
+    ier = 0
     res = lsecondidf( q, n, d, rho, TOL, MAXITER, ier )
 END SUBROUTINE sublsecondidf
 
@@ -52,6 +55,7 @@ SUBROUTINE sublprimepdf( x, nu, a, TOL, MAXITER, ier, res )
     INTEGER,       INTENT(OUT) :: ier
     REAL(KIND=PR), INTENT(OUT) :: res
     REAL(KIND=PR), EXTERNAL    :: lprimepdf
+    ier = 0
     res = lprimepdf( x, nu, a, TOL, MAXITER, ier )
 END SUBROUTINE sublprimepdf
 
@@ -63,6 +67,7 @@ SUBROUTINE sublprimecdf( x, nu, a, TOL, MAXITER, ier, res )
     INTEGER,       INTENT(OUT) :: ier
     REAL(KIND=PR), INTENT(OUT) :: res
     REAL(KIND=PR), EXTERNAL    :: lprimecdf
+    ier = 0
     res = lprimecdf( x, nu, a, TOL, MAXITER, ier )
 END SUBROUTINE sublprimecdf
 
@@ -74,6 +79,7 @@ SUBROUTINE sublprimeidf( q, nu, a, TOL, MAXITER, ier, res )
     INTEGER,       INTENT(OUT) :: ier
     REAL(KIND=PR), INTENT(OUT) :: res
     REAL(KIND=PR), EXTERNAL    :: lprimeidf
+    ier = 0
     res = lprimeidf( q, nu, a, TOL, MAXITER, ier )
 END SUBROUTINE sublprimeidf
 
@@ -85,6 +91,7 @@ SUBROUTINE subkprimepdf( x, nu1, nu2, a, TOL, MAXITER, ier, res )
     INTEGER,       INTENT(OUT) :: ier
     REAL(KIND=PR), INTENT(OUT) :: res
     REAL(KIND=PR), EXTERNAL    :: kprimepdf
+    ier = 0
     res = kprimepdf( x, nu1, nu2, a, TOL, MAXITER, ier )
 END SUBROUTINE subkprimepdf
 
@@ -96,6 +103,7 @@ SUBROUTINE subkprimecdf( x, nu1, nu2, a, TOL, MAXITER, ier, res )
     INTEGER,       INTENT(OUT) :: ier
     REAL(KIND=PR), INTENT(OUT) :: res
     REAL(KIND=PR), EXTERNAL    :: kprimecdf
+    ier = 0
     res = kprimecdf( x, nu1, nu2, a, TOL, MAXITER, ier )
 END SUBROUTINE subkprimecdf
 
@@ -107,6 +115,7 @@ SUBROUTINE subkprimeidf( q, nu1, nu2, a, TOL, MAXITER, ier, res )
     INTEGER,       INTENT(OUT) :: ier
     REAL(KIND=PR), INTENT(OUT) :: res
     REAL(KIND=PR), EXTERNAL    :: kprimeidf
+    ier = 0
     res = kprimeidf( q, nu1, nu2, a, TOL, MAXITER, ier )
 END SUBROUTINE subkprimeidf
 

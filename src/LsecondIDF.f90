@@ -32,12 +32,12 @@ FUNCTION lsecondIDF ( q, n, d, rho, TOL, MAXITER, ier )
     INTEGER, INTENT(OUT)       :: ier      
 
     !  Local declarations
-    INTEGER                    :: jer
     REAL(PR), PARAMETER        :: ONE=1.0D0, TWO=2.0D0
 
     !  Local declarations
     REAL(KIND=PR), EXTERNAL :: lsecondCDF, mydtrinv
 
+    ier = 0
     lsecondIDF = mydtrinv( func, q,                     & ! func must a one-argument function
                  .FALSE., .FALSE., -1.0D6, 1.0D6,       & ! no bounds
                  d,                                     & ! approximate mean

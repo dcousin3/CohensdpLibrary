@@ -2024,7 +2024,9 @@ function gam1 ( a )
       t = a
       d = a - half
       if (d .gt. zero) t = d - half
-      if (t) 30,10,20
+      if (t .lt. 0) goto 30
+      if (t .eq. 0) goto 10
+      if (t .gt. 0) goto 20
 
    10 gam1 = zero
       return
