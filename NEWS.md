@@ -1,4 +1,4 @@
-# CohensdpLibrary 0.5.4 (4 August 2022)
+# CohensdpLibrary 0.5.2 (4 August 2022)
 
 * First release of CohensdpLibrary over CRAN.
 
