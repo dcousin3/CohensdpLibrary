@@ -4,7 +4,7 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! prior-informed functions
+! prior-informed lambda second distribution
 ! from Cousineau, 2022
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -49,7 +49,7 @@ END SUBROUTINE subfbdeltafromobsdpobsridf
 
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! lsecond
+! lambda second distribution
 ! from Cousineau, 2022, psyArxiv; Lecoutre, 2022
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 SUBROUTINE sublsecondpdf( delta, n, d, rho, TOL, MAXITER, ier, res )
@@ -91,7 +91,7 @@ END SUBROUTINE sublsecondidf
 
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! lprime and kprime distributions
+! lambda prime and k prime distributions
 ! taken from Poitevineau & Lecoutre, 2010
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 SUBROUTINE sublprimepdf( x, nu, a, TOL, MAXITER, ier, res )

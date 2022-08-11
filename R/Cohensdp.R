@@ -278,7 +278,7 @@ Cohensdp.within.adjustedlambdaprime <- function(statistics, gamma = .95) {
     c(dp, limits)
 }
 
-
+#' @importFrom stats qnorm
 Cohensdp.within.morris2000 <- function(statistics, gamma = .95) {
     sts  <- vfyStat(statistics, c("m1","s1","m2","s2","n", "r"))
     J <- function(df) { exp ( lgamma(df/2) - log(sqrt(df/2)) - lgamma((df-1)/2) ) }
@@ -298,9 +298,7 @@ Cohensdp.within.morris2000 <- function(statistics, gamma = .95) {
     c(dp, limits)
 }
 
-
 Cohensdp.within.alginakeselman2003 <- function(statistics , gamma = .95) {
-    # uses MBESS
     sts  <- vfyStat(statistics, c("m1","s1","m2","s2","n", "r"))
     GM<- function(ns) {length(ns) / sum(1/ns)}  # Geometric mean
     J <- function(df) { exp ( lgamma(df/2) - log(sqrt(df/2)) - lgamma((df-1)/2) ) }
@@ -314,9 +312,13 @@ Cohensdp.within.alginakeselman2003 <- function(statistics , gamma = .95) {
 
     W <- GM(c(sts$s1^2, sts$s2^2)) / mean(c(sts$s1^2, sts$s2^2))
     rW <- sts$r * W
-    tCI <- MBESS::conf.limits.nct(dp * sqrt(sts$n/(2*(1-rW))), sts$n-1, conf.level = gamma)
-    tCI.low <- tCI$Lower.Limit
-    tCI.hig <- tCI$Upper.Limit
+    ## MBESS is creating R Run errors, so made it with the true pivot distribution
+    #    tCI <- MBESS::conf.limits.nct(dp * sqrt(sts$n/(2*(1-rW))), sts$n-1, conf.level = gamma)
+    #    tCI.low <- tCI$Lower.Limit
+    #    tCI.hig <- tCI$Upper.Limit
+    tCI.low <- qlprime(1/2-gamma/2, nu=sts$n-1, ncp=dp * sqrt(sts$n/(2*(1-rW))) )
+    tCI.hig <- qlprime(1/2+gamma/2, nu=sts$n-1, ncp=dp * sqrt(sts$n/(2*(1-rW))) )
+
     limits <- c(tCI.low, tCI.hig) / sqrt(sts$n/(2*(1-rW)))
     c(dp, limits)
 }

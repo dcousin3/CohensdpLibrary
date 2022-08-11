@@ -2,7 +2,7 @@ Package: CohensdpLibrary
 Type: Package
 Title: Cohen's D_p Computation with Confidence Intervals
 Description: Computing Cohen's d_p in between-subject and within-subject designs.
-Version: 0.5.2
+Version: 0.5.3
 Date: 2022-07-19
 License: GPL-3
 Author: Denis Cousineau <denis.cousineau@uottawa.ca>
@@ -12,8 +12,7 @@ RoxygenNote: 7.1.1
 NeedsCompilation: yes
 Imports: Rdpack
 Depends:
-    R (>= 3.5.0),
-    MBESS
+    R (>= 3.5.0)
 Suggests: 
     testthat,
 RdMacros: Rdpack

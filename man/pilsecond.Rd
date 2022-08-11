@@ -47,10 +47,10 @@ distribution, but a lambda-second custom-tailored  for the problem of standardiz
 difference.
 }
 \examples{
-
-dpilsecond(0.25, 9, 0.26, 0.333) # 1.186735
-ppilsecond(0.25, 9, 0.26, 0.333) # 0.5150561
-qpilsecond(0.01, 9, 0.26, 0.333) # -0.7294266
+### Note: this distribution can be slow to compute
+### dpilsecond(0.25, 9, 0.26, 0.333) # 1.186735
+### ppilsecond(0.25, 9, 0.26, 0.333) # 0.5150561
+### qpilsecond(0.01, 9, 0.26, 0.333) # -0.7294266
 
 }
 \references{

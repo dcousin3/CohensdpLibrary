@@ -28,7 +28,7 @@ FUNCTION FBlsecondCDF( delta, n, d, r, rho, TOL, MAXITER )
     IMPLICIT NONE
     INTEGER, PARAMETER      :: PR=KIND(1.0D0)
 
-    REAL(PR), intent(in)    :: delta, n, d, r, rho
+    REAL(PR), INTENT(in)    :: delta, n, d, r, rho
     integer                 :: MAXITER  ! max iterations, suggested 5000
     REAL(PR), INTENT(IN)    :: TOL      ! precision to exit, suggested 10D-5
     REAL(PR)                :: FBlsecondCDF
