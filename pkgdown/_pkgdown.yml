@@ -19,6 +19,7 @@ reference:
       - '`kprime`'
       - '`lprime`'
       - '`lsecond`'
+      - '`pilsecond`'
   - title: Subsidiary functions
     desc: Some functions required for the computations
     contents:

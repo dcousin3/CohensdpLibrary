@@ -31,8 +31,7 @@ between-subject design and single-group design. See
 \details{
 This function returns the Cohen's d_p statistics corrected for bias but no confidence
 interval as this estimate is not used to build such interval.
-This function reduces the degrees of freedom by 1 in within-subject design when the
-population  rho is unknown.
+This function uses r when rho is unknown.
 }
 \examples{
 

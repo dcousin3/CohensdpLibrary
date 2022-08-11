@@ -131,7 +131,7 @@ Hedges (1981); Cousineau (2022, submitted); Goulet-Pelletier and Cousineau (2018
 .</p>
     </div>
 
-    <pre class="usage"><span class='fu'>Cohensdp</span><span class='op'>(</span><span class='va'>statistics</span>, <span class='va'>design</span>, <span class='va'>gamma</span> <span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>Cohensdp</span><span class='op'>(</span><span class='va'>statistics</span>, <span class='va'>design</span>, <span class='va'>gamma</span>, <span class='va'>method</span> <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -156,6 +156,11 @@ from which <code>m</code> is standardized).</p></td>
       <th>gamma</th>
       <td><p>the confidence level of the confidence interval (default 0.95)</p></td>
     </tr>
+    <tr>
+      <th>method</th>
+      <td><p>In "within"-subject design only, choose among methods <code>"piCI"</code> (default), or
+<code>"adjustedlambdaprime"</code>, <code>"alginakeselman2003"</code>, <code>"morris2000"</code>.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -166,8 +171,9 @@ from which <code>m</code> is standardized).</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function reduces the degrees of freedom by 1 in within-subject design when the population
-rho is unknown.</p>
+    <p>This function uses the exact method in "single"-group and "between"-subject designs.
+In "within"-subject design, the default is the prior-informed confidence interval
+("piCI") which is based on a bayesian credible interval. Other methods are available.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Cousineau D (2022).
@@ -225,6 +231,10 @@ doi: <a href='https://doi.org/10.22237/jmasm/1177992600'>10.22237/jmasm/11779926
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   95.0% Confidence interval = [-1.802, -0.242]</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>  	*: confidence interval obtained from the method lambda-prime with 9 degrees of freedom (Lecoutre, 2007, Journal of Modern Applied Statistical Methods)</span>
 <span class='r-in'></span>
+<span class='r-in'><span class='co'># example in a repeated-measure design with a different method than piCI</span></span>
+<span class='r-in'><span class='fu'>Cohensdp</span><span class='op'>(</span>statistics <span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span> m1<span class='op'>=</span> <span class='fl'>101</span>, m2<span class='op'>=</span> <span class='fl'>114</span>, s1<span class='op'>=</span> <span class='fl'>12.5</span>, s2<span class='op'>=</span> <span class='fl'>14.3</span>, n<span class='op'>=</span> <span class='fl'>12</span>, rho<span class='op'>=</span> <span class='fl'>0.53</span> <span class='op'>)</span>,</span>
+<span class='r-in'>         design     <span class='op'>=</span><span class='st'>"within"</span>, method <span class='op'>=</span> <span class='st'>"adjustedlambdaprime"</span><span class='op'>)</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in Cohensdp(statistics = list(m1 = 101, m2 = 114, s1 = 12.5, s2 = 14.3,     n = 12, rho = 0.53), design = "within", method = "adjustedlambdaprime")</span> unused argument (method = "adjustedlambdaprime")</span>
 <span class='r-in'></span>
 <span class='r-in'></span>
 </pre>

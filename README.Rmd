@@ -1,5 +1,4 @@
 ---
-title: "README file"
 output: github_document
 bibliography: "inst/REFERENCES.bib"
 csl: "inst/apa-6th.csl"
@@ -19,7 +18,7 @@ and @w16 noted the existence of at least 5 difference sorts of standardized mean
 making this very important point: all these estimators ARE NOT Cohen's d measures.
 
 The measure that J. Cohen [@c69] created is obtained from the mean difference standardized using the pooled
-standard deviation. Hence, measures such as \(d_{av}\), $d_z$, $d_a$, etc. are not Cohen's d and **more importantly**,
+standard deviation. Hence, measures such as $d_a_v$, $d_z$, $d_a$, etc. are not Cohen's d and **more importantly**,
 they cannot be compared! They all return different values because they measure different things. They are not just
 different, they can be markedly different. As an example, a $d_z$, given the means and standard deviations,
 can be _smaller_  **or** _larger_ than the Cohen's $d$ depending on the amount of correlation across the pairs
@@ -32,7 +31,7 @@ deviation and only this statistic was used to standardized the mean difference. 
 statistic for standardized mean difference, it allows for comparisons across studies, whether they used within-subject
 or between-subject design.
 
-```{r, echo = FALSE, message = FALSE, results = 'hide'}
+```{r, echo = FALSE, message = FALSE, results = 'hide', warning = FALSE}
 cat("this will be hidden; use for general initializations.\n")
 library(CohensdpLibrary)
 options("CohensdpLibrary.SHOWWARNINGS" = FALSE) # shut down all messages

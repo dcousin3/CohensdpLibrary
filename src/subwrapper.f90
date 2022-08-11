@@ -2,6 +2,53 @@
 ! R cannot link to functions, only to subroutines
 ! D. Cousineau, 4/08/2022
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! prior-informed functions
+! from Cousineau, 2022
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+SUBROUTINE subfbdeltafromobsdpobsrpdf( delta, n, d, r, TOL, MAXITER, ier, res )
+    IMPLICIT NONE
+    INTEGER, PARAMETER         :: PR=KIND(1.0D0)
+    REAL(KIND=PR), INTENT(IN)  :: delta, n, d, r, TOL
+    INTEGER,       INTENT(IN)  :: MAXITER
+    INTEGER,       INTENT(OUT) :: ier
+    REAL(KIND=PR), INTENT(OUT) :: res
+    REAL(KIND=PR), EXTERNAL    :: fbdeltafromobsdpobsrpdf
+    ier = 0
+    res = fbdeltafromobsdpobsrpdf( delta, n, d, r, TOL, MAXITER, ier )
+END SUBROUTINE subfbdeltafromobsdpobsrpdf
+
+SUBROUTINE subfbdeltafromobsdpobsrcdf( delta, n, d, r, TOL, MAXITER, ier, res )
+    IMPLICIT NONE
+    INTEGER, PARAMETER         :: PR=KIND(1.0D0)
+    REAL(KIND=PR), INTENT(IN)  :: delta, n, d, r, TOL
+    INTEGER,       INTENT(IN)  :: MAXITER
+    INTEGER,       INTENT(OUT) :: ier
+    REAL(KIND=PR), INTENT(OUT) :: res
+    REAL(KIND=PR), EXTERNAL    :: fbdeltafromobsdpobsrcdf
+    ier = 0
+    res = fbdeltafromobsdpobsrcdf( delta, n, d, r, TOL, MAXITER, ier )
+END SUBROUTINE subfbdeltafromobsdpobsrcdf
+
+SUBROUTINE subfbdeltafromobsdpobsridf( delta, n, d, r, TOL, MAXITER, ier, res )
+    IMPLICIT NONE
+    INTEGER, PARAMETER         :: PR=KIND(1.0D0)
+    REAL(KIND=PR), INTENT(IN)  :: delta, n, d, r, TOL
+    INTEGER,       INTENT(IN)  :: MAXITER
+    INTEGER,       INTENT(OUT) :: ier
+    REAL(KIND=PR), INTENT(OUT) :: res
+    REAL(KIND=PR), EXTERNAL    :: fbdeltafromobsdpobsridf
+    ier = 0
+    res = fbdeltafromobsdpobsridf( delta, n, d, r, TOL, MAXITER, ier )
+END SUBROUTINE subfbdeltafromobsdpobsridf
+
+
+
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! lsecond
 ! from Cousineau, 2022, psyArxiv; Lecoutre, 2022
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

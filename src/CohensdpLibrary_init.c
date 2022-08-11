@@ -16,6 +16,11 @@ extern void F77_NAME(sublsecondpdf)(double *, double *, double *, double *, doub
 extern void F77_NAME(sublsecondcdf)(double *, double *, double *, double *, double *, short *, short *, double *);
 extern void F77_NAME(sublsecondidf)(double *, double *, double *, double *, double *, short *, short *, double *);
 
+extern void F77_NAME(subfbdeltafromobsdpobsrpdf)(double *, double *, double *, double *, double *, short *, short *, double *);
+extern void F77_NAME(subfbdeltafromobsdpobsrcdf)(double *, double *, double *, double *, double *, short *, short *, double *);
+extern void F77_NAME(subfbdeltafromobsdpobsridf)(double *, double *, double *, double *, double *, short *, short *, double *);
+
+
 static const R_FortranMethodDef FortranEntries[] = {
     {"subhyg0f1",     (DL_FUNC) &F77_NAME(subhyg0f1),     3},
     {"subhyg1f1",     (DL_FUNC) &F77_NAME(subhyg1f1),     4},
@@ -29,6 +34,9 @@ static const R_FortranMethodDef FortranEntries[] = {
     {"sublsecondpdf", (DL_FUNC) &F77_NAME(sublsecondpdf), 8},
     {"sublsecondcdf", (DL_FUNC) &F77_NAME(sublsecondcdf), 8},
     {"sublsecondidf", (DL_FUNC) &F77_NAME(sublsecondidf), 8},
+    {"subfbdeltafromobsdpobsrpdf", (DL_FUNC) &F77_NAME(subfbdeltafromobsdpobsrpdf), 8},
+    {"subfbdeltafromobsdpobsrcdf", (DL_FUNC) &F77_NAME(subfbdeltafromobsdpobsrcdf), 8},
+    {"subfbdeltafromobsdpobsridf", (DL_FUNC) &F77_NAME(subfbdeltafromobsdpobsridf), 8},
     {NULL, NULL, 0} 
 };
 

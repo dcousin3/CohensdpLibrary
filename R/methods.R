@@ -90,17 +90,22 @@ explain.CohensdpObject <- function(x, ...) {
             ),
             switch(x$design, 
                 "single"  = sprintf(paste("\t sample standard deviation ",format," is the denominator\n", sep=""), sts$s ),
-                "within"  = sprintf(paste("\t pooled standard deviation ",format," is the denominator\n", sep=""), sqrt( (sts$s1^2 + sts$s2^2) / 2) ),
-                "between" = sprintf(paste("\t pooled standard deviation ",format," is the denominator\n", sep=""), sqrt( ( (sts$n1-1)*sts$s1^2 + (sts$n2-1)*sts$s2^2) / (sts$n1+sts$n2-2) ) )
+                "within"  = sprintf(paste("\t pooled sample standard deviation ",format," is the denominator\n", sep=""), sqrt( (sts$s1^2 + sts$s2^2) / 2) ),
+                "between" = sprintf(paste("\t pooled sample standard deviation ",format," is the denominator\n", sep=""), sqrt( ( (sts$n1-1)*sts$s1^2 + (sts$n2-1)*sts$s2^2) / (sts$n1+sts$n2-2) ) )
             ),
             sprintf(paste("%5.1f%% Confidence interval = [",format,", ",format,"]\n",sep=""), x$gamma*100, x$interval[1], x$interval[2]),
             switch(x$design, 
-                "single"  = sprintf("\t*: confidence interval obtained from the method lambda-prime with %d degrees of freedom (Lecoutre, 2007, Journal of Modern Applied Statistical Methods)\n", sts$n-1),
+                "single"  = sprintf("\t*: confidence interval obtained from the lambda-prime method with %d degrees of freedom (Lecoutre, 2007, Journal of Modern Applied Statistical Methods)\n", sts$n-1),
                 "within"  = if ("rho" %in% names(sts)) 
-                                sprintf("\t*: confidence interval obtained from the method lambda-second with %d degrees of freedom (Cousineau, 2022, The Quantitative Methods for Psychology)\n", 2*(sts$n-1))
+                                sprintf("\t*: confidence interval obtained from the lambda-second method with %d degrees of freedom (Cousineau, 2022, The Quantitative Methods for Psychology)\n", 2*(sts$n-1))
                             else
-                                sprintf("\t*: confidence interval obtained from the Adjusted lambda' method with %d degrees of freedom (Cousineau & Goulet-Pelletier, 2021, The Quantitative Methods for Psychology)\n", 2*(sts$n-1))
-                ,
+                                switch(x$method,
+                                "exact" =                sprintf("\t*: confidence interval obtained from the prior-informed lambda'' method with %d degrees of freedom (Cousineau, 2022, The Quantitative Methods for Psychology)\n", 2*(sts$n-1) ),
+                                "piCI" =                 sprintf("\t*: confidence interval obtained from the prior-informed lambda'' method with %d degrees of freedom (Cousineau, 2022, The Quantitative Methods for Psychology)\n", 2*(sts$n-1) ),
+                                "adjustedlambdaprime" =  sprintf("\t*: confidence interval obtained from the adjusted lambda' method with %d degrees of freedom (Cousineau & Goulet-Pelletier, 2021, The Quantitative Methods for Psychology)\n", 2*(sts$n-1) ),
+                                "alginakeselman2003" =   sprintf("\t*: confidence interval obtained from the Algina & Keselmand method based on the pivotal of a scaled non-central t' with %d degrees of freedom (2003, Educational and Psychological Measurement)\n", sts$n-1 ),
+                                "morris2000" =           sprintf("\t*: confidence interval obtained from the Morris method based on the z distribution and the standard error of dp (2000, British Journal of Mathematical and Statistical Psycholog)\n" )
+                                ),
                 "between" = sprintf("\t*: confidence interval obtained from the lambda-prime method with %d degrees of freedom (Lecoutre, 2007, Journal of Modern Applied Statistical Methods)\n", sts$n1+sts$n2-2) 
             )
             ) },

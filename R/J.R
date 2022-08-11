@@ -80,7 +80,7 @@ J <- function(
     if(length(statistics) == 0)  stop( messageSnotE() ) 
 
     # 1.2: check that the designs are legitimate
-    if (is.null(design)) stop(messageDempt)
+    if (is.null(design)) stop(messageDempt() )
     if (!(design %in% c("within","between","single"))) {
         stop( messageDnotG(design) )
     }
@@ -162,38 +162,20 @@ J.between <- function( statistics ) {
 ##### within #################################################################
 ##############################################################################
 J.within <- function( statistics ) {
+    sts  <- vfyStat(statistics, c("n","r|rho"))
+
+    # both versions are identical except that rho is named or r...
     if ( "rho" %in% names(statistics) ) 
-        res <- J.within.rhoknown( statistics )
+        rho = statistics$rho
     else
-        res <- J.within.rhounknown( statistics )
-    res
-}
+        rho = statistics$r
 
-J.within.rhoknown <- function( statistics ) {
-    sts  <- vfyStat(statistics, c("n", "rho"))
-
-    df = 2*(sts$n-1)
-
-    # compute unbiasing factor; works for small or large df; thanks to Robert Calin-Jageman
+    df = 2*(statistics$n-1)
     exp ( lgamma(df/2) - log(sqrt(df/2)) - lgamma((df-1)/2) ) *
-      (1-sts$rho^2)^(-(df-2)/4) /
-      hypergeometric2F1((df-1)/4, (df+1)/4, (df+2)/4, sts$rho^2)
-
+      (1-rho^2)^(-(df-2)/4) /
+      hypergeometric2F1((df-1)/4, (df+1)/4, (df+2)/4, rho^2)
 }
 
-J.within.rhounknown <- function( statistics ) {
-    sts  <- vfyStat(statistics, c("n", "r"))
-
-    # compute unbiasing factor; works for small or large df; thanks to Robert Calin-Jageman
-    if( getOption("CohensdpLibrary.SHOWWARNINGS") )
-        message(" ::CohensdpLibrary:: No known correction factor at this time when rho is unknown. Decreasing df by 1...")
-
-    df = 2*(sts$n-1-1)
-
-    exp ( lgamma(df/2) - log(sqrt(df/2)) - lgamma((df-1)/2) ) *
-      (1-sts$r^2)^(-(df-2)/4) /
-      hypergeometric2F1((df-1)/4, (df+1)/4, (df+2)/4, sts$r^2)
-}
 
 
 ##############################################################################

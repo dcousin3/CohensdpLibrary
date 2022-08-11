@@ -30,8 +30,7 @@
 #' @details
 #' This function returns the Cohen's d_p statistics corrected for bias but no confidence
 #' interval as this estimate is not used to build such interval.
-#' This function reduces the degrees of freedom by 1 in within-subject design when the 
-#' population  rho is unknown.
+#' This function uses r when rho is unknown.
 #'
 #' @references
 #' \insertAllCited{}
@@ -86,7 +85,7 @@ Hedgesgp <- function(
     }
 
     if( getOption("CohensdpLibrary.SHOWWARNINGS") )
-        message(" ::CohensdpLibrary:: There is no confidence interval for an (unbiased) Hedges's gp...")
+        message(  messageNoCI() )
 
     ##############################################################################
     # STEP 2: let's do the computation and return everything
@@ -164,15 +163,7 @@ Hedgesgp.between <- function( statistics ) {
 ##### within #################################################################
 ##############################################################################
 Hedgesgp.within <- function( statistics ) {
-    if ("rho" %in% names(statistics)) 
-        res <- Hedgesgp.within.rhoknown( statistics )
-    else
-        res <- Hedgesgp.within.rhounknown( statistics )
-    res
-}
-
-Hedgesgp.within.rhoknown <- function( statistics ) {
-    sts  <- vfyStat(statistics, c("m1","s1","m2","s2","n", "rho"))
+    sts  <- vfyStat(statistics, c("m1","s1","m2","s2","n","r|rho"))
 
     #get pairwise statistics Delta means and pooled SD
     dmn  <- sts$m1 - sts$m2
@@ -180,32 +171,11 @@ Hedgesgp.within.rhoknown <- function( statistics ) {
     #compute biased Cohen's d_p 
     dp   <- dmn / sdp  
     # compute correction factor
-    j <- J.within.rhoknown( statistics )
+    j <- J.within( statistics )
 
     dp * j
 }
 
-Hedgesgp.within.rhounknown <- function( statistics ) {
-    sts  <- vfyStat(statistics, c("m1","s1","m2","s2","n", "r"))
-
-    #get pairwise statistics Delta means and pooled SD
-    dmn  <- sts$m1 - sts$m2
-    sdp  <- sqrt((sts$s1^2 + sts$s2^2)/2)
-    #compute biased Cohen's d_p 
-    dp   <- dmn / sdp  
-
-    if( getOption("CohensdpLibrary.SHOWWARNINGS") )
-        message(" ::CohensdpLibrary:: No known correction factor at this time when rho is unknown. Decreasing df by 1...")
- 
-    # compute correction factor
-    pastsituation = getOption("CohensdpLibrary.SHOWWARNINGS")
-    options("CohensdpLibrary.SHOWWARNINGS" = FALSE)
-    j <- J.within.rhounknown( sts )
-    options("CohensdpLibrary.SHOWWARNINGS" = pastsituation)
-
-    dp * j
-
-}
 
 
 ##############################################################################

@@ -1,5 +1,3 @@
-README file
-================
 
 # Cohen’s *d*<sub>*p*</sub> library: Getting the Cohen’s *d*<sub>*p*</sub> and its confidence interval in any design
 
@@ -22,7 +20,7 @@ estimators ARE NOT Cohen’s d measures.
 
 The measure that J. Cohen (Cohen, 1969) created is obtained from the
 mean difference standardized using the pooled standard deviation. Hence,
-measures such as *d*<sub>*a**v*</sub>, *d*<sub>*z*</sub>,
+measures such as *d*<sub>*a*<sub>*v*</sub></sub>, *d*<sub>*z*</sub>,
 *d*<sub>*a*</sub>, etc. are not Cohen’s d and **more importantly**, they
 cannot be compared! They all return different values because they
 measure different things. They are not just different, they can be
@@ -91,7 +89,7 @@ Cohensdp( statistics = list(m1=76, m2=72, n=20, s1=14.8, s2=18.8, r=0.2),
 )
 ```
 
-    ## [1] -0.3367129  0.2364258  0.8062037
+    ## [1] -0.3340867  0.2364258  0.7998962
 
 You get a more readable output with `summarize`, e.g.,
 
@@ -102,7 +100,7 @@ summarize(Cohensdp( statistics = list(m1=76, m2=72, n=20, s1=14.8, s2=18.8, r=0.
 ```
 
     ## Cohen's dp         = 0.236
-    ##   95.0% Confidence interval = [-0.337, 0.806]
+    ##   95.0% Confidence interval = [-0.334, 0.800]
 
 The design can be replaced with `between` for a between-subject design:
 

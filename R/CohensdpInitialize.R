@@ -26,27 +26,49 @@
 
 }
 
+# header to messages
+hm = "CohensdLibrary |> "
 
 # define the error messages here as they are used in many functions
-messageSnotL <- function() {"Argument `statistics` is missing or is not a list. Exiting..."}
-messageSnotE <- function() {"Argument `statistics` is empty. Exiting..." }
-messageDnotG <- function(design) {paste("Not a known `design` \"",design,"\". Use within, between, single. Exiting...", sep="") }
-messageDempt <- function() {"Argument `design` not given. Exiting..."}
-messageGnotG <- function(gamma) {paste("The confidence level `gamma` \"",gamma,"\" is not between 0 and 1. Exiting...", sep="")}
-messageSinct <- function(statname) {
-                    paste("The list of statistics is incomplete. Are needed: ", 
-                        paste(statname, collapse = " "), sep = "")}
-messageWier  <- function( fctname, ier) {paste("The subroutine ",fctname," signals convergence problems ", ier, sep="" ) }
-messageNtsm  <- function(n) {paste("Sample size ",n," too small. Exiting...",sep="")}
-messageSneg  <- function(s) {paste("Sample standard deviation ",s," cannot be negative. Exiting...",sep="")}
-messageRwrg  <- function(r) {paste("Correlation ",r," must be between -1 and +1. Exiting...",sep="")}
+messageSnotL <- function()       {paste(hm, "Argument `statistics` is missing or is not a list. Exiting...", sep="")}
+messageSnotE <- function()       {paste(hm, "Argument `statistics` is empty. Exiting...", sep="") }
+messageDnotG <- function(design) {paste(hm, "Not a known `design` \"",design,"\". Use within, between, single. Exiting...", sep="") }
+messageDempt <- function()       {"Mandatory argument `design` not given. Exiting..."}
+messageGnotG <- function(gamma)  {paste(hm, "The confidence level `gamma` \"",gamma,"\" is not between 0 and 1. Exiting...", sep="")}
+messageSinct <- function(sname)  {paste(hm, "The list of statistics is incomplete. Are needed: ", 
+                                        paste(sname, collapse = ", "), 
+                                        ". Exiting...", sep = "")}
+messageWier  <- function( fctname, ier) {paste(hm, "The subroutine ",fctname," signals convergence problems ", ier, sep="" ) }
+messageNtsm  <- function(n)      {paste(hm, "Sample size ",n," too small. Exiting...",sep="")}
+messageSneg  <- function(s)      {paste(hm, "Sample standard deviation ",s," cannot be negative. Exiting...",sep="")}
+messageRwrg  <- function(r)      {paste(hm, "Correlation ",r," must be between -1 and +1. Exiting...",sep="")}
+messageSexa  <- function(m)      {paste(hm, "Method `", m, "` unknown in \"single\" design. Only 'exact' is implemented. Exiting...")}
+messageBexa  <- function(m)      {paste(hm, "Method `", m, "` unknown in \"between\" design. Only 'exact' is implemented. Exiting...")}
+messageWexa  <- function(m)      {paste(hm, "Method `", m, "` unknown in \"within\" design. Only 'exact' or 'piCI' (default), 'adjustedlambdaprime', 'alginakeselman2003', and 'morris2000' are implemented. Exiting...")}
+
+messageNoCI  <- function()       {paste(hm, "There is no confidence interval for an (unbiased) Hedges's gp...", sep="")}
 
 
-# verify that the named statistics are in the list or else issue an error message
+
+# Are the named statistics of statlist in the list statname?
+# Accept specification like "a|b" which test that either an attribute a or an 
+# attribute b is in the list
+is.inIt <- function( statlist, statname ) {
+    for (i in statname) {
+        d <- unlist(strsplit(i, split="[|]"))
+        if (!any(d %in% names(statlist)))
+            return(FALSE)
+    }
+    return(TRUE)
+}
+
+
+# Verify that the named statistics in statlist are in the list or else issue an error message
 vfyStat <- function(statlist, statname) {
     # check that the required statistics were provided
-    if (!(all(statname %in% names(statlist))))
+    if (!(is.inIt(statlist, statname)))
         stop( messageSinct(statname) )
+
 
     # check the domain of the statistics
     if ("n" %in% names(statlist) )  {if (statlist$n  <2) stop(messageNtsm(statlist$n)) }

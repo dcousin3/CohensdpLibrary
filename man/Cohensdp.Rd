@@ -4,7 +4,7 @@
 \alias{Cohensdp}
 \title{Cohen's standardized mean difference.}
 \usage{
-Cohensdp(statistics, design, gamma )
+Cohensdp(statistics, design, gamma, method )
 }
 \arguments{
 \item{statistics}{a list of pre-computed statistics. The statistics to provide
@@ -20,6 +20,9 @@ from which \code{m} is standardized).}
 \item{design}{the design of the measures (\code{"within"}, \code{"between"}, or \code{"single"});}
 
 \item{gamma}{the confidence level of the confidence interval (default 0.95)}
+
+\item{method}{In "within"-subject design only, choose among methods \code{"piCI"} (default), or
+\code{"adjustedlambdaprime"}, \code{"alginakeselman2003"}, \code{"morris2000"}.}
 }
 \value{
 \preformatted{       the Cohen's $d_p$ statistic and its confidence interval.
@@ -35,8 +38,9 @@ distribution \insertCite{l07}{CohensdpLibrary}. See
 \insertCite{h81,c22a,c22b,gc18;textual}{CohensdpLibrary}.
 }
 \details{
-This function reduces the degrees of freedom by 1 in within-subject design when the population
-rho is unknown.
+This function uses the exact method in "single"-group and "between"-subject designs.
+In "within"-subject design, the default is the prior-informed confidence interval
+("piCI") which is based on a bayesian credible interval. Other methods are available.
 }
 \examples{
 
@@ -65,6 +69,9 @@ summarize( res )
 # ... and a human-readable ouptut with additional explanations.
 explain( res )   
 
+# example in a repeated-measure design with a different method than piCI
+Cohensdp(statistics =list( m1= 101, m2= 114, s1= 12.5, s2= 14.3, n= 12, rho= 0.53 ),
+         design     ="within", method = "adjustedlambdaprime")
 
 
 }

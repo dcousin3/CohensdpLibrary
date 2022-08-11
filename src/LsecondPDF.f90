@@ -45,8 +45,11 @@ FUNCTION lsecondPDF ( delta, n, d, rho, TOL, MAXITER, ier )
     k = 0
     DO WHILE ( k .LE. MAXITER )
         previousstep = step
-        ck = EXP( LOG_GAMMA(q/TWO+k) - LOG_GAMMA(q/TWO) - LOG_GAMMA(k+ONE)) * rho**(TWO*k) * & 
-            (ONE-rho**TWO)**(q/TWO)
+!        ck = EXP( LOG_GAMMA(q/TWO+k) - LOG_GAMMA(q/TWO) - LOG_GAMMA(k+ONE)) * rho**(TWO*k) * & 
+!            (ONE-rho**TWO)**(q/TWO)
+        ck =  EXP( LOG_GAMMA(q/TWO+k) - LOG_GAMMA(q/TWO) - LOG_GAMMA(k+ONE) + (TWO*k)*LOG(rho) + & 
+                   (q/TWO) * LOG(ONE-rho**TWO) &
+              )
         ek = sqrt(1/(1-rho**TWO)) * sqrt(q/(q + TWO*k))
     
         step = ck/(1/ek) * lprimePDF(b0 * delta, TWO*q+FOUR*k, b0*d / ek, TOL, MAXITER, jer)
