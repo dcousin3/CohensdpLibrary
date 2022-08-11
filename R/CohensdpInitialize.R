@@ -87,10 +87,10 @@ vfyStat <- function(statlist, statname) {
 ## new METHODS : here only router function and generic
 ####################################################################
 
-#' @md
-#'
 #' @title explain 
 #' 
+#' @md
+#'
 #' @description
 #' ``explain()`` provides a human-readable, exhaustive, description of
 #' the results. It also provides references to the key results.
@@ -108,6 +108,8 @@ explain.default <- function(x, ...) { print(x) }
 
 #' @title summarize 
 #' 
+#' @md
+#'
 #' @description
 #' ``summarize()`` provides a human-readable output of a dpObject. it is 
 #' synonym of ``summary()`` (but as actions are verbs, I used a verb).

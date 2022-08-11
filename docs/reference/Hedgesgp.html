@@ -170,25 +170,25 @@ doi: <a href='https://doi.org/10.20982/tqmp.14.4.p242'>10.20982/tqmp.14.4.p242</
 <span class='r-in'><span class='co'># example in which the means are 114 vs. 101 with sDs of 14.3 and 12.5 respectively </span></span>
 <span class='r-in'><span class='fu'>Hedgesgp</span><span class='op'>(</span> statistics <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span> m1<span class='op'>=</span> <span class='fl'>101</span>, m2<span class='op'>=</span> <span class='fl'>114</span>, s1<span class='op'>=</span> <span class='fl'>12.5</span>, s2<span class='op'>=</span> <span class='fl'>14.3</span>, n1<span class='op'>=</span> <span class='fl'>12</span>, n2<span class='op'>=</span> <span class='fl'>12</span> <span class='op'>)</span>, </span>
 <span class='r-in'>          design     <span class='op'>=</span> <span class='st'>"between"</span><span class='op'>)</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span>  ::CohensdpLibrary:: There is no confidence interval for an (unbiased) Hedges's gp...</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> CohensdLibrary |&gt; There is no confidence interval for an (unbiased) Hedges's gp...</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> [1] -0.9345258</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># example in a repeated-measure design</span></span>
 <span class='r-in'><span class='fu'>Hedgesgp</span><span class='op'>(</span> statistics <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span> m1<span class='op'>=</span> <span class='fl'>101</span>, m2<span class='op'>=</span> <span class='fl'>114</span>, s1<span class='op'>=</span> <span class='fl'>12.5</span>, s2<span class='op'>=</span> <span class='fl'>14.3</span>, n<span class='op'>=</span> <span class='fl'>12</span>, rho<span class='op'>=</span> <span class='fl'>0.53</span> <span class='op'>)</span>, </span>
 <span class='r-in'>          design     <span class='op'>=</span> <span class='st'>"within"</span><span class='op'>)</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span>  ::CohensdpLibrary:: There is no confidence interval for an (unbiased) Hedges's gp...</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> CohensdLibrary |&gt; There is no confidence interval for an (unbiased) Hedges's gp...</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> [1] -0.9260117</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># example with a single-group design where mu is a population parameter</span></span>
 <span class='r-in'><span class='fu'>Hedgesgp</span><span class='op'>(</span> statistics <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span> m <span class='op'>=</span> <span class='fl'>101</span>, m0 <span class='op'>=</span> <span class='fl'>114</span>, s <span class='op'>=</span> <span class='fl'>12.5</span>, n <span class='op'>=</span> <span class='fl'>10</span> <span class='op'>)</span>, </span>
 <span class='r-in'>          design     <span class='op'>=</span> <span class='st'>"single"</span><span class='op'>)</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span>  ::CohensdpLibrary:: There is no confidence interval for an (unbiased) Hedges's gp...</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> CohensdLibrary |&gt; There is no confidence interval for an (unbiased) Hedges's gp...</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> [1] -0.9504299</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># The results can be displayed in three modes</span></span>
 <span class='r-in'><span class='va'>res</span> <span class='op'>&lt;-</span> <span class='fu'>Hedgesgp</span><span class='op'>(</span> statistics <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span> m <span class='op'>=</span> <span class='fl'>101</span>, m0 <span class='op'>=</span> <span class='fl'>114</span>, s <span class='op'>=</span> <span class='fl'>12.5</span>, n <span class='op'>=</span> <span class='fl'>10</span> <span class='op'>)</span>, </span>
 <span class='r-in'>                 design     <span class='op'>=</span> <span class='st'>"single"</span><span class='op'>)</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span>  ::CohensdpLibrary:: There is no confidence interval for an (unbiased) Hedges's gp...</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> CohensdLibrary |&gt; There is no confidence interval for an (unbiased) Hedges's gp...</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># a raw result of the Cohen's d_p and its confidence interval</span></span>
 <span class='r-in'><span class='va'>res</span>              </span>
@@ -197,14 +197,12 @@ doi: <a href='https://doi.org/10.20982/tqmp.14.4.p242'>10.20982/tqmp.14.4.p242</
 <span class='r-in'><span class='co'># a human-readable output</span></span>
 <span class='r-in'><span class='fu'><a href='summarize.html'>summarize</a></span><span class='op'>(</span> <span class='va'>res</span> <span class='op'>)</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Hedges' gp         = -0.950</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  No confidence interval known for Hedges's gp</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># ... and a human-readable ouptut with additional explanations </span></span>
 <span class='r-in'><span class='fu'><a href='explain.html'>explain</a></span><span class='op'>(</span> <span class='va'>res</span> <span class='op'>)</span>   </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Hedges' gp         = -0.950</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>  	 sample mean 101.000 is compared to assumed mean 114.000</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>  	 sample standard deviation 12.500 is the denominator</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  	*: there is no known confidence interval for an (unbiased) Hedges' gp.</span>
 <span class='r-in'>                 </span>
 <span class='r-in'></span>
 </pre>
