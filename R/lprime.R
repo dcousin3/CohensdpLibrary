@@ -22,7 +22,7 @@
 #' @param ncp       the non-centrality parameter of the distribution;
 #' @param p         the probability from which a quantile is requested;
 #'
-#' @return          the probability or quantile of a Lambda' distribution
+#' @return          The probability or quantile of a Lambda' distribution.
 #'
 #' @details
 #' lprime are functions that compute the Lambda-prime distribution. It was shown to be the predictive  

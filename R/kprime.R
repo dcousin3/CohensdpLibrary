@@ -23,7 +23,7 @@
 #' @param ncp       the noncentrality parameter;
 #' @param p         the probability from which a quantile is requested;
 #'
-#' @return          the probability or quantile of a K' distribution
+#' @return          The probability or quantile of a K' distribution.
 #'
 #' @details
 #' kprime is a {p,d,q} set of functions that compute the K-prime distribution. This distribution has many applications,

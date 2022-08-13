@@ -23,7 +23,7 @@ qkprime(p, nu1, nu2, ncp)
 \item{p}{the probability from which a quantile is requested;}
 }
 \value{
-\preformatted{     the probability or quantile of a K' distribution
+\preformatted{     The probability or quantile of a K' distribution.
 }
 }
 \description{

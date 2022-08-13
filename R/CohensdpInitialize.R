@@ -98,6 +98,8 @@ vfyStat <- function(statlist, statname) {
 #' @param x   an object to explain
 #' @param ... ignored
 #' 
+#' @return a human-readable output with details of computations.
+#' 
 #' @export
 explain <- function(x, ...) {  UseMethod("explain") }
 
@@ -116,6 +118,8 @@ explain.default <- function(x, ...) { print(x) }
 #' 
 #' @param x   an object to summarize
 #' @param ... ignored
+#' 
+#' @return a human-readable output as per articles.
 #' 
 #' @export 
 summarize <- function(x, ...) {  UseMethod("summarize") }

@@ -20,8 +20,9 @@ mean from which \code{m} is standardized).}
 \item{design}{the design of the measures (\code{"within"}, \code{"between"}, or \code{"single"});}
 }
 \value{
-\preformatted{       the unbiased Cohen's $d_p$ statistic.
-}
+The unbiased Cohen's $d_p$ statistic, commonly called a Hedges' $g_p$.
+The return value is internally a dpObject which can be
+displayed with print, explain or summary/summarize.
 }
 \description{
 \code{Hedgesgp()} computes the unbiased Cohen's d (noted $g_p$) in either within-subject,

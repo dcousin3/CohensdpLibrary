@@ -6,7 +6,7 @@
 \alias{CohensdpLibrary-package}
 \title{CohensdpLibrary: Cohen's D_p Computation with Confidence Intervals}
 \description{
-Computing Cohen's d_p in between-subject and within-subject designs.
+Computing Cohen's d_p in any experimental designs (between-subject, within-subject, and single-group design). Cousineau (2022) <https://github.com/dcousin3/CohensdpLibrary>.
 }
 \details{
 CohensdpLibrary is a library that computes the Cohen's $d_p$ along with confidence intervals. 

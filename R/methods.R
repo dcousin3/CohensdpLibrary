@@ -36,6 +36,7 @@ print.CohensdpObject <- function(x, ...) {
 #' @name summarize
 #'
 #' @method summarize CohensdpObject 
+#' 
 #' @export 
 summarize.CohensdpObject <-  function(x, ...) {
     format = getOption("CohensdpLibrary.FORMAT")
@@ -70,6 +71,7 @@ summarize.CohensdpObject <-  function(x, ...) {
 #' @name explain
 #'
 #' @method explain CohensdpObject 
+#' 
 #' @export
 explain.CohensdpObject <- function(x, ...) {
     format = getOption("CohensdpLibrary.FORMAT")

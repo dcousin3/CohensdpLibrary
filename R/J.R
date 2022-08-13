@@ -22,7 +22,9 @@
 #'                        - for "single":  ``n``.
 #' @param design        the design of the measures (``"within"``, ``"between"``, or ``"single"``);
 #'
-#' @return            the correction factor for unbiasing a Cohen's $d_p$. 
+#' @return   The correction factor for unbiasing a Cohen's $d_p$. 
+#'           The return value is internally a dpObject which can be 
+#'           displayed with print, explain or summary/summarize.
 #'
 #' @details
 #' This function decreases the degrees of freedom by 1 in within-subject design when the population 

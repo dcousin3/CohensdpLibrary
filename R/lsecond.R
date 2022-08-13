@@ -24,7 +24,7 @@
 #' @param rho       the population correlation 
 #' @param p         the probability from which a quantile is requested
 #'
-#' @return          the probability or quantile of a Lambda'' distribution
+#' @return          The probability or quantile of a Lambda'' distribution.
 #'
 #' @details
 #' lsecond are {p,d,q} functions that compute the Lambda-second (L") distribution. This 

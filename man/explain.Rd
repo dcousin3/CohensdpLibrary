@@ -14,6 +14,9 @@ explain(x, ...)
 
 \item{...}{ignored}
 }
+\value{
+a human-readable output with details of computations.
+}
 \description{
 \code{explain()} provides a human-readable, exhaustive, description of
 the results. It also provides references to the key results.

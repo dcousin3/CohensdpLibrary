@@ -26,7 +26,7 @@
 #' @param r         the sample correlation 
 #' @param p         the probability from which a quantile is requested
 #'
-#' @return          the probability or quantile of a prior-informed Lambda'' distribution.
+#' @return          The probability or quantile of a prior-informed Lambda'' distribution.
 #'
 #' @details
 #' pilsecond are {p,d,q} functions that compute the prior-informed Lambda-second (L") distribution. This 

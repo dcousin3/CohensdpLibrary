@@ -25,8 +25,9 @@ from which \code{m} is standardized).}
 \code{"adjustedlambdaprime"}, \code{"alginakeselman2003"}, \code{"morris2000"}.}
 }
 \value{
-\preformatted{       the Cohen's $d_p$ statistic and its confidence interval.
-}
+The Cohen's $d_p$ statistic and its confidence interval.
+The return value is internally a dpObject which can be
+displayed with print, explain or summary/summarize.
 }
 \description{
 \code{Cohensdp()} computes the Cohen's d (noted $d_p$) and its confidence interval in

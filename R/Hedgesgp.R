@@ -25,7 +25,9 @@
 #'                          mean from which ``m`` is standardized).
 #' @param design        the design of the measures (``"within"``, ``"between"``, or ``"single"``);
 #'
-#' @return            the unbiased Cohen's $d_p$ statistic.
+#' @return   The unbiased Cohen's $d_p$ statistic, commonly called a Hedges' $g_p$.
+#'           The return value is internally a dpObject which can be 
+#'           displayed with print, explain or summary/summarize.
 #'
 #' @details
 #' This function returns the Cohen's d_p statistics corrected for bias but no confidence

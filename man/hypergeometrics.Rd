@@ -21,7 +21,7 @@ hypergeometric2F1(a, b, c, z)
 \item{c}{the third parameter;}
 }
 \value{
-\preformatted{the result of the hypergeometric function
+\preformatted{The result of the hypergeometric function.
 }
 }
 \description{

@@ -25,7 +25,7 @@
 #' @param c    the third parameter;
 #' @param z    the argument raised to the powers 0 ... infinity ;
 #'
-#' @return     the result of the hypergeometric function
+#' @return     The result of the hypergeometric function.
 #'
 #' @references
 #' \insertAllCited{}

@@ -17,8 +17,9 @@ the measure;
 \item{design}{the design of the measures (\code{"within"}, \code{"between"}, or \code{"single"});}
 }
 \value{
-\preformatted{       the correction factor for unbiasing a Cohen's $d_p$. 
-}
+The correction factor for unbiasing a Cohen's $d_p$.
+The return value is internally a dpObject which can be
+displayed with print, explain or summary/summarize.
 }
 \description{
 \code{J()} computes the correction factor to get an unbiased Cohen's $d_p$ in either within-

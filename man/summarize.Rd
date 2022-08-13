@@ -14,7 +14,10 @@ summarize(x, ...)
 
 \item{...}{ignored}
 }
+\value{
+a human-readable output as per articles.
+}
 \description{
-``summarize()`` provides a human-readable output of a dpObject. it is 
-synonym of ``summary()`` (but as actions are verbs, I used a verb).
+\code{summarize()} provides a human-readable output of a dpObject. it is
+synonym of \code{summary()} (but as actions are verbs, I used a verb).
 }
