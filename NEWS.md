@@ -1,13 +1,9 @@
-# CohensdpLibrary 0.5.4 (11 August 2022)
+# CohensdpLibrary 0.5.5 (16 August 2022)
 
-* Second release of CohensdpLibrary over CRAN.
+* Release of CohensdpLibrary over CRAN.
 * Updated references;
 * Added @values to roxygen2 documentations
 * Updated message managment
-
-# CohensdpLibrary 0.5.2 (4 August 2022)
-
-* First release of CohensdpLibrary over CRAN.
 
 # CohensdpLibrary 0.5.1 (4 August 2022)
 

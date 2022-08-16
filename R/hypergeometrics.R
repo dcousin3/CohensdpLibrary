@@ -8,9 +8,9 @@
 #'
 #' @description
 #' The hypergeometric functions are a series of functions which includes
-#' the hypergeometric0F1, called the confluent hypergeometric limit function;
-#' the hypergeometric1F1, called the confluent hypergeometric function;
-#' and the hypergeometric2F1, called Gauss' confluent hypergeometric function.
+#' the hypergeometric0F1, called the confluent hypergeometric limit function (D. Cousineau);
+#' the hypergeometric1F1, called the confluent hypergeometric function \insertCite{m14}{CohensdpLibrary};
+#' and the hypergeometric2F1, called Gauss' confluent hypergeometric function \insertCite{MICHEL2008535}{CohensdpLibrary}.
 #' These functions are involved in the computation of the K' and Lambda' 
 #' distributions, as well as the Chi-square" and the t" distributions
 #' \insertCite{c22a}{CohensdpLibrary}.

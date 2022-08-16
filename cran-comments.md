@@ -1,20 +1,17 @@
 ## Submission
 
-* Updated version 0.5.4
+* Updated version 0.5.5
 
 ## Comment
 
-* I revised the package over version 0.5.3 as per you comments:
-* Added \value to the two functions which had none;
-* Added a reference to the DESCRIPTION
-* As of messages, 
-    - all the STOP message cannot be supressed (and I believe this is ok)
-    - all the general warnings/for-your-information messages can be 
-      suppressed with a global option CohensdpLibrary.SHOWWARNINGS:
-        ``if( getOption("CohensdpLibrary.SHOWWARNINGS") ) message(  messageNoCI() )``
-    - there was a ``print`` method extracting from the data structure what to show
-    - and there are advanced methods ``summary`` and ``explain`` for more elaborate outputs
-    - ... so I believe that things should be at par with R expectations? If not, please advice.
+* I revised the package over version 0.5.4 as per you comment:
+* There are no copyright holder for past Fortran code
+* All such code is public domain and its respective authors are 
+  acknowledged in the documentation (specifically, in the
+  man/hypergeometrics.Rd, the man/kprime.Rd and the man/lprime.Rd). 
+  All additional code is mine alone.
+* I added a reference to Cohen 1969 in the DESCRIPTION
+* I re-ran R CMD check just to be sure.
 
 ## Test environments
 

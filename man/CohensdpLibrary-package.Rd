@@ -6,7 +6,7 @@
 \alias{CohensdpLibrary-package}
 \title{CohensdpLibrary: Cohen's D_p Computation with Confidence Intervals}
 \description{
-Computing Cohen's d_p in any experimental designs (between-subject, within-subject, and single-group design). Cousineau (2022) <https://github.com/dcousin3/CohensdpLibrary>.
+Computing Cohen's d_p in any experimental designs (between-subject, within-subject, and single-group design). Cousineau (2022) <https://github.com/dcousin3/CohensdpLibrary>; Cohen (1969, ISBN: 0-8058-0283-5).
 }
 \details{
 CohensdpLibrary is a library that computes the Cohen's $d_p$ along with confidence intervals. 
@@ -35,5 +35,9 @@ qkprime(x, nu1, nu2, ncp) quantile
 These functions are implemented from the FORTRAN source of Poitevineau & Lecoutre, 2010.
 Note that the library sadists also has implementations for these two distributions. However,
 the sadists::kprime distribution is inaccurate for small nu1 or small nu2.
+}
+\author{
+\strong{Maintainer}: Denis Cousineau \email{denis.cousineau@uottawa.ca} (Developer)
+
 }
 \keyword{internal}
