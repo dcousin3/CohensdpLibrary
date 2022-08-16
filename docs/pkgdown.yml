@@ -2,7 +2,7 @@ pandoc: 2.11.4
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2022-08-16T10:38Z
+last_built: 2022-08-16T11:43Z
 urls:
   reference: https://github.com/dcousin3/CohensdpLibrary/reference
   article: https://github.com/dcousin3/CohensdpLibrary/articles
