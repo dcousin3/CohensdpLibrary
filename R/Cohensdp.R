@@ -207,17 +207,25 @@ Cohensdp.between <- function(statistics, gamma = .95, method ) {
 ##############################################################################
 ##### within #################################################################
 ##############################################################################
+#' @importFrom utils modifyList
 Cohensdp.within <- function(statistics, gamma = .95, method ) {
-    if ("rho" %in% names(statistics)) 
-        res <- Cohensdp.within.rhoknown( statistics, gamma )
-    else if ("r" %in% names(statistics)) 
-        res <- switch( method,
-            "exact" =                Cohensdp.within.piCI( statistics, gamma ),
-            "piCI" =                 Cohensdp.within.piCI( statistics, gamma ),
-            "adjustedlambdaprime" =  Cohensdp.within.adjustedlambdaprime( statistics, gamma ),
-            "alginakeselman2003" =   Cohensdp.within.alginakeselman2003( statistics, gamma ),
-            "morris2000" =           Cohensdp.within.morris2000( statistics, gamma )
-        )
+    res <- if ("rho" %in% names(statistics)) {
+                if (statistics$rho == 0) # this is a between-subject design!
+                    Cohensdp.between( 
+                        modifyList(statistics, list(n1=statistics$n, n2=statistics$n)),
+                        gamma )
+                else
+                    Cohensdp.within.rhoknown( statistics, gamma )
+            } else if ("r" %in% names(statistics)) {
+                if(statistics$r == 0) statistics=modifyList(statistics, list(r = 0.0000001))
+                switch( method,
+                    "exact" =                Cohensdp.within.piCI( statistics, gamma ),
+                    "piCI" =                 Cohensdp.within.piCI( statistics, gamma ),
+                    "adjustedlambdaprime" =  Cohensdp.within.adjustedlambdaprime( statistics, gamma ),
+                    "alginakeselman2003" =   Cohensdp.within.alginakeselman2003( statistics, gamma ),
+                    "morris2000" =           Cohensdp.within.morris2000( statistics, gamma )
+                )
+            }
     res
 }
 
