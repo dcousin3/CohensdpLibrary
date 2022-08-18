@@ -1,16 +1,11 @@
 ## Submission
 
-* Updated version 0.5.5
+* Updated version 0.5.6
 
 ## Comment
 
-* I revised the package over version 0.5.4 as per you comment:
-* There are no copyright holder for past Fortran code
-* All such code is public domain and its respective authors are 
-  acknowledged in the documentation (specifically, in the
-  man/hypergeometrics.Rd, the man/kprime.Rd and the man/lprime.Rd). 
-  All additional code is mine alone.
-* I added a reference to Cohen 1969 in the DESCRIPTION
+* The lto tests were failing; I corrected the init.c wrapper to match compatility requirements.
+
 * I re-ran R CMD check just to be sure.
 
 ## Test environments
