@@ -260,7 +260,7 @@ subroutine bratio( a, b, x, y, w, w1, ierr )
       w = half + (half - w1)
       go to 220
 
-  140 n = b0
+  140 n = INT(b0)
       b0 = b0 - n
 
       if (b0 == zero) then
@@ -268,7 +268,7 @@ subroutine bratio( a, b, x, y, w, w1, ierr )
          b0 = one
       end if
 
-  141 w = bup(b0, a0, y0, x0, n, eps)
+      w = bup(b0, a0, y0, x0, n, eps)
       if (x0 .gt. 0.7D0) go to 150
       w = w + bpser(a0, b0, x0, eps)
       w1 = half + (half - w)
@@ -478,7 +478,7 @@ function alnrel ( a )
 
   else
 
-    x = onedble + real ( a, kind(onedble) )
+    x = real ( onedble + a, kind(PR) )
     alnrel = log ( x )
 
   end if
@@ -913,7 +913,7 @@ function betaln ( a0, b0 )
 ! reduction of a when b <= 1000
 !
    30 if (b .gt. 1000.0D0) go to 50
-      n = a - one
+      n = INT(a - one)
       w = one
       do i = 1,n
          a = a - one
@@ -927,7 +927,7 @@ function betaln ( a0, b0 )
 !
 !  Reduction of b when b < 8
 !
-   40 n = b - one
+   40 n = INT(b - one)
       z = one
       do i = 1,n
          b = b - one
@@ -938,7 +938,7 @@ function betaln ( a0, b0 )
 !
 !  reduction of a when b .gt. 1000
 !
-   50 n = a - one
+   50 n = INT(a - one)
       w = one
       do i = 1,n
          a = a - one
@@ -1249,7 +1249,7 @@ function bpser ( a, b, x, eps )
   implicit none
   INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-  real(kind=16), parameter :: onedble=1.0_16
+  real(kind=16), parameter :: onedble=1.0D0
   real(PR), parameter :: zero=0.0D0, half=0.5D0, one=1.0D0
 
   real(PR) a
@@ -1300,7 +1300,7 @@ function bpser ( a, b, x, eps )
       if (apb .gt. one) go to 20
          z = one + gam1(apb)
          go to 30
-   20 u = real(a,kind(onedble)) + real(b,kind(onedble)) - onedble
+   20 u = real(a + b - onedble, kind(PR)) 
       z = (one + gam1(u))/apb
 
    30 c = (one + gam1(a))*(one + gam1(b))/z
@@ -1310,7 +1310,7 @@ function bpser ( a, b, x, eps )
 !  procedure for a0 < 1 and 1 < b0 < 8
 !
    40 u = gamln1(a0)
-      m = b0 - one
+      m = INT(b0 - one)
       if (m < 1) go to 50
       c = one
       do i = 1,m
@@ -1325,7 +1325,7 @@ function bpser ( a, b, x, eps )
       if (apb .gt. one) go to 51
          t = one + gam1(apb)
          go to 52
-   51 u = real(a0,kind(onedble)) + real(b0,kind(onedble)) - onedble
+   51 u = real(a0 + b0 - onedble, kind(PR)) 
       t = (one + gam1(u))/apb
    52 bpser = exp(z)*(a0/a)*(one + gam1(b0))/t
       go to 70
@@ -1455,7 +1455,7 @@ function brcmp1 ( mu, a, b, x, y )
       if ( one < apb ) go to 40
          z = one + gam1(apb)
          go to 50
-   40 u = real(a,kind(onedble)) + real(b,kind(onedble)) - onedble
+   40 u = real(a + b - onedble, kind(PR)) 
       z = (one + gam1(u))/apb
 
    50 c = (one + gam1(a))*(one + gam1(b))/z
@@ -1465,7 +1465,7 @@ function brcmp1 ( mu, a, b, x, y )
 !  algorithm for 1 < b0 < 8
 !
    60 u = gamln1(a0)
-      n = b0 - one
+      n = INT(b0 - one)
       if (n < 1) go to 70
       c = one
       do 61 i = 1,n
@@ -1480,7 +1480,7 @@ function brcmp1 ( mu, a, b, x, y )
       if (apb .gt. one) go to 71
          t = one + gam1(apb)
          go to 72
-   71 u = real(a0,kind(onedble)) + real(b0,kind(onedble)) - onedble
+   71 u = real(a0 + b0 - onedble, kind(PR)) 
       t = (one + gam1(u))/apb
    72 brcmp1 = a0*esum(mu,z)*(one + gam1(b0))/t
       return
@@ -1612,7 +1612,7 @@ function brcomp ( a, b, x, y )
 !-----------------------------------------------------------------------
 !  procedure for a < 1 or b < 1
 !-----------------------------------------------------------------------
-   30 b0 = max ( a, b )
+      b0 = max ( a, b )
       if (b0 .ge. 8.0D0) go to 80
       if ( one < b0 ) go to 60
 !
@@ -1625,7 +1625,7 @@ function brcomp ( a, b, x, y )
       if (apb .gt. one) go to 40
          z = one + gam1(apb)
          go to 50
-   40 u = real(a,kind(onedble)) + real(b,kind(onedble)) - onedble
+   40 u = real(a + b - onedble, kind(PR)) 
       z = (one + gam1(u))/apb
 
    50 c = (one + gam1(a))*(one + gam1(b))/z
@@ -1635,7 +1635,7 @@ function brcomp ( a, b, x, y )
 !  algorithm for 1 < b0 < 8
 !
    60 u = gamln1(a0)
-      n = b0 - one
+      n = INT(b0 - one)
       if (n < 1) go to 70
       c = one
       do i = 1,n
@@ -1650,7 +1650,7 @@ function brcomp ( a, b, x, y )
       if (apb .gt. one) go to 71
          t = one + gam1(apb)
          go to 72
-   71 u = real(a0,kind(onedble)) + real(b0,kind(onedble)) - onedble
+   71 u = real(a0 + b0 - onedble, kind(PR)) 
       t = (one + gam1(u))/apb
    72 brcomp = a0*exp(z)*(one + gam1(b0))/t
       return
@@ -1752,8 +1752,8 @@ function bup ( a, b, x, y, n, eps )
   d = one
   if (n == 1 .or. a < one) go to 10
       if (apb < 1.1D0*ap1) go to 10
-         mu = abs(exparg(1))
-         k = exparg(0)
+         mu = INT(abs(exparg(1)))
+         k = INT(exparg(0))
          if (k < mu) mu = k
          t = mu
          d = exp(-t)
@@ -1776,7 +1776,7 @@ function bup ( a, b, x, y, n, eps )
       if (r < one) go to 40
       k = nm1
       t = nm1
-      if (r < t) k = r
+      if (r < t) k = INT(r)
 !
 !  add the increasing terms of the series
 !
@@ -2325,7 +2325,7 @@ function gsumln ( a, b )
   real(PR) gsumln
   real(PR) x
 
-  x = real ( a, kind(twodble) ) + real ( b, kind(twodble) ) - twodble
+  x = real ( a + b - twodble, kind(PR) ) 
 
   if ( x <= 0.25D0 ) then
     gsumln = gamln1 ( one + x )
@@ -2818,7 +2818,7 @@ function psi ( xx )
 
   real(PR) aug
   real(PR) den
-  real(kind=16), parameter :: dx0 = 1.461632144968362341262659542325721325_16
+  real(kind=16), parameter :: dx0 = 1.461632144968362341262659542325721325D0
   integer i
   integer ipmpar
   integer m
@@ -2945,7 +2945,7 @@ function psi ( xx )
       end do
 
       den = (upper + p1(7)) / (den + q1(6))
-      xmx0 = real(x,kind(dx0)) - dx0
+      xmx0 = real(x  - dx0 ,kind(1.0D0))
       psi = den * xmx0 + aug
       return
 !

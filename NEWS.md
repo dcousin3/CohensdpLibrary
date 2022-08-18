@@ -1,3 +1,7 @@
+# CohensdpLibrary 0.5.6 (18 August 2022)
+
+* Matched the lto cross-compiler compatibility tests .
+
 # CohensdpLibrary 0.5.5 (16 August 2022)
 
 * Release of CohensdpLibrary over CRAN.

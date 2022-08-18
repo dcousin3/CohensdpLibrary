@@ -172,7 +172,7 @@ FUNCTION kprimecdf( x, q, r, a1, TOL, MAXITER, ier )
          return
       end if
       if ( betaf(0) < beta0*betaratio ) then ! Beta at k is small, so k is moved to
-         k = xarg*k                          ! somewhere between modes of g_j's and H_j's
+         k = INT(xarg*k)                     ! somewhere between modes of g_j's and H_j's
          k = (k/2)*2                         ! Make k an even number
          dj2 = k*half
          betaf(0) = betacdf( xarg, dj2+half, r2, ier )
@@ -481,7 +481,7 @@ SUBROUTINE kprimebis( x, q, r, a1, TOL, MAXITER, ier, result )
          return
       end if
       if ( betaf(0) < beta0*betaratio ) then ! Beta at k is small, so k is moved to
-         k = xarg*k                          ! somewhere between modes of g_j's and H_j's
+         k = INT(xarg*k)                     ! somewhere between modes of g_j's and H_j's
          k = (k/2)*2                         ! Make k an even number
          dj2 = k*half
          betaf(0) = betacdf( xarg, dj2+half, r2, ier )

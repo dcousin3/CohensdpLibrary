@@ -27,14 +27,14 @@ FUNCTION lprimepdf( x, q, a1, TOL, MAXITER, ier )
     !*********************************************************************************************!
 
     IMPLICIT NONE
-    INTEGER, PARAMETER        :: PR=KIND(1.0D0)
+    INTEGER, PARAMETER    :: PR=KIND(1.0D0)
 
     !  Function
-    REAL(PR) :: lprimepdf
+    REAL(PR)              :: lprimepdf
 
     !  Arguments
     REAL(PR), INTENT(in)  :: x, q, a1, TOL
-    INTEGER,  INTENT(in)  :: MAXITER
+    INTEGER, INTENT(in)   :: MAXITER
     INTEGER, INTENT(out)  :: ier
 
     !  Local declarations

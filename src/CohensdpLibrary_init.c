@@ -6,18 +6,18 @@
 extern void F77_NAME(subhyg0f1)    (double *, double *, double *);
 extern void F77_NAME(subhyg1f1)    (double *, double *, double *, double *);
 extern void F77_NAME(subhyg2f1)    (double *, double *, double *, double *, double *);
-extern void F77_NAME(sublprimepdf) (double *, double *, double *, double *, short *,  short *, double *);
-extern void F77_NAME(sublprimecdf) (double *, double *, double *, double *, short *,  short *, double *);
-extern void F77_NAME(sublprimeidf) (double *, double *, double *, double *, short *,  short *, double *);
-extern void F77_NAME(subkprimepdf) (double *, double *, double *, double *, double *, short *, short *, double *);
-extern void F77_NAME(subkprimecdf) (double *, double *, double *, double *, double *, short *, short *, double *);
-extern void F77_NAME(subkprimeidf) (double *, double *, double *, double *, double *, short *, short *, double *);
-extern void F77_NAME(sublsecondpdf)(double *, double *, double *, double *, double *, short *, short *, double *);
-extern void F77_NAME(sublsecondcdf)(double *, double *, double *, double *, double *, short *, short *, double *);
-extern void F77_NAME(sublsecondidf)(double *, double *, double *, double *, double *, short *, short *, double *);
-extern void F77_NAME(subfbdeltafromobsdpobsrpdf)(double *, double *, double *, double *, double *, short *, short *, double *);
-extern void F77_NAME(subfbdeltafromobsdpobsrcdf)(double *, double *, double *, double *, double *, short *, short *, double *);
-extern void F77_NAME(subfbdeltafromobsdpobsridf)(double *, double *, double *, double *, double *, short *, short *, double *);
+extern void F77_NAME(sublprimepdf) (double *, double *, double *, double *, long *,  long *, double *);
+extern void F77_NAME(sublprimecdf) (double *, double *, double *, double *, long *,  long *, double *);
+extern void F77_NAME(sublprimeidf) (double *, double *, double *, double *, long *,  long *, double *);
+extern void F77_NAME(subkprimepdf) (double *, double *, double *, double *, double *, long *, long *, double *);
+extern void F77_NAME(subkprimecdf) (double *, double *, double *, double *, double *, long *, long *, double *);
+extern void F77_NAME(subkprimeidf) (double *, double *, double *, double *, double *, long *, long *, double *);
+extern void F77_NAME(sublsecondpdf)(double *, double *, double *, double *, double *, long *, long *, double *);
+extern void F77_NAME(sublsecondcdf)(double *, double *, double *, double *, double *, long *, long *, double *);
+extern void F77_NAME(sublsecondidf)(double *, double *, double *, double *, double *, long *, long *, double *);
+extern void F77_NAME(subfbdeltafromobsdpobsrpdf)(double *, double *, double *, double *, double *, long *, long *, double *);
+extern void F77_NAME(subfbdeltafromobsdpobsrcdf)(double *, double *, double *, double *, double *, long *, long *, double *);
+extern void F77_NAME(subfbdeltafromobsdpobsridf)(double *, double *, double *, double *, double *, long *, long *, double *);
 
 
 static const R_FortranMethodDef FortranEntries[] = {

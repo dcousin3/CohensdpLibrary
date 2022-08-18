@@ -52,7 +52,7 @@ FUNCTION FBdeltafromobsdpobsridf( q, n, obsdp, obsr, TOL, MAXITER, ier  )
 
     !  Local declarations
     REAL(PR), EXTERNAL        :: FBdeltafromobsdpobsrcdf, dtrinv
-
+    ier = 0
     FBdeltafromobsdpobsridf = dtrinv( func, q,          &
                 .FALSE., .FALSE., -1.0D2, +1.0D2,     &
                 obsdp, -0.5D0,                        & ! negative to start with EX
@@ -66,7 +66,8 @@ CONTAINS
         INTEGER,  INTENT(out):: iok
         REAL(PR), EXTERNAL   :: deltafromobsdpobsrcdf
         REAL(PR)             :: func
-        func = FBdeltafromobsdpobsrcdf( x, n, obsdp, obsr, TOL, MAXITER )
+        iok = 0
+        func = FBdeltafromobsdpobsrcdf( x, n, obsdp, obsr, TOL, MAXITER, iok )
     END FUNCTION func
 
 END FUNCTION FBdeltafromobsdpobsridf
