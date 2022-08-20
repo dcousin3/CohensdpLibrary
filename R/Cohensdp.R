@@ -215,7 +215,10 @@ Cohensdp.between <- function(statistics, gamma = .95, method ) {
 ##############################################################################
 #' @importFrom utils modifyList
 Cohensdp.within <- function(statistics, gamma = .95, method ) {
+print("asdfasdf")
+print(method)
     res <- if ("rho" %in% names(statistics)) {
+                if (method!="exact") stop( messageNoMh() )
                 if (statistics$rho == 0) # this is a between-subject design!
                     Cohensdp.between( 
                         modifyList(statistics, list(n1=statistics$n, n2=statistics$n)),

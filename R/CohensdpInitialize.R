@@ -48,7 +48,7 @@ messageWexa  <- function(m)      {paste(hm, "Method `", m, "` unknown in \"withi
 
 messageNoCI  <- function()       {paste(hm, "There is no confidence interval for an (unbiased) Hedges's gp...", sep="")}
 messageNotg  <- function(g)      {paste(hm, "The confidence level ",g, " has not been calibrated yet. (only .90, .99, and .99 are at this time). Exiting...", sep="" ) }
-
+messageNoMh  <- function()       {"Only the exact method can be used when rho is known. Exiting..."}
 
 # Are the named statistics of statlist in the list statname?
 # Accept specification like "a|b" which test that either an attribute a or an 
