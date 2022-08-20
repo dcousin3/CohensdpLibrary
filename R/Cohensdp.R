@@ -215,8 +215,6 @@ Cohensdp.between <- function(statistics, gamma = .95, method ) {
 ##############################################################################
 #' @importFrom utils modifyList
 Cohensdp.within <- function(statistics, gamma = .95, method ) {
-print("asdfasdf")
-print(method)
     res <- if ("rho" %in% names(statistics)) {
                 if (method!="exact") stop( messageNoMh() )
                 if (statistics$rho == 0) # this is a between-subject design!
@@ -356,12 +354,10 @@ fittsAdjustedGamma <- function(gamma, n) {
 }
 
 
-# adjustedlambdaprime       -1.5938740 -0.9679684 -0.3245811
-# regressionapproximation   returns the same...
 Cohensdp.within.regressionapproximation <- function(statistics, gamma = .95) {
     sts  <- vfyStat(statistics, c("m1","s1","m2","s2","n", "r"))
     GM<- function(ns) {length(ns) / sum(1/ns)}  # Geometric mean
-print("erew")
+
     #get pairwise statistics Delta means and pooled SD
     dmn  <- sts$m1 - sts$m2
     sdp  <- sqrt((sts$s1^2 + sts$s2^2)/2)
