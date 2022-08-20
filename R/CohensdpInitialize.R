@@ -44,10 +44,10 @@ messageSneg  <- function(s)      {paste(hm, "Sample standard deviation ",s," can
 messageRwrg  <- function(r)      {paste(hm, "Correlation ",r," must be between -1 and +1. Exiting...",sep="")}
 messageSexa  <- function(m)      {paste(hm, "Method `", m, "` unknown in \"single\" design. Only 'exact' is implemented. Exiting...")}
 messageBexa  <- function(m)      {paste(hm, "Method `", m, "` unknown in \"between\" design. Only 'exact' is implemented. Exiting...")}
-messageWexa  <- function(m)      {paste(hm, "Method `", m, "` unknown in \"within\" design. Only 'exact' or 'piCI' (default), 'adjustedlambdaprime', 'alginakeselman2003', and 'morris2000' are implemented. Exiting...")}
+messageWexa  <- function(m)      {paste(hm, "Method `", m, "` unknown in \"within\" design. Only 'exact' or 'piCI' (default), 'morris2000', 'alginakeselman2003', 'adjustedlambdaprime', and 'regressionapproximation' are implemented. Exiting...")}
 
 messageNoCI  <- function()       {paste(hm, "There is no confidence interval for an (unbiased) Hedges's gp...", sep="")}
-
+messageNotg  <- function(g)      {paste(hm, "The confidence level ",g, " has not been calibrated yet. (only .90, .99, and .99 are at this time). Exiting...", sep="" ) }
 
 
 # Are the named statistics of statlist in the list statname?

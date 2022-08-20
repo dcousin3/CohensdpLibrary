@@ -80,7 +80,7 @@ Hedges (1981); Cousineau (2022, submitted); Goulet-Pelletier and Cousineau (2018
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">CohensdpLibrary</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
       </span>
     </div>
 
@@ -159,7 +159,8 @@ from which <code>m</code> is standardized).</p></td>
     <tr>
       <th>method</th>
       <td><p>In "within"-subject design only, choose among methods <code>"piCI"</code> (default), or
-<code>"adjustedlambdaprime"</code>, <code>"alginakeselman2003"</code>, <code>"morris2000"</code>.</p></td>
+<code>"adjustedlambdaprime"</code>, <code>"alginakeselman2003"</code>, <code>"morris2000"</code>, and
+<code>"regressionapproximation"</code>.</p></td>
     </tr>
     </table>
 
@@ -172,15 +173,30 @@ displayed with print, explain or summary/summarize.</p>
 
     <p>This function uses the exact method in "single"-group and "between"-subject designs.
 In "within"-subject design, the default is the prior-informed confidence interval
-("piCI") which is based on a bayesian credible interval. Other methods are available.</p>
+("piCI") which is based on a bayesian credible interval. This method is described in
+Cousineau (submitted)
+. Other methods are available, described in
+Morris (2000); Algina and Keselman (2003); Cousineau and Goulet-Pelletier (2021); Fitts (2022)</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Cousineau D (2022).
+    <p>Algina J, Keselman HJ (2003).
+&#8220;Approximate confidence intervals for effect sizes.&#8221;
+<em>Educational and Psychological Measurement</em>, <b>63</b>, 537 -- 553.
+doi: <a href='https://doi.org/10.1177/0013164403256358'>10.1177/0013164403256358</a>
+.<br /><br /> Cousineau D (2022).
 &#8220;The exact distribution of the Cohen's \(d_p\) in repeated-measure designs.&#8221;
 doi: <a href='https://doi.org/10.31234/osf.io/akcnd'>10.31234/osf.io/akcnd</a>
-, <a href='https://psyarxiv.com/akcnd/'>https://psyarxiv.com/akcnd/</a>.<br /><br /> Cousineau D (submitted).
+, <a href='https://psyarxiv.com/akcnd/'>https://psyarxiv.com/akcnd/</a>.<br /><br /> Cousineau D, Goulet-Pelletier J (2021).
+&#8220;A study of confidence intervals for Cohen's dp in within-subject designs with new proposals.&#8221;
+<em>The Quantitative Methods for Psychology</em>, <b>17</b>, 51 -- 75.
+doi: <a href='https://doi.org/10.20982/tqmp.17.1.p051'>10.20982/tqmp.17.1.p051</a>
+.<br /><br /> Cousineau D (submitted).
 &#8220;The exact confidence interval of the Cohen's \(d_p\) in repeated-measure designs.&#8221;
-<em>The Quantitative Methods for Psychology</em>.<br /><br /> Goulet-Pelletier J, Cousineau D (2018).
+<em>The Quantitative Methods for Psychology</em>.<br /><br /> Fitts DA (2022).
+&#8220;Point and interval estimates for a standardized mean difference in paired-samples designs using a pooled standard deviation.&#8221;
+<em>The Quantitative Methods for Psychology</em>, <b>18</b>(2), 207-223.
+doi: <a href='https://doi.org/10.20982/tqmp.18.2.p207'>10.20982/tqmp.18.2.p207</a>
+.<br /><br /> Goulet-Pelletier J, Cousineau D (2018).
 &#8220;A review of effect sizes and their confidence intervals, Part I: The Cohen's d family.&#8221;
 <em>The Quantitative Methods for Psychology</em>, <b>14</b>(4), 242-265.
 doi: <a href='https://doi.org/10.20982/tqmp.14.4.p242'>10.20982/tqmp.14.4.p242</a>
@@ -190,6 +206,10 @@ doi: <a href='https://doi.org/10.20982/tqmp.14.4.p242'>10.20982/tqmp.14.4.p242</
 &#8220;Another look at confidence intervals from the noncentral T distribution.&#8221;
 <em>Journal of Modern Applied Statistical Methods</em>, <b>6</b>, 107 -- 116.
 doi: <a href='https://doi.org/10.22237/jmasm/1177992600'>10.22237/jmasm/1177992600</a>
+.<br /><br /> Morris SB (2000).
+&#8220;Distribution of the standardized mean change effect size for meta-analysis on repeated measures.&#8221;
+<em>British Journal of Mathematical and Statistical Psychology</em>, <b>53</b>, 17 -- 29.
+doi: <a href='https://doi.org/10.1348/000711000159150'>10.1348/000711000159150</a>
 .</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

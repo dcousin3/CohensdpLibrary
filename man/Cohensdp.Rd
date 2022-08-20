@@ -22,7 +22,8 @@ from which \code{m} is standardized).}
 \item{gamma}{the confidence level of the confidence interval (default 0.95)}
 
 \item{method}{In "within"-subject design only, choose among methods \code{"piCI"} (default), or
-\code{"adjustedlambdaprime"}, \code{"alginakeselman2003"}, \code{"morris2000"}.}
+\code{"adjustedlambdaprime"}, \code{"alginakeselman2003"}, \code{"morris2000"}, and
+\code{"regressionapproximation"}.}
 }
 \value{
 The Cohen's $d_p$ statistic and its confidence interval.
@@ -41,7 +42,9 @@ distribution \insertCite{l07}{CohensdpLibrary}. See
 \details{
 This function uses the exact method in "single"-group and "between"-subject designs.
 In "within"-subject design, the default is the prior-informed confidence interval
-("piCI") which is based on a bayesian credible interval. Other methods are available.
+("piCI") which is based on a bayesian credible interval. This method is described in
+\insertCite{c22b;textual}{CohensdpLibrary}. Other methods are available, described in
+\insertCite{m00,ak03,CG057-1,f22;textual}{CohensdpLibrary}
 }
 \examples{
 

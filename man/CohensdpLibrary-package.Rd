@@ -39,5 +39,10 @@ the sadists::kprime distribution is inaccurate for small nu1 or small nu2.
 \author{
 \strong{Maintainer}: Denis Cousineau \email{denis.cousineau@uottawa.ca} (Developer)
 
+Other contributors:
+\itemize{
+  \item Douglas Fitts [contributor]
+}
+
 }
 \keyword{internal}

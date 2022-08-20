@@ -102,11 +102,12 @@ explain.CohensdpObject <- function(x, ...) {
                                 sprintf("\t*: confidence interval obtained from the lambda-second method with %d degrees of freedom (Cousineau, 2022, The Quantitative Methods for Psychology)\n", 2*(sts$n-1))
                             else
                                 switch(x$method,
-                                "exact" =                sprintf("\t*: confidence interval obtained from the prior-informed lambda'' method with %d degrees of freedom (Cousineau, 2022, The Quantitative Methods for Psychology)\n", 2*(sts$n-1) ),
-                                "piCI" =                 sprintf("\t*: confidence interval obtained from the prior-informed lambda'' method with %d degrees of freedom (Cousineau, 2022, The Quantitative Methods for Psychology)\n", 2*(sts$n-1) ),
-                                "adjustedlambdaprime" =  sprintf("\t*: confidence interval obtained from the adjusted lambda' method with %d degrees of freedom (Cousineau & Goulet-Pelletier, 2021, The Quantitative Methods for Psychology)\n", 2*(sts$n-1) ),
-                                "alginakeselman2003" =   sprintf("\t*: confidence interval obtained from the Algina & Keselmand method based on the pivotal of a scaled non-central t' with %d degrees of freedom (2003, Educational and Psychological Measurement)\n", sts$n-1 ),
-                                "morris2000" =           sprintf("\t*: confidence interval obtained from the Morris method based on the z distribution and the standard error of dp (2000, British Journal of Mathematical and Statistical Psycholog)\n" )
+                                "exact" =                   sprintf("\t*: confidence interval obtained from the prior-informed lambda'' method with %d degrees of freedom (Cousineau, 2022, The Quantitative Methods for Psychology).\n", 2*(sts$n-1) ),
+                                "piCI" =                    sprintf("\t*: confidence interval obtained from the prior-informed lambda'' method with %d degrees of freedom (Cousineau, 2022, The Quantitative Methods for Psychology).\n", 2*(sts$n-1) ),
+                                "morris2000" =              sprintf("\t*: confidence interval obtained from the Morris method based on the z distribution and the standard error of dp (2000, British Journal of Mathematical and Statistical Psycholog)\n" ),
+                                "alginakeselman2003" =      sprintf("\t*: confidence interval obtained from the Algina & Keselmand method based on the pivotal of a scaled non-central t' with %d degrees of freedom (2003, Educational and Psychological Measurement).\n", sts$n-1 ),
+                                "adjustedlambdaprime" =     sprintf("\t*: confidence interval obtained from the adjusted lambda' method with %d degrees of freedom (Cousineau & Goulet-Pelletier, 2021, The Quantitative Methods for Psychology).\n", 2*(sts$n-1) ),
+                                "regressionapproximation" = sprintf("\t*: confidence interval obtained from the regression approximation method with adjusted gamma of %5.4f (Fitts, 2022, The Quantitative Methods for Psychology).\n", fittsAdjustedGamma(x$gamma, sts$n) )
                                 ),
                 "between" = sprintf("\t*: confidence interval obtained from the lambda-prime method with %d degrees of freedom (Lecoutre, 2007, Journal of Modern Applied Statistical Methods)\n", sts$n1+sts$n2-2) 
             )

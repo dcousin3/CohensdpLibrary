@@ -30,7 +30,8 @@
 #' @param design        the design of the measures (``"within"``, ``"between"``, or ``"single"``);
 #' @param gamma         the confidence level of the confidence interval (default 0.95) 
 #' @param method        In "within"-subject design only, choose among methods ``"piCI"`` (default), or
-#'                      ``"adjustedlambdaprime"``, ``"alginakeselman2003"``, ``"morris2000"``.
+#'                      ``"adjustedlambdaprime"``, ``"alginakeselman2003"``, ``"morris2000"``, and
+#'                      ``"regressionapproximation"``.
 #'
 #' @return   The Cohen's $d_p$ statistic and its confidence interval.
 #'           The return value is internally a dpObject which can be 
@@ -39,7 +40,12 @@
 #' @details
 #' This function uses the exact method in "single"-group and "between"-subject designs. 
 #' In "within"-subject design, the default is the prior-informed confidence interval
-#' ("piCI") which is based on a bayesian credible interval. Other methods are available.
+#' ("piCI") which is based on a bayesian credible interval. This method is described in
+#' \insertCite{c22b;textual}{CohensdpLibrary}. Other methods are available, described in
+#' \insertCite{m00,ak03,CG057-1,f22;textual}{CohensdpLibrary}
+#'
+#'
+#'
 #'
 #' @references
 #' \insertAllCited{}
@@ -107,7 +113,7 @@ Cohensdp <- function(
         stop( messageSexa(method) )
     if (design == "between" & !( method == "exact"))
         stop( messageBexa(method) )
-    if (design == "within" & !( method %in% c("exact","piCI","adjustedlambdaprime","alginakeselman2003","morris2000") ) )
+    if (design == "within" & !( method %in% c("exact","piCI","adjustedlambdaprime","alginakeselman2003","morris2000","regressionapproximation") ) )
         stop( messageWexa(method) )
 
 
@@ -219,11 +225,12 @@ Cohensdp.within <- function(statistics, gamma = .95, method ) {
             } else if ("r" %in% names(statistics)) {
                 if(statistics$r == 0) statistics=modifyList(statistics, list(r = 0.0000001))
                 switch( method,
-                    "exact" =                Cohensdp.within.piCI( statistics, gamma ),
-                    "piCI" =                 Cohensdp.within.piCI( statistics, gamma ),
-                    "adjustedlambdaprime" =  Cohensdp.within.adjustedlambdaprime( statistics, gamma ),
-                    "alginakeselman2003" =   Cohensdp.within.alginakeselman2003( statistics, gamma ),
-                    "morris2000" =           Cohensdp.within.morris2000( statistics, gamma )
+                    "exact" =                   Cohensdp.within.piCI( statistics, gamma ),
+                    "piCI" =                    Cohensdp.within.piCI( statistics, gamma ),
+                    "adjustedlambdaprime" =     Cohensdp.within.adjustedlambdaprime( statistics, gamma ),
+                    "alginakeselman2003" =      Cohensdp.within.alginakeselman2003( statistics, gamma ),
+                    "morris2000" =              Cohensdp.within.morris2000( statistics, gamma ),
+                    "regressionapproximation" = Cohensdp.within.regressionapproximation( statistics, gamma )
                 )
             }
     res
@@ -322,7 +329,7 @@ Cohensdp.within.alginakeselman2003 <- function(statistics , gamma = .95) {
 
     W <- GM(c(sts$s1^2, sts$s2^2)) / mean(c(sts$s1^2, sts$s2^2))
     rW <- sts$r * W
-    ## MBESS is creating R Run errors, so made it with the true pivot distribution
+    ## MBESS is creating R Run errors, so implemented it with the true pivot distribution
     #    tCI <- MBESS::conf.limits.nct(dp * sqrt(sts$n/(2*(1-rW))), sts$n-1, conf.level = gamma)
     #    tCI.low <- tCI$Lower.Limit
     #    tCI.hig <- tCI$Upper.Limit
@@ -333,6 +340,40 @@ Cohensdp.within.alginakeselman2003 <- function(statistics , gamma = .95) {
     c(dp, limits)
 }
 
+
+fittsAdjustedGamma <- function(gamma, n) {
+    # compute corrected confidence level from regression equations; see Fitts, 2022
+    switch(toString(gamma),
+      "0.9"  = gamma2 <- 1 - (0.1001 - 0.1087 / n + 0.3589 / n^2),
+      "0.95" = gamma2 <- 1 - (0.0495 - 0.0843 / n),
+      "0.99" = gamma2 <- 1 - (0.0098 - 0.0461 / n),
+      stop( messageNotg(gamma) )
+    )  
+    gamma2
+}
+
+Cohensdp.within.regressionapproximation <- function(statistics, gamma = .95) {
+    sts  <- vfyStat(statistics, c("m1","s1","m2","s2","n", "r"))
+    GM<- function(ns) {length(ns) / sum(1/ns)}  # Geometric mean
+
+    #get pairwise statistics Delta means and pooled SD
+    dmn  <- sts$m1 - sts$m2
+    sdp  <- sqrt((sts$s1^2 + sts$s2^2)/2)
+
+    #compute biased Cohen's d_p 
+    dp <- dmn / sdp
+
+    # compute corrected confidence level from regression equations; see Fitts, 2022
+    gamma2 <- fittsAdjustedGamma( gamma, sts$n )
+    W   <- GM(c(sts$s1^2, sts$s2^2)) / mean(c(sts$s1^2, sts$s2^2))
+    rW  <- sts$r * W
+    rOP <- sts$r * (1 + (1-sts$r^2)/(2 * (sts$n - 3)))
+   
+    tCI.low <- qlprime( p = 0.5 - gamma2 /2, ncp = dp * sqrt(sts$n/(2*(1-rW))), nu = 2/(1+rOP^2)*(sts$n-1) )
+    tCI.hig <- qlprime( p = 0.5 + gamma2 /2, ncp = dp * sqrt(sts$n/(2*(1-rW))), nu = 2/(1+rOP^2)*(sts$n-1) )
+    limits <- c(tCI.low, tCI.hig) / sqrt(sts$n/(2*(1-rW)))
+    c( dp, limits)
+}
 
 
 ##############################################################################

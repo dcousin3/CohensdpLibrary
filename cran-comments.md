@@ -1,12 +1,10 @@
 ## Submission
 
-* Updated version 0.5.6
+* Updated version 0.5.7
 
 ## Comment
 
-* The lto tests were failing; I corrected the init.c wrapper to match compatility requirements.
-
-* I re-ran R CMD check just to be sure.
+* added one method to Cohens's dp in within-subject design.
 
 ## Test environments
 

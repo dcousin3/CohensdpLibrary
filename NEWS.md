@@ -1,3 +1,7 @@
+# CohensdpLibrary 0.5.7 (20 August 2022)
+
+* Added "regressionapproximation" method to within-subject designs (Fitts, 2022).
+
 # CohensdpLibrary 0.5.6 (18 August 2022)
 
 * Matched the lto cross-compiler compatibility tests .
