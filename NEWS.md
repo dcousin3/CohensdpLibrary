@@ -20,7 +20,7 @@
 
 # CohensdpLibrary 0.5.0 (4 August 2022)
 
-* Version for the manuscript Cousineau, D. (submitted)
+* Version for the manuscript; Cousineau, D. (submitted)
 
 # CohensdpLibrary 0.4 (August 2022)
 

@@ -37,8 +37,8 @@ FUNCTION FBlsecondPDF( delta, n, d, r, rho, TOL, MAXITER )
     REAL(PR), PARAMETER   :: HALF=0.5D0, ONE=1.0D0, TWO = 2.0D0, FOUR =  4.0D0
 
     !  Local declarations
-    REAL(PR)              :: q, b0, total, step, previousstep, ck, ek, ier
-    INTEGER               :: k
+    REAL(PR)              :: q, b0, total, step, previousstep, ck, ek
+    INTEGER               :: k, ier
 
     step  = 0.0D0
     previousstep = 0.0D0

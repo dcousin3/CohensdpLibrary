@@ -27,7 +27,7 @@
 }
 
 # header to messages
-hm = "CohensdLibrary |> "
+hm = sprintf(">>= CohensdpLibrary %s=>> ", packageVersion("CohensdpLibrary") )
 
 # define the error messages here as they are used in many functions
 messageSnotL <- function()       {paste(hm, "Argument `statistics` is missing or is not a list. Exiting...", sep="")}

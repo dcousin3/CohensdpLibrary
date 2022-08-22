@@ -1,11 +1,10 @@
 ## Submission
 
-* Updated version 0.5.7
+* Updated version 0.5.8
 
 ## Comment
 
-* Created init.c file as per "package_native_routine_registration_skeleton", 
-  that is, with void for all the parameters (hardly can see with this is better...)
+* Man, thanks for seeing this. Corrected ier type to integer.
 
 ## Test environments
 
