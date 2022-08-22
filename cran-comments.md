@@ -4,7 +4,8 @@
 
 ## Comment
 
-* added one method to Cohens's dp in within-subject design.
+* Created init.c file as per "package_native_routine_registration_skeleton", 
+  that is, with void for all the parameters (hardly can see with this is better...)
 
 ## Test environments
 

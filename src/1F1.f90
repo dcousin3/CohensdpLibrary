@@ -45,6 +45,7 @@ SUBROUTINE CHGM(A,B,X,HG)
     !===================================================
     IMPLICIT DOUBLE PRECISION (A-H,O-Z)
     PI=3.141592653589793D0
+    Y1=0.0D0
     A0=A
     A1=A
     X0=X

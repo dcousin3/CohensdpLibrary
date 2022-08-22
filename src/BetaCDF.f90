@@ -452,7 +452,7 @@ function alnrel ( a )
   implicit none
   INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-  real(kind=16), parameter :: onedble=1.0_16
+  real(PR), parameter :: onedble=1.0_16
   real(PR), parameter :: one=1.0D0, two=2.0D0
 
   real(PR) a
@@ -1249,7 +1249,7 @@ function bpser ( a, b, x, eps )
   implicit none
   INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-  real(kind=16), parameter :: onedble=1.0D0
+  real(PR), parameter :: onedble=1.0D0
   real(PR), parameter :: zero=0.0D0, half=0.5D0, one=1.0D0
 
   real(PR) a
@@ -1384,7 +1384,7 @@ function brcmp1 ( mu, a, b, x, y )
   implicit none
   INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-  real(kind=16), parameter :: onedble=1.0_16
+  real(PR), parameter :: onedble=1.0_16
   real(PR), parameter :: zero=0.0D0, one=1.0D0
 
   real(PR) a
@@ -1547,7 +1547,7 @@ function brcomp ( a, b, x, y )
   implicit none
   INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-  real(kind=16), parameter :: onedble=1.0_16
+  real(PR), parameter :: onedble=1.0_16
   real(PR), parameter :: zero=0.0D0, one=1.0D0
 
   real(PR) a
@@ -2315,7 +2315,7 @@ function gsumln ( a, b )
   implicit none
   INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-  real(kind=16), parameter :: twodble=2.0_16
+  real(PR), parameter :: twodble=2.0_16
   real(PR), parameter :: one=1.0D0
 
   real(PR) a
@@ -2818,7 +2818,7 @@ function psi ( xx )
 
   real(PR) aug
   real(PR) den
-  real(kind=16), parameter :: dx0 = 1.461632144968362341262659542325721325D0
+  real(PR), parameter :: dx0 = 1.461632144968362341262659542325721325D0
   integer i
   integer ipmpar
   integer m
@@ -2945,7 +2945,7 @@ function psi ( xx )
       end do
 
       den = (upper + p1(7)) / (den + q1(6))
-      xmx0 = real(x  - dx0 ,kind(1.0D0))
+      xmx0 = real(x  - dx0, kind(1.0D0))
       psi = den * xmx0 + aug
       return
 !
