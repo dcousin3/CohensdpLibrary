@@ -1,14 +1,14 @@
 ## Submission
 
-* Updated version 0.5.8
+* Updated version 0.5.9
 
 ## Comment
 
-* Man, thanks for seeing this. Corrected ier type to integer.
+* Just re-vamp fortran code for standard fortran 2008, following Prof Ripley's message.
 
 ## Test environments
 
-* local WIN-64x install, R 4.1.0
+* local WIN-64x install, R 4.3.0
 
 * win-builder devel 
 
@@ -21,36 +21,22 @@
 
 * There was a few NOTEs on remote servers: 
 
-* Win-dev returned one note:
+* Win-dev returned zero note:
 
-> checking CRAN incoming feasibility ... NOTE
-Maintainer: 'Denis Cousineau <denis.cousineau@uottawa.ca>'
+* R-hub returned two notes on some servers:
 
-* R-hub returned four notes:
-
-> checking CRAN incoming feasibility ... NOTE
-Maintainer: 'Denis Cousineau <denis.cousineau@uottawa.ca>'
-I do not know what this message means or how it can be resolved.
-
-> checking dependencies in R code ... NOTE
-  Namespace in Imports field not imported from: 'Rdpack'
-    All declared Imports should be used.
-Rdpack is for building documentation but is not required in the present package
-
-> checking for detritus in the temp directory ... NOTE
-  Found the following files/directories:
-    'lastMiKTeXException'
-This directory is created by r-hub but is not part of the present package.
-
-> checking HTML version of manual ... NOTE
+  - nothing on Debian Linux, R-devel, GCC ASAN/UBSAN
+  
+  - Ubuntu Linux 20.04.1 LTS, R-release, GCC says
+      - * checking HTML version of manual ... NOTE
 Skipping checking HTML validation: no command 'tidy' found
-I do not know what this message means or how it can be resolved.
+Skipping checking math rendering: package 'V8' unavailable
 
-
+  - Fedora Linux, R-devel, clang, gfortran says the same as Ubuntu
 
 ## Downstream dependencies
 
 * This package does not rely on any other packages
 
-* It requires Rtools4
+* It requires Rtools4.3
 
