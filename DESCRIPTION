@@ -2,7 +2,8 @@ Package: CohensdpLibrary
 Type: Package
 Title: Cohen's D_p Computation with Confidence Intervals
 Description: Computing Cohen's d_p in any experimental designs (between-subject, within-subject, and single-group design). Cousineau (2022) <https://github.com/dcousin3/CohensdpLibrary>; Cohen (1969, ISBN: 0-8058-0283-5).
-Version: 0.5.8
+Nickname: Compute this
+Version: 0.5.9
 Date: 2022-08-20
 License: GPL-3
 Authors@R: c(person(given = "Denis", family = "Cousineau", 
@@ -13,11 +14,11 @@ Authors@R: c(person(given = "Denis", family = "Cousineau",
                     role = "ctb" )
             )
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
 NeedsCompilation: yes
 Imports: Rdpack
 Depends:
     R (>= 3.5.0)
 Suggests: 
-    testthat,
+    testthat
 RdMacros: Rdpack

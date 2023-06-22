@@ -149,8 +149,8 @@ FUNCTION kprimecdf( x, q, r, a1, TOL, MAXITER, ier )
    aqa = a2/(q+a2)
    aqal = log(aqa)
    qqal = q2*log(one-aqa)
-   q2l = dlgama(q2)
-   r2l = dlgama(r2)
+   q2l = log_gamma(q2)
+   r2l = log_gamma(r2)
    r2l1mx = r2*log(one-xarg)
    xl = log(xarg)
    k = max( 0, int( a2-(a2+a2)/q ) )   ! Mode of neg. bin. distribution
@@ -182,7 +182,7 @@ FUNCTION kprimecdf( x, q, r, a1, TOL, MAXITER, ier )
          end if
       end if
       if ( k > 0 ) then
-         gcoeff(0) = qqal - q2l + dlgama(dj2+q2) - dlgama(dj2+one) + dj2*aqal
+         gcoeff(0) = qqal - q2l + log_gamma(dj2+q2) - log_gamma(dj2+one) + dj2*aqal
          if ( gcoeff(0) >= explower ) then
             gcoeff(0) = exp(gcoeff(0))*half
          else
@@ -194,16 +194,16 @@ FUNCTION kprimecdf( x, q, r, a1, TOL, MAXITER, ier )
             ier = 4
             return
          end if
-         gcoeff(1) = qqal - q2l + dlgama(dj2+q2) - dlgama(dj2+one) + dj2*aqal
+         gcoeff(1) = qqal - q2l + log_gamma(dj2+q2) - log_gamma(dj2+one) + dj2*aqal
          if ( gcoeff(1) >= explower ) then
             gcoeff(1) = exp(gcoeff(1))*half
          else
             gcoeff(1) = zero
          end if
-         xgamf(0) = (k+1)*half*xl+r2l1mx+dlgama(r2+(k+1)*half)-r2l-dlgama((k+3)*half)
-         xgamf(1) = (k+2)*half*xl+r2l1mx+dlgama(r2+k*half+one)-r2l-dlgama((k+4)*half)
+         xgamf(0) = (k+1)*half*xl+r2l1mx+log_gamma(r2+(k+1)*half)-r2l-log_gamma((k+3)*half)
+         xgamf(1) = (k+2)*half*xl+r2l1mx+log_gamma(r2+k*half+one)-r2l-log_gamma((k+4)*half)
          xgamb(0) = xgamf(0)
-         xgamb(1) = k*half*xl+r2l1mx+dlgama(r2+k*half)-r2l-dlgama((k+2)*half)
+         xgamb(1) = k*half*xl+r2l1mx+log_gamma(r2+k*half)-r2l-log_gamma((k+2)*half)
          if ( xgamf(0) >= explower .and. xgamf(1) >= explower .and.   &
               xgamb(1) >= explower ) then
             xgamf(0) = exp(xgamf(0))
@@ -221,7 +221,7 @@ FUNCTION kprimecdf( x, q, r, a1, TOL, MAXITER, ier )
       gcoefb(0) = gcoeff(0)
       betab(0) = betaf(0)
       dj2 = (k-1)*half
-      gcoefb(1) = qqal - q2l + dlgama(dj2+q2) - dlgama(dj2+one) + dj2*aqal
+      gcoefb(1) = qqal - q2l + log_gamma(dj2+q2) - log_gamma(dj2+one) + dj2*aqal
       if ( gcoefb(1) >= explower ) then
          gcoefb(1) = exp(gcoefb(1))*half
       else
@@ -230,7 +230,7 @@ FUNCTION kprimecdf( x, q, r, a1, TOL, MAXITER, ier )
       betab(1) = betaf(1) + xgamb(1)
    else
       gcoeff(0) = ((one-aqa)**q2)*half
-      gcoeff(1) = qqal - q2l - dlg15 + half*aqal + dlgama(q2+half)
+      gcoeff(1) = qqal - q2l - dlg15 + half*aqal + log_gamma(q2+half)
       if ( gcoeff(1) >= explower ) then
          gcoeff(1) = exp(gcoeff(1))*half
       else
@@ -242,7 +242,7 @@ FUNCTION kprimecdf( x, q, r, a1, TOL, MAXITER, ier )
          ier = 4
          return
       end if
-      xgamf(0) = r2l1mx+dlgama(r2+half)-r2l-dlg15+half*xl
+      xgamf(0) = r2l1mx+log_gamma(r2+half)-r2l-dlg15+half*xl
       xgamf(1) = (one-xarg)**r2*xarg*r2
       xgamb(0) = xgamf(0)
       xgamb(1) = (one-xarg)**r2
@@ -458,8 +458,8 @@ SUBROUTINE kprimebis( x, q, r, a1, TOL, MAXITER, ier, result )
    aqa = a2/(q+a2)
    aqal = log(aqa)
    qqal = q2*log(one-aqa)
-   q2l = dlgama(q2)
-   r2l = dlgama(r2)
+   q2l = log_gamma(q2)
+   r2l = log_gamma(r2)
    r2l1mx = r2*log(one-xarg)
    xl = log(xarg)
    k = max( 0, int( a2-(a2+a2)/q ) )   ! Mode of neg. bin. distribution
@@ -491,7 +491,7 @@ SUBROUTINE kprimebis( x, q, r, a1, TOL, MAXITER, ier, result )
          end if
       end if
       if ( k > 0 ) then
-         gcoeff(0) = qqal - q2l + dlgama(dj2+q2) - dlgama(dj2+one) + dj2*aqal
+         gcoeff(0) = qqal - q2l + log_gamma(dj2+q2) - log_gamma(dj2+one) + dj2*aqal
          if ( gcoeff(0) >= explower ) then
             gcoeff(0) = exp(gcoeff(0))*half
          else
@@ -503,16 +503,16 @@ SUBROUTINE kprimebis( x, q, r, a1, TOL, MAXITER, ier, result )
             ier = 4
             return
          end if
-         gcoeff(1) = qqal - q2l + dlgama(dj2+q2) - dlgama(dj2+one) + dj2*aqal
+         gcoeff(1) = qqal - q2l + log_gamma(dj2+q2) - log_gamma(dj2+one) + dj2*aqal
          if ( gcoeff(1) >= explower ) then
             gcoeff(1) = exp(gcoeff(1))*half
          else
             gcoeff(1) = zero
          end if
-         xgamf(0) = (k+1)*half*xl+r2l1mx+dlgama(r2+(k+1)*half)-r2l-dlgama((k+3)*half)
-         xgamf(1) = (k+2)*half*xl+r2l1mx+dlgama(r2+k*half+one)-r2l-dlgama((k+4)*half)
+         xgamf(0) = (k+1)*half*xl+r2l1mx+log_gamma(r2+(k+1)*half)-r2l-log_gamma((k+3)*half)
+         xgamf(1) = (k+2)*half*xl+r2l1mx+log_gamma(r2+k*half+one)-r2l-log_gamma((k+4)*half)
          xgamb(0) = xgamf(0)
-         xgamb(1) = k*half*xl+r2l1mx+dlgama(r2+k*half)-r2l-dlgama((k+2)*half)
+         xgamb(1) = k*half*xl+r2l1mx+log_gamma(r2+k*half)-r2l-log_gamma((k+2)*half)
          if ( xgamf(0) >= explower .and. xgamf(1) >= explower .and.   &
               xgamb(1) >= explower ) then
             xgamf(0) = exp(xgamf(0))
@@ -530,7 +530,7 @@ SUBROUTINE kprimebis( x, q, r, a1, TOL, MAXITER, ier, result )
       gcoefb(0) = gcoeff(0)
       betab(0) = betaf(0)
       dj2 = (k-1)*half
-      gcoefb(1) = qqal - q2l + dlgama(dj2+q2) - dlgama(dj2+one) + dj2*aqal
+      gcoefb(1) = qqal - q2l + log_gamma(dj2+q2) - log_gamma(dj2+one) + dj2*aqal
       if ( gcoefb(1) >= explower ) then
          gcoefb(1) = exp(gcoefb(1))*half
       else
@@ -539,7 +539,7 @@ SUBROUTINE kprimebis( x, q, r, a1, TOL, MAXITER, ier, result )
       betab(1) = betaf(1) + xgamb(1)
    else
       gcoeff(0) = ((one-aqa)**q2)*half
-      gcoeff(1) = qqal - q2l - dlg15 + half*aqal + dlgama(q2+half)
+      gcoeff(1) = qqal - q2l - dlg15 + half*aqal + log_gamma(q2+half)
       if ( gcoeff(1) >= explower ) then
          gcoeff(1) = exp(gcoeff(1))*half
       else
@@ -551,7 +551,7 @@ SUBROUTINE kprimebis( x, q, r, a1, TOL, MAXITER, ier, result )
          ier = 4
          return
       end if
-      xgamf(0) = r2l1mx+dlgama(r2+half)-r2l-dlg15+half*xl
+      xgamf(0) = r2l1mx+log_gamma(r2+half)-r2l-dlg15+half*xl
       xgamf(1) = (one-xarg)**r2*xarg*r2
       xgamb(0) = xgamf(0)
       xgamb(1) = (one-xarg)**r2

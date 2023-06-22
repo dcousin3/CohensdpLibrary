@@ -452,7 +452,7 @@ function alnrel ( a )
   implicit none
   INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-  real(PR), parameter :: onedble=1.0_16
+  real(PR), parameter :: onedble=1.0D0
   real(PR), parameter :: one=1.0D0, two=2.0D0
 
   real(PR) a
@@ -874,7 +874,7 @@ function betaln ( a0, b0 )
   real(PR) betaln
   real(PR) c
   real(PR), parameter :: e = 0.918938533204673D0
-!!real(PR) dlgama
+!!real(PR) log_gamma
   real(PR) gsumln
   real(PR) h
   integer i
@@ -892,10 +892,10 @@ function betaln ( a0, b0 )
 !  a < 1
 !
   if ( b < 8.0D0 ) then
-    betaln = dlgama ( a ) + ( dlgama ( b ) - dlgama ( a + b ) )
+    betaln = log_gamma ( a ) + ( log_gamma ( b ) - log_gamma ( a + b ) )
     return
   else
-    betaln = dlgama ( a ) + algdiv ( a, b )
+    betaln = log_gamma ( a ) + algdiv ( a, b )
     return
   end if
 !
@@ -903,11 +903,11 @@ function betaln ( a0, b0 )
 !
    20 if (a .gt. two) go to 30
       if (b .gt. two) go to 21
-         betaln = dlgama(a) + dlgama(b) - gsumln(a,b)
+         betaln = log_gamma(a) + log_gamma(b) - gsumln(a,b)
          return
    21 w = zero
       if (b < 8.0D0) go to 40
-         betaln = dlgama(a) + algdiv(a,b)
+         betaln = log_gamma(a) + algdiv(a,b)
          return
 !
 ! reduction of a when b <= 1000
@@ -922,7 +922,7 @@ function betaln ( a0, b0 )
       end do
       w = log ( w )
       if (b < 8.0D0) go to 40
-      betaln = w + dlgama(a) + algdiv(a,b)
+      betaln = w + log_gamma(a) + algdiv(a,b)
       return
 !
 !  Reduction of b when b < 8
@@ -933,7 +933,7 @@ function betaln ( a0, b0 )
          b = b - one
          z = z * (b/(a + b))
       end do
-      betaln = w + log ( z ) + (dlgama(a) + (dlgama(b) - gsumln(a,b)))
+      betaln = w + log ( z ) + (log_gamma(a) + (log_gamma(b) - gsumln(a,b)))
       return
 !
 !  reduction of a when b .gt. 1000
@@ -944,7 +944,7 @@ function betaln ( a0, b0 )
          a = a - one
          w = w * (a/(one + a/b))
       end do
-      betaln = ( log ( w ) - n* log ( b ) ) + (dlgama(a) + algdiv(a,b))
+      betaln = ( log ( w ) - n* log ( b ) ) + (log_gamma(a) + algdiv(a,b))
       return
 !
 !  procedure when a .ge. 8
@@ -1384,7 +1384,7 @@ function brcmp1 ( mu, a, b, x, y )
   implicit none
   INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-  real(PR), parameter :: onedble=1.0_16
+  real(PR), parameter :: onedble=1.0D0
   real(PR), parameter :: zero=0.0D0, one=1.0D0
 
   real(PR) a
@@ -1547,7 +1547,7 @@ function brcomp ( a, b, x, y )
   implicit none
   INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-  real(PR), parameter :: onedble=1.0_16
+  real(PR), parameter :: onedble=1.0D0
   real(PR), parameter :: zero=0.0D0, one=1.0D0
 
   real(PR) a
@@ -2315,7 +2315,7 @@ function gsumln ( a, b )
   implicit none
   INTEGER, PARAMETER        :: PR=KIND(1.0D0)
 
-  real(PR), parameter :: twodble=2.0_16
+  real(PR), parameter :: twodble=2.0D0
   real(PR), parameter :: one=1.0D0
 
   real(PR) a

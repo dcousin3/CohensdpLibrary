@@ -31,7 +31,7 @@ FUNCTION lprimeidf( p, q, a1, TOL, MAXITER, ier )
     !     External functions called:
     !       LPRIMECDF
     !     Fortran functions called:
-    !       ABS  LOG  SQRT  DLGAMA
+    !       ABS  LOG  SQRT  log_gamma
     !
     !*********************************************************************************************!
     !**                                                                                         **!
@@ -57,7 +57,7 @@ FUNCTION lprimeidf( p, q, a1, TOL, MAXITER, ier )
 
     ier = 0
 
-    k = Exp(dlgama((q+1)/2.) - dlgama(q/2.) ) * sqrt(2/q)
+    k = Exp(log_gamma((q+1)/2.) - log_gamma(q/2.) ) * sqrt(2/q)
 
     lprimeidf = dtrinv( func, p,                       &
                 .FALSE., .FALSE., -1.0D6, 1.0D6,       &

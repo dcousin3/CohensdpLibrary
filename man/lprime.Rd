@@ -21,8 +21,8 @@ qlprime(p, nu, ncp)
 \item{p}{the probability from which a quantile is requested;}
 }
 \value{
-\preformatted{     The probability or quantile of a Lambda' distribution.
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{     The probability or quantile of a Lambda' distribution.
+}\if{html}{\out{</div>}}
 }
 \description{
 plprime computes the cumulative probability of the lambda-prime distribution with

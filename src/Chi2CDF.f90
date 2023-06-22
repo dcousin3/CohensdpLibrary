@@ -108,7 +108,7 @@ FUNCTION chi2cdf( x, p, plimit, ier )
       ier = 2
 
       10 continue
-      a = - y + a*log(y) - dlgama(a)
+      a = - y + a*log(y) - log_gamma(a)
       if ( h >= tinyr ) then
          a = log(h) + a
          if ( a >= explower ) then

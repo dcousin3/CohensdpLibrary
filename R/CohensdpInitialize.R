@@ -1,5 +1,8 @@
 #' @useDynLib CohensdpLibrary
 #
+# what follows needed to avoid devtools::check() error
+#' @importFrom Rdpack reprompt
+#
 # things to initialize
 .onLoad <- function(libname, pkgname) {    
     # set the default arguments for the iterative functions:
@@ -45,6 +48,8 @@ messageRwrg  <- function(r)      {paste(hm, "Correlation ",r," must be between -
 messageSexa  <- function(m)      {paste(hm, "Method `", m, "` unknown in \"single\" design. Only 'exact' is implemented. Exiting...")}
 messageBexa  <- function(m)      {paste(hm, "Method `", m, "` unknown in \"between\" design. Only 'exact' is implemented. Exiting...")}
 messageWexa  <- function(m)      {paste(hm, "Method `", m, "` unknown in \"within\" design. Only 'exact' or 'piCI' (default), 'morris2000', 'alginakeselman2003', 'adjustedlambdaprime', and 'regressionapproximation' are implemented. Exiting...")}
+
+messageNoEx  <- function()       {"There is no exact method known in within-subject design when the population rho is unkown. We suggest method='adjustedlambdaprime'"}
 
 messageNoCI  <- function()       {paste(hm, "There is no confidence interval for an (unbiased) Hedges's gp...", sep="")}
 messageNotg  <- function(g)      {paste(hm, "The confidence level ",g, " has not been calibrated yet. (only .90, .99, and .99 are at this time). Exiting...", sep="" ) }

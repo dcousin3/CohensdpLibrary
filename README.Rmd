@@ -74,7 +74,8 @@ bound) given the sample means, the sample standard deviations, and the correlati
 
 ```{r}
 Cohensdp( statistics = list(m1=76, m2=72, n=20, s1=14.8, s2=18.8, r=0.2),
-          design = "within"
+          design = "within",
+          method = "adjustedlambdaprime"
 )
 ```
 
@@ -82,8 +83,9 @@ You get a more readable output with ``summarize``, e.g.,
 
 ```{r}
 summarize(Cohensdp( statistics = list(m1=76, m2=72, n=20, s1=14.8, s2=18.8, r=0.2),
-                    design = "within")
-)
+                    design = "within",
+                    method = "adjustedlambdaprime"
+))
 ```
 
 The design can be replaced with ``between`` for a between-subject design:

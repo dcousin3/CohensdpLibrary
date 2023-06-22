@@ -1,5 +1,5 @@
 
-# Cohen’s *d*<sub>*p*</sub> library: Getting the Cohen’s *d*<sub>*p*</sub> and its confidence interval in any design
+# Cohen’s $d_p$ library: Getting the Cohen’s $d_p$ and its confidence interval in any design
 
 <!-- badges: start -->
 
@@ -7,37 +7,36 @@
 Status](https://www.r-pkg.org/badges/version/CohensdpLibrary)](https://cran.r-project.org/package=CohensdpLibrary)
 <!-- badges: end -->
 
-This library computes the Cohen’s *d*<sub>*p*</sub> and its confidence
-intervals in any experimental design. In the past, researchers developed
-distinct versions of standardized mean difference for between and
-within-subject design. The consequence is that these various estimators
-could not be compared between each others and more importantly, across
-experimental design. Lakens (2013) noted the existence of two different
-measures in within-subject design, and Westfall (2016) noted the
-existence of at least 5 difference sorts of standardized mean
-difference. He concluded by making this very important point: all these
-estimators ARE NOT Cohen’s d measures.
+This library computes the Cohen’s $d_p$ and its confidence intervals in
+any experimental design. In the past, researchers developed distinct
+versions of standardized mean difference for between and within-subject
+design. The consequence is that these various estimators could not be
+compared between each others and more importantly, across experimental
+design. Lakens (2013) noted the existence of two different measures in
+within-subject design, and Westfall (2016) noted the existence of at
+least 5 difference sorts of standardized mean difference. He concluded
+by making this very important point: all these estimators ARE NOT
+Cohen’s d measures.
 
 The measure that J. Cohen (Cohen, 1969) created is obtained from the
 mean difference standardized using the pooled standard deviation. Hence,
-measures such as *d*<sub>*a*<sub>*v*</sub></sub>, *d*<sub>*z*</sub>,
-*d*<sub>*a*</sub>, etc. are not Cohen’s d and **more importantly**, they
-cannot be compared! They all return different values because they
-measure different things. They are not just different, they can be
-markedly different. As an example, a *d*<sub>*z*</sub>, given the means
-and standard deviations, can be *smaller* **or** *larger* than the
-Cohen’s *d* depending on the amount of correlation across the pairs of
-data.
+measures such as $d_a_v$, $d_z$, $d_a$, etc. are not Cohen’s d and
+**more importantly**, they cannot be compared! They all return different
+values because they measure different things. They are not just
+different, they can be markedly different. As an example, a $d_z$, given
+the means and standard deviations, can be *smaller* **or** *larger* than
+the Cohen’s $d$ depending on the amount of correlation across the pairs
+of data.
 
 This whole mess implies lack of comparability and confusion as to what
 statistics was actually reported. For that reason, I chose to call the
-true Cohen’s *d* with a distinct subscript *p*, as in *d*<sub>*p*</sub>
-so that (i) we clearly see the difference (the reader is not left
-guessing what *d* represents); (ii) is is clear that the pooled standard
-deviation and only this statistic was used to standardized the mean
-difference. Further, by advocating a unique statistic for standardized
-mean difference, it allows for comparisons across studies, whether they
-used within-subject or between-subject design.
+true Cohen’s $d$ with a distinct subscript $p$, as in $d_p$ so that (i)
+we clearly see the difference (the reader is not left guessing what $d$
+represents); (ii) is is clear that the pooled standard deviation and
+only this statistic was used to standardized the mean difference.
+Further, by advocating a unique statistic for standardized mean
+difference, it allows for comparisons across studies, whether they used
+within-subject or between-subject design.
 
 ## Why this package?
 
@@ -77,30 +76,32 @@ and before using it:
 library(CohensdpLibrary)
 ```
 
-The main function is `Cohensdp`, which returns the Cohen’s
-*d*<sub>*p*</sub> and its confidence intervals under various designs.
-For example, this returns the triplet (lower 95% confidence interval
-bound, *d*<sub>*p*</sub>, upper 95% confidence interval bound) given the
-sample means, the sample standard deviations, and the correlation
+The main function is `Cohensdp`, which returns the Cohen’s $d_p$ and its
+confidence intervals under various designs. For example, this returns
+the triplet (lower 95% confidence interval bound, $d_p$, upper 95%
+confidence interval bound) given the sample means, the sample standard
+deviations, and the correlation
 
 ``` r
 Cohensdp( statistics = list(m1=76, m2=72, n=20, s1=14.8, s2=18.8, r=0.2),
-          design = "within"
+          design = "within",
+          method = "adjustedlambdaprime"
 )
 ```
 
-    ## [1] -0.3340867  0.2364258  0.7998962
+    ## [1] -0.3422415  0.2364258  0.8025925
 
 You get a more readable output with `summarize`, e.g.,
 
 ``` r
 summarize(Cohensdp( statistics = list(m1=76, m2=72, n=20, s1=14.8, s2=18.8, r=0.2),
-                    design = "within")
-)
+                    design = "within",
+                    method = "adjustedlambdaprime"
+))
 ```
 
     ## Cohen's dp         = 0.236
-    ##   95.0% Confidence interval = [-0.334, 0.800]
+    ##   95.0% Confidence interval = [-0.342, 0.803]
 
 The design can be replaced with `between` for a between-subject design:
 
@@ -117,9 +118,9 @@ summarize(Cohensdp( statistics = list(m1=76, m2=72, n1=10, n2=10, s1=14.8, s2=18
 between-group design, and `n` is provided separately for each group,
 `n1` and `n2`).
 
-Finally, it is also possible to get a Cohen’s *d*<sub>*p*</sub> from a
-single group as long as you have an hypothetical mean `m0` to compare
-the sample mean to, e.g.,
+Finally, it is also possible to get a Cohen’s $d_p$ from a single group
+as long as you have an hypothetical mean `m0` to compare the sample mean
+to, e.g.,
 
 ``` r
 summarize(Cohensdp( statistics = list(m=76, m0=72, n=20, s=14.8),
@@ -150,8 +151,8 @@ sciences*. Academic Press.
 
 <div id="ref-c22a" class="csl-entry">
 
-Cousineau, D. (2022). *The exact distribution of the Cohen’s
-*d*<sub>*p*</sub> in repeated-measure designs*. PsyArXiv.
+Cousineau, D. (2022). *The exact distribution of the Cohen’s $d_p$ in
+repeated-measure designs*. PsyArXiv.
 <https://doi.org/10.31234/osf.io/akcnd>
 
 </div>
@@ -159,8 +160,8 @@ Cousineau, D. (2022). *The exact distribution of the Cohen’s
 <div id="ref-c22b" class="csl-entry">
 
 Cousineau, D. (submitted). The exact confidence interval of the Cohen’s
-*d*<sub>*p*</sub> in repeated-measure designs. *The Quantitative Methods
-for Psychology*.
+$d_p$ in repeated-measure designs. *The Quantitative Methods for
+Psychology*.
 
 </div>
 
@@ -191,7 +192,7 @@ cumulative science: A practical primer for t-tests and ANOVAs.
 
 <div id="ref-w16" class="csl-entry">
 
-Westfall, J. (2016). Five different “Cohen’s *d*” statistics for
+Westfall, J. (2016). Five different “Cohen’s $d$” statistics for
 within-subject designs.
 
 </div>

@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">CohensdpLibrary</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.5.9</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -63,89 +59,91 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<div id="cohens-dp-library-getting-the-cohens-dp-and-its-confidence-interval-in-any-design" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#cohens-dp-library-getting-the-cohens-dp-and-its-confidence-interval-in-any-design" class="anchor"></a>Cohen’s <em>d</em><sub><em>p</em></sub> library: Getting the Cohen’s <em>d</em><sub><em>p</em></sub> and its confidence interval in any design</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="cohens-d_p-library-getting-the-cohens-d_p-and-its-confidence-interval-in-any-design">Cohen’s <span class="math inline"><em>d</em><sub><em>p</em></sub></span> library: Getting the Cohen’s <span class="math inline"><em>d</em><sub><em>p</em></sub></span> and its confidence interval in any design<a class="anchor" aria-label="anchor" href="#cohens-d_p-library-getting-the-cohens-d_p-and-its-confidence-interval-in-any-design"></a>
+</h1></div>
 <!-- badges: start -->
 
-<p>This library computes the Cohen’s <em>d</em><sub><em>p</em></sub> and its confidence intervals in any experimental design. In the past, researchers developed distinct versions of standardized mean difference for between and within-subject design. The consequence is that these various estimators could not be compared between each others and more importantly, across experimental design. Lakens (2013) noted the existence of two different measures in within-subject design, and Westfall (2016) noted the existence of at least 5 difference sorts of standardized mean difference. He concluded by making this very important point: all these estimators ARE NOT Cohen’s d measures.</p>
-<p>The measure that J. Cohen (Cohen, 1969) created is obtained from the mean difference standardized using the pooled standard deviation. Hence, measures such as <em>d</em><sub><em>a</em><sub><em>v</em></sub></sub>, <em>d</em><sub><em>z</em></sub>, <em>d</em><sub><em>a</em></sub>, etc. are not Cohen’s d and <strong>more importantly</strong>, they cannot be compared! They all return different values because they measure different things. They are not just different, they can be markedly different. As an example, a <em>d</em><sub><em>z</em></sub>, given the means and standard deviations, can be <em>smaller</em> <strong>or</strong> <em>larger</em> than the Cohen’s <em>d</em> depending on the amount of correlation across the pairs of data.</p>
-<p>This whole mess implies lack of comparability and confusion as to what statistics was actually reported. For that reason, I chose to call the true Cohen’s <em>d</em> with a distinct subscript <em>p</em>, as in <em>d</em><sub><em>p</em></sub> so that (i) we clearly see the difference (the reader is not left guessing what <em>d</em> represents); (ii) is is clear that the pooled standard deviation and only this statistic was used to standardized the mean difference. Further, by advocating a unique statistic for standardized mean difference, it allows for comparisons across studies, whether they used within-subject or between-subject design.</p>
-<div id="why-this-package" class="section level2">
-<h2 class="hasAnchor">
-<a href="#why-this-package" class="anchor"></a>Why this package?</h2>
+<p>This library computes the Cohen’s <span class="math inline"><em>d</em><sub><em>p</em></sub></span> and its confidence intervals in any experimental design. In the past, researchers developed distinct versions of standardized mean difference for between and within-subject design. The consequence is that these various estimators could not be compared between each others and more importantly, across experimental design. Lakens (2013) noted the existence of two different measures in within-subject design, and Westfall (2016) noted the existence of at least 5 difference sorts of standardized mean difference. He concluded by making this very important point: all these estimators ARE NOT Cohen’s d measures.</p>
+<p>The measure that J. Cohen (Cohen, 1969) created is obtained from the mean difference standardized using the pooled standard deviation. Hence, measures such as <span class="math inline"><em>d</em><sub><em>a</em><sub><em>v</em></sub></sub></span>, <span class="math inline"><em>d</em><sub><em>z</em></sub></span>, <span class="math inline"><em>d</em><sub><em>a</em></sub></span>, etc. are not Cohen’s d and <strong>more importantly</strong>, they cannot be compared! They all return different values because they measure different things. They are not just different, they can be markedly different. As an example, a <span class="math inline"><em>d</em><sub><em>z</em></sub></span>, given the means and standard deviations, can be <em>smaller</em> <strong>or</strong> <em>larger</em> than the Cohen’s <span class="math inline"><em>d</em></span> depending on the amount of correlation across the pairs of data.</p>
+<p>This whole mess implies lack of comparability and confusion as to what statistics was actually reported. For that reason, I chose to call the true Cohen’s <span class="math inline"><em>d</em></span> with a distinct subscript <span class="math inline"><em>p</em></span>, as in <span class="math inline"><em>d</em><sub><em>p</em></sub></span> so that (i) we clearly see the difference (the reader is not left guessing what <span class="math inline"><em>d</em></span> represents); (ii) is is clear that the pooled standard deviation and only this statistic was used to standardized the mean difference. Further, by advocating a unique statistic for standardized mean difference, it allows for comparisons across studies, whether they used within-subject or between-subject design.</p>
+<div class="section level2">
+<h2 id="why-this-package">Why this package?<a class="anchor" aria-label="anchor" href="#why-this-package"></a>
+</h2>
 <p><code>MBESS</code> is an excellent package which already computes standardized mean difference and returns confidence intervals (Kelley, 2022). However, it does not compute confidence intervals in within-subject design directly. The Algina and Keselman approximate method can be implemented within MBESS with some programming (Cousineau &amp; Goulet-Pelletier, 2021). This package, on the other hand, can be used with any experimental design. It only requires an argument <code>design</code> which specifies the type of experimental design.</p>
 <p>The confidence interval in within-subect design was unknown until recently. In recent work (Cousineau, 2022, submitted), its exact expression was found when the population correlation is know and an approximation was proposed when the sample correlation is known, but not the population correlation.</p>
 </div>
 </div>
-<div id="using-cohensdplibrary" class="section level1">
-<h1 class="hasAnchor">
-<a href="#using-cohensdplibrary" class="anchor"></a>Using <code>CohensdpLibrary</code>
+<div class="section level1">
+<h1 id="using-cohensdplibrary">Using <code>CohensdpLibrary</code>
+<a class="anchor" aria-label="anchor" href="#using-cohensdplibrary"></a>
 </h1>
 <p>You can install this library on you computer from CRAN (note the uppercase C and uppercase L)</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"CohensdpLibrary"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"CohensdpLibrary"</span><span class="op">)</span></span></code></pre></div>
 <p>or if the library devtools is installed with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"dcousin3/CohensdpLibrary"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"dcousin3/CohensdpLibrary"</span><span class="op">)</span></span></code></pre></div>
 <p>and before using it:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">CohensdpLibrary</span><span class="op">)</span></code></pre></div>
-<p>The main function is <code>Cohensdp</code>, which returns the Cohen’s <em>d</em><sub><em>p</em></sub> and its confidence intervals under various designs. For example, this returns the triplet (lower 95% confidence interval bound, <em>d</em><sub><em>p</em></sub>, upper 95% confidence interval bound) given the sample means, the sample standard deviations, and the correlation</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">CohensdpLibrary</span><span class="op">)</span></span></code></pre></div>
+<p>The main function is <code>Cohensdp</code>, which returns the Cohen’s <span class="math inline"><em>d</em><sub><em>p</em></sub></span> and its confidence intervals under various designs. For example, this returns the triplet (lower 95% confidence interval bound, <span class="math inline"><em>d</em><sub><em>p</em></sub></span>, upper 95% confidence interval bound) given the sample means, the sample standard deviations, and the correlation</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/Cohensdp.html">Cohensdp</a></span><span class="op">(</span> statistics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>m1<span class="op">=</span><span class="fl">76</span>, m2<span class="op">=</span><span class="fl">72</span>, n<span class="op">=</span><span class="fl">20</span>, s1<span class="op">=</span><span class="fl">14.8</span>, s2<span class="op">=</span><span class="fl">18.8</span>, r<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span>,
-          design <span class="op">=</span> <span class="st">"within"</span>
-<span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] -0.3340867  0.2364258  0.7998962</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/Cohensdp.html">Cohensdp</a></span><span class="op">(</span> statistics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>m1<span class="op">=</span><span class="fl">76</span>, m2<span class="op">=</span><span class="fl">72</span>, n<span class="op">=</span><span class="fl">20</span>, s1<span class="op">=</span><span class="fl">14.8</span>, s2<span class="op">=</span><span class="fl">18.8</span>, r<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span>,</span>
+<span>          design <span class="op">=</span> <span class="st">"within"</span>,</span>
+<span>          method <span class="op">=</span> <span class="st">"adjustedlambdaprime"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="do">## [1] -0.3422415  0.2364258  0.8025925</span></span></code></pre></div>
 <p>You get a more readable output with <code>summarize</code>, e.g.,</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/summarize.html">summarize</a></span><span class="op">(</span><span class="fu"><a href="reference/Cohensdp.html">Cohensdp</a></span><span class="op">(</span> statistics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>m1<span class="op">=</span><span class="fl">76</span>, m2<span class="op">=</span><span class="fl">72</span>, n<span class="op">=</span><span class="fl">20</span>, s1<span class="op">=</span><span class="fl">14.8</span>, s2<span class="op">=</span><span class="fl">18.8</span>, r<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span>,
-                    design <span class="op">=</span> <span class="st">"within"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Cohen's dp         = 0.236</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="do">##   95.0% Confidence interval = [-0.334, 0.800]</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/summarize.html">summarize</a></span><span class="op">(</span><span class="fu"><a href="reference/Cohensdp.html">Cohensdp</a></span><span class="op">(</span> statistics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>m1<span class="op">=</span><span class="fl">76</span>, m2<span class="op">=</span><span class="fl">72</span>, n<span class="op">=</span><span class="fl">20</span>, s1<span class="op">=</span><span class="fl">14.8</span>, s2<span class="op">=</span><span class="fl">18.8</span>, r<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span>,</span>
+<span>                    design <span class="op">=</span> <span class="st">"within"</span>,</span>
+<span>                    method <span class="op">=</span> <span class="st">"adjustedlambdaprime"</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="do">## Cohen's dp         = 0.236</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="do">##   95.0% Confidence interval = [-0.342, 0.803]</span></span></code></pre></div>
 <p>The design can be replaced with <code>between</code> for a between-subject design:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/summarize.html">summarize</a></span><span class="op">(</span><span class="fu"><a href="reference/Cohensdp.html">Cohensdp</a></span><span class="op">(</span> statistics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>m1<span class="op">=</span><span class="fl">76</span>, m2<span class="op">=</span><span class="fl">72</span>, n1<span class="op">=</span><span class="fl">10</span>, n2<span class="op">=</span><span class="fl">10</span>, s1<span class="op">=</span><span class="fl">14.8</span>, s2<span class="op">=</span><span class="fl">18.8</span><span class="op">)</span>,
-                    design <span class="op">=</span> <span class="st">"between"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Cohen's dp         = 0.236</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="do">##   95.0% Confidence interval = [-0.647, 1.113]</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/summarize.html">summarize</a></span><span class="op">(</span><span class="fu"><a href="reference/Cohensdp.html">Cohensdp</a></span><span class="op">(</span> statistics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>m1<span class="op">=</span><span class="fl">76</span>, m2<span class="op">=</span><span class="fl">72</span>, n1<span class="op">=</span><span class="fl">10</span>, n2<span class="op">=</span><span class="fl">10</span>, s1<span class="op">=</span><span class="fl">14.8</span>, s2<span class="op">=</span><span class="fl">18.8</span><span class="op">)</span>,</span>
+<span>                    design <span class="op">=</span> <span class="st">"between"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="do">## Cohen's dp         = 0.236</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="do">##   95.0% Confidence interval = [-0.647, 1.113]</span></span></code></pre></div>
 <p>(the statistic <code>r</code> is removed as there is no correlation in between-group design, and <code>n</code> is provided separately for each group, <code>n1</code> and <code>n2</code>).</p>
-<p>Finally, it is also possible to get a Cohen’s <em>d</em><sub><em>p</em></sub> from a single group as long as you have an hypothetical mean <code>m0</code> to compare the sample mean to, e.g.,</p>
+<p>Finally, it is also possible to get a Cohen’s <span class="math inline"><em>d</em><sub><em>p</em></sub></span> from a single group as long as you have an hypothetical mean <code>m0</code> to compare the sample mean to, e.g.,</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/summarize.html">summarize</a></span><span class="op">(</span><span class="fu"><a href="reference/Cohensdp.html">Cohensdp</a></span><span class="op">(</span> statistics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>m<span class="op">=</span><span class="fl">76</span>, m0<span class="op">=</span><span class="fl">72</span>, n<span class="op">=</span><span class="fl">20</span>, s<span class="op">=</span><span class="fl">14.8</span><span class="op">)</span>,
-                    design <span class="op">=</span> <span class="st">"single"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Cohen's dp         = 0.270</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="do">##   95.0% Confidence interval = [-0.180, 0.713]</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/summarize.html">summarize</a></span><span class="op">(</span><span class="fu"><a href="reference/Cohensdp.html">Cohensdp</a></span><span class="op">(</span> statistics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>m<span class="op">=</span><span class="fl">76</span>, m0<span class="op">=</span><span class="fl">72</span>, n<span class="op">=</span><span class="fl">20</span>, s<span class="op">=</span><span class="fl">14.8</span><span class="op">)</span>,</span>
+<span>                    design <span class="op">=</span> <span class="st">"single"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="do">## Cohen's dp         = 0.270</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="do">##   95.0% Confidence interval = [-0.180, 0.713]</span></span></code></pre></div>
 <p>Replace <code>summarize</code> with <code>explain</code> for additional information on the result.</p>
 <p>Check the web site <a href="https://github.com/dcousin3/CohensdpLibrary" class="uri">https://github.com/dcousin3/CohensdpLibrary</a> for more. also, <code><a href="reference/CohensdpLibrary-package.html">help(CohensdpLibrary)</a></code> will get you started.</p>
 </div>
-<div id="references" class="section level1">
-<h1 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h1>
+<div class="section level1">
+<h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" line-spacing="2">
 <div id="ref-c69" class="csl-entry">
 Cohen, J. (1969). <em>Statistical power analysis for the behavioral sciences</em>. Academic Press.
 </div>
 <div id="ref-c22a" class="csl-entry">
-Cousineau, D. (2022). <em>The exact distribution of the Cohen’s </em>d<em><sub></sub></em>p<em> in repeated-measure designs</em>. PsyArXiv. <a href="https://doi.org/10.31234/osf.io/akcnd" class="uri">https://doi.org/10.31234/osf.io/akcnd</a>
+Cousineau, D. (2022). <em>The exact distribution of the Cohen’s <span class="math inline"><em>d</em><sub><em>p</em></sub></span> in repeated-measure designs</em>. PsyArXiv. <a href="https://doi.org/10.31234/osf.io/akcnd" class="external-link uri">https://doi.org/10.31234/osf.io/akcnd</a>
 </div>
 <div id="ref-c22b" class="csl-entry">
-Cousineau, D. (submitted). The exact confidence interval of the Cohen’s <em>d</em><sub><em>p</em></sub> in repeated-measure designs. <em>The Quantitative Methods for Psychology</em>.
+Cousineau, D. (submitted). The exact confidence interval of the Cohen’s <span class="math inline"><em>d</em><sub><em>p</em></sub></span> in repeated-measure designs. <em>The Quantitative Methods for Psychology</em>.
 </div>
 <div id="ref-CG057-1" class="csl-entry">
-Cousineau, D., &amp; Goulet-Pelletier, J.-C. (2021). A study of confidence intervals for Cohen’s dp in within-subject designs with new proposals. <em>The Quantitative Methods for Psychology</em>, <em>17</em>, 51–75. <a href="https://doi.org/10.20982/tqmp.17.1.p051" class="uri">https://doi.org/10.20982/tqmp.17.1.p051</a>
+Cousineau, D., &amp; Goulet-Pelletier, J.-C. (2021). A study of confidence intervals for Cohen’s dp in within-subject designs with new proposals. <em>The Quantitative Methods for Psychology</em>, <em>17</em>, 51–75. <a href="https://doi.org/10.20982/tqmp.17.1.p051" class="external-link uri">https://doi.org/10.20982/tqmp.17.1.p051</a>
 </div>
 <div id="ref-k22" class="csl-entry">
-Kelley, K. (2022). <em>MBESS: The MBESS R package</em>. Retrieved from <a href="https://CRAN.R-project.org/package=MBESS" class="uri">https://CRAN.R-project.org/package=MBESS</a>
+Kelley, K. (2022). <em>MBESS: The MBESS R package</em>. Retrieved from <a href="https://CRAN.R-project.org/package=MBESS" class="external-link uri">https://CRAN.R-project.org/package=MBESS</a>
 </div>
 <div id="ref-L0003-1" class="csl-entry">
-Lakens, D. (2013). Calculating and reporting effect sizes to facilitate cumulative science: A practical primer for t-tests and ANOVAs. <em>Frontiers in Psychology</em>, <em>4</em>, 1–12. <a href="https://doi.org/10.3389/fpsyg.2013.00863" class="uri">https://doi.org/10.3389/fpsyg.2013.00863</a>
+Lakens, D. (2013). Calculating and reporting effect sizes to facilitate cumulative science: A practical primer for t-tests and ANOVAs. <em>Frontiers in Psychology</em>, <em>4</em>, 1–12. <a href="https://doi.org/10.3389/fpsyg.2013.00863" class="external-link uri">https://doi.org/10.3389/fpsyg.2013.00863</a>
 </div>
 <div id="ref-w16" class="csl-entry">
-Westfall, J. (2016). Five different “Cohen’s <em>d</em>” statistics for within-subject designs.
+Westfall, J. (2016). Five different “Cohen’s <span class="math inline"><em>d</em></span>” statistics for within-subject designs.
 </div>
 </div>
 </div>
@@ -154,49 +152,54 @@ Westfall, J. (2016). Five different “Cohen’s <em>d</em>” statistics for wi
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=CohensdpLibrary">https://​cloud.r-project.org/​package=CohensdpLibrary</a>
-</li>
-</ul>
-</div>
-<div class="license">
-<h2>License</h2>
-<ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></li>
-</ul>
-</div>
-<div class="citation">
-<h2>Citation</h2>
-<ul class="list-unstyled">
-<li><a href="authors.html">Citing CohensdpLibrary</a></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>Denis Cousineau <br><small class="roles"> Author, maintainer </small>  <br><small>(Developer)</small>
-</li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="https://cloud.r-project.org/package=CohensdpLibrary" class="external-link">View on CRAN</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="license">
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://cran.r-project.org/package=CohensdpLibrary"><img src="https://www.r-pkg.org/badges/version/CohensdpLibrary" alt="CRAN Status"></a></li>
+<li><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing CohensdpLibrary</a></li>
+</ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>Denis Cousineau <br><small class="roles"> Author, maintainer </small>  </li>
+<li><a href="authors.html">More about authors...</a></li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://cran.r-project.org/package=CohensdpLibrary" class="external-link"><img src="https://www.r-pkg.org/badges/version/CohensdpLibrary" alt="CRAN Status"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Denis Cousineau.</p>
+  <p></p>
+<p>Developed by Denis Cousineau.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -204,6 +207,8 @@ Westfall, J. (2016). Five different “Cohen’s <em>d</em>” statistics for wi
 
   
 
+
+  
 
   </body>
 </html>

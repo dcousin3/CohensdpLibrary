@@ -23,8 +23,8 @@ qlsecond(p,     n, d, rho)
 \item{p}{the probability from which a quantile is requested}
 }
 \value{
-\preformatted{     The probability or quantile of a Lambda'' distribution.
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{     The probability or quantile of a Lambda'' distribution.
+}\if{html}{\out{</div>}}
 }
 \description{
 This distribution was introduced in \insertCite{c22b;textual}{CohensdpLibrary} as the

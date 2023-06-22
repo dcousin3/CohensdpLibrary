@@ -56,7 +56,7 @@ FUNCTION kprimeidf( p, q, r, a1, TOL, MAXITER, ier )
     REAL(PR)           :: k
     REAL(PR), EXTERNAL :: kprimecdf, dtrinv
 
-    k = Exp(dlgama((q+1)/2.) + dlgama((r-1)/2.) - dlgama(q/2.) - dlgama(r/2.)) * sqrt(r/q)
+    k = Exp(log_gamma((q+1)/2.) + log_gamma((r-1)/2.) - log_gamma(q/2.) - log_gamma(r/2.)) * sqrt(r/q)
 
     kprimeidf = dtrinv( func, p,                            &
                 .FALSE., .FALSE., -1.0D6, +1.0D6,           &

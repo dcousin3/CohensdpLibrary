@@ -32,7 +32,7 @@ FUNCTION tprimeidf( p, q, a1, delta, maxitr, ier )
     !     External functions called:
     !       LPRIMECDF
     !     Fortran functions called:
-    !       ABS  LOG  SQRT  DLGAMA
+    !       ABS  LOG  SQRT  log_gamma
     !
     !*********************************************************************************************!
     !**                                                                                         **!
@@ -60,7 +60,7 @@ FUNCTION tprimeidf( p, q, a1, delta, maxitr, ier )
     REAL(PR), EXTERNAL :: tprimecdf, dtrinv
     ier = 0
 
-    k = sqrt(q/2) * Exp(dlgama((q-1.0D0)/2.0D0) - dlgama(q/2.0D0) ) 
+    k = sqrt(q/2) * Exp(log_gamma((q-1.0D0)/2.0D0) - log_gamma(q/2.0D0) ) 
 
     tprimeidf = dtrinv( func, p,                             &
                 .FALSE., .FALSE., -1.0D6, 1.0D6,          &

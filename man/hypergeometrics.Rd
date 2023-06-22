@@ -21,8 +21,8 @@ hypergeometric2F1(a, b, c, z)
 \item{c}{the third parameter;}
 }
 \value{
-\preformatted{The result of the hypergeometric function.
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{The result of the hypergeometric function.
+}\if{html}{\out{</div>}}
 }
 \description{
 The hypergeometric functions are a series of functions which includes

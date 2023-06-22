@@ -23,8 +23,8 @@ qpilsecond(p,     n, d, r)
 \item{p}{the probability from which a quantile is requested}
 }
 \value{
-\preformatted{     The probability or quantile of a prior-informed Lambda'' distribution.
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{     The probability or quantile of a prior-informed Lambda'' distribution.
+}\if{html}{\out{</div>}}
 }
 \description{
 This distribution extend the lambda second distribution introduced in

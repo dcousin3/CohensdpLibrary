@@ -29,8 +29,8 @@
 #'                              from which ``m`` is standardized).
 #' @param design        the design of the measures (``"within"``, ``"between"``, or ``"single"``);
 #' @param gamma         the confidence level of the confidence interval (default 0.95) 
-#' @param method        In "within"-subject design only, choose among methods ``"piCI"`` (default), or
-#'                      ``"adjustedlambdaprime"``, ``"alginakeselman2003"``, ``"morris2000"``, and
+#' @param method        In "within"-subject design only, choose among methods ``"piCI"``, or
+#'                      ``"adjustedlambdaprime"`` (default), ``"alginakeselman2003"``, ``"morris2000"``, and
 #'                      ``"regressionapproximation"``.
 #'
 #' @return   The Cohen's $d_p$ statistic and its confidence interval.
@@ -39,8 +39,8 @@
 #'
 #' @details
 #' This function uses the exact method in "single"-group and "between"-subject designs. 
-#' In "within"-subject design, the default is the prior-informed confidence interval
-#' ("piCI") which is based on a bayesian credible interval. This method is described in
+#' In "within"-subject design, the default is the adjusted Lambda prime confidence interval
+#' ("adjustedlambdaprime") which is based on an approximate method. This method is described in
 #' \insertCite{c22b;textual}{CohensdpLibrary}. Other methods are available, described in
 #' \insertCite{m00,ak03,CG057-1,f22;textual}{CohensdpLibrary}
 #'
@@ -59,7 +59,7 @@
 #'
 #' # example in a repeated-measure design
 #' Cohensdp(statistics =list( m1= 101, m2= 114, s1= 12.5, s2= 14.3, n= 12, rho= 0.53 ),
-#'          design     ="within")
+#'          design     ="within" )
 #'
 #' # example with a single-group design where mu is a population parameter
 #' Cohensdp( statistics = list( m = 101, m0 = 114, s = 12.5, n = 10 ), 
@@ -226,7 +226,7 @@ Cohensdp.within <- function(statistics, gamma = .95, method ) {
             } else if ("r" %in% names(statistics)) {
                 if(statistics$r == 0) statistics=modifyList(statistics, list(r = 0.0000001))
                 switch( method,
-                    "exact" =                   Cohensdp.within.piCI( statistics, gamma ),
+                    "exact" =                   stop( messageNoEx() ),
                     "piCI" =                    Cohensdp.within.piCI( statistics, gamma ),
                     "adjustedlambdaprime" =     Cohensdp.within.adjustedlambdaprime( statistics, gamma ),
                     "alginakeselman2003" =      Cohensdp.within.alginakeselman2003( statistics, gamma ),

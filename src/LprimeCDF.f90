@@ -134,7 +134,7 @@ FUNCTION lprimecdf( x, q, a, TOL, MAXITER, ier )
    erp  = err / relerr
    qqal = q2 * log( q/(q+a2) )
    aqal = log( a2/(q+a2) )
-   q2l  = dlgama( q2 )
+   q2l  = log_gamma( q2 )
    jjj  = 2 * nint( a2*half - a2/q - half )
    jjj  = max( jjj, 0 )
 
@@ -148,7 +148,7 @@ FUNCTION lprimecdf( x, q, a, TOL, MAXITER, ier )
    if ( jjj >= jmax ) then
       if ( g0 < log(cinf) ) then
          dj2 = half * jjj
-         ga  = qqal - twol - q2l + dlgama(dj2+q2) - dlgama(dj2+one) + dj2*aqal
+         ga  = qqal - twol - q2l + log_gamma(dj2+q2) - log_gamma(dj2+one) + dj2*aqal
          if ( ga < explower )  goto 5   !  Cannot be computed
          if ( exp(ga) < cinf ) goto 5   !  Cannot be computed
          ja = 0
@@ -157,7 +157,7 @@ FUNCTION lprimecdf( x, q, a, TOL, MAXITER, ier )
          do
             j0  = (ja+jz) / 2
             dj2 = half * j0
-            g0  = qqal - twol - q2l + dlgama(dj2+q2) - dlgama(dj2+one) + dj2*aqal
+            g0  = qqal - twol - q2l + log_gamma(dj2+q2) - log_gamma(dj2+one) + dj2*aqal
             if ( g0 >= explower ) then
                if ( (j0+1)*exp(g0) < cinf ) then
                   ja = j0
@@ -195,20 +195,20 @@ FUNCTION lprimecdf( x, q, a, TOL, MAXITER, ier )
          ier = 4
          return
       end if
-      rl(jm) = (dj+one)*half*log(x2) - x2 - dlgama((dj+three)*half)
+      rl(jm) = (dj+one)*half*log(x2) - x2 - log_gamma((dj+three)*half)
       jm  = abs( jm-1 )
       dj  = j0 + 1
       dj2 = dj * half
-      gl(jm) = qqal - twol - q2l + dlgama(dj2+q2) - dlgama(dj2+one) + dj2*aqal
+      gl(jm) = qqal - twol - q2l + log_gamma(dj2+q2) - log_gamma(dj2+one) + dj2*aqal
       kx(jm) = chi2cdf( xarg, dj+one, dflimit, ier )
       if ( ier /= 0 ) then
          ier = 4
          return
       end if
-      rl(jm) = (dj+one)*half*log(x2) - x2 - dlgama((dj+three)*half)
+      rl(jm) = (dj+one)*half*log(x2) - x2 - log_gamma((dj+three)*half)
    else
       gl(0) = qqal - twol
-      gl(1) = gl(0) - q2l - dlg15 + half*aqal + dlgama(q2+half)
+      gl(1) = gl(0) - q2l - dlg15 + half*aqal + log_gamma(q2+half)
       kx(0) = chi2cdf( xarg, one, dflimit, ier )
       if ( ier /= 0 ) then
          ier = 4
@@ -219,8 +219,8 @@ FUNCTION lprimecdf( x, q, a, TOL, MAXITER, ier )
          ier = 4
          return
       end if
-      rl(0) = half*log(x2) - ( x2 + dlgama(onep5) )
-      rl(1) = log(x2) - ( x2 + dlgama(two) )
+      rl(0) = half*log(x2) - ( x2 + log_gamma(onep5) )
+      rl(1) = log(x2) - ( x2 + log_gamma(two) )
    end if
    sum   = zero
    sumneg= zero
