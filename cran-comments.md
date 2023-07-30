@@ -32,7 +32,7 @@
 Skipping checking HTML validation: no command 'tidy' found
 Skipping checking math rendering: package 'V8' unavailable
 
-  - Fedora Linux, R-devel, clang, gfortran says the same as Ubuntu
+  - Fedora Linux, R-devel says the same as Ubuntu
 
 ## Downstream dependencies
 
