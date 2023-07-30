@@ -1,7 +1,7 @@
 <Math define book =``book``>
 <Math define refid =``c69``>
-<Math define author =``Cohen, J.``>
-<Math define title =``Statistical power analysis for the behavioral sciences``>
-<Math define year =``1969``>
-<Math define addresse =``San Diego``>
-<Math define publisher =``Academic Press``>
+<Math define author =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>
+<Math define title =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>
+<Math define year =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>
+<Math define addresse =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>
+<Math define publisher =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>

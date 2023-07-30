@@ -1,10 +1,10 @@
 ## Submission
 
-* Updated version 0.5.9
+* Updated version 0.5.10
 
 ## Comment
 
-* Just re-vamp fortran code for standard fortran 2008, following Prof Ripley's message.
+* Re-vamp fortran code for standard fortran 2008, following Prof Ripley's message.
 
 ## Test environments
 

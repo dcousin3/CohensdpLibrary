@@ -1,7 +1,7 @@
 <Math define manual =``manual``>
 <Math define refid =``k22``>
-<Math define title =``MBESS: The MBESS R Package``>
-<Math define author =``Ken Kelley``>
-<Math define year =``2022``>
-<Math define note =``R package version 4.9.0``>
-<Math define url =``https://CRAN.R-project.org/package=MBESS``>
+<Math define title =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>
+<Math define author =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>
+<Math define year =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>
+<Math define note =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>
+<Math define url =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>

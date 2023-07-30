@@ -10,7 +10,7 @@ FUNCTION hyg2F1(A, B, C, Z)
   REAL(PR)              :: hyg2F1
   COMPLEX(PR), EXTERNAL :: HYP_2F1
 
-  hyg2F1 = REALPART( HYP_2F1( &
+  hyg2F1 = REAL( HYP_2F1( &
                 CMPLX( REAL(A,KIND=PR), 0, KIND=PR), &
                 CMPLX( REAL(B,KIND=PR), 0, KIND=PR), & 
                 CMPLX( REAL(C,KIND=PR), 0, KIND=PR), &

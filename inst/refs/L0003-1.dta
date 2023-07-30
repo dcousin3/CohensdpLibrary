@@ -1,9 +1,9 @@
 <Math define article =``article``>
 <Math define refid =``L0003-1``>
-<Math define author =``Lakens, D.``>
-<Math define title =``Calculating and reporting effect sizes to facilitate cumulative science: A practical primer for t-tests and ANOVAs``>
-<Math define year =``2013``>
-<Math define journal =``Frontiers in Psychology``>
-<Math define volume =``4``>
-<Math define pages =``1 -- 12``>
-<Math define doi =``10.3389/fpsyg.2013.00863``>
+<Math define author =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>
+<Math define title =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>
+<Math define year =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>
+<Math define journal =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>
+<Math define volume =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>
+<Math define pages =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>
+<Math define doi =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>

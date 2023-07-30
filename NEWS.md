@@ -1,3 +1,7 @@
+# CohensdpLibrary 0.5.10 (30 July 2023)
+
+* Uses Fortran 2008-compatible functions REAL rather than realpart
+
 # CohensdpLibrary 0.5.9 (22 June 2023)
 
 * Uses Fortran 2008-compatible functions JIMAG and LOG_GAMMA

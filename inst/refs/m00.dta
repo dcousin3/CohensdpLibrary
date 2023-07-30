@@ -1,9 +1,9 @@
 <Math define article =``article``>
 <Math define refid =``m00``>
-<Math define author =``Morris, S. B.``>
-<Math define title =``Distribution of the standardized mean change effect size for meta-analysis on repeated measures``>
-<Math define year =``2000``>
-<Math define journal =``British Journal of Mathematical and Statistical Psychology``>
-<Math define volume =``53``>
-<Math define pages =``17 -- 29``>
-<Math define doi =``10.1348/000711000159150``>
+<Math define author =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>
+<Math define title =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>
+<Math define year =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>
+<Math define journal =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>
+<Math define volume =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>
+<Math define pages =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>
+<Math define doi =``<Math ifdef xx>asdf <Math endifdef><Math endifdef yy> faj f<Math endifdef xx>``>
