@@ -1,10 +1,10 @@
 ## Submission
 
-* Updated version 0.5.10
+* Updated version 0.5.11
 
 ## Comment
 
-* Re-vamp fortran code for standard fortran 2008, following Prof Ripley's message.
+* Forgot a test when an argument was missing
 
 ## Test environments
 
@@ -19,20 +19,11 @@
 
 * There were no ERRORs and no WARNINGs.
 
-* There was a few NOTEs on remote servers: 
-
 * Win-dev returned zero note:
 
-* R-hub returned two notes on some servers:
-
-  - nothing on Debian Linux, R-devel, GCC ASAN/UBSAN
-  
-  - Ubuntu Linux 20.04.1 LTS, R-release, GCC says
-      - * checking HTML version of manual ... NOTE
-Skipping checking HTML validation: no command 'tidy' found
-Skipping checking math rendering: package 'V8' unavailable
-
-  - Fedora Linux, R-devel says the same as Ubuntu
+* R-hub does not work anymore. I get this error
+  Error in curl::curl_fetch_memory(url, handle = handle) : 
+  SSL peer certificate or SSH remote key was not OK: [builder.r-hub.io] schannel: SEC_E_UNTRUSTED_ROOT (0x80090325) 
 
 ## Downstream dependencies
 

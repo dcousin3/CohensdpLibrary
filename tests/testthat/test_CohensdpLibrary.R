@@ -209,6 +209,16 @@ test_that("TESTS of the options (7/8)", {
 })
 
 
+context("Testing new checks (August 2024)")
+
+########################################################################
+test_that("TESTS of missing r/rho (8/8)", {
+
+    expect_error( resW <- Cohensdp( statistics=list(m1=72, m2=76,s1=16,s2=16,n=10), design="within", method = "piii") )
+
+})
+
+
 
 ########################################################################
 test_that("TESTS of my moral (8/8)", {

@@ -140,7 +140,7 @@ more. also, `help(CohensdpLibrary)` will get you started.
 # References
 
 <div id="refs" class="references csl-bib-body hanging-indent"
-line-spacing="2">
+entry-spacing="0" line-spacing="2">
 
 <div id="ref-c69" class="csl-entry">
 

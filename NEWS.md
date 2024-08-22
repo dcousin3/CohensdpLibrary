@@ -1,3 +1,7 @@
+# CohensdpLibrary 0.5.11 (22 August 2024)
+
+* Missed a check for the presence of r/rho in the statistics for within-subject design.
+
 # CohensdpLibrary 0.5.10 (30 July 2023)
 
 * Uses Fortran 2008-compatible functions REAL rather than realpart

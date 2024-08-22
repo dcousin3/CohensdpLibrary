@@ -50,7 +50,7 @@ messageBexa  <- function(m)      {paste(hm, "Method `", m, "` unknown in \"betwe
 messageWexa  <- function(m)      {paste(hm, "Method `", m, "` unknown in \"within\" design. Only 'exact' or 'piCI' (default), 'morris2000', 'alginakeselman2003', 'adjustedlambdaprime', and 'regressionapproximation' are implemented. Exiting...")}
 
 messageNoEx  <- function()       {"There is no exact method known in within-subject design when the population rho is unkown. We suggest method='adjustedlambdaprime'"}
-
+messageNoRh  <- function()       {"Either rho or r is missing from the statistics. Exiting..."}
 messageNoCI  <- function()       {paste(hm, "There is no confidence interval for an (unbiased) Hedges's gp...", sep="")}
 messageNotg  <- function(g)      {paste(hm, "The confidence level ",g, " has not been calibrated yet. (only .90, .99, and .99 are at this time). Exiting...", sep="" ) }
 messageNoMh  <- function()       {"Only the exact method can be used when rho is known. Exiting..."}

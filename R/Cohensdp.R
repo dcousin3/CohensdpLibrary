@@ -233,6 +233,8 @@ Cohensdp.within <- function(statistics, gamma = .95, method ) {
                     "morris2000" =              Cohensdp.within.morris2000( statistics, gamma ),
                     "regressionapproximation" = Cohensdp.within.regressionapproximation( statistics, gamma )
                 )
+            } else {
+                stop( messageNoRh() )
             }
     res
 }
