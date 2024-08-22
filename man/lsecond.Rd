@@ -34,7 +34,7 @@ It is the dual of the t" distribution, the sampling distribution of dp in repeat
 design introduced in \insertCite{c22a;textual}{CohensdpLibrary}.
 }
 \details{
-lsecond are {p,d,q} functions that compute the Lambda-second (L") distribution. This
+lsecond are (p,d,q) functions that compute the Lambda-second (L") distribution. This
 distribution is an generalization of the lambda-prime distribution
 \insertCite{l99}{CohensdpLibrary}.
 

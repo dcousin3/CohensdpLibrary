@@ -36,7 +36,7 @@ in the case where the population rho is not known. It is then replaced by a prio
 which indicates the probability of a certain rho given the observed correlation r.
 }
 \details{
-pilsecond are {p,d,q} functions that compute the prior-informed Lambda-second (L") distribution. This
+pilsecond are (p,d,q) functions that compute the prior-informed Lambda-second (L") distribution. This
 distribution is an generalization of the lambda-prime distribution
 \insertCite{l99}{CohensdpLibrary}. It can take up to two seconds to compute.
 

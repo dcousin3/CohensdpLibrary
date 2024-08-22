@@ -29,7 +29,7 @@
 #' @return          The probability or quantile of a prior-informed Lambda'' distribution.
 #'
 #' @details
-#' pilsecond are {p,d,q} functions that compute the prior-informed Lambda-second (L") distribution. This 
+#' pilsecond are (p,d,q) functions that compute the prior-informed Lambda-second (L") distribution. This 
 #' distribution is an generalization of the lambda-prime distribution
 #' \insertCite{l99}{CohensdpLibrary}. It can take up to two seconds to compute.
 #'

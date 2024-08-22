@@ -26,7 +26,7 @@
 #' @return          The probability or quantile of a K' distribution.
 #'
 #' @details
-#' kprime is a {p,d,q} set of functions that compute the K-prime distribution. This distribution has many applications,
+#' kprime is a (p,d,q) set of functions that compute the K-prime distribution. This distribution has many applications,
 #' including to obtain the sampling distribution of _r_ given a population rho and the predictive distributions
 #' of rho given a sample _r_. See \insertCite{l99,pl10;textual}{CohensdpLibrary}.
 #'

@@ -27,7 +27,7 @@
 #' @return          The probability or quantile of a Lambda'' distribution.
 #'
 #' @details
-#' lsecond are {p,d,q} functions that compute the Lambda-second (L") distribution. This 
+#' lsecond are (p,d,q) functions that compute the Lambda-second (L") distribution. This 
 #' distribution is an generalization of the lambda-prime distribution
 #' \insertCite{l99}{CohensdpLibrary}.
 #'

@@ -33,7 +33,7 @@ parameters nu1, nu2, ncp; dkprime returns its density and qkprime, a quantile.
 \insertCite{l99,pl10;textual}{CohensdpLibrary}.
 }
 \details{
-kprime is a {p,d,q} set of functions that compute the K-prime distribution. This distribution has many applications,
+kprime is a (p,d,q) set of functions that compute the K-prime distribution. This distribution has many applications,
 including to obtain the sampling distribution of \emph{r} given a population rho and the predictive distributions
 of rho given a sample \emph{r}. See \insertCite{l99,pl10;textual}{CohensdpLibrary}.
 
