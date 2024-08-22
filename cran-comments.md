@@ -11,19 +11,21 @@
 * local WIN-64x install, R 4.3.0
 
 * win-builder devel 
-
+    
 * r-hub.io
 
 
 ## R CMD check results
 
-* There were no ERRORs and no WARNINGs.
+* Local
+    -There were no ERRORs and no WARNINGs.
 
-* Win-dev returned zero note:
+* Win-dev returned:
+    -Status: OK!
 
-* R-hub does not work anymore. I get this error
-  Error in curl::curl_fetch_memory(url, handle = handle) : 
-  SSL peer certificate or SSH remote key was not OK: [builder.r-hub.io] schannel: SEC_E_UNTRUSTED_ROOT (0x80090325) 
+* R-hub does not work anymore? I get this error
+    -Error in curl::curl_fetch_memory(url, handle = handle) : 
+    SSL peer certificate or SSH remote key was not OK: [builder.r-hub.io] schannel: SEC_E_UNTRUSTED_ROOT (0x80090325) 
 
 ## Downstream dependencies
 
