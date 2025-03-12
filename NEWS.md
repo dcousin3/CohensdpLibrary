@@ -1,3 +1,8 @@
+# CohensdpLibrary 0.6.0 (12 March 2025)
+
+* adjusted the pooled standard deviation formula in between-group design.
+* regular maintenance.
+
 # CohensdpLibrary 0.5.11 (22 August 2024)
 
 * Missed a check for the presence of r/rho in the statistics for within-subject design.

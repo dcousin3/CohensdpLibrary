@@ -1,5 +1,7 @@
-title: CohensdpLibrary
-url: https://github.com/dcousin3/CohensdpLibrary
+home:
+  title: Cohen's d_p Computation with Confidence Intervals
+  description: Computing Cohen's d_p in any experimental designs (between-subject, within-subject, and single-group design).
+  url: https://github.com/dcousin3/CohensdpLibrary/
 
 reference:
   - title: Main Functions

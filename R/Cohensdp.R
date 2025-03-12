@@ -196,15 +196,15 @@ Cohensdp.between <- function(statistics, gamma = .95, method ) {
 
     #get pairwise statistics Delta means and pooled SD
     dmn  <- sts$m1 - sts$m2
-    sdp  <- sqrt((sts$s1^2 + sts$s2^2)/2)
-    n    <- 2 / (1/sts$n1 + 1/sts$n2)           #harmonic mean
+    sdp  <- sqrt( ((sts$n1-1)*sts$s1^2 + (sts$n2-1)*sts$s2^2) / (sts$n1+sts$n2-2) )
+    nh   <- 2 / (1/sts$n1 + 1/sts$n2)           #harmonic mean
     #compute biased Cohen's d_p
     dp   <- dmn / sdp  
 
-    dlow <- qlprime(1/2-gamma/2, nu = 2*(n-1), ncp = dp * sqrt(n/2) ) 
-    dhig <- qlprime(1/2+gamma/2, nu = 2*(n-1), ncp = dp * sqrt(n/2) ) 
+    dlow <- qlprime(1/2-gamma/2, nu = 2*(nh-1), ncp = dp * sqrt(nh/2) ) 
+    dhig <- qlprime(1/2+gamma/2, nu = 2*(nh-1), ncp = dp * sqrt(nh/2) ) 
 
-    limits <- c(dlow, dhig) / sqrt(n/2)
+    limits <- c(dlow, dhig) / sqrt(nh/2)
     c(dp, limits)
 
 }

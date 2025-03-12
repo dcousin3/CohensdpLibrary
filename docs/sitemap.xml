@@ -1,66 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://github.com/dcousin3/CohensdpLibrary/404.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/dcousin3/CohensdpLibrary/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/dcousin3/CohensdpLibrary/index.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/dcousin3/CohensdpLibrary/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/dcousin3/CohensdpLibrary/reference/Cohensdp.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/dcousin3/CohensdpLibrary/reference/CohensdpLibrary-package.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/dcousin3/CohensdpLibrary/reference/dkprime.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/dcousin3/CohensdpLibrary/reference/dlprime.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/dcousin3/CohensdpLibrary/reference/dlsecond.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/dcousin3/CohensdpLibrary/reference/explain.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/dcousin3/CohensdpLibrary/reference/Hedgesgp.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/dcousin3/CohensdpLibrary/reference/hypergeometric0F1.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/dcousin3/CohensdpLibrary/reference/hypergeometrics.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/dcousin3/CohensdpLibrary/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/dcousin3/CohensdpLibrary/reference/J.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/dcousin3/CohensdpLibrary/reference/kprime.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/dcousin3/CohensdpLibrary/reference/lprime.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/dcousin3/CohensdpLibrary/reference/lsecond.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/dcousin3/CohensdpLibrary/reference/pilsecond.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/dcousin3/CohensdpLibrary/reference/print.CohensdpObject.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/dcousin3/CohensdpLibrary/reference/summarize.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://github.com/dcousin3/CohensdpLibrary/404.html</loc></url>
+<url><loc>https://github.com/dcousin3/CohensdpLibrary/authors.html</loc></url>
+<url><loc>https://github.com/dcousin3/CohensdpLibrary/index.html</loc></url>
+<url><loc>https://github.com/dcousin3/CohensdpLibrary/news/index.html</loc></url>
+<url><loc>https://github.com/dcousin3/CohensdpLibrary/reference/Cohensdp.html</loc></url>
+<url><loc>https://github.com/dcousin3/CohensdpLibrary/reference/CohensdpLibrary-package.html</loc></url>
+<url><loc>https://github.com/dcousin3/CohensdpLibrary/reference/explain.html</loc></url>
+<url><loc>https://github.com/dcousin3/CohensdpLibrary/reference/Hedgesgp.html</loc></url>
+<url><loc>https://github.com/dcousin3/CohensdpLibrary/reference/hypergeometrics.html</loc></url>
+<url><loc>https://github.com/dcousin3/CohensdpLibrary/reference/index.html</loc></url>
+<url><loc>https://github.com/dcousin3/CohensdpLibrary/reference/J.html</loc></url>
+<url><loc>https://github.com/dcousin3/CohensdpLibrary/reference/kprime.html</loc></url>
+<url><loc>https://github.com/dcousin3/CohensdpLibrary/reference/lprime.html</loc></url>
+<url><loc>https://github.com/dcousin3/CohensdpLibrary/reference/lsecond.html</loc></url>
+<url><loc>https://github.com/dcousin3/CohensdpLibrary/reference/pilsecond.html</loc></url>
+<url><loc>https://github.com/dcousin3/CohensdpLibrary/reference/print.CohensdpObject.html</loc></url>
+<url><loc>https://github.com/dcousin3/CohensdpLibrary/reference/summarize.html</loc></url>
 </urlset>
+
